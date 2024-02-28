@@ -73,7 +73,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Typed } from 'typed.ts'
+import { Typed } from '@/utils/typed'
 
 const el = ref<HTMLSpanElement[]>([])
 const secondDate =
