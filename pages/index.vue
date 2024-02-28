@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center">
     <p
-      class="w-[1600px] h-[276px] text-center text-[86px] font-semibold text-[#363535] mt-[64px] mb-[40px]"
+      class="w-[1600px] h-[276px] text-center text-[80px] font-semibold text-[#363535] mt-[64px] mb-[40px]"
     >
       {{ typeValue }}
       <span class="blinking-cursor">|</span>
@@ -68,7 +68,12 @@
         </div>
       </div>
     </div>
-    <img id="me" class="mt-[45px] mr-[84px]" src="/me.png" />
+    <img id="me" class="mt-[22px] mr-[84px]" src="/me.png" />
+  </div>
+  <div
+    class="flex justify-center w-full absolute bottom-0 -ml-44 text-[16px] text-[#5F5B5B]"
+  >
+    2024-PRESENT © Muh Syahendra A
   </div>
 </template>
 

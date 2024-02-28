@@ -4,3 +4,7 @@
   font-weight: 100;
   src: local('VT323'), url('/VT323-Regular.ttf') format('truetype');
 }
+
+body {
+  font-family: 'Poppins';
+}

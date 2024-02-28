@@ -11,6 +11,9 @@ devDependencies:
   '@nuxt/ui':
     specifier: ^2.13.0
     version: 2.14.1(nuxt@3.10.3)(vite@5.1.4)(vue@3.4.20)
+  '@nuxtjs/google-fonts':
+    specifier: ^3.1.3
+    version: 3.1.3
   nuxt:
     specifier: ^3.10.1
     version: 3.10.3(sass@1.71.1)(vite@5.1.4)
@@ -1424,6 +1427,17 @@ packages:
     dependencies:
       '@nuxt/kit': 3.10.3
       lodash.template: 4.5.0
+      pathe: 1.1.2
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
+  /@nuxtjs/google-fonts@3.1.3:
+    resolution: {integrity: sha512-gHwstHXQKd/r9O2WnQR4UJbi7Rfb9No1/gF4gqP+y18h1DAAZUOYPBF5EAPGjZKgDOW2XbZHP8Rw3oSDTpIT1A==}
+    dependencies:
+      '@nuxt/kit': 3.10.3
+      google-fonts-helper: 3.4.1
       pathe: 1.1.2
     transitivePeerDependencies:
       - rollup
@@ -3701,6 +3715,15 @@ packages:
       path-type: 5.0.0
       slash: 5.1.0
       unicorn-magic: 0.1.0
+    dev: true
+
+  /google-fonts-helper@3.4.1:
+    resolution: {integrity: sha512-unq9c1NF771916DrVR2MTpMJ5iHiMSjMBApErjhWT1FZIE+7x+Qik+w6cYi5jw/KtHELz+tyGAKgQetTU9wrlA==}
+    dependencies:
+      deepmerge: 4.3.1
+      hookable: 5.5.3
+      ofetch: 1.3.3
+      ufo: 1.4.0
     dev: true
 
   /graceful-fs@4.2.11:
