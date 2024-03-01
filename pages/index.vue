@@ -1,79 +1,86 @@
 <template>
-  <div class="flex justify-center">
-    <p
-      class="w-[1600px] h-[276px] text-center text-[80px] font-semibold text-[#363535] mt-[64px] mb-[40px]"
-    >
-      {{ typeValue }}
-      <span class="blinking-cursor">|</span>
-    </p>
-  </div>
-  <div class="flex justify-center">
-    <p class="text-[#B1AFB0] font-bold text-[22px]" id="motto">
-      The Man Behind The Keyboard
-    </p>
-  </div>
-
-  <div class="w-full flex justify-between">
-    <div>
-      <div
-        class="w-[715px] h-[287px] ml-[35px] rounded-[8px] py-[26px] px-[33px] mt-[76px] overflow-auto"
-        :style="{ background: appConfig.colors['custom-black'][900] }"
-        @click="handleMouseEvent()"
+  <div class="px-[160px]">
+    <div class="flex justify-center">
+      <p
+        class="w-[1600px] h-[276px] text-center text-[80px] font-semibold text-[#363535] mt-[64px] mb-[40px]"
       >
-        <div v-for="(item, index) in dataTerminal" :key="index">
-          <div
-            v-if="item.html === 'text'"
-            style="white-space: pre-wrap"
-            :style="{ color: appConfig.colors['custom-black'][50] }"
-          >
-            <span ref="el" class="fontTerminal" />
-          </div>
-          <div class="flex items-center" v-if="item.html === 'input'">
-            <div>
-              <span
-                class="text-white text-sm flex items-center fontTerminal"
-                style="width: 76px"
-              >
-                {{ item.created_at }} =&#62; $
-              </span>
+        {{ typeValue }}
+        <span class="blinking-cursor">|</span>
+      </p>
+    </div>
+    <div class="flex justify-center">
+      <p class="text-[#B1AFB0] font-bold text-[22px]" id="motto">
+        The Man Behind The Keyboard
+      </p>
+    </div>
+
+    <div class="w-full flex justify-between relative">
+      <div>
+        <div
+          class="w-[715px] h-[287px] ml-[35px] rounded-[8px] py-[26px] px-[33px] mt-[76px] overflow-auto"
+          :style="{ background: appConfig.colors['custom-black'][900] }"
+          @click="handleMouseEvent()"
+        >
+          <div v-for="(item, index) in dataTerminal" :key="index">
+            <div
+              v-if="item.html === 'text'"
+              style="white-space: pre-wrap"
+              :style="{ color: appConfig.colors['custom-black'][50] }"
+            >
+              <span ref="el" class="fontTerminal" />
             </div>
-            <div class="text-white">
-              <div class="break-words">
-                <div
-                  suppressContentEditableWarning
-                  :id="`typing_text${index}`"
-                  contenteditable
-                  ref="editable"
-                  class="no-underline text-white focus:outline-none fontTerminal min-w-5"
-                  @keydown="handleSubmit($event, { props: item, index })"
-                  @mousedown="handleMouseEvent(index)"
-                ></div>
+            <div class="flex items-center" v-if="item.html === 'input'">
+              <div>
+                <span
+                  class="text-white text-sm flex items-center fontTerminal"
+                  style="width: 76px"
+                >
+                  {{ item.created_at }} =&#62; $
+                </span>
+              </div>
+              <div class="text-white">
+                <div class="break-words">
+                  <div
+                    suppressContentEditableWarning
+                    :id="`typing_text${index}`"
+                    contenteditable
+                    ref="editable"
+                    class="no-underline text-white focus:outline-none fontTerminal min-w-5"
+                    @keydown="handleSubmit($event, { props: item, index })"
+                    @mousedown="handleMouseEvent(index)"
+                  ></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="ml-[35px]">
-        <div class="mt-3 text-[16px] font-semibold text-[#464444]">Find Me</div>
-        <div class="flex justify-between w-fit mt-[10px]">
-          <a href="https://www.linkedin.com/in/muhsyahendraa/" target="_blank">
-            <img class="mr-[10px]" src="/linkedin.png" />
-          </a>
-          <a href="https://discordapp.com/users/squidy5488" target="_blank">
-            <img class="mr-[10px]" src="/discord.png" />
-          </a>
-          <a href="https://www.instagram.com/msyaa240/" target="_blank">
-            <img class="mr-[10px]" src="/instagram.png" />
-          </a>
+        <div class="ml-[35px]">
+          <div class="mt-3 text-[16px] font-semibold text-[#464444]">
+            Find Me
+          </div>
+          <div class="flex justify-between w-fit mt-[10px]">
+            <a
+              href="https://www.linkedin.com/in/muhsyahendraa/"
+              target="_blank"
+            >
+              <img class="mr-[10px]" src="/linkedin.png" />
+            </a>
+            <a href="https://discordapp.com/users/squidy5488" target="_blank">
+              <img class="mr-[10px]" src="/discord.png" />
+            </a>
+            <a href="https://www.instagram.com/msyaa240/" target="_blank">
+              <img class="mr-[10px]" src="/instagram.png" />
+            </a>
+          </div>
         </div>
       </div>
+      <img id="me" class="mt-[22px] mr-[84px]" src="/me.png" />
+      <div
+        class="flex justify-center w-full absolute bottom-0 -ml-37 text-[16px] text-[#5F5B5B]"
+      >
+        2024-PRESENT © Muh Syahendra A
+      </div>
     </div>
-    <img id="me" class="mt-[22px] mr-[84px]" src="/me.png" />
-  </div>
-  <div
-    class="flex justify-center w-full absolute bottom-0 -ml-44 text-[16px] text-[#5F5B5B]"
-  >
-    2024-PRESENT © Muh Syahendra A
   </div>
 </template>
 
@@ -110,7 +117,6 @@ const typeText = (e: string, value?: string) => {
   const typed = new Typed({
     callback: (text) => {
       // dataTerminal.value[startIndex.value].html = text
-      console.log(el.value)
       if (el.value) {
         el.value[startIndex.value].innerHTML = text
       }

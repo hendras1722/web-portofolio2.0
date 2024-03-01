@@ -1,11 +1,11 @@
+const route = useRoute()
+
 export default defineAppConfig({
   ui: {
     primary: 'lime',
     gray: 'neutral',
   },
-  background: {
-    home: 'bg-[url("/background.png")] bg-cover bg-center bg-no-repeat min-h-dvh',
-  },
+  background: {},
   colors: {
     'custom-black': {
       '50': '#F6F5F5',
