@@ -5,7 +5,7 @@
         `bg-[url('/background.png')] bg-cover bg-center bg-no-repeat min-h-dvh`,
     ]"
   >
-    <div id="navbar" class="w-screen flex justify-center">
+    <div id="navbar" class="w-full flex justify-center">
       <div class="h-[119px] py-[32px]" :class="['w-[calc(100%-320px)]']">
         <div class="flex justify-between items-center py-[10px]">
           <div class="font-bold text-2xl">MSA</div>

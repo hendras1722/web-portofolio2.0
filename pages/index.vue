@@ -2,7 +2,7 @@
   <div class="px-[160px]">
     <div class="flex justify-center mb-[40px] mt-[64px]">
       <p
-        class="w-[1600px] text-center text-[80px] font-semibold text-[#363535]"
+        class="w-[1600px] min-h-[276px] text-center text-[80px] font-semibold text-[#363535]"
       >
         {{ typeValue }}
         <span class="blinking-cursor">|</span>
@@ -617,7 +617,7 @@ onMounted(() => {
 // blinks curso start
 .blinking-cursor {
   font-size: 6rem;
-  color: #2c3e50;
+  color: black;
   -webkit-animation: 1s blink step-end infinite;
   -moz-animation: 1s blink step-end infinite;
   -ms-animation: 1s blink step-end infinite;
