@@ -1,8 +1,8 @@
 <template>
   <div class="px-[160px]">
-    <div class="flex justify-center">
+    <div class="flex justify-center mb-[40px] mt-[64px]">
       <p
-        class="w-[1600px] h-[276px] text-center text-[80px] font-semibold text-[#363535] mt-[64px] mb-[40px]"
+        class="w-[1600px] text-center text-[80px] font-semibold text-[#363535]"
       >
         {{ typeValue }}
         <span class="blinking-cursor">|</span>
