@@ -1,5 +1,3 @@
-const route = useRoute()
-
 export default defineAppConfig({
   ui: {
     primary: 'lime',
