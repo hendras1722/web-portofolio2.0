@@ -2,7 +2,7 @@
   <div
     :class="[
       route.path === '/' &&
-        `bg-[url('/background.png')] bg-cover bg-center bg-no-repeat min-h-dvh`,
+        `md:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover bg-center bg-no-repeat min-h-dvh`,
     ]"
   >
     <div id="navbar" class="w-full flex justify-center">
@@ -57,10 +57,12 @@ function handleScroll() {
   if (scroll > 100) {
     id?.classList.add('bg-white')
     id?.classList.add('fixed')
+    id?.classList.add('z-[2]')
     scrollStatus.value = true
   } else {
     id?.classList.remove('bg-white')
     id?.classList.remove('fixed')
+    id?.classList.remove('z-[2]')
     scrollStatus.value = false
   }
 }

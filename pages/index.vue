@@ -5,7 +5,7 @@
         class="w-[1600px] min-h-[276px] text-center text-[80px] font-semibold text-[#363535]"
       >
         {{ typeValue }}
-        <span class="blinking-cursor">|</span>
+        <span class="blinking-cursor lg:text-[86px] text-[31px]">|</span>
       </p>
     </div>
     <div class="flex justify-center">
@@ -14,10 +14,10 @@
       </p>
     </div>
 
-    <div class="w-full flex justify-between relative">
+    <div class="w-full lg:flex justify-between relative block z-[1]">
       <div>
         <div
-          class="w-[715px] h-[287px] ml-[35px] rounded-[8px] py-[26px] px-[33px] mt-[76px] overflow-auto"
+          class="lg:w-[715px] w-full h-[287px] lg:ml-[35px] rounded-[8px] py-[26px] px-[33px] mt-[76px] overflow-auto"
           :style="{ background: appConfig.colors['custom-black'][900] }"
           @click="handleMouseEvent()"
         >
@@ -54,7 +54,7 @@
             </div>
           </div>
         </div>
-        <div class="ml-[35px]">
+        <div class="lg:ml-[35px] lg:block absolute bottom-0 mb-[48px]">
           <div class="mt-3 text-[16px] font-semibold text-[#464444]">
             Find Me
           </div>
@@ -74,9 +74,15 @@
           </div>
         </div>
       </div>
-      <img id="me" class="mt-[22px] mr-[84px]" src="/me.png" />
+      <div class="lg:block flex justify-end">
+        <img
+          id="me"
+          class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit w-[246px] h-[305px]"
+          src="/me.png"
+        />
+      </div>
       <div
-        class="flex justify-center w-full absolute bottom-0 -ml-37 text-[16px] text-[#5F5B5B]"
+        class="lg:flex lg:justify-center w-full absolute bottom-0 lg:-ml-37 lg:text-[16px] text-[8px] text-[#5F5B5B] left-0 lg:mb-0 mb-[13px]"
       >
         2024-PRESENT © Muh Syahendra A
       </div>
