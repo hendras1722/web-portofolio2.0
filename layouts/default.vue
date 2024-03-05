@@ -5,24 +5,32 @@
         `md:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover bg-center bg-no-repeat min-h-dvh`,
     ]"
   >
-    <div id="navbar" class="w-full flex justify-center">
-      <div class="h-[119px] py-[32px]" :class="['w-[calc(100%-320px)]']">
-        <div class="flex justify-between items-center py-[10px]">
-          <div class="font-bold text-2xl">MSA</div>
-          <div>
-            <ul class="flex justify-between">
-              <li
-                v-for="(item, index) in menu"
-                :key="'menu' + index"
-                class="px-5 text-[22px]"
-              >
-                <NuxtLink :to="item.link" v-slot="{ isActive }"
-                  ><span :class="[isActive ? 'text-black' : 'text-[#D1D0D0]']">
-                    {{ item.name }}
-                  </span>
-                </NuxtLink>
-              </li>
-            </ul>
+    <div
+      id="navbar"
+      :class="[scrollStatus ? 'w-full' : 'w-full']"
+      class="grid grid-cols-12 grid-rows-1 gap-4 px-[160px] justify-between"
+    >
+      <div class="col-span-12">
+        <div class="h-[119px] py-[32px]">
+          <div class="flex justify-between items-center py-[10px]">
+            <div class="font-bold text-2xl">MSA</div>
+            <div>
+              <ul class="flex justify-between">
+                <li
+                  v-for="(item, index) in menu"
+                  :key="'menu' + index"
+                  class="px-5 text-[22px]"
+                >
+                  <NuxtLink :to="item.link" v-slot="{ isActive }"
+                    ><span
+                      :class="[isActive ? 'text-black' : 'text-[#D1D0D0]']"
+                    >
+                      {{ item.name }}
+                    </span>
+                  </NuxtLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

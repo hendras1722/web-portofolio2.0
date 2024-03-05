@@ -1,23 +1,26 @@
 <template>
   <div class="px-[160px]">
-    <div class="flex justify-center mb-[40px] mt-[64px]">
-      <p
-        class="w-[1600px] min-h-[276px] text-center text-[80px] font-semibold text-[#363535]"
-      >
-        {{ typeValue }}
-        <span class="blinking-cursor lg:text-[86px] text-[31px]">|</span>
-      </p>
-    </div>
-    <div class="flex justify-center">
-      <p class="text-[#B1AFB0] font-bold text-[22px]" id="motto">
-        The Man Behind The Keyboard
-      </p>
-    </div>
-
-    <div class="w-full lg:flex justify-between relative block z-[1]">
-      <div>
+    <div class="grid grid-cols-12 grid-rows-1 gap-4">
+      <div class="col-span-12">
+        <div class="flex justify-center mb-[40px] mt-[64px]">
+          <p
+            class="w-[1600px] min-h-[276px] text-center text-[80px] font-semibold text-[#363535]"
+          >
+            {{ typeValue }}
+            <span class="blinking-cursor lg:text-[86px] text-[31px]">|</span>
+          </p>
+        </div>
+      </div>
+      <div class="col-span-12">
+        <div class="flex justify-center">
+          <p class="text-[#B1AFB0] font-bold text-[22px]" id="motto">
+            The Man Behind The Keyboard
+          </p>
+        </div>
+      </div>
+      <div class="col-span-6 px-[35px] relative">
         <div
-          class="lg:w-[715px] w-full h-[287px] lg:ml-[35px] rounded-[8px] py-[26px] px-[33px] mt-[76px] overflow-auto"
+          class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] mt-[76px] overflow-auto"
           :style="{ background: appConfig.colors['custom-black'][900] }"
           @click="handleMouseEvent()"
         >
@@ -54,7 +57,7 @@
             </div>
           </div>
         </div>
-        <div class="lg:ml-[35px] lg:block absolute bottom-0 mb-[48px]">
+        <div class="block">
           <div class="mt-3 text-[16px] font-semibold text-[#464444]">
             Find Me
           </div>
@@ -73,18 +76,20 @@
             </a>
           </div>
         </div>
+        <div
+          class="flex absolute bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B]"
+        >
+          2024-PRESENT © Muh Syahendra A
+        </div>
       </div>
-      <div class="lg:block flex justify-end">
-        <img
-          id="me"
-          class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit w-[246px] h-[305px]"
-          src="/me.png"
-        />
-      </div>
-      <div
-        class="lg:flex lg:justify-center w-full absolute bottom-0 lg:-ml-37 lg:text-[16px] text-[8px] text-[#5F5B5B] left-0 lg:mb-0 mb-[13px]"
-      >
-        2024-PRESENT © Muh Syahendra A
+      <div class="col-span-6 col-start-7 flex justify-end">
+        <div class="lg:block">
+          <img
+            id="me"
+            class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit md:block hidden"
+            src="/me.png"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -422,17 +427,22 @@ function handleSubmit(e: KeyboardEvent, props: any) {
       ? '0' + new Date().getHours()
       : '' + new Date().getHours()
 
-  const charCode = e.keyCode || e.which
+  let charCode = e.keyCode || e.which
   if (!typing_text) return
 
   if (charCode === 13 || e.key == 'Enter' || e.code == 'Enter') {
+    e.preventDefault()
+    const input = document.createElement('input')
+    input.value = typing_text.innerHTML
+
     container_typing?.scrollTo({
       left: 0,
       top: container_typing?.scrollHeight,
       behavior: 'smooth',
     })
-    typing_text.blur()
+
     typing_text.setAttribute('contentEditable', 'false')
+    typing_text.blur()
 
     if (!value) {
       dataTerminal.value.push({
