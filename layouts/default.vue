@@ -2,7 +2,7 @@
   <div
     :class="[
       route.path === '/' &&
-        `md:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover bg-center bg-no-repeat min-h-lvh`,
+        `lg:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover bg-center bg-no-repeat min-h-lvh`,
     ]"
   >
     <div

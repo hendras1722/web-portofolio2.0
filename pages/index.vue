@@ -4,7 +4,7 @@
       <div class="col-span-12">
         <div class="flex justify-center lg:mb-[40px] mt-[64px]">
           <p
-            class="w-[1600px] min-h-[80px] lg:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535]"
+            class="w-[1600px] min-h-[80px] lg:text-center md:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535]"
           >
             {{ typeValue }}
             <span class="blinking-cursor md:text-[86px] text-[31px]">|</span>
@@ -21,7 +21,7 @@
           </p>
         </div>
       </div>
-      <div class="md:col-span-6 col-span-12 md:px-[35px] relative">
+      <div class="sm:col-span-6 col-span-12 md:px-[35px] relative">
         <div
           class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] mt-[76px] overflow-auto"
           :style="{ background: appConfig.colors['custom-black'][900] }"
@@ -86,7 +86,7 @@
         </div>
       </div>
       <div class="col-span-6 col-start-7 flex justify-end">
-        <div class="lg:block md:hidden">
+        <div class="lg:block md:block hidden">
           <img
             id="me"
             class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit md:flex hidden"
@@ -96,7 +96,7 @@
       </div>
     </div>
     <div>
-      <div class="lg:hidden">
+      <div class="lg:hidden md:hidden">
         <img
           id="me"
           class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
