@@ -7,9 +7,14 @@
   >
     <div
       id="navbar"
-      class="grid grid-cols-12 grid-rows-1 gap-4 px-[160px] justify-between w-full"
+      class="grid grid-cols-12 grid-rows-1 gap-4 lg:px-[160px] px-[20px] w-full"
     >
-      <div class="md:hidden block h-[60px] py-[32px] col-span-12">asd</div>
+      <div
+        class="md:hidden h-[60px] py-[32px] col-span-12 flex justify-between"
+      >
+        <div class="font-bold text-2xl">MSA</div>
+        <div>Hamburgers</div>
+      </div>
       <div class="col-span-12 hidden sm:block">
         <div class="h-[119px] py-[32px]">
           <div class="flex justify-between items-center py-[10px]">
