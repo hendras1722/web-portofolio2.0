@@ -17,6 +17,7 @@
     "sass": "^1.71.1"
   },
   "dependencies": {
+    "@nuxt/content": "^2.12.1",
     "@vueuse/core": "^10.9.0"
   }
 }

@@ -1,24 +1,27 @@
 <template>
-  <div class="px-[160px]">
+  <div class="lg:px-[160px] px-[20px]">
     <div class="grid grid-cols-12 grid-rows-1 gap-4">
       <div class="col-span-12">
-        <div class="flex justify-center mb-[40px] mt-[64px]">
+        <div class="flex justify-center lg:mb-[40px] mt-[64px]">
           <p
-            class="w-[1600px] min-h-[276px] text-center text-[80px] font-semibold text-[#363535]"
+            class="w-[1600px] min-h-[80px] lg:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535]"
           >
             {{ typeValue }}
-            <span class="blinking-cursor lg:text-[86px] text-[31px]">|</span>
+            <span class="blinking-cursor md:text-[86px] text-[31px]">|</span>
           </p>
         </div>
       </div>
       <div class="col-span-12">
         <div class="flex justify-center">
-          <p class="text-[#B1AFB0] font-bold text-[22px]" id="motto">
+          <p
+            class="text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[3vw]"
+            id="motto"
+          >
             The Man Behind The Keyboard
           </p>
         </div>
       </div>
-      <div class="col-span-6 px-[35px] relative">
+      <div class="md:col-span-6 col-span-12 md:px-[35px] relative">
         <div
           class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] mt-[76px] overflow-auto"
           :style="{ background: appConfig.colors['custom-black'][900] }"
@@ -35,7 +38,7 @@
             <div class="flex items-center" v-if="item.html === 'input'">
               <div>
                 <span
-                  class="text-white text-sm flex items-center fontTerminal"
+                  class="text-white text-sm flex items-center fontTerminal text-wrap"
                   style="width: 76px"
                 >
                   {{ item.created_at }} =&#62; $
@@ -57,7 +60,7 @@
             </div>
           </div>
         </div>
-        <div class="block">
+        <div>
           <div class="mt-3 text-[16px] font-semibold text-[#464444]">
             Find Me
           </div>
@@ -77,19 +80,28 @@
           </div>
         </div>
         <div
-          class="flex absolute bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B]"
+          class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] md:flex h-[84px]"
         >
           2024-PRESENT © Muh Syahendra A
         </div>
       </div>
       <div class="col-span-6 col-start-7 flex justify-end">
-        <div class="lg:block">
+        <div class="lg:block md:hidden">
           <img
             id="me"
-            class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit md:block hidden"
+            class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit md:flex hidden"
             src="/me.png"
           />
         </div>
+      </div>
+    </div>
+    <div>
+      <div class="lg:hidden">
+        <img
+          id="me"
+          class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
+          src="/me.png"
+        />
       </div>
     </div>
   </div>
@@ -387,14 +399,6 @@ const typeText = (e: string, value?: string) => {
       created_at: hour + ':' + minute + ':' + second,
     })
 
-    // setDataTerminal((prev) => [
-    //   ...prev,
-    // {
-    //   html: 'input',
-    //   created_at: hour + ':' + minute + ':' + second,
-    // },
-    // ])
-
     if (container_typing) {
       container_typing.scrollTo({
         left: 0,
@@ -402,8 +406,6 @@ const typeText = (e: string, value?: string) => {
         behavior: 'smooth',
       })
     }
-
-    // setCodeStatus(randomValue)
   }
 
   type()
@@ -413,7 +415,6 @@ function handleSubmit(e: KeyboardEvent, props: any) {
   let value = null
 
   const typing_text = document.getElementById(`typing_text${props.index}`)
-  value = typing_text?.innerText
   const second =
     new Date().getSeconds() <= 9
       ? '0' + new Date().getSeconds()
@@ -432,6 +433,8 @@ function handleSubmit(e: KeyboardEvent, props: any) {
 
   if (charCode === 13 || e.key == 'Enter' || e.code == 'Enter') {
     e.preventDefault()
+    value = typing_text?.innerText.replace(/\n/gm, '')
+
     const input = document.createElement('input')
     input.value = typing_text.innerHTML
 
@@ -632,7 +635,7 @@ onMounted(() => {
 
 // blinks curso start
 .blinking-cursor {
-  font-size: 6rem;
+  // font-size: 6rem;
   color: black;
   -webkit-animation: 1s blink step-end infinite;
   -moz-animation: 1s blink step-end infinite;

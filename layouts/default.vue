@@ -2,15 +2,15 @@
   <div
     :class="[
       route.path === '/' &&
-        `md:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover bg-center bg-no-repeat min-h-dvh`,
+        `md:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover bg-center bg-no-repeat min-h-lvh`,
     ]"
   >
     <div
       id="navbar"
-      :class="[scrollStatus ? 'w-full' : 'w-full']"
-      class="grid grid-cols-12 grid-rows-1 gap-4 px-[160px] justify-between"
+      class="grid grid-cols-12 grid-rows-1 gap-4 px-[160px] justify-between w-full"
     >
-      <div class="col-span-12">
+      <div class="md:hidden block h-[60px] py-[32px] col-span-12">asd</div>
+      <div class="col-span-12 hidden sm:block">
         <div class="h-[119px] py-[32px]">
           <div class="flex justify-between items-center py-[10px]">
             <div class="font-bold text-2xl">MSA</div>
@@ -35,7 +35,6 @@
         </div>
       </div>
     </div>
-
     <main :class="[scrollStatus && 'pt-[119px]']">
       <slot />
     </main>
@@ -75,10 +74,16 @@ function handleScroll() {
   }
 }
 
+const interval = ref<any>(null)
+
 onMounted(() => {
-  setInterval(() => {
+  interval.value = setInterval(() => {
     handleScroll()
   }, 100)
+})
+
+onUnmounted(() => {
+  clearInterval(interval.value)
 })
 </script>
 
