@@ -62,6 +62,15 @@ const menu = ref([
     name: 'Activity',
   },
 ])
+// useHead(() => {
+//   link: [
+//     {
+//       as: 'image',
+//       rel: 'preload',
+//       href: '//coffee.svg',
+//     },
+//   ]
+// })
 const scrollStatus = ref(false)
 function handleScroll() {
   const id = document.getElementById('navbar')
