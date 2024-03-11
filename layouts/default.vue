@@ -10,7 +10,7 @@
       class="grid grid-cols-12 grid-rows-1 gap-4 lg:px-[160px] px-[20px] w-full"
     >
       <div
-        class="md:hidden h-[60px] py-[32px] col-span-12 flex justify-between"
+        class="md:hidden h-[60px] py-[25px] items-center col-span-12 flex justify-between"
       >
         <div class="font-bold text-2xl">MSA</div>
         <div>Hamburgers</div>
