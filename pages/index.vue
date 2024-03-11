@@ -429,8 +429,10 @@ function handleSubmit(e: KeyboardEvent, props: any) {
       : '' + new Date().getHours()
 
   let charCode = e.keyCode || e.which
-  if (!typing_text) return
+  value = typing_text?.innerText.replace(/\n/gm, '')
 
+  if (!typing_text) return
+  console.log(charCode, e.key, e.code)
   if (charCode === 13 || e.key == 'Enter' || e.code == 'Enter') {
     e.preventDefault()
     value = typing_text?.innerText.replace(/\n/gm, '')
