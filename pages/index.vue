@@ -14,7 +14,7 @@
       <div class="col-span-12">
         <div class="flex justify-center">
           <p
-            class="text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[3vw]"
+            class="text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[22px]"
             id="motto"
           >
             The Man Behind The Keyboard
@@ -23,7 +23,7 @@
       </div>
       <div class="sm:col-span-6 col-span-12 md:px-[35px] relative">
         <div
-          class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] mt-[76px] overflow-auto"
+          class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] lg:mt-[76px] mt-[34px] overflow-auto"
           :style="{ background: appConfig.colors['custom-black'][900] }"
           @click="handleMouseEvent()"
         >
