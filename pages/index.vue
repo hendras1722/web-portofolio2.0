@@ -80,7 +80,7 @@
           </div>
         </div>
         <div
-          class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] md:flex h-[84px]"
+          class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] md:flex absolute"
         >
           2024-PRESENT © Muh Syahendra A
         </div>

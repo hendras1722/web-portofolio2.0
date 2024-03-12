@@ -94,6 +94,10 @@ const menu = ref([
     link: '/activity',
     name: 'Activity',
   },
+  {
+    link: '/Chat',
+    name: 'Chat',
+  },
 ])
 // useHead(() => {
 //   link: [
