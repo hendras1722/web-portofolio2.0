@@ -1,10 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxt/ui', '@nuxtjs/google-fonts'],
+  extends: '@nuxt-themes/typography',
+  modules: ['@nuxt/ui', '@nuxtjs/google-fonts', '@nuxt/content'],
   css: ['~/assets/css/font.css'],
   colorMode: {
     preference: 'light',
+  },
+  ui: {
+    icons: ['ic'],
   },
   googleFonts: {
     families: {

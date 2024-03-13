@@ -1,12 +1,12 @@
 <template>
   <div
-    class="thumbnail relative bg-[url(/coffee.svg)] w-dwh bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-fixed"
+    class="thumbnail relative bg-[url(/coffee.svg)] w-dvw bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-fixed"
   >
     <div
-      class="lg:px-[287px] px-[20px] w-fit h-fit absolute top-0 bottom-0 mx-auto z-[1] right-0 left-0 my-auto text-white"
+      class="lg:px-[287px] sm:px-[100px] px-[20px] w-fit h-fit absolute top-0 bottom-0 mx-auto z-[1] right-0 left-0 my-auto text-white"
     >
       <div class="text-white block">
-        <p class="text-center font-bold lg:text-[86px]">
+        <p class="text-center font-bold lg:text-[86px] md:text-[75px]">
           Reading is essential for those who seek to rise above the ordinary
         </p>
         <p class="mt-[50px] text-center font-bold lg:text-[31px]">Jim Rohn</p>

@@ -17,6 +17,8 @@
     "sass": "^1.71.1"
   },
   "dependencies": {
+    "@iconify-json/ic": "^1.1.17",
+    "@nuxt-themes/typography": "^1.0.1",
     "@nuxt/content": "^2.12.1",
     "@vueuse/core": "^10.9.0"
   }

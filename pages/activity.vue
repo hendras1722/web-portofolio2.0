@@ -1,50 +1,62 @@
 <template>
   <div>
     <div class="lg:px-[287px] px-[20px] mt-[66px] mb-[86px]">
-      <div class="font-bold text-[61px] w-full text-center text-[#212020] mb-[109px]">
+      <div
+        class="font-bold lg:text-[61px] w-full text-center text-[#212020] mb-[109px]"
+      >
         Experience
       </div>
-      <div class="text-[#212020] relative" v-for="(item, index) in dataExperience" :key="index">
-        <h2 class="font-bold text-[4.765625vw] text-[#212020]">{{ item.title }}</h2>
+      <div
+        class="text-[#212020] relative mt-5"
+        v-for="(item, index) in dataExperience"
+        :key="index"
+      >
+        <h2 class="font-bold lg:text-[3vw] text-[#212020]">
+          {{ item.title }}
+        </h2>
         <p
-          class="text-[10vw] text-white absolute left-0 right-0 mx-auto flex justify-center w-full top-3 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]">
+          class="lg:text-[8vw] text-[10vw] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
+        >
           {{ item.date }}
         </p>
-        <p class="font-semibold text-[22px]">
+        <p class="font-semibold lg:text-[22px]">
           {{ item.desc }}
         </p>
       </div>
-      <div class="font-bold text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px]">
+      <div
+        class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px]"
+      >
         Education
       </div>
-      <div class="text-[#212020] relative" v-for="(item, index) in dataEducation" :key="index">
-        <h2 class="font-bold text-[4.765625vw] text-[#212020]">{{ item.title }}</h2>
+      <div
+        class="text-[#212020] relative mt-5"
+        v-for="(item, index) in dataEducation"
+        :key="index"
+      >
+        <h2 class="font-bold lg:text-[3vw] text-[#212020]">
+          {{ item.title }}
+        </h2>
         <p
-          class="text-[10vw] text-white absolute left-0 right-0 mx-auto flex justify-center w-full top-3 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]">
+          class="lg:text-[8vw] text-[10vw] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
+        >
           {{ item.date }}
         </p>
-        <p class="font-semibold text-[22px]">
+        <p class="font-semibold lg:text-[22px]">
           {{ item.desc }}
         </p>
       </div>
-      <div class="font-bold text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px]">
+      <div
+        class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px]"
+      >
         Project
       </div>
       <div class="grid grid-cols-3 grid-rows-2 gap-4 place-items-center">
-        <div class="font-bold text-[30px]  w-full text-left text-[#212020] ">
-          BNI
-        </div>
-        <div class="font-bold text-[30px]  w-full text-left text-[#212020] ">
-          CIMB
-        </div>
-        <div class="font-bold text-[30px]  w-full text-left text-[#212020] ">
-          Ceisa 4.0
-        </div>
-        <div class="font-bold text-[30px]  w-full text-left text-[#212020] ">
-          Glasier Privy
-        </div>
-        <div class="font-bold text-[30px]  w-full text-left text-[#212020] ">
-          Tele App Privy
+        <div
+          class="font-bold lg:text-[30px] w-full text-left text-[#212020]"
+          v-for="item in dataProject"
+          :key="item"
+        >
+          {{ item }}
         </div>
       </div>
     </div>
@@ -94,6 +106,13 @@ const dataEducation = [
     date: '2019',
     desc: `Activities to major in strong current electrical engineering and graduate in 2018 `,
   },
+]
+const dataProject = [
+  'BNI',
+  'CIMB',
+  'Ceisa 4.0',
+  'Glasier Privy',
+  'Tele App Privy',
 ]
 </script>
 
