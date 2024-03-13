@@ -5,9 +5,9 @@
         Experience
       </div>
       <div class="text-[#212020] relative" v-for="(item, index) in dataExperience" :key="index">
-        <h2 class="font-bold text-[61px] text-[#212020]">{{ item.title }}</h2>
+        <h2 class="font-bold text-[4.765625vw] text-[#212020]">{{ item.title }}</h2>
         <p
-          class="lg:text-[128px] text-[40px] text-white absolute left-0 right-0 mx-auto flex justify-center w-full top-3 -z-[1] font-medium drop-shadow-[0_0.3px_0.3px_#464444]">
+          class="text-[10vw] text-white absolute left-0 right-0 mx-auto flex justify-center w-full top-3 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]">
           {{ item.date }}
         </p>
         <p class="font-semibold text-[22px]">
@@ -18,9 +18,9 @@
         Education
       </div>
       <div class="text-[#212020] relative" v-for="(item, index) in dataEducation" :key="index">
-        <h2 class="font-bold text-[61px] text-[#212020]">{{ item.title }}</h2>
+        <h2 class="font-bold text-[4.765625vw] text-[#212020]">{{ item.title }}</h2>
         <p
-          class="lg:text-[128px] text-[40px] text-white absolute left-0 right-0 mx-auto flex justify-center w-full top-3 -z-[1] font-medium drop-shadow-[0_0.3px_0.3px_#464444]">
+          class="text-[10vw] text-white absolute left-0 right-0 mx-auto flex justify-center w-full top-3 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]">
           {{ item.date }}
         </p>
         <p class="font-semibold text-[22px]">
