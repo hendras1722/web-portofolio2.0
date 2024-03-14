@@ -7,3 +7,9 @@ date: '2023-12-22'
 <!-- Content of the page -->
 
 Learn how to use @nuxt/content. Full amount of content beyond the more divider. ![A Cool Image](/discord.png){: width=150 height=100 style="float:right; padding:16px"}
+
+```js [file.js]{4-6,7} meta-info=val
+export default () => {
+  console.log('Code block')
+}
+```
