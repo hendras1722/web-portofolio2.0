@@ -437,9 +437,9 @@ export default defineTheme({
           initial: '{typography.color.secondary.200}',
           dark: '{typography.color.secondary.800}',
         },
-        borderRadius: '{typography.radii.3xs}',
+        borderRadius: '{typography.radii.4xs}',
         color: {
-          initial: 'red',
+          initial: '{typography.color.secondary.700}',
           dark: '{typography.color.secondary.200}',
         },
         backgroundColor: {
