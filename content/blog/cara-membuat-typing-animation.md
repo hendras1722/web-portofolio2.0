@@ -1,7 +1,7 @@
 ---
 title: 'Cara Bembuat Typing Animation'
 description: 'Vue'
-date: '2023-12-22'
+date: '2024-03-15'
 ---
 
 <!-- Content of the page -->
