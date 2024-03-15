@@ -19,7 +19,7 @@
 
 
         <ContentList path="/blog" v-slot="{ list }">
-          <p v-for="article in list" :key="article._path" class="lg:text-[31px] text-[15px]">
+          <p v-for="article in filterList(list)" :key="article._path" class="lg:text-[31px] text-[15px]">
             <NuxtLink :to="article._path" class="hover:underline">
               {{ article.title }}
             </NuxtLink>
@@ -43,7 +43,12 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+function filterList(e: any) {
+  const newDateList = e.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return newDateList
+}
+</script>
 
 <style scoped lang="scss">
 .vignette-large {
