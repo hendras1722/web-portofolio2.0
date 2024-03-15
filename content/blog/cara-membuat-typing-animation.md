@@ -1,5 +1,5 @@
 ---
-title: 'Cara Bembuat Typing Animation'
+title: 'Cara Membuat Typing Animation'
 description: 'Vue'
 date: '2024-03-15'
 ---
