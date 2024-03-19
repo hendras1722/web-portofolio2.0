@@ -4,6 +4,7 @@
     <div class="flex justify-center shadow-lg p-10 rounded-lg mt-16">
       <div class="w-full">
         <div
+          id="container_typing"
           class="border border-gray-100 p-6 mb-5 rounded-lg h-[240px] overflow-auto"
         >
           <div v-for="(item, index) in modelValue" :key="index">
@@ -33,7 +34,9 @@
             <!-- chat me -->
             <div v-else>
               <div class="w-full flex justify-end">
-                <div class="text-sm text-gray-400 font-bold truncate w-52">
+                <div
+                  class="text-sm text-gray-400 text-end font-bold truncate w-52"
+                >
                   {{ item.info.full_name }}
                 </div>
               </div>
@@ -64,13 +67,15 @@
           >
             <div id="typing" contenteditable class="outline-none"></div>
           </div>
-          <UButton
-            class="ml-5 rounded-full"
-            :ui="{ base: '!bg-green-500 hover:!bg-green-400' }"
-            icon="i-ic-baseline-send"
-            @click="handleSend"
-          >
-          </UButton>
+          <div class="w-min">
+            <UButton
+              class="ml-5 rounded-full"
+              :ui="{ base: '!bg-green-500 hover:!bg-green-400' }"
+              icon="i-ic-baseline-send"
+              @click="handleSend"
+            >
+            </UButton>
+          </div>
         </div>
         <div class="flex justify-center" v-else>
           <UButton
@@ -91,7 +96,7 @@
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const cookie = useCookie('sb-access-token')
-const modelValue = ref<
+const modelValue = useState<
   {
     id: string
     chat: string
@@ -102,18 +107,28 @@ const modelValue = ref<
       picture: string
     }
   }[]
->([])
+>('data', () => [])
 
 const id = user.value?.id
-const { data } = await useFetch<{
-  data: any
-}>('/api/getChat', {
-  method: 'GET',
-  headers: {
-    authorization: 'bearer' + ' ' + (cookie.value || ''),
-  },
-})
-modelValue.value = data.value?.data
+async function getChat() {
+  try {
+    const { data } = await useFetch<{
+      data: any
+    }>('/api/getChat', {
+      method: 'GET',
+
+      watch: false,
+    })
+    modelValue.value = data.value?.data
+    let objDiv = document.getElementById('container_typing')
+    if (!objDiv) return
+    objDiv.scrollTop = objDiv.scrollHeight
+    return true
+  } catch (error) {
+    return false
+  }
+}
+getChat()
 
 async function handleClick() {
   const { error } = await supabase.auth.signInWithOAuth({
@@ -138,6 +153,14 @@ async function handleSend() {
     },
     watch: false,
   })
+  if (res) {
+    await getChat()
+    let objDiv = document.getElementById('container_typing')
+    let bodyTyping = document.getElementById('typing')
+    if (!objDiv || !bodyTyping) return
+    bodyTyping.innerHTML = ''
+    objDiv.scrollTop = objDiv.scrollHeight
+  }
 }
 
 async function handleOut() {
