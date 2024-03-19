@@ -83,6 +83,7 @@
         </div>
       </div>
     </div>
+    <UButton @click="handleOut">keluar</UButton>
   </div>
 </template>
 
@@ -109,7 +110,7 @@ const { data } = await useFetch<{
 }>('/api/getChat', {
   method: 'GET',
   headers: {
-    authorization: 'bearer' + ' ' + cookie.value,
+    authorization: 'bearer' + ' ' + (cookie.value || ''),
   },
 })
 modelValue.value = data.value?.data
@@ -137,6 +138,10 @@ async function handleSend() {
     },
     watch: false,
   })
+}
+
+async function handleOut() {
+  const { error } = await supabase.auth.signOut()
 }
 </script>
 

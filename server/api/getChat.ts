@@ -4,14 +4,11 @@ import { supabase } from '@/utils/supabase'
 export default defineEventHandler(async (event) => {
   const path = getHeaders(event)
 
-  if (!path.authorization) {
-    throw createError({
-      statusCode: 403,
-      message: 'Forbidden Access',
-    })
-  }
   const cookie = path.authorization?.replace('bearer ', '')
+  if (!cookie) return
+
   function parseJwt(token: string) {
+    if (!cookie || cookie === 'bearer') return
     var base64Url = token.split('.')[1]
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
     var jsonPayload = decodeURIComponent(

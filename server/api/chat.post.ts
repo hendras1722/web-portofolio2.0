@@ -5,13 +5,14 @@ export default defineEventHandler(async (event) => {
   const path = getHeaders(event)
   const body = await readBody(event)
 
-  if (!path.authorization) {
+  const cookie = path.authorization?.replace('bearer ', '')
+
+  if (!cookie) {
     throw createError({
       statusCode: 403,
       message: 'Forbidden Access',
     })
   }
-  const cookie = path.authorization?.replace('bearer ', '')
 
   function parseJwt(token: string) {
     var base64Url = token.split('.')[1]
