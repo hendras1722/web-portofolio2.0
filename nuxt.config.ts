@@ -2,13 +2,22 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   extends: '@nuxt-themes/typography',
-  modules: ['@nuxt/ui', '@nuxtjs/google-fonts', '@nuxt/content'],
+  modules: [
+    '@nuxt/ui',
+    '@nuxtjs/google-fonts',
+    '@nuxt/content',
+    '@nuxtjs/supabase',
+  ],
   css: ['~/assets/css/font.css'],
   colorMode: {
     preference: 'light',
   },
   ui: {
     icons: ['ic'],
+  },
+  supabase: {
+    // Options
+    redirect: false,
   },
   googleFonts: {
     families: {

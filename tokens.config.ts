@@ -10,16 +10,6 @@ export default defineTheme({
         '@studioIcon material-symbols:article',
       ],
     },
-    body: {
-      color: {
-        initial: '{typography.color.black}',
-        dark: '{typography.color.white}',
-      },
-      backgroundColor: {
-        initial: '{typography.color.white}',
-        dark: '{typography.color.black}',
-      },
-    },
     verticalMargin: {
       $schema: {
         title: 'Vertical spacings between paragraphs.',
@@ -90,32 +80,6 @@ export default defineTheme({
       extrabold: '800',
       black: '900',
     },
-    lead: {
-      $schema: {
-        title: 'Line heights used in your typography.',
-        tags: [
-          '@studioInput design-token',
-          '@studioInputTokenType font-size',
-          '@studioIcon material-symbols:height-rounded',
-        ],
-      },
-      1: '.025rem',
-      2: '.5rem',
-      3: '.75rem',
-      4: '1rem',
-      5: '1.25rem',
-      6: '1.5rem',
-      7: '1.75rem',
-      8: '2rem',
-      9: '2.25rem',
-      10: '2.5rem',
-      none: '1',
-      tight: '1.25',
-      snug: '1.375',
-      normal: '1.5',
-      relaxed: '1.625',
-      loose: '2',
-    },
     font: {
       $schema: {
         title: 'Your typography fonts',
@@ -131,59 +95,6 @@ export default defineTheme({
       sans: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
       serif: 'ui-serif, Georgia, Cambria, Times New Roman, Times, serif',
       mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
-    },
-    color: {
-      $schema: {
-        title: 'Your typography color palette.',
-        tags: [
-          '@studioInput design-token',
-          '@studioInputTokenType color',
-          '@studioIcon ph:palette',
-        ],
-      },
-      white: '#ffffff',
-      black: '#0E0D0D',
-      primary: {
-        50: '#d9e5ff',
-        100: '#b3cbff',
-        200: '#8db0ff',
-        300: '#6696ff',
-        400: '#407cff',
-        500: '#1a62ff',
-        600: '#0047e1',
-        700: '#0035a9',
-        800: '#002370',
-        900: '#001238',
-      },
-      secondary: {
-        50: '#FBFBFB',
-        100: '#F6F5F4',
-        200: '#ECEBE8',
-        300: '#DBD9D3',
-        400: '#ADA9A4',
-        500: '#97948F',
-        600: '#67635D',
-        700: '#36332E',
-        800: '#201E1B',
-        900: '#121110',
-      },
-    },
-    radii: {
-      none: '0px',
-      '4xs': '2px',
-      '3xs': '4px',
-      '2xs': '6px',
-      xs: '8px',
-      sm: '10px',
-      md: '12px',
-      lg: '14px',
-      xl: '16px',
-      '2xl': '18px',
-      '3xl': '20px',
-      '4xl': '24px',
-      '5xl': '28px',
-      '6xl': '32px',
-      full: '9999px',
     },
   },
   prose: {
@@ -373,60 +284,7 @@ export default defineTheme({
         dark: '{typography.color.secondary.800}',
       },
     },
-    table: {
-      margin: '{typography.verticalMargin.base} 0',
-      textAlign: 'start',
-      fontSize: '{typography.fontSize.sm}',
-      lineHeight: '{typography.lead.6}',
-    },
-    thead: {
-      border: {
-        width: '0px',
-        style: 'solid',
-        color: {
-          initial: '{typography.color.secondary.300}',
-          dark: '{typography.color.secondary.600}',
-        },
-      },
-      borderBottom: {
-        width: '1px',
-        style: 'solid',
-        color: {
-          initial: '{typography.color.secondary.200}',
-          dark: '{typography.color.secondary.800}',
-        },
-      },
-    },
-    th: {
-      color: {
-        initial: '{typography.color.secondary.600}',
-        dark: '{typography.color.secondary.400}',
-      },
-      padding:
-        '0 {typography.verticalMargin.sm} {typography.verticalMargin.sm} {typography.verticalMargin.sm}',
-      fontWeight: '{typography.fontWeight.semibold}',
-      textAlign: 'inherit',
-    },
-    tbody: {
-      tr: {
-        borderBottom: {
-          width: '1px',
-          style: 'dashed',
-          color: {
-            initial: '{typography.color.secondary.200}',
-            dark: '{typography.color.secondary.800}',
-          },
-        },
-      },
-      td: {
-        padding: '{typography.verticalMargin.sm}',
-      },
-      code: {
-        inline: {
-          fontSize: '{typography.fontSize.sm}',
-        },
-      },
-    },
+
     code: {
       block: {
         fontSize: '{typography.fontSize.sm}',
