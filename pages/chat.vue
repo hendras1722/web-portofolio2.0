@@ -5,20 +5,12 @@
       <div class="w-full">
         <div
           id="container_typing"
-          class="border border-gray-100 p-6 mb-5 rounded-lg h-[240px] overflow-auto"
+          class="border border-gray-100 p-6 mb-5 rounded-lg h-[440px] overflow-auto"
         >
           <div v-for="(item, index) in modelValue" :key="index">
             <!-- chat orther -->
             <div class="flex items-start mb-5" v-if="item.id !== id">
-              <div class="w-min">
-                <img
-                  :src="item.info.picture"
-                  :srcset="item.info.picture"
-                  alt="avatar"
-                  class="w-10 h-10 rounded-full bg-contain"
-                />
-              </div>
-              <div class="ml-2">
+              <div>
                 <div class="text-sm text-gray-400 font-bold truncate w-52">
                   {{ item.info.full_name }}
                 </div>
@@ -27,6 +19,11 @@
                     {{ item.chat }}
                   </p>
                 </div>
+                <small class="text-gray-300 font-semibold">{{
+                  formatDistanceStrict(new Date(item.created_at), new Date(), {
+                    addSuffix: true,
+                  })
+                }}</small>
               </div>
             </div>
             <!-- end -->
@@ -47,14 +44,11 @@
                       {{ item.chat }}
                     </p>
                   </div>
-                </div>
-                <div class="w-min ml-2">
-                  <img
-                    :src="item.info.picture"
-                    :srcset="item.info.picture"
-                    alt="avatar"
-                    class="w-10 h-10 rounded-full bg-contain"
-                  />
+                  <small class="text-gray-300 font-semibold flex justify-end">{{
+                    formatDistanceStrict(item.created_at, new Date(), {
+                      addSuffix: true,
+                    })
+                  }}</small>
                 </div>
               </div>
             </div>
@@ -86,13 +80,18 @@
             Sign in with Google
           </UButton>
         </div>
+        <div class="text-center mt-5" v-if="user">
+          <UButton @click="handleOut" variant="ghost" color="red"
+            >Sign Out</UButton
+          >
+        </div>
       </div>
     </div>
-    <UButton @click="handleOut">keluar</UButton>
   </div>
 </template>
 
 <script setup lang="ts">
+import { formatDistanceStrict } from 'date-fns'
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const cookie = useCookie('sb-access-token')
@@ -112,13 +111,13 @@ const modelValue = useState<
 const id = user.value?.id
 async function getChat() {
   try {
-    const { data } = await useFetch<{
-      data: any
-    }>('/api/getChat', {
-      method: 'GET',
-
-      watch: false,
-    })
+    const { data } = await useAsyncData('chat', () =>
+      $fetch<{
+        data: any
+      }>('/api/getChat', {
+        method: 'GET',
+      })
+    )
     modelValue.value = data.value?.data
     let objDiv = document.getElementById('container_typing')
     if (!objDiv) return
@@ -143,24 +142,24 @@ async function handleClick() {
 async function handleSend() {
   const body = document.getElementById('typing')
   if (!body) return
-  const res = await useFetch('/api/chat', {
-    method: 'POST',
-    body: {
-      chat: body.innerText,
-    },
-    headers: {
-      authorization: 'bearer' + ' ' + cookie.value,
-    },
-    watch: false,
-  })
-  if (res) {
-    await getChat()
-    let objDiv = document.getElementById('container_typing')
-    let bodyTyping = document.getElementById('typing')
-    if (!objDiv || !bodyTyping) return
-    bodyTyping.innerHTML = ''
-    objDiv.scrollTop = objDiv.scrollHeight
-  }
+  const res = await useAsyncData('chat', () =>
+    $fetch('/api/chat', {
+      method: 'POST',
+      body: {
+        chat: body.innerText,
+      },
+      headers: {
+        authorization: 'bearer' + ' ' + cookie.value,
+      },
+      watch: false,
+    })
+  )
+  await getChat()
+  let objDiv = document.getElementById('container_typing')
+  let bodyTyping = document.getElementById('typing')
+  if (!objDiv || !bodyTyping) return
+  bodyTyping.innerHTML = ''
+  objDiv.scrollTop = objDiv.scrollHeight
 }
 
 async function handleOut() {

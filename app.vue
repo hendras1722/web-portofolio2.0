@@ -12,4 +12,4 @@
 
 <script setup lang="ts"></script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

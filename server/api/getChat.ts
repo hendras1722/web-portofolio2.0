@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
       id,
       chat,
       info: raw_user_meta_data,
-      created_at
+      date
       `
     )
 
@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
       return {
         id: item.id,
         chat: item.chat,
-        created_at: item.created_at,
+        created_at: item.date,
         info: {
           email: item.info.email,
           full_name: item.info.full_name,
