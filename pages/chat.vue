@@ -31,7 +31,7 @@
             <!-- end -->
 
             <!-- chat me -->
-            <div v-else>
+            <div v-if="item.id === id">
               <div class="w-full flex justify-end">
                 <div
                   class="text-sm text-gray-400 text-end font-bold truncate w-52"
