@@ -10,17 +10,19 @@
           <div v-for="(item, index) in modelValue" :key="index">
             <!-- chat orther -->
             <div class="flex items-start mb-5" v-if="item.id !== id">
-              <div>
+              <div class="grid place-items-start">
                 <div class="text-sm text-gray-400 font-bold truncate w-52">
                   {{ item.info.full_name }}
                 </div>
-                <div class="shadow-md p-2 rounded-lg max-w-2xl">
-                  <p>
-                    {{ item.chat }}
-                  </p>
+                <div class="w-min my-1">
+                  <div class="shadow-md p-2 rounded-lg max-w-2xl min-w-min">
+                    <p>
+                      {{ item.chat }}
+                    </p>
+                  </div>
                 </div>
-                <small class="text-gray-300 font-semibold">{{
-                  formatDistanceStrict(new Date(item.created_at), new Date(), {
+                <small class="text-gray-300 font-semibold flex justify-end">{{
+                  formatDistanceStrict(item.created_at, new Date(), {
                     addSuffix: true,
                   })
                 }}</small>
@@ -38,11 +40,13 @@
                 </div>
               </div>
               <div class="flex items-start justify-end mb-5">
-                <div>
-                  <div class="shadow-md p-2 rounded-lg max-w-2xl">
-                    <p>
-                      {{ item.chat }}
-                    </p>
+                <div class="grid place-items-end">
+                  <div class="w-min my-1">
+                    <div class="shadow-md p-2 rounded-lg max-w-2xl min-w-min">
+                      <p>
+                        {{ item.chat }}
+                      </p>
+                    </div>
                   </div>
                   <small class="text-gray-300 font-semibold flex justify-end">{{
                     formatDistanceStrict(item.created_at, new Date(), {
@@ -59,7 +63,13 @@
           <div
             class="p-2 w-full border border-green-300 bg-green-50 min-h-10 rounded"
           >
-            <div id="typing" contenteditable class="outline-none"></div>
+            <div
+              id="typing"
+              contenteditable
+              @focus="handleFocus"
+              @blur="handleBlur"
+              class="outline-none"
+            ></div>
           </div>
           <div class="w-min">
             <UButton
@@ -164,6 +174,20 @@ async function handleSend() {
 
 async function handleOut() {
   const { error } = await supabase.auth.signOut()
+  window.location.reload()
+  if (error) return console.error('Error Euy')
+}
+
+function handleFocus() {
+  const navbar = document.getElementById('navbar')
+  if (!navbar) return
+  navbar.style.transform = 'translateY(-100px)'
+}
+
+function handleBlur() {
+  const navbar = document.getElementById('navbar')
+  if (!navbar) return
+  navbar.style.transform = 'translateY(0px)'
 }
 </script>
 
