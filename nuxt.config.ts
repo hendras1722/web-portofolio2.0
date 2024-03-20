@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxt/content',
     '@nuxtjs/supabase',
+    '@vueuse/nuxt',
   ],
   css: ['~/assets/css/font.css'],
   colorMode: {

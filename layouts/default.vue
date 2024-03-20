@@ -7,8 +7,8 @@
   >
     <div class="relative col-span-12 lg:hidden">
       <div
-        id="navbar"
-        class="fixed w-full z-10 bg-white"
+        id="navbar1"
+        class="fixed w-full z-10"
         :class="[scrollStatus && 'bg-white']"
       >
         <div
@@ -58,7 +58,7 @@
     </div>
     <div
       id="navbar"
-      class="grid grid-cols-12 grid-rows-1 gap-4 lg:px-[160px] px-[20px] w-full md:hidden lg:block fixed z-20 bg-white"
+      class="grid grid-cols-12 grid-rows-1 gap-4 lg:px-[160px] px-[20px] w-full md:hidden lg:block fixed z-20"
     >
       <div class="col-span-12 hidden lg:block">
         <div class="h-[119px] py-[32px]">
@@ -128,6 +128,8 @@
 </template>
 
 <script lang="ts" setup>
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+
 const route = useRoute()
 const isMenuOpen = ref(false)
 const menu = ref([
@@ -159,15 +161,39 @@ useHead({
 })
 
 const scrollStatus = ref(false)
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+const smAndLarger = breakpoints.greaterOrEqual('sm') // sm and larger
+const largerThanSm = breakpoints.greater('sm') // only larger than sm
+const lgAndSmaller = breakpoints.smallerOrEqual('lg') // lg and smaller
+const smallerThanLg = breakpoints.smaller('lg') // only smaller than lg
+console.log(
+  smAndLarger.value,
+  largerThanSm.value,
+  lgAndSmaller.value,
+  smallerThanLg.value
+)
 function handleScroll() {
   const id = document.getElementById('navbar')
+  const id1 = document.getElementById('navbar1')
   const scroll = window.scrollY
-  if (route.path !== '/blog') {
+  // console.log(laptop.value, 'inilaptopvalue')
+  // if (laptop.value) return
+  if (route.path === '/blog') {
+    id1?.classList.add('bg-white')
     if (scroll > 0) {
       id?.classList.add('bg-white')
     } else {
       id?.classList.remove('bg-white')
     }
+    return
+  }
+  if (scroll > 0) {
+    id?.classList.add('bg-white')
+    id1?.classList.add('bg-white')
+  } else {
+    id?.classList.remove('bg-white')
+    id1?.classList.remove('bg-white')
   }
 }
 

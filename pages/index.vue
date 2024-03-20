@@ -2,7 +2,7 @@
   <div class="lg:px-[160px] px-[20px]">
     <div class="grid grid-cols-12 grid-rows-1 gap-4">
       <div class="col-span-12">
-        <div class="flex justify-center lg:mb-[40px] mt-[64px]">
+        <div class="flex justify-center lg:mb-[40px]">
           <p
             class="w-[1600px] min-h-[80px] lg:text-center md:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535]"
           >
