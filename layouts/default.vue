@@ -7,6 +7,7 @@
   >
     <div class="relative col-span-12 lg:hidden">
       <div
+        id="navbar"
         class="fixed w-full z-10 bg-white"
         :class="[scrollStatus && 'bg-white']"
       >
@@ -86,15 +87,16 @@
         </div>
       </div>
     </div>
-    <main :class="['pt-[120px]']">
+    <main :class="['sm:pt-[120px] pt-[80px]']">
       <slot />
     </main>
     <div
       v-if="route.path !== '/'"
-      class="bg-[#212020] lg:h-[410px] min-h-[80px] relative"
+      class="bg-[#212020] lg:h-[410px] min-h-[80px] relative z-[5]"
     >
       <div
-        class="flex lg:justify-end justify-center mt-[51px] lg:px-[160px] lg:py-[50px] px-[50px] py-[30px]"
+        class="flex lg:justify-end justify-center lg:px-[160px] lg:py-[50px] px-[50px] py-[30px]"
+        :class="[route.path !== '/blog' && 'mt-[51px]']"
       >
         <div>
           <div class="mt-3 text-[36px] font-semibold text-[#E7E6E6]">
@@ -160,10 +162,12 @@ const scrollStatus = ref(false)
 function handleScroll() {
   const id = document.getElementById('navbar')
   const scroll = window.scrollY
-  if (scroll > 0) {
-    id?.classList.add('bg-white')
-  } else {
-    id?.classList.remove('bg-white')
+  if (route.path !== '/blog') {
+    if (scroll > 0) {
+      id?.classList.add('bg-white')
+    } else {
+      id?.classList.remove('bg-white')
+    }
   }
 }
 

@@ -1,20 +1,24 @@
 <template>
-  <div
-    class="thumbnail relative bg-[url(/coffee.svg)] w-dvw bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-fixed"
-  >
+  <div class="fixed top-0">
     <div
-      class="lg:px-[287px] sm:px-[100px] px-[20px] w-fit h-fit absolute top-0 bottom-0 mx-auto z-[1] right-0 left-0 my-auto text-white"
+      class="thumbnail relative bg-[url(/coffee.svg)] w-dvw bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-fixed"
     >
-      <div class="text-white block">
-        <p class="text-center font-bold lg:text-[86px] sm:text-[40px]">
-          Reading is essential for those who seek to rise above the ordinary
-        </p>
-        <p class="mt-[50px] text-center font-bold lg:text-[31px]">Jim Rohn</p>
+      <div
+        class="lg:px-[157px] sm:px-[100px] px-[20px] w-fit h-fit absolute top-12 bottom-0 mx-auto z-[1] right-0 left-0 my-auto text-white"
+      >
+        <div class="text-white block">
+          <p class="text-center font-bold lg:text-[86px] sm:text-[40px]">
+            Reading is essential for those who seek to rise above the ordinary
+          </p>
+          <p class="mt-[50px] text-center font-bold lg:text-[31px]">Jim Rohn</p>
+        </div>
       </div>
+      <div class="vignette vignette-large"></div>
     </div>
-    <div class="vignette vignette-large"></div>
   </div>
-  <div class="lg:px-[160px] lg:py-[99px] px-[50px] py-[20px]">
+  <div
+    class="lg:px-[160px] lg:py-[99px] px-[50px] py-[20px] z-[5] relative bg-white sm:mt-[800px] mt-[400px]"
+  >
     <div class="flex justify-between">
       <div>
         <h2 class="font-semibold lg:text-[61px] text-[30px]">Article</h2>
