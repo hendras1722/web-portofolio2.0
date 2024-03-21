@@ -80,6 +80,7 @@
           </div>
         </div>
         <div
+          v-if="width < 1041 || width > 1201"
           class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex absolute"
         >
           2024-PRESENT © Muh Syahendra A
@@ -109,6 +110,9 @@
 
 <script lang="ts" setup>
 import { Typed } from '@/utils/typed'
+import { useWindowSize } from '@vueuse/core'
+
+const { width } = useWindowSize()
 
 const el = ref<HTMLSpanElement[]>([])
 const secondDate =

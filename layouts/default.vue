@@ -87,7 +87,12 @@
         </div>
       </div>
     </div>
-    <main :class="['sm:pt-[120px] pt-[80px]']">
+    <main
+      :class="[
+        'pt-[80px]',
+        route.path === '/blog' ? 'pt-[17px]' : 'sm:pt-[120px]',
+      ]"
+    >
       <slot />
     </main>
     <div
@@ -198,6 +203,26 @@ function handleScroll() {
 }
 
 const interval = ref<any>(null)
+
+watch(
+  () => route.path,
+  (val) => {
+    useHead({
+      title: `Muh Syahendra A | ${
+        val === '/'
+          ? 'Home'
+          : val
+              .replace('/', '')
+              .split('/')
+              .map((item) => {
+                const first = item.slice(0, 1).toUpperCase()
+                return item.replace(/^\w/gm, first)
+              })
+              .join(' ')
+      }`,
+    })
+  }
+)
 
 onMounted(() => {
   interval.value = setInterval(() => {
