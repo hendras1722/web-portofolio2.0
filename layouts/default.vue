@@ -94,10 +94,8 @@
                   v-model="i"
                 />
                 <span class="toggle">
-                  <span class="right">{{ isDark ? 'off' : 'on' }}</span>
-                  <span class="left dark:text-white">{{
-                    isDark ? 'on' : 'off'
-                  }}</span>
+                  <span class="right">on</span>
+                  <span class="left dark:text-white">off</span>
                 </span>
               </label>
             </div>
