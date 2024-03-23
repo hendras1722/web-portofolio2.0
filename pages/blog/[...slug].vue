@@ -2,7 +2,8 @@
   <div class="px-[160px]">
     <UButton
       variant="ghost"
-      class="text-[#212020]"
+      color="transparent"
+      class="text-[#212020] dark:text-white dark:!bg-[#121212]"
       @click="$router.push('/blog')"
     >
       <div class="flex items-center">
@@ -12,10 +13,15 @@
     </UButton>
     <ContentDoc v-slot="{ doc }">
       <article>
-        <h1 class="text-[#212020] text-5xl text-center font-extrabold">
+        <h1
+          class="text-[#212020] text-5xl text-center font-extrabold dark:text-white"
+        >
           {{ doc.title }}
         </h1>
-        <ContentRenderer :value="doc" class="text-[#212020] text-sm" />
+        <ContentRenderer
+          :value="doc"
+          class="text-[#212020] text-sm dark:text-white"
+        />
       </article>
     </ContentDoc>
     <ul class="before:content-['>'] flex text-xl text-gray-600 mt-10">

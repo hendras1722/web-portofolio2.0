@@ -17,7 +17,7 @@
     </div>
   </div>
   <div
-    class="lg:px-[160px] lg:py-[99px] px-[50px] py-[20px] z-[5] relative bg-white mt-[400px]"
+    class="lg:px-[160px] lg:py-[99px] px-[50px] py-[20px] z-[5] relative bg-white mt-[400px] dark:bg-[#121212]"
     :class="['lg:mt-[800px] md:mt-[394px]']"
   >
     <div class="flex justify-between">

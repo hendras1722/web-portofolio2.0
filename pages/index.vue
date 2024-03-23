@@ -4,17 +4,20 @@
       <div class="col-span-12">
         <div class="flex justify-center lg:mb-[40px]">
           <p
-            class="w-[1600px] min-h-[80px] lg:text-center md:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535]"
+            class="w-[1600px] min-h-[80px] lg:text-center md:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535] dark:text-white"
           >
             {{ typeValue }}
-            <span class="blinking-cursor md:text-[86px] text-[31px]">|</span>
+            <span
+              class="blinking-cursor md:text-[86px] text-[31px] dark:text-white"
+              >|</span
+            >
           </p>
         </div>
       </div>
       <div class="col-span-12">
         <div class="flex justify-center">
           <p
-            class="text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[22px]"
+            class="text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[22px] dark:text-white"
             id="motto"
           >
             The Man Behind The Keyboard
