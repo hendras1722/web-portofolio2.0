@@ -90,21 +90,70 @@
         </div>
       </div>
       <div class="col-span-6 col-start-7 flex justify-end">
-        <div class="lg:block md:block hidden">
+        <div class="lg:block md:block hidden relative">
+          <div id="container" v-if="isDark">
+            <div id="pillow" class="absolute">
+              <div
+                class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl"
+              >
+                Z
+              </div>
+              <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">
+                Z
+              </div>
+              <div class="zzz zzz-z dark:text-white dark:drop-shadow-xl">Z</div>
+              <div class="corner top-left"></div>
+              <div class="corner top-right"></div>
+              <div class="corner bottom-right"></div>
+              <div class="corner bottom-left"></div>
+            </div>
+          </div>
+
           <img
+            v-if="isDark"
             id="me"
-            class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit md:flex hidden"
-            src="/me.png"
+            class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
+            :src="'/me_sleep.png'"
+          />
+          <img
+            v-if="!isDark"
+            id="me"
+            class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
+            :src="'/me.png'"
           />
         </div>
       </div>
     </div>
+
     <div>
       <div class="lg:hidden md:hidden">
+        <div id="container" v-if="i">
+          <div id="pillow" class="absolute">
+            <div
+              class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl"
+            >
+              Z
+            </div>
+            <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">Z</div>
+            <div class="zzz zzz-z dark:text-white dark:drop-shadow-xl">Z</div>
+            <div class="corner top-left"></div>
+            <div class="corner top-right"></div>
+            <div class="corner bottom-right"></div>
+            <div class="corner bottom-left"></div>
+          </div>
+        </div>
+        {{ i }}
         <img
+          v-if="isDark"
           id="me"
           class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
-          src="/me.png"
+          :src="'/me_sleep.png'"
+        />
+        <img
+          v-if="!isDark"
+          id="me"
+          class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
+          :src="'/me.png'"
         />
       </div>
     </div>
@@ -116,6 +165,18 @@ import { Typed } from '@/utils/typed'
 import { useWindowSize } from '@vueuse/core'
 
 const { width } = useWindowSize()
+
+const colorMode = useColorMode()
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set() {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  },
+})
+
+const i = ref(isDark.value)
 
 const el = ref<HTMLSpanElement[]>([])
 const secondDate =
@@ -709,4 +770,95 @@ onMounted(() => {
 }
 
 // blink cursor end
+
+// sleep
+
+#pillow {
+  margin-left: 100px;
+}
+
+// .corner {
+//   height: 50px;
+//   position: absolute;
+//   width: 50px;
+//   z-index: 1;
+// }
+
+.top-left {
+  top: 0;
+  left: 0;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+}
+
+.bottom-right {
+  background-color: #e1e1e1;
+  bottom: -45px;
+  right: 0;
+}
+
+.bottom-left {
+  background-color: #e1e1e1;
+  bottom: -45px;
+  left: 0;
+}
+
+.zzz {
+  animation-name: zzz;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  animation-direction: forwards;
+  font-weight: bold;
+  position: absolute;
+  z-index: 100;
+  transform: translateY(100%);
+  font-family: 'Concert One', cursive;
+}
+
+.zzz-z {
+  animation-delay: 0s;
+  right: 10px;
+}
+.zzz-zz {
+  animation-delay: 0.5s;
+  right: -20px;
+}
+.zzz-zzz {
+  animation-delay: 1s;
+  right: 0;
+}
+
+/* *** All Animations *** */
+/*Darker Sky*/
+@-webkit-keyframes zzz {
+  0% {
+    color: rgba(160, 84, 246, 0);
+    font-size: 30px;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+  }
+  100% {
+    font-size: 72px;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes zzz {
+  0% {
+    color: rgba(160, 84, 246, 0);
+    font-size: 30px;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+  }
+  100% {
+    font-size: 72px;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+}
 </style>

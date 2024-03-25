@@ -20,42 +20,43 @@
           <div>
             <UButton
               variant="ghost"
-              class="bg-white text-black"
+              class="bg-white text-black dark:bg-transparent"
               @click="openMenu"
             >
-              <UIcon name="i-ic-baseline-dehaze" />
+              <UIcon name="i-ic-baseline-dehaze dark:text-white" />
             </UButton>
-          </div>
-        </div>
-        <div
-          v-show="isMenuOpen"
-          class="top-0 fixed bg-white w-full px-6 pb-6 pt-[50px] shadow-[0px_10px_10px_-8px_rgba(49,46,46,0.77)] z-20"
-          id="navbar-mobile"
-        >
-          <div class="absolute top-0 right-0 mr-6 mt-3">
-            <UButton
-              variant="ghost"
-              class="bg-white text-black"
-              @click="closeMenu"
-            >
-              <UIcon name="i-ic-baseline-close" />
-            </UButton>
-          </div>
-
-          <div
-            class="text-[16px] font-medium text-[#504E4F] mb-[9px]"
-            v-for="(item, index) in menu"
-            :key="'menu' + index"
-          >
-            <NuxtLink :to="item.link" v-slot="{ isActive }" @click="closeMenu"
-              ><span :class="[isActive ? 'text-black' : 'text-[#D1D0D0]']">
-                {{ item.name }}
-              </span>
-            </NuxtLink>
           </div>
         </div>
       </div>
     </div>
+    <div
+      v-show="isMenuOpen"
+      class="top-0 fixed bg-white w-full px-6 pb-6 pt-[50px] shadow-[0px_10px_10px_-8px_rgba(49,46,46,0.77)] z-20 -5"
+      id="navbar-mobile"
+    >
+      <div class="absolute top-0 right-0 mr-6 mt-3">
+        <UButton variant="ghost" class="bg-white text-black" @click="closeMenu">
+          <UIcon name="i-ic-baseline-close dark:text-black" />
+        </UButton>
+      </div>
+
+      <div
+        class="text-[16px] font-medium text-[#504E4F] mb-[9px]"
+        v-for="(item, index) in menu"
+        :key="'menu' + index"
+      >
+        <NuxtLink
+          :to="item.link"
+          v-slot="{ isActive }"
+          @click="closeMenu"
+          @blur="isMenuOpen = false"
+          ><span :class="[isActive ? 'text-black' : 'text-[#D1D0D0]']">
+            {{ item.name }}
+          </span>
+        </NuxtLink>
+      </div>
+    </div>
+
     <div
       id="navbar"
       class="grid grid-cols-12 grid-rows-1 gap-4 lg:px-[160px] px-[20px] w-full md:hidden lg:block fixed z-20"
@@ -160,9 +161,9 @@ const isDark = computed({
   },
 })
 
+const i = ref(isDark.value)
 const route = useRoute()
 const isMenuOpen = ref(false)
-const i = ref(isDark.value)
 
 const menu = ref([
   {
