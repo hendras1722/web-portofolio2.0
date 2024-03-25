@@ -7,24 +7,26 @@
         Experience
       </div>
       <div
-        class="text-[#212020] relative mt-5"
+        class="text-[#212020] dark:text-white relative mt-5"
         v-for="(item, index) in dataExperience"
         :key="index"
       >
-        <h2 class="font-bold lg:text-[3vw] text-[#212020]">
+        <h2
+          class="font-bold lg:text-[3vw] text-[#212020] dark:text-white dark:drop-shadow-md"
+        >
           {{ item.title }}
         </h2>
         <p
-          class="lg:text-[8vw] text-[10vw] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
+          class="lg:text-[8vw] text-[10vw] dark:text-[#dcdcdc] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
         >
           {{ item.date }}
         </p>
-        <p class="font-semibold lg:text-[22px]">
+        <p class="font-semibold lg:text-[22px] dark:drop-shadow-md">
           {{ item.desc }}
         </p>
       </div>
       <div
-        class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px]"
+        class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px] dark:text-white"
       >
         Education
       </div>
@@ -33,26 +35,28 @@
         v-for="(item, index) in dataEducation"
         :key="index"
       >
-        <h2 class="font-bold lg:text-[3vw] text-[#212020]">
+        <h2
+          class="font-bold lg:text-[3vw] text-[#212020] dark:text-white dark:drop-shadow-md"
+        >
           {{ item.title }}
         </h2>
         <p
-          class="lg:text-[8vw] text-[10vw] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
+          class="lg:text-[8vw] text-[10vw] dark:text-[#dcdcdc] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
         >
           {{ item.date }}
         </p>
-        <p class="font-semibold lg:text-[22px]">
+        <p class="font-semibold lg:text-[22px] dark:text-white">
           {{ item.desc }}
         </p>
       </div>
       <div
-        class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px]"
+        class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px] dark:text-white"
       >
         Project
       </div>
       <div class="grid grid-cols-3 grid-rows-2 gap-4 place-items-center">
         <div
-          class="font-bold lg:text-[30px] w-full text-left text-[#212020]"
+          class="font-bold lg:text-[30px] w-full text-left text-[#212020] dark:text-white"
           v-for="item in dataProject"
           :key="item"
         >
@@ -61,7 +65,7 @@
       </div>
 
       <div
-        class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px]"
+        class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px] dark:text-white"
       >
         Certificate License
       </div>
@@ -72,7 +76,7 @@
         @click="handleOpenCertificateModal(item.title)"
       >
         <div
-          class="hover:bg-gray-100 p-2 rounded-md flex items-center justify-between"
+          class="hover:bg-gray-100 p-2 dark:hover:bg-slate-600 rounded-md flex items-center justify-between"
         >
           <div>
             <h3 class="font-bold text-[3vw]">{{ item.title }}</h3>

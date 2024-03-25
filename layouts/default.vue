@@ -94,8 +94,8 @@
                   v-model="i"
                 />
                 <span class="toggle">
-                  <span class="right">on</span>
-                  <span class="left dark:text-white">off</span>
+                  <span id="off" class="left">off</span>
+                  <span id="on" class="right dark:text-white">on</span>
                 </span>
               </label>
             </div>
@@ -111,6 +111,7 @@
     >
       <slot />
     </main>
+
     <div
       v-if="route.path !== '/'"
       class="bg-[#212020] lg:h-[410px] min-h-[80px] relative z-[5]"
@@ -149,7 +150,6 @@
 </template>
 
 <script lang="ts" setup>
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 const colorMode = useColorMode()
 const isDark = computed({
   get() {
@@ -162,7 +162,7 @@ const isDark = computed({
 
 const route = useRoute()
 const isMenuOpen = ref(false)
-const i = ref(false)
+const i = ref(isDark.value)
 
 const menu = ref([
   {
@@ -194,11 +194,7 @@ useHead({
 
 const scrollStatus = ref(false)
 
-const breakpoints = useBreakpoints(breakpointsTailwind)
-
 function handleSwitch() {
-  const body = document.getElementsByTagName('body')
-  if (!body) return
   isDark.value = !isDark.value
 }
 
