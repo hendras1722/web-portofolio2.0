@@ -142,7 +142,6 @@
             <div class="corner bottom-left"></div>
           </div>
         </div>
-        {{ i }}
         <img
           v-if="isDark"
           id="me"
