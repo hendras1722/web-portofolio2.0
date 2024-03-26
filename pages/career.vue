@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="lg:px-[287px] px-[20px] mt-[66px] mb-[86px]">
+    <div class="lg:px-[160px] px-[20px] mt-[66px] mb-[86px]">
       <div
         class="font-bold lg:text-[61px] w-full text-center text-[#212020] mb-[109px] dark:text-white"
       >

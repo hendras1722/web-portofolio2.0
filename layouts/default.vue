@@ -145,20 +145,7 @@
             </div>
           </div>
           <!-- o -->
-          <div class="last:mb-0 mb-3">
-            <label for="email" class="text-white text-2xl">Your Email</label>
-            <div>
-              <UInput
-                class="input"
-                variant="none"
-                id="email"
-                color="tranparent"
-                :ui="{
-                  base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none hover:border-b-[1px] hover:border-[#D1D0D0] hover:rounded-none border-[#4444] border-b-[1px] !pl-0',
-                }"
-              />
-            </div>
-          </div>
+
           <div class="last:mb-0 mb-3">
             <label for="Message" class="text-white text-2xl">Message</label>
             <div>
