@@ -69,31 +69,33 @@
       >
         Certificate License
       </div>
-      <button
-        class="w-full text-start"
-        v-for="(item, index) in dataCertificate"
-        :key="index"
-        @click="handleOpenCertificateModal(item.title)"
-      >
+      <div class="w-full">
         <div
-          class="hover:bg-gray-100 p-2 dark:hover:bg-slate-600 rounded-md flex items-center justify-between"
+          class="text-start cursor-auto"
+          v-for="(item, index) in dataCertificate"
+          :key="index"
+          @click="handleOpenCertificateModal(item.title)"
         >
-          <div>
-            <h3 class="font-bold text-[3vw]">{{ item.title }}</h3>
-            <p class="sm:text-lg text-[12px] text-gray-400">
-              {{ item.date }}
-            </p>
-          </div>
-          <div class="text-end">
-            <button class="learn-more">
-              <span class="circle" aria-hidden="true">
-                <span class="icon arrow"></span>
-              </span>
-              <span class="button-text">Open File</span>
-            </button>
+          <div
+            class="hover:bg-gray-100 p-2 dark:hover:bg-slate-600 rounded-md flex items-center justify-between"
+          >
+            <div>
+              <h3 class="font-bold text-[3vw]">{{ item.title }}</h3>
+              <p class="sm:text-lg text-[12px] text-gray-400">
+                {{ item.date }}
+              </p>
+            </div>
+            <div class="text-end">
+              <button class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Open File</span>
+              </button>
+            </div>
           </div>
         </div>
-      </button>
+      </div>
 
       <ModalContainer v-model="isOpen" class="relative">
         <div v-if="!loading">

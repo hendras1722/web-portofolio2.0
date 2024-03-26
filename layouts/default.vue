@@ -126,7 +126,7 @@
         class="grid sm:grid-cols-2 grid-cols-1 grid-rows-1 gap-4 lg:px-[160px] lg:py-[50px] px-[50px] py-[30px]"
         :class="[route.path !== '/blog' && 'mt-[51px]']"
       >
-        <div>
+        <div class="p-5">
           <h1 class="text-5xl mb-10 text-white text-center font-extrabold">
             Contact us
           </h1>
@@ -163,6 +163,7 @@
             <label for="Message" class="text-white text-2xl">Message</label>
             <div>
               <textarea
+                rows="5"
                 class="text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:outline-none focus:rounded-none border-[#4444] border-b-[1px] !pl-0 bg-transparent w-full resize-none"
               />
             </div>
