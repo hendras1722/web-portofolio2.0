@@ -181,7 +181,9 @@
         </div>
 
         <div class="p-5">
-          <label for="alamat" class="font-bold text-white">Alamat</label>
+          <label for="alamat" class="font-bold text-white text-[36px]"
+            >Alamat</label
+          >
           <div id="alamat" class="italic text-sm text-white">
             Perumahan Griya Pratama Asri 2 No.H-12, Somoragen, Joho, Kec.
             Prambanan, Kabupaten Klaten, Jawa Tengah 57454
