@@ -139,7 +139,7 @@
                 id="Name"
                 color="tranparent"
                 :ui="{
-                  base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none border-[#4444] border-b-[1px] !pl-0 ',
+                  base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none hover:border-b-[1px] hover:border-[#D1D0D0] hover:rounded-none border-[#4444] border-b-[1px] !pl-0 ',
                 }"
               />
             </div>
@@ -154,7 +154,7 @@
                 id="email"
                 color="tranparent"
                 :ui="{
-                  base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none border-[#4444] border-b-[1px] !pl-0',
+                  base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none hover:border-b-[1px] hover:border-[#D1D0D0] hover:rounded-none border-[#4444] border-b-[1px] !pl-0',
                 }"
               />
             </div>
@@ -164,7 +164,7 @@
             <div>
               <textarea
                 rows="5"
-                class="text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:outline-none focus:rounded-none border-[#4444] border-b-[1px] !pl-0 bg-transparent w-full resize-none"
+                class="text-white focus:border-b-[1px] focus:border-[#D1D0D0] hover:border-[#D1D0D0] focus:outline-none focus:rounded-none border-[#4444] border-b-[1px] !pl-0 bg-transparent w-full resize-none"
               />
             </div>
           </div>
