@@ -5,7 +5,7 @@
         `lg:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover bg-center bg-no-repeat min-h-lvh`,
     ]"
   >
-    <div class="relative col-span-12 lg:hidden">
+    <div class="relative col-span-12 lg:hidden" ref="target">
       <div
         id="navbar1"
         class="fixed w-full z-10"
@@ -28,32 +28,37 @@
           </div>
         </div>
       </div>
-    </div>
-    <div
-      v-show="isMenuOpen"
-      class="top-0 fixed bg-white w-full px-6 pb-6 pt-[50px] shadow-[0px_10px_10px_-8px_rgba(49,46,46,0.77)] z-20 -5"
-      id="navbar-mobile"
-    >
-      <div class="absolute top-0 right-0 mr-6 mt-3">
-        <UButton variant="ghost" class="bg-white text-black" @click="closeMenu">
-          <UIcon name="i-ic-baseline-close dark:text-black" />
-        </UButton>
-      </div>
-
       <div
-        class="text-[16px] font-medium text-[#504E4F] mb-[9px]"
-        v-for="(item, index) in menu"
-        :key="'menu' + index"
+        v-show="isMenuOpen"
+        class="top-0 fixed bg-white w-full px-6 pb-6 pt-[50px] shadow-[0px_10px_10px_-8px_rgba(49,46,46,0.77)] z-20 -5"
+        id="navbar-mobile"
+        ref="target"
       >
-        <NuxtLink
-          :to="item.link"
-          v-slot="{ isActive }"
-          @click="closeMenu"
-          @blur="isMenuOpen = false"
-          ><span :class="[isActive ? 'text-black' : 'text-[#D1D0D0]']">
-            {{ item.name }}
-          </span>
-        </NuxtLink>
+        <div class="absolute top-0 right-0 mr-6 mt-3">
+          <UButton
+            variant="ghost"
+            class="bg-white text-black"
+            @click="closeMenu"
+          >
+            <UIcon name="i-ic-baseline-close dark:text-black" />
+          </UButton>
+        </div>
+
+        <div
+          class="text-[16px] font-medium text-[#504E4F] mb-[9px]"
+          v-for="(item, index) in menu"
+          :key="'menu' + index"
+        >
+          <NuxtLink
+            :to="item.link"
+            v-slot="{ isActive }"
+            @click="closeMenu"
+            @blur="isMenuOpen = false"
+            ><span :class="[isActive ? 'text-black' : 'text-[#D1D0D0]']">
+              {{ item.name }}
+            </span>
+          </NuxtLink>
+        </div>
       </div>
     </div>
 
@@ -115,29 +120,100 @@
 
     <div
       v-if="route.path !== '/'"
-      class="bg-[#212020] lg:h-[410px] min-h-[80px] relative z-[5]"
+      class="bg-[#212020] lg:min-h-[410px] min-h-[80px] relative z-[5]"
     >
       <div
-        class="flex lg:justify-end justify-center lg:px-[160px] lg:py-[50px] px-[50px] py-[30px]"
+        class="grid sm:grid-cols-2 grid-cols-1 grid-rows-1 gap-4 lg:px-[160px] lg:py-[50px] px-[50px] py-[30px]"
         :class="[route.path !== '/blog' && 'mt-[51px]']"
       >
         <div>
-          <div class="mt-3 text-[36px] font-semibold text-[#E7E6E6]">
-            Find Me
+          <h1 class="text-5xl mb-10 text-white text-center font-extrabold">
+            Contact us
+          </h1>
+          <div class="last:mb-0 mb-3">
+            <label for="Name" class="text-white text-2xl">Name</label>
+            <div>
+              <UInput
+                class="input"
+                variant="none"
+                id="Name"
+                color="tranparent"
+                :ui="{
+                  base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none border-[#4444] border-b-[1px] !pl-0 ',
+                }"
+              />
+            </div>
           </div>
-          <div class="flex justify-between w-fit mt-[10px]">
-            <a
-              href="https://www.linkedin.com/in/muhsyahendraa/"
-              target="_blank"
+          <!-- o -->
+          <div class="last:mb-0 mb-3">
+            <label for="email" class="text-white text-2xl">Your Email</label>
+            <div>
+              <UInput
+                class="input"
+                variant="none"
+                id="email"
+                color="tranparent"
+                :ui="{
+                  base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none border-[#4444] border-b-[1px] !pl-0',
+                }"
+              />
+            </div>
+          </div>
+          <div class="last:mb-0 mb-3">
+            <label for="Message" class="text-white text-2xl">Message</label>
+            <div>
+              <textarea
+                class="text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:outline-none focus:rounded-none border-[#4444] border-b-[1px] !pl-0 bg-transparent w-full resize-none"
+              />
+            </div>
+          </div>
+          <div class="mb-0 sm:mb-14">
+            <UButton
+              variant="solid"
+              color="green"
+              size="xl"
+              class="!bg-green-500 hover:!bg-green-800 w-full"
+              block
+              >Kirim</UButton
             >
-              <img class="mr-[10px] w-[48px] h-[48px]" src="/linkedin.svg" />
-            </a>
-            <a href="https://discordapp.com/users/squidy5488" target="_blank">
-              <img class="mr-[10px] w-[48px] h-[48px]" src="/discord.svg" />
-            </a>
-            <a href="https://www.instagram.com/msyaa240/" target="_blank">
-              <img class="mr-[10px] w-[48px] h-[48px]" src="/instagram.svg" />
-            </a>
+          </div>
+        </div>
+
+        <div class="p-5">
+          <label for="alamat" class="font-bold text-white">Alamat</label>
+          <div id="alamat" class="italic text-sm text-white">
+            Perumahan Griya Pratama Asri 2 No.H-12, Somoragen, Joho, Kec.
+            Prambanan, Kabupaten Klaten, Jawa Tengah 57454
+          </div>
+          <div class="flex justify-start">
+            <div id="findme">
+              <div class="mt-3 text-[36px] font-semibold text-[#E7E6E6]">
+                Find Me
+              </div>
+              <div class="flex justify-between w-fit mt-[10px]">
+                <a
+                  href="https://www.linkedin.com/in/muhsyahendraa/"
+                  target="_blank"
+                >
+                  <img
+                    class="mr-[10px] w-[48px] h-[48px]"
+                    src="/linkedin.svg"
+                  />
+                </a>
+                <a
+                  href="https://discordapp.com/users/squidy5488"
+                  target="_blank"
+                >
+                  <img class="mr-[10px] w-[48px] h-[48px]" src="/discord.svg" />
+                </a>
+                <a href="https://www.instagram.com/msyaa240/" target="_blank">
+                  <img
+                    class="mr-[10px] w-[48px] h-[48px]"
+                    src="/instagram.svg"
+                  />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -151,6 +227,8 @@
 </template>
 
 <script lang="ts" setup>
+import { onClickOutside } from '@vueuse/core'
+
 const colorMode = useColorMode()
 const isDark = computed({
   get() {
@@ -164,6 +242,11 @@ const isDark = computed({
 const i = ref(isDark.value)
 const route = useRoute()
 const isMenuOpen = ref(false)
+const target = ref(null)
+onClickOutside(target, (event) => {
+  if (event) isMenuOpen.value = false
+  return
+})
 
 const menu = ref([
   {
@@ -402,4 +485,21 @@ function closeMenu() {
   transform: rotateX(10deg) rotateY(0deg);
   color: #487bdb;
 }
+
+/*Change text in autofill textbox*/
+.input input:-webkit-autofill {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #23232329;
+}
+// input.input:-webkit-autofill,
+// input.input:-webkit-autofill:hover,
+// input.input:-webkit-autofill:focus,
+// input.input:-webkit-autofill:active {
+// -webkit-background-clip: text;
+// -webkit-text-fill-color: #ffffff;
+// transition: background-color 5000s ease-in-out 0s;
+// box-shadow: inset 0 0 20px 20px #23232329;
+// }
 </style>

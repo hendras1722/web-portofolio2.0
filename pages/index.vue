@@ -91,7 +91,7 @@
       </div>
       <div class="col-span-6 col-start-7 flex justify-end">
         <div class="lg:block md:block hidden relative">
-          <div id="container" v-if="isDark">
+          <div id="container" v-show="isDark">
             <div id="pillow" class="absolute">
               <div
                 class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl"
@@ -110,13 +110,13 @@
           </div>
 
           <img
-            v-if="isDark"
+            v-show="isDark"
             id="me"
             class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
             :src="'/me_sleep.png'"
           />
           <img
-            v-if="!isDark"
+            v-show="!isDark"
             id="me"
             class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
             :src="'/me.png'"
@@ -127,7 +127,7 @@
 
     <div>
       <div class="lg:hidden md:hidden">
-        <div id="container" v-if="i">
+        <div id="container" v-show="i">
           <div id="pillow" class="absolute">
             <div
               class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl"
@@ -143,13 +143,13 @@
           </div>
         </div>
         <img
-          v-if="isDark"
+          v-show="isDark"
           id="me"
           class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
           :src="'/me_sleep.png'"
         />
         <img
-          v-if="!isDark"
+          v-show="!isDark"
           id="me"
           class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
           :src="'/me.png'"
@@ -207,7 +207,7 @@ const typeText = (e: string, value?: string) => {
   const typed = new Typed({
     callback: (text) => {
       // dataTerminal.value[startIndex.value].html = text
-      if (el.value) {
+      if (el.value || el.value[startIndex.value]) {
         el.value[startIndex.value].innerHTML = text
       }
     },
@@ -499,7 +499,7 @@ function handleSubmit(e: KeyboardEvent, props: any) {
   value = typing_text?.innerText.replace(/\n/gm, '')
 
   if (!typing_text) return
-  console.log(charCode, e.key, e.code)
+
   if (charCode === 13 || e.key == 'Enter' || e.code == 'Enter') {
     e.preventDefault()
     value = typing_text?.innerText.replace(/\n/gm, '')
