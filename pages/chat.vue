@@ -1,6 +1,6 @@
 <template>
   <div class="lg:px-[160px] px-[20px]">
-    <h1 class="font-bold lg:text-[61px] w-full text-center">Chat Holla</h1>
+    <h1 class="font-bold text-5xl w-full text-center">Chat Holla</h1>
     <div class="flex justify-center shadow-lg p-10 rounded-lg mt-16">
       <div class="w-full">
         <div
@@ -72,7 +72,7 @@
               contenteditable
               @focus="handleFocus"
               @blur="handleBlur"
-              class="outline-none"
+              class="outline-none dark:text-black"
             ></div>
           </div>
           <div class="w-min">
@@ -85,7 +85,7 @@
             </UButton>
           </div>
         </div>
-        <div class="flex justify-center" v-else>
+        <div class="flex justify-center items-center" v-else>
           <button class="google-sign-in-button" @click="handleClick">
             <svg
               xmlns="http://www.w3.org/2000/svg"
