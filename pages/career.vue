@@ -217,7 +217,7 @@ const dataProject = [
 onMounted(() => {
   const idIframe = document.getElementById('inner')
   if (!idIframe) return
-  $nextTick(() => {
+  nextTick(() => {
     idIframe.onload = function () {
       idIframe.style.display = 'block'
       loading.value = true

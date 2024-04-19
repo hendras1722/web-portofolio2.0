@@ -1,7 +1,7 @@
 <template>
   <div class="fixed top-0">
     <div
-      class="thumbnail relative bg-[url(/coffee.svg)] w-dvw bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-fixed"
+      class="thumbnail relative bg-[url(/coffee.svg)] w-dvw bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-scroll"
     >
       <div
         class="lg:px-[157px] sm:px-[100px] px-[20px] w-fit h-fit absolute top-12 bottom-0 mx-auto z-[1] right-0 left-0 my-auto text-white"
@@ -108,6 +108,6 @@ const packageList = [
   height: -moz-available;
   position: absolute;
   background: black;
-  opacity: 0.4;
+  opacity: 0.5;
 }
 </style>

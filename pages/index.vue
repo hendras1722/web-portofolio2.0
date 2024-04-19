@@ -127,7 +127,7 @@
 
     <div>
       <div class="lg:hidden md:hidden">
-        <div id="container" v-show="i">
+        <div id="container" v-show="isDark">
           <div id="pillow" class="absolute">
             <div
               class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl"
@@ -174,8 +174,6 @@ const isDark = computed({
     colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
   },
 })
-
-const i = ref(isDark.value)
 
 const el = ref<HTMLSpanElement[]>([])
 const secondDate =

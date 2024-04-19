@@ -17,20 +17,39 @@
           <div class="font-bold text-2xl">
             <NuxtLink to="/">MSA</NuxtLink>
           </div>
-          <div>
-            <UButton
-              variant="ghost"
-              class="bg-white text-black dark:bg-transparent"
-              @click="openMenu"
-            >
-              <UIcon name="i-ic-baseline-dehaze dark:text-white" />
-            </UButton>
+          <div class="flex items-center justify-between w-32">
+            <label class="switch switch--mobile ml-3">
+              <input
+                class="cb"
+                type="checkbox"
+                @change="handleSwitch"
+                v-model="i"
+              />
+              <span class="toggle toggle--mobile">
+                <span id="off" class="left left--mobile">off</span>
+                <span id="on" class="right right--mobile dark:text-white"
+                  >on</span
+                >
+              </span>
+            </label>
+            <div>
+              <UButton
+                variant="ghost"
+                class="bg-white text-black dark:bg-transparent"
+                @click="openMenu"
+              >
+                <UIcon
+                  name="i-ic-baseline-dehaze dark:text-white"
+                  class="text-2xl"
+                />
+              </UButton>
+            </div>
           </div>
         </div>
       </div>
       <div
         v-show="isMenuOpen"
-        class="top-0 fixed bg-white w-full px-6 pb-6 pt-[50px] shadow-[0px_10px_10px_-8px_rgba(49,46,46,0.77)] z-20 -5"
+        class="top-0 fixed bg-white w-full px-6 pb-6 pt-[50px] shadow-[0px_10px_10px_-8px_rgba(49,46,46,0.77)] z-20 -5 dark:bg-[#121212]"
         id="navbar-mobile"
         ref="target"
       >
@@ -54,7 +73,7 @@
             v-slot="{ isActive }"
             @click="closeMenu"
             @blur="isMenuOpen = false"
-            ><span :class="[isActive ? 'text-black' : 'text-[#D1D0D0]']">
+            ><span :class="[isActive ? 'text-[#6c6c6c]' : 'text-[#D1D0D0]']">
               {{ item.name }}
             </span>
           </NuxtLink>
@@ -218,6 +237,9 @@
 
 <script lang="ts" setup>
 import { onClickOutside } from '@vueuse/core'
+import { useWindowSize } from '@vueuse/core'
+
+const { width } = useWindowSize()
 
 const colorMode = useColorMode()
 const isDark = computed({
@@ -367,6 +389,9 @@ function closeMenu() {
   width: 5em;
   height: 2.5em;
   user-select: none;
+  &--mobile {
+    font-size: 14px;
+  }
 }
 
 /* Hide default HTML checkbox */
@@ -390,6 +415,10 @@ function closeMenu() {
   overflow: hidden;
   box-shadow: -0.3em 0 0 0 #373737, -0.3em 0.3em 0 0 #373737,
     0.3em 0 0 0 #373737, 0.3em 0.3em 0 0 #373737, 0 0.3em 0 0 #373737;
+  &--mobile {
+    width: 80%;
+    height: 80%;
+  }
 }
 
 .toggle > .left {
