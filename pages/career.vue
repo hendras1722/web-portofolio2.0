@@ -17,7 +17,7 @@
           {{ item.title }}
         </h2>
         <p
-          class="lg:text-[8vw] text-[10vw] dark:text-[#dcdcdc] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
+          class="lg:text-[8vw] text-[10vw] dark:text-[#9e9d9d] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
         >
           {{ item.date }}
         </p>
@@ -41,7 +41,7 @@
           {{ item.title }}
         </h2>
         <p
-          class="lg:text-[8vw] text-[10vw] dark:text-[#dcdcdc] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
+          class="lg:text-[8vw] text-[10vw] dark:text-[#9e9d9d] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
         >
           {{ item.date }}
         </p>

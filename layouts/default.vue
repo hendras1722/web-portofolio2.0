@@ -103,7 +103,7 @@
                       :class="[
                         isActive
                           ? 'text-black dark:text-white'
-                          : 'text-[#D1D0D0] dark:text-white',
+                          : 'text-[#D1D0D0] dark:text-[#6c6c6c]',
                       ]"
                     >
                       {{ item.name }}
