@@ -63,26 +63,29 @@
             <!-- end -->
           </div>
         </div>
-        <div class="flex items-center" v-if="user">
-          <div
-            class="p-2 w-full border border-green-300 bg-green-50 min-h-10 rounded"
-          >
+        <div v-if="user">
+          <div class="w-full flex items-center">
             <div
-              id="typing"
-              contenteditable
-              @focus="handleFocus"
-              @blur="handleBlur"
-              class="outline-none dark:text-black"
-            ></div>
-          </div>
-          <div class="w-min">
-            <UButton
-              class="ml-5 rounded-full"
-              :ui="{ base: '!bg-green-500 hover:!bg-green-400' }"
-              icon="i-ic-baseline-send"
-              @click="handleSend"
+              class="p-2 w-full border border-green-300 bg-green-50 min-h-10 rounded"
             >
-            </UButton>
+              <div
+                id="typing"
+                contenteditable
+                @focus="handleFocus"
+                @blur="handleBlur"
+                @paste="handlePaste"
+                class="outline-none dark:text-black"
+              ></div>
+            </div>
+            <div class="w-min">
+              <UButton
+                class="ml-5 rounded-full"
+                :ui="{ base: '!bg-green-500 hover:!bg-green-400' }"
+                icon="i-ic-baseline-send"
+                @click="handleSend"
+              >
+              </UButton>
+            </div>
           </div>
         </div>
         <div class="flex justify-center items-center" v-else>
@@ -222,6 +225,13 @@ function handleBlur() {
   const navbar = document.getElementById('navbar')
   if (!navbar) return
   navbar.style.transform = 'translateY(0px)'
+}
+const handlePaste = (event: ClipboardEvent) => {
+  event.preventDefault() // Stop the default paste behavior
+  const text = (event.clipboardData || (window as any).clipboardData).getData(
+    'text/plain'
+  )
+  document.execCommand('insertText', false, text) // Insert text without formatting
 }
 </script>
 
@@ -489,5 +499,13 @@ function handleBlur() {
   to {
     filter: brightness(100);
   }
+}
+#typing {
+  overflow-wrap: break-word; /* Ensures that the words can be broken and wrapped to the next line */
+  word-break: break-word; /* Use this to break the word at the edge of the container */
+  white-space: pre-wrap; /* Maintains whitespace formatting but wraps text */
+  // min-height: 10px; /* Minimum height to maintain a consistent look */
+  // max-height: 200px; /* Maximum height before scrolling */
+  // overflow-y: auto; /* Allows scrolling vertically if the text exceeds max-height */
 }
 </style>

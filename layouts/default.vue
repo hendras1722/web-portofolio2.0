@@ -73,7 +73,7 @@
             v-slot="{ isActive }"
             @click="closeMenu"
             @blur="isMenuOpen = false"
-            ><span :class="[isActive ? 'text-[#6c6c6c]' : 'text-[#D1D0D0]']">
+            ><span :class="[isActive ? ' text-[#D1D0D0]' : 'text-[#6c6c6c]']">
               {{ item.name }}
             </span>
           </NuxtLink>

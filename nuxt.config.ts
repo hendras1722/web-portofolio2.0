@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxtjs/supabase',
     '@vueuse/nuxt',
+    'nuxt-aos',
   ],
   css: ['~/assets/css/font.css'],
   colorMode: {

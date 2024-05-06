@@ -43,7 +43,7 @@
         <img src="/handbook.png" />
       </div>
     </div>
-    <div class="flex justify-start mt-[110px]">
+    <div class="flex justify-start mt-[110px]" data-aos="fade-right">
       <div class="mr-[28px] hidden lg:block">
         <img src="/laptop.png" />
       </div>
