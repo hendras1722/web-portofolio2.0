@@ -193,7 +193,7 @@ async function handleSend() {
     $fetch('/api/chat', {
       method: 'POST',
       body: {
-        chat: body.innerText,
+        chat: body.innerText.trim(),
       },
       headers: {
         authorization: 'bearer' + ' ' + cookie.value,
@@ -228,9 +228,9 @@ function handleBlur() {
 }
 const handlePaste = (event: ClipboardEvent) => {
   event.preventDefault() // Stop the default paste behavior
-  const text = (event.clipboardData || (window as any).clipboardData).getData(
-    'text/plain'
-  )
+  const text = (event.clipboardData || (window as any).clipboardData)
+    .getData('text/plain')
+    .trim()
   document.execCommand('insertText', false, text) // Insert text without formatting
 }
 </script>
