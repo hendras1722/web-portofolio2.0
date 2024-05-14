@@ -153,6 +153,7 @@
             <label for="Name" class="text-white text-2xl">Name</label>
             <div>
               <UInput
+                v-model="body.name"
                 class="input"
                 variant="none"
                 id="Name"
@@ -163,12 +164,43 @@
               />
             </div>
           </div>
-          <!-- o -->
+          <div class="last:mb-0 mb-3">
+            <label for="email" class="text-white text-2xl">Email</label>
+            <div>
+              <UInput
+                v-model="body.email"
+                type="email"
+                class="input"
+                variant="none"
+                id="email"
+                color="tranparent"
+                :ui="{
+                  base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none hover:border-b-[1px] hover:border-[#D1D0D0] hover:rounded-none border-[#4444] border-b-[1px] !pl-0 ',
+                }"
+              />
+            </div>
+          </div>
+          <div class="last:mb-0 mb-3">
+            <label for="Subject" class="text-white text-2xl">Subject</label>
+            <div>
+              <UInput
+                v-model="body.subject"
+                class="input"
+                variant="none"
+                id="Subject"
+                color="tranparent"
+                :ui="{
+                  base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none hover:border-b-[1px] hover:border-[#D1D0D0] hover:rounded-none border-[#4444] border-b-[1px] !pl-0 ',
+                }"
+              />
+            </div>
+          </div>
 
           <div class="last:mb-0 mb-3">
             <label for="Message" class="text-white text-2xl">Message</label>
             <div>
               <textarea
+                v-model="body.message"
                 rows="5"
                 class="text-white focus:border-b-[1px] focus:border-[#D1D0D0] hover:border-[#D1D0D0] focus:outline-none focus:rounded-none border-[#4444] border-b-[1px] !pl-0 bg-transparent w-full resize-none"
               />
@@ -180,9 +212,16 @@
               color="green"
               size="xl"
               class="!bg-green-500 hover:!bg-green-800 w-full"
+              :class="[loading && 'bg-green-300']"
               block
-              >Kirim</UButton
+              @click.stop="handleSend"
             >
+              <div v-if="loading" class="flex items-center">
+                <div class="loader mr-3"></div>
+                <span>Loading</span>
+              </div>
+              <span v-else>Kirim</span>
+            </UButton>
           </div>
         </div>
 
@@ -237,9 +276,7 @@
 
 <script lang="ts" setup>
 import { onClickOutside } from '@vueuse/core'
-import { useWindowSize } from '@vueuse/core'
-
-const { width } = useWindowSize()
+// import { useWindowSize } from '@vueuse/core'
 
 const colorMode = useColorMode()
 const isDark = computed({
@@ -255,6 +292,13 @@ const i = ref(isDark.value)
 const route = useRoute()
 const isMenuOpen = ref(false)
 const target = ref(null)
+const body = ref({
+  name: '',
+  email: '',
+  subject: '',
+  message: '',
+})
+const loading = ref(false)
 onClickOutside(target, (event) => {
   if (event) isMenuOpen.value = false
   return
@@ -324,6 +368,23 @@ function handleScroll() {
 }
 
 const interval = ref<any>(null)
+
+async function handleSend() {
+  loading.value = true
+  const { data } = await useFetch<{ data: boolean }>('/api/mail', {
+    method: 'POST',
+    body: body.value,
+  })
+  if (data.value?.data) {
+    body.value = {
+      email: '',
+      message: '',
+      name: '',
+      subject: '',
+    }
+  }
+  loading.value = false
+}
 
 watch(
   () => route.path,
@@ -521,4 +582,68 @@ function closeMenu() {
 // transition: background-color 5000s ease-in-out 0s;
 // box-shadow: inset 0 0 20px 20px #23232329;
 // }
+.loader {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  margin-top: -20px;
+}
+
+.loader:before {
+  content: '';
+  width: 20px;
+  height: 5px;
+  background: #fff;
+  position: absolute;
+  top: 32px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow324 0.5s linear infinite;
+}
+
+.loader:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 4px;
+  animation: jump7456 0.5s linear infinite;
+}
+
+@keyframes jump7456 {
+  15% {
+    border-bottom-right-radius: 3px;
+  }
+
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
+  }
+
+  50% {
+    transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 40px;
+  }
+
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+
+@keyframes shadow324 {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
 </style>

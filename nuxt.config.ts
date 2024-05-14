@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   extends: '@nuxt-themes/typography',
+
   modules: [
     '@nuxt/ui',
     '@nuxtjs/google-fonts',
@@ -9,7 +10,33 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@vueuse/nuxt',
     'nuxt-aos',
+    // [
+    //   'nuxt-mail',
+    //   {
+    //     message: { to: 'User <muhsyahendraa1722@gmail.com>' },
+    //     configs: {
+    //       custom: ({ replyTo, text, from }) => ({
+    //         replyTo,
+    //       }),
+    //     },
+    //     smtp: {
+    //       service: 'gmail',
+    //       // host: 'smtp.gmail.com',
+    //       // port: 587,
+    //       auth: {
+    //         user: 'muhsyahendraa1722@gmail.com',
+    //         pass: 'vdtn vsfa kzim twvk',
+    //       },
+    //     },
+    //   },
+    // ],
   ],
+  runtimeConfig: {
+    public: {
+      usermail: '',
+      passmail: '',
+    },
+  },
   css: ['~/assets/css/font.css'],
   colorMode: {
     preference: 'light',
