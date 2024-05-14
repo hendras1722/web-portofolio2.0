@@ -10,26 +10,6 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@vueuse/nuxt',
     'nuxt-aos',
-    // [
-    //   'nuxt-mail',
-    //   {
-    //     message: { to: 'User <muhsyahendraa1722@gmail.com>' },
-    //     configs: {
-    //       custom: ({ replyTo, text, from }) => ({
-    //         replyTo,
-    //       }),
-    //     },
-    //     smtp: {
-    //       service: 'gmail',
-    //       // host: 'smtp.gmail.com',
-    //       // port: 587,
-    //       auth: {
-    //         user: 'muhsyahendraa1722@gmail.com',
-    //         pass: 'vdtn vsfa kzim twvk',
-    //       },
-    //     },
-    //   },
-    // ],
   ],
   runtimeConfig: {
     public: {
