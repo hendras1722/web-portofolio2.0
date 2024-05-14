@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const transporter = nodemailer.createTransport({
     // service: 'gmail',
-    host: 'smtp.gmail.com',
+    host: process.env.NUXT_SMTP,
     port: 465,
 
     secure: true, // Use `true` for port 465, `false` for all other ports
