@@ -146,7 +146,7 @@
         :class="[route.path !== '/blog' && 'mt-[51px]']"
       >
         <div class="p-5">
-          <h1 class="text-5xl mb-10 text-white text-center font-extrabold">
+          <h1 class="text-2xl mb-10 text-white text-center font-extrabold">
             Contact us
           </h1>
           <div class="last:mb-0 mb-3">
