@@ -157,7 +157,6 @@
                 class="input"
                 variant="none"
                 id="Name"
-                color="tranparent"
                 :ui="{
                   base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none hover:border-b-[1px] hover:border-[#D1D0D0] hover:rounded-none border-[#4444] border-b-[1px] !pl-0 ',
                 }"
@@ -173,7 +172,6 @@
                 class="input"
                 variant="none"
                 id="email"
-                color="tranparent"
                 :ui="{
                   base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none hover:border-b-[1px] hover:border-[#D1D0D0] hover:rounded-none border-[#4444] border-b-[1px] !pl-0 ',
                 }"
@@ -188,7 +186,6 @@
                 class="input"
                 variant="none"
                 id="Subject"
-                color="tranparent"
                 :ui="{
                   base: 'text-white focus:border-b-[1px] focus:border-[#D1D0D0] focus:rounded-none hover:border-b-[1px] hover:border-[#D1D0D0] hover:rounded-none border-[#4444] border-b-[1px] !pl-0 ',
                 }"
@@ -272,6 +269,23 @@
       </div>
     </div>
   </div>
+
+  <div class="fixed z-[9999] top-5 right-5">
+    <transition name="fade">
+      <UNotification
+        v-if="showNotif"
+        icon="i-heroicons-check-circle"
+        description="Berhasil Terkirim"
+        :id="3"
+        title="Success"
+        :timeout="0"
+        :ui="{
+          wrapper: '!min-w-[400px]',
+        }"
+        @close="hande"
+      />
+    </transition>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -299,11 +313,17 @@ const body = ref({
   message: '',
 })
 const loading = ref(false)
+const showNotif = ref(false)
+
 onClickOutside(target, (event) => {
   if (event) isMenuOpen.value = false
   return
 })
 
+function hande() {
+  showNotif.value = false
+  console.log('wewe')
+}
 const menu = ref([
   {
     link: '/',
@@ -371,6 +391,7 @@ const interval = ref<any>(null)
 
 async function handleSend() {
   loading.value = true
+
   const { data } = await useFetch<{ data: boolean }>('/api/mail', {
     method: 'POST',
     body: body.value,
@@ -382,6 +403,12 @@ async function handleSend() {
       name: '',
       subject: '',
     }
+  }
+  if (data.value?.data) {
+    showNotif.value = true
+    setTimeout(() => {
+      showNotif.value = false
+    }, 1000)
   }
   loading.value = false
 }
@@ -645,5 +672,15 @@ function closeMenu() {
   50% {
     transform: scale(1.2, 1);
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
