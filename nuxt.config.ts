@@ -25,13 +25,32 @@ export default defineNuxtConfig({
     preference: 'light',
   },
   pwa: {
-    mode: 'development',
+    // mode: 'development',
     strategies: 'generateSW',
     registerType: 'autoUpdate',
     manifest: {
       name: 'MSA me',
       short_name: 'msame',
+      description: 'OIOIOOi',
       theme_color: '#ffffff',
+      icons: [
+        {
+          src: 'icons/icon-192x192.png',
+          sizes: '192x192',
+          type: 'image/png',
+        },
+        {
+          src: 'icons/icon-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+        },
+        {
+          src: 'icons/icon-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'any maskable',
+        },
+      ],
     },
     pwaAssets: {
       config: true,
@@ -39,14 +58,15 @@ export default defineNuxtConfig({
     workbox: {
       globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
       sourcemap: true,
+      navigateFallback: '/',
     },
     client: {
       installPrompt: true,
     },
     devOptions: {
       enabled: true,
+      type: 'module',
       suppressWarnings: true,
-      navigateFallback: '/',
       navigateFallbackAllowlist: [/^\/$/],
     },
   },

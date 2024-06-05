@@ -9,22 +9,6 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
-  "exports": {
-    ".": {
-      "types": "./dist/types.d.mts",
-      "default": "./dist/module.mjs"
-    },
-    "./configuration": {
-      "types": "./configuration.d.ts"
-    },
-    "./*": "./*"
-  },
-  "main": "./dist/module.mjs",
-  "types": "./dist/types.d.ts",
-  "files": [
-    "dist",
-    "*.d.ts"
-  ],
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxt/ui": "^2.13.0",
