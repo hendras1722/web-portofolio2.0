@@ -67,7 +67,7 @@
           <div class="mt-3 text-[16px] font-semibold text-[#464444]">
             Find Me
           </div>
-          <div class="flex justify-between w-fit mt-[10px]">
+          <div class="flex flex-wrap justify-around w-fit mt-[10px]">
             <a
               href="https://www.linkedin.com/in/muhsyahendraa/"
               target="_blank"
@@ -80,8 +80,29 @@
             <a href="https://www.instagram.com/msyaa240/" target="_blank">
               <img class="mr-[10px]" src="/instagram.svg" />
             </a>
+            <a href="hhttps://github.com/hendras1722" target="_blank">
+              <img class="mr-[10px]" src="/github-mark.svg" />
+            </a>
+            <a
+              href="https://www.buymeacoffee.com/outyourimpossible"
+              class="text-center"
+              :class="[
+                width > 1041 && width < 1190 && 'my-3',
+                width > 1200 && width < 1390 && 'mt-3 mb-8',
+                width < 497 && 'my-3',
+              ]"
+            >
+              <img
+                align="left"
+                src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                height="50"
+                width="210"
+                alt="https://www.buymeacoffee.com/outyourimpossible"
+              />
+            </a>
           </div>
         </div>
+
         <div
           v-if="width < 1041 || width > 1201"
           class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex absolute"
