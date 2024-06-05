@@ -38,6 +38,7 @@ export default defineNuxtConfig({
     },
     workbox: {
       globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+      sourcemap: true,
     },
     client: {
       installPrompt: true,
