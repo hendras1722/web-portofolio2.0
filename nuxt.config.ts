@@ -1,8 +1,12 @@
+import { VitePWA } from 'vite-plugin-pwa'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
   extends: '@nuxt-themes/typography',
-
+  build: {
+    transpile: ['@vite-pwa/nuxt'],
+  },
   modules: [
     '@nuxt/ui',
     '@nuxtjs/google-fonts',
@@ -10,6 +14,7 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@vueuse/nuxt',
     'nuxt-aos',
+    '@vite-pwa/nuxt',
   ],
   runtimeConfig: {
     public: {
@@ -20,6 +25,59 @@ export default defineNuxtConfig({
   css: ['~/assets/css/font.css'],
   colorMode: {
     preference: 'light',
+  },
+  vite: {
+    plugins: [
+      VitePWA({
+        registerType: 'autoUpdate',
+        manifest: {
+          name: 'MSAme',
+          short_name: 'App',
+          description: 'MSA me syahendra.com',
+          theme_color: '#ffffff',
+          icons: [
+            {
+              src: 'icons/icon-192x192.png',
+              sizes: '192x192',
+              type: 'image/png',
+            },
+            {
+              src: 'icons/icon-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+            },
+          ],
+        },
+        workbox: {
+          // Workbox configuration options
+        },
+      }),
+    ],
+  },
+  pwa: {
+    mode: 'development',
+    strategies: 'generateSW',
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'MSA me',
+      short_name: 'msame',
+      theme_color: '#ffffff',
+    },
+    pwaAssets: {
+      config: true,
+    },
+    workbox: {
+      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+    },
+    client: {
+      installPrompt: true,
+    },
+    devOptions: {
+      enabled: true,
+      suppressWarnings: true,
+      navigateFallback: '/',
+      navigateFallbackAllowlist: [/^\/$/],
+    },
   },
   ui: {
     icons: ['ic'],
