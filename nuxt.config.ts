@@ -59,6 +59,12 @@ export default defineNuxtConfig({
       globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
       sourcemap: true,
       navigateFallback: '/',
+      runtimeCaching: [
+        {
+          urlPattern: '/*',
+          handler: 'NetworkFirst', // Memaksa untuk selalu mengambil file terbaru dari jaringan
+        },
+      ],
     },
     client: {
       installPrompt: true,

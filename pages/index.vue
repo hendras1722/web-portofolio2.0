@@ -72,28 +72,24 @@
               href="https://www.linkedin.com/in/muhsyahendraa/"
               target="_blank"
             >
-              <img class="mr-[10px]" src="/linkedin.svg" />
+              <img class="mr-[10px] p-3" src="/linkedin.svg" />
             </a>
             <a href="https://discordapp.com/users/squidy5488" target="_blank">
-              <img class="mr-[10px]" src="/discord.svg" />
+              <img class="mr-[10px] p-3" src="/discord.svg" />
             </a>
             <a href="https://www.instagram.com/msyaa240/" target="_blank">
-              <img class="mr-[10px]" src="/instagram.svg" />
+              <img class="mr-[10px] p-3" src="/instagram.svg" />
             </a>
             <a href="hhttps://github.com/hendras1722" target="_blank">
-              <img class="mr-[10px]" src="/github-mark.svg" />
+              <img class="mr-[10px] p-3" src="/github-mark.svg" />
             </a>
             <a
-              href="https://www.buymeacoffee.com/outyourimpossible"
               class="text-center"
-              :class="[
-                width > 1041 && width < 1190 && 'my-3',
-                width > 1200 && width < 1390 && 'mt-3 mb-8',
-                width < 497 && 'my-3',
-              ]"
+              href="https://www.buymeacoffee.com/outyourimpossible"
             >
               <img
                 align="left"
+                class="p-3"
                 src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
                 height="50"
                 width="210"
