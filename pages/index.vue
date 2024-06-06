@@ -173,12 +173,47 @@
         />
       </div>
     </div>
+    <div
+      v-show="holidayResult.length > 0"
+      id="modal_holiday"
+      class="fixed left-0 bottom-0 z-[5] bg-white w-full p-10 transition ease delay-150 shadow-2xl shadow-blue-500/50"
+      :class="{
+        'translate-y-[220px]': isModalHolidayResult,
+      }"
+    >
+      <div class="flex justify-end">
+        <UButton
+          variant="ghost"
+          class="bg-white text-black"
+          @click="handleClose"
+        >
+          <UIcon name="i-ic-baseline-close" class="dark:text-black" />
+        </UButton>
+      </div>
+      <div>Ada libur bulan ini:</div>
+      <div class="flex flex-nowrap overflow-auto">
+        <div
+          v-for="(item, index) in holidayResult"
+          class="p-2 border border-black rounded my-3 mx-3"
+        >
+          <h3 class="font-extrabold text-nowrap">
+            {{ item.name }}
+          </h3>
+          <p>{{ formatDate(item.date) }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { Typed } from '@/utils/typed'
 import { useWindowSize } from '@vueuse/core'
+
+interface Holiday {
+  date: string
+  name?: string | any
+}
 
 const { width } = useWindowSize()
 
@@ -213,6 +248,9 @@ const dataTerminal = ref([
   },
 ])
 const startIndex = ref(0)
+const holidayResult = ref<Holiday[]>([])
+const isModalHolidayResult = ref(false)
+
 const appConfig = useAppConfig()
 
 const container_typing = document?.getElementById('container_typing')
@@ -685,8 +723,96 @@ function typeTextTitle() {
   charIndex.value += 1
   setTimeout(typeTextTitle, typingSpeed)
 }
+const MONTH_NAME = {
+  januari: '01',
+  februari: '02',
+  maret: '03',
+  april: '04',
+  mei: '05',
+  juni: '06',
+  juli: '07',
+  agustus: '08',
+  september: '09',
+  oktober: '10',
+  november: '11',
+  desember: '12',
+} as const
 
-onMounted(() => {
+function formatDate(e: string) {
+  const date = new Date(e)
+  const monthName = Object.keys(MONTH_NAME)[date.getMonth() - 1]
+  return (
+    date.getDate() + ' ' + monthName.toUpperCase() + ' ' + date.getFullYear()
+  )
+}
+
+async function getDate() {
+  const data = await $fetch<any>('/api/getWebsite')
+  const dom = new DOMParser().parseFromString(data, 'text/html')
+  const months = dom?.querySelectorAll('#main article ul')
+  if (!months) {
+    throw new Error('Failed to parse DOM')
+  }
+
+  const result = (Array.from(months) as any[]).flatMap((item) => {
+    const [monthName, year] =
+      item
+        .querySelector('li:first-child a')
+        ?.getAttribute('href')
+        ?.split('-') || []
+
+    const month = MONTH_NAME[monthName as keyof typeof MONTH_NAME]
+
+    return (
+      Array.from(item.querySelectorAll('li:last-child table tr')) as any[]
+    ).flatMap((holiday) => {
+      const day = holiday.querySelector('td:first-child')?.textContent.trim()
+      const name = holiday.querySelector('td:last-child')?.textContent.trim()
+      if (day && day.includes('-')) {
+        const split = day.split('-', 2)
+        const start = Number(split[0])
+        const end = Number(split[1])
+
+        return Array.from({ length: end - start })
+          .fill(start)
+          .flatMap((value, index) => {
+            return {
+              date: `${year}-${month}-${(Number(value) + index)
+                .toString()
+                .padStart(2, '0')}`,
+              name,
+            }
+          })
+      }
+
+      return {
+        date: `${year}-${month}-${day?.padStart(2, '0')}`,
+        name,
+      }
+    })
+  }) as Holiday[]
+  let month = String(new Date().getMonth())
+  let year = new Date().getFullYear()
+
+  if (Number(month) < 10) {
+    month = String('0' + month)
+  }
+  let resultDateYear = '' + year + '-' + month
+  if (result.length < 1) {
+    isModalHolidayResult.value = true
+    return
+  }
+  holidayResult.value = result.filter((item) =>
+    item.date.includes(resultDateYear)
+  )
+}
+
+function handleClose() {
+  isModalHolidayResult.value = true
+}
+
+onBeforeMount(() => {
+  getDate()
   setTimeout(typeTextTitle, 1000)
   setTimeout(() => {
     typeText('mount')
@@ -874,5 +1000,9 @@ onMounted(() => {
     -webkit-transform: translateY(-100%);
     transform: translateY(-100%);
   }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 </style>

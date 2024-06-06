@@ -59,7 +59,7 @@
             class="bg-white text-black"
             @click="closeMenu"
           >
-            <UIcon name="i-ic-baseline-close dark:text-black" />
+            <UIcon name="i-ic-baseline-close" class="dark:text-black" />
           </UButton>
         </div>
 
@@ -305,7 +305,7 @@ const isDark = computed({
 const i = ref(isDark.value)
 const route = useRoute()
 const isMenuOpen = ref(false)
-const target = ref(null)
+const target = ref()
 const body = ref({
   name: '',
   email: '',
@@ -436,7 +436,7 @@ watch(
   }
 )
 
-onMounted(() => {
+onBeforeMount(() => {
   interval.value = setInterval(() => {
     handleScroll()
   }, 100)
