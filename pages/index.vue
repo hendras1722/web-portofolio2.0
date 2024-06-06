@@ -740,7 +740,7 @@ const MONTH_NAME = {
 
 function formatDate(e: string) {
   const date = new Date(e)
-  const monthName = Object.keys(MONTH_NAME)[date.getMonth() - 1]
+  const monthName = Object.keys(MONTH_NAME)[date.getMonth()]
   return (
     date.getDate() + ' ' + monthName.toUpperCase() + ' ' + date.getFullYear()
   )
@@ -750,6 +750,7 @@ async function getDate() {
   const data = await $fetch<any>('/api/getWebsite')
   const dom = new DOMParser().parseFromString(data, 'text/html')
   const months = dom?.querySelectorAll('#main article ul')
+
   if (!months) {
     throw new Error('Failed to parse DOM')
   }
@@ -791,13 +792,14 @@ async function getDate() {
       }
     })
   }) as Holiday[]
-  let month = String(new Date().getMonth())
+  let month = String(new Date().getMonth() + 1)
   let year = new Date().getFullYear()
 
   if (Number(month) < 10) {
     month = String('0' + month)
   }
   let resultDateYear = '' + year + '-' + month
+
   if (result.length < 1) {
     isModalHolidayResult.value = true
     return
