@@ -65,6 +65,8 @@
 </template>
 
 <script lang="ts" setup>
+import Chat from '~/types/getChat'
+
 function filterList(e: any) {
   const newDateList = e.sort(
     (a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -98,6 +100,11 @@ const packageList = [
     link: 'https://www.npmjs.com/package/msa-cli',
   },
 ]
+
+onMounted(() => {
+  const getChat = new Chat()
+  console.log(getChat.response)
+})
 </script>
 
 <style scoped lang="scss">

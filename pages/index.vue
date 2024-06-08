@@ -1,19 +1,11 @@
 <template>
   <div class="lg:px-[160px] px-[20px]">
     <div class="grid grid-cols-12 grid-rows-1 gap-4">
-      <div class="col-span-12">
-        <div class="flex justify-center lg:mb-[40px]">
-          <p
-            class="w-[1600px] min-h-[80px] lg:text-center md:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535] dark:text-white"
-          >
-            {{ typeValue }}
-            <span
-              class="blinking-cursor md:text-[86px] text-[31px] dark:text-white"
-              >|</span
-            >
-          </p>
+      <ClientOnly>
+        <div class="col-span-12">
+          <TypingText />
         </div>
-      </div>
+      </ClientOnly>
       <div class="col-span-12">
         <div class="flex justify-center">
           <p
@@ -698,7 +690,6 @@ function handleMouseEvent(e?: number) {
   )
   const container_typing = document.getElementById('container_typing')
 
-  console.log(container_typing)
   if (!typing_text) return
   if (container_typing) {
     typing_text.focus()
@@ -716,13 +707,13 @@ const displayTextArrayIndex = ref(0)
 const charIndex = ref(0)
 const typingSpeed = 100
 
-function typeTextTitle() {
-  typeValue.value += displayTextArray.value[displayTextArrayIndex.value].charAt(
-    charIndex.value
-  )
-  charIndex.value += 1
-  setTimeout(typeTextTitle, typingSpeed)
-}
+// function typeTextTitle() {
+//   typeValue.value += displayTextArray.value[displayTextArrayIndex.value].charAt(
+//     charIndex.value
+//   )
+//   charIndex.value += 1
+//   setTimeout(typeTextTitle, typingSpeed)
+// }
 const MONTH_NAME = {
   januari: '01',
   februari: '02',
@@ -812,14 +803,19 @@ async function getDate() {
 function handleClose() {
   isModalHolidayResult.value = true
 }
-
-onBeforeMount(() => {
+onMounted(() => {
   getDate()
-  setTimeout(typeTextTitle, 1000)
-  setTimeout(() => {
+  nextTick(() => {
     typeText('mount')
-  }, 1000)
+  })
 })
+
+// onBeforeMount(() => {
+//   setTimeout(typeTextTitle, 1000)
+//   setTimeout(() => {
+//
+//   }, 1000)
+// })
 </script>
 
 <style lang="scss" setup>
