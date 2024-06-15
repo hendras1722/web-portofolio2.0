@@ -54,13 +54,16 @@
       >
         Project
       </div>
-      <div class="grid grid-cols-3 grid-rows-2 gap-4 place-items-center">
+      <div class="container_scoller">
+        <!-- <div
+          class="grid grid-cols-3 grid-rows-2 gap-4 place-items-center scroller"
+        > -->
         <div
-          class="font-bold lg:text-[30px] w-full text-left text-[#212020] dark:text-white"
-          v-for="item in dataProject"
-          :key="item"
+          class="font-bold lg:text-[30px] w-full text-left text-[#212020] dark:text-white scroller"
         >
-          {{ item }}
+          <span v-for="item in dataProject" :key="item">
+            {{ item }} &nbsp; |
+          </span>
         </div>
       </div>
 
@@ -206,15 +209,22 @@ const dataEducation = [
     desc: `Activities to major in strong current electrical engineering and graduate in 2018 `,
   },
 ]
-const dataProject = [
+const dataProject = ref([
   'BNI',
   'CIMB',
   'Ceisa 4.0',
   'Glasier Privy',
   'Tele App Privy',
-]
+])
 
 onMounted(() => {
+  let j: any[] = []
+  for (let i = 0; i < 100; i++) {
+    j = [...j, ...JSON.parse(JSON.stringify(dataProject.value))]
+  }
+  console.log(j)
+  dataProject.value = j
+  console.log(dataProject.value)
   const idIframe = document.getElementById('inner')
   if (!idIframe) return
   nextTick(() => {
@@ -392,6 +402,28 @@ button:hover .button-text {
   top: 56px;
   left: 12px;
 }
+.container_scoller {
+  @apply relative flex  overflow-hidden;
+}
+
+.scroller {
+  @apply flex items-center justify-around text-nowrap gap-5;
+  animation: scroll 50s linear infinite;
+  animation-play-state: running;
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-1050%, 0, 0);
+  }
+}
+
 @keyframes lds-roller {
   0% {
     transform: rotate(0deg);

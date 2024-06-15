@@ -20,7 +20,20 @@
     class="lg:px-[160px] lg:py-[99px] px-[50px] py-[20px] z-[5] relative bg-white mt-[400px] dark:bg-[#121212]"
     :class="['lg:mt-[800px] md:mt-[394px]']"
   >
-    <div class="flex justify-between">
+    <div
+      class="flex justify-between"
+      :initial="{
+        x: 500,
+        opacity: 0,
+      }"
+      :visible="{
+        x: 0,
+        opacity: 1,
+        transition: {
+          delay: 1200,
+        },
+      }"
+    >
       <div>
         <h2 class="font-semibold lg:text-[61px] text-[30px]">Article</h2>
 
@@ -43,7 +56,21 @@
         <img src="/handbook.png" />
       </div>
     </div>
-    <div class="flex justify-start mt-[110px]" data-aos="fade-right">
+    <div
+      class="flex justify-start mt-[110px]"
+      v-motion
+      :initial="{
+        x: -500,
+        opacity: 0,
+      }"
+      :visible-once="{
+        x: 0,
+        opacity: 1,
+        transition: {
+          delay: 200,
+        },
+      }"
+    >
       <div class="mr-[28px] hidden lg:block">
         <img src="/laptop.png" />
       </div>

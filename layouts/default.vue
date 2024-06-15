@@ -235,29 +235,7 @@
               <div class="mt-3 text-[36px] font-semibold text-[#E7E6E6]">
                 Find Me
               </div>
-              <div class="flex justify-between w-fit mt-[10px]">
-                <a
-                  href="https://www.linkedin.com/in/muhsyahendraa/"
-                  target="_blank"
-                >
-                  <img
-                    class="mr-[10px] w-[48px] h-[48px]"
-                    src="/linkedin.svg"
-                  />
-                </a>
-                <a
-                  href="https://discordapp.com/users/squidy5488"
-                  target="_blank"
-                >
-                  <img class="mr-[10px] w-[48px] h-[48px]" src="/discord.svg" />
-                </a>
-                <a href="https://www.instagram.com/msyaa240/" target="_blank">
-                  <img
-                    class="mr-[10px] w-[48px] h-[48px]"
-                    src="/instagram.svg"
-                  />
-                </a>
-              </div>
+              <SocialIcon />
             </div>
           </div>
         </div>
@@ -444,6 +422,12 @@ onBeforeMount(() => {
 
 onUnmounted(() => {
   clearInterval(interval.value)
+
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    registrations.forEach((registration) => {
+      registration.unregister()
+    })
+  })
 })
 
 function openMenu() {

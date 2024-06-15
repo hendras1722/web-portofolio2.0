@@ -8,12 +8,78 @@
       </ClientOnly>
       <div class="col-span-12">
         <div class="flex justify-center">
-          <p
-            class="text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[22px] dark:text-white"
-            id="motto"
+          <div
+            class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[22px] dark:text-white"
           >
-            The Man Behind The Keyboard
-          </p>
+            <div
+              v-motion
+              :initial="{
+                x: -500,
+                opacity: 0,
+              }"
+              :enter="{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  delay: 500,
+                },
+              }"
+            >
+              The Man &nbsp;
+            </div>
+            <div>Behind</div>
+            <div
+              v-motion
+              :initial="{
+                x: 500,
+                opacity: 0,
+              }"
+              :enter="{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  delay: 500,
+                },
+              }"
+            >
+              &nbsp; The Microphone
+            </div>
+          </div>
+          <!-- <p
+            class="text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[22px] dark:text-white"
+          >
+            <span
+              v-motion
+              :initial="{
+                x: -500,
+                opacity: 0,
+              }"
+              :enter="{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  delay: 500,
+                },
+              }"
+            >
+              The Man
+            </span>
+            Behind
+            <span
+              v-motion
+              :initial="{
+                x: 500,
+              }"
+              :enter="{
+                x: 0,
+                transition: {
+                  delay: 500,
+                },
+              }"
+            >
+              The Keyboard</span
+            >
+          </p> -->
         </div>
       </div>
       <div class="md:col-span-6 col-span-12 md:px-[35px] lg:relative">
@@ -59,36 +125,7 @@
           <div class="mt-3 text-[16px] font-semibold text-[#464444]">
             Find Me
           </div>
-          <div class="flex flex-wrap justify-around w-fit mt-[10px]">
-            <a
-              href="https://www.linkedin.com/in/muhsyahendraa/"
-              target="_blank"
-            >
-              <img class="mr-[10px] p-3" src="/linkedin.svg" />
-            </a>
-            <a href="https://discordapp.com/users/squidy5488" target="_blank">
-              <img class="mr-[10px] p-3" src="/discord.svg" />
-            </a>
-            <a href="https://www.instagram.com/msyaa240/" target="_blank">
-              <img class="mr-[10px] p-3" src="/instagram.svg" />
-            </a>
-            <a href="hhttps://github.com/hendras1722" target="_blank">
-              <img class="mr-[10px] p-3" src="/github-mark.svg" />
-            </a>
-            <a
-              class="text-center"
-              href="https://www.buymeacoffee.com/outyourimpossible"
-            >
-              <img
-                align="left"
-                class="p-3"
-                src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-                height="50"
-                width="210"
-                alt="https://www.buymeacoffee.com/outyourimpossible"
-              />
-            </a>
-          </div>
+          <SocialIcon />
         </div>
 
         <div
@@ -166,11 +203,24 @@
       </div>
     </div>
     <div
-      v-show="holidayResult.length > 0"
+      v-show="holidayResult.length > 0 && !isModalHolidayResult"
       id="modal_holiday"
       class="fixed left-0 bottom-0 z-[5] bg-white w-full p-10 transition ease delay-150 shadow-2xl shadow-blue-500/50"
       :class="{
         'translate-y-[220px]': isModalHolidayResult,
+      }"
+      v-motion
+      :initial="{
+        y: 500,
+        opacity: 0,
+      }"
+      :enter="{
+        y: 0,
+        opacity: 1,
+        transition: {
+          delay: 500,
+          ease: 'easeInOut',
+        },
       }"
     >
       <div class="flex justify-end">
@@ -186,7 +236,7 @@
       <div class="flex flex-nowrap overflow-auto">
         <div
           v-for="(item, index) in holidayResult"
-          class="p-2 border border-black rounded my-3 mx-3"
+          class="p-2 border border-black rounded my-3 mx-3 dark:text-white"
         >
           <h3 class="font-extrabold text-nowrap">
             {{ item.name }}
@@ -824,10 +874,6 @@ onMounted(() => {
 }
 
 #me {
-  animation: fadeInAnimation 3s ease-in-out;
-}
-
-#motto {
   animation: fadeInAnimation 3s ease-in-out;
 }
 

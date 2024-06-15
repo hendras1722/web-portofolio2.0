@@ -11,8 +11,8 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxtjs/supabase',
     '@vueuse/nuxt',
-    'nuxt-aos',
     '@vite-pwa/nuxt',
+    '@vueuse/motion/nuxt',
   ],
   runtimeConfig: {
     public: {
