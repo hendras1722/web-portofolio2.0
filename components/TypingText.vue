@@ -1,21 +1,24 @@
 <template>
   <div class="hello flex justify-center lg:mb-[40px]">
     <p
-      v-motion
-      :initial="{
-        y: -500,
-        opacity: 0,
-      }"
-      :enter="{
-        y: 0,
-        opacity: 1,
-        transition: {
-          delay: 500,
-        },
-      }"
       class="w-[1600px] min-h-[80px] lg:text-center md:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535] dark:text-white"
     >
-      Hello I’m Muh Syahendra A <br />
+      <div
+        v-motion
+        :initial="{
+          y: -500,
+          opacity: 0,
+        }"
+        :enter="{
+          y: 0,
+          opacity: 1,
+          transition: {
+            delay: 200,
+          },
+        }"
+      >
+        Hello I’m Muh Syahendra A
+      </div>
       <span v-if="ClientOnlyRef">
         {{ typeValue }}
       </span>

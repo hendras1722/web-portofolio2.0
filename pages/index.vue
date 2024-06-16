@@ -9,7 +9,7 @@
       <div class="col-span-12">
         <div class="flex justify-center">
           <div
-            class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[22px] dark:text-white"
+            class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[18px] dark:text-white text-nowrap"
           >
             <div
               v-motion
@@ -232,11 +232,11 @@
           <UIcon name="i-ic-baseline-close" class="dark:text-black" />
         </UButton>
       </div>
-      <div>Ada libur bulan ini:</div>
+      <div class="dark:text-black">Ada libur bulan ini:</div>
       <div class="flex flex-nowrap overflow-auto">
         <div
           v-for="(item, index) in holidayResult"
-          class="p-2 border border-black rounded my-3 mx-3 dark:text-white"
+          class="p-2 border border-black rounded my-3 mx-3 dark:text-black"
         >
           <h3 class="font-extrabold text-nowrap">
             {{ item.name }}

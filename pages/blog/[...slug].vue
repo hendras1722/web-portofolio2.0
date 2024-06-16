@@ -1,5 +1,5 @@
 <template>
-  <div class="px-[160px]">
+  <div class="lg:px-[160px] px-[50px]">
     <UButton
       variant="ghost"
       color="transparent"
