@@ -57,7 +57,39 @@
       </div>
     </div>
     <div
-      class="flex justify-start mt-[110px]"
+      class="hidden justify-start mt-[110px]"
+      v-motion
+      :initial="{
+        x: -500,
+        opacity: 0,
+      }"
+      :visible-once="{
+        x: 0,
+        opacity: 1,
+        transition: {
+          delay: 200,
+        },
+      }"
+    >
+      <div class="mr-[28px] hidden lg:block">
+        <img src="/laptop.png" />
+      </div>
+      <div>
+        <h2 class="font-semibold lg:text-[61px] text-[30px]">My Package</h2>
+        <p class="lg:text-[31px] text-[15px]">
+          <NuxtLink
+            :to="item.link"
+            target="_blank"
+            class="hover:underline block w-fit"
+            v-for="(item, index) in packageList"
+            :key="index"
+            >{{ item.name }}</NuxtLink
+          >
+        </p>
+      </div>
+    </div>
+    <div
+      class="lg:flex justify-start mt-[110px]"
       v-motion
       :initial="{
         x: -500,
