@@ -101,6 +101,17 @@ function filterList(e: any) {
   return newDateList
 }
 
+useHead({
+  link: [
+    {
+      rel: 'preload',
+      href: '/coffee.svg',
+      as: 'image',
+      type: 'image/svg+xml',
+    },
+  ],
+})
+
 const packageList = [
   {
     name: 'Vue3 Camera Jebreet',
