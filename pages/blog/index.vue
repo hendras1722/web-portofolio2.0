@@ -1,125 +1,80 @@
 <template>
-  <div class="fixed top-0">
-    <div
-      class="thumbnail relative bg-[url(/coffee.svg)] w-dvw bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-scroll"
-    >
+  <section id="hero">
+    <div class="fixed top-0">
       <div
-        class="lg:px-[157px] sm:px-[100px] px-[20px] w-fit h-fit absolute top-12 bottom-0 mx-auto z-[1] right-0 left-0 my-auto text-white"
+        class="thumbnail relative bg-[url(/coffee.svg)] w-dvw bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-scroll"
       >
-        <div class="text-white block">
-          <p class="text-center font-bold lg:text-[66px] sm:text-[40px]">
-            Reading is essential for those who seek to rise above the ordinary
-          </p>
-          <p class="mt-[50px] text-center font-bold lg:text-[31px]">Jim Rohn</p>
+        <div
+          class="lg:px-[157px] sm:px-[100px] px-[20px] w-fit h-fit absolute top-12 bottom-0 mx-auto z-[1] right-0 left-0 my-auto text-white"
+          style="
+            mix-blend-mode: overlay;
+            filter: drop-shadow(0px 5px 10px black);
+          "
+        >
+          <div class="text-white block">
+            <p class="text-center font-bold lg:text-[66px] sm:text-[40px]">
+              Reading is essential for those who seek to rise above the ordinary
+            </p>
+            <p class="mt-[50px] text-center font-bold lg:text-[31px]">
+              Jim Rohn
+            </p>
+          </div>
         </div>
+        <div class="vignette vignette-large"></div>
       </div>
-      <div class="vignette vignette-large"></div>
     </div>
-  </div>
+  </section>
+
   <div
     class="lg:px-[160px] lg:py-[99px] px-[50px] py-[20px] z-[5] relative bg-white mt-[400px] dark:bg-[#121212]"
     :class="['lg:mt-[800px] md:mt-[394px]']"
   >
-    <div
-      class="flex justify-between"
-      :initial="{
-        x: 500,
-        opacity: 0,
-      }"
-      :visible="{
-        x: 0,
-        opacity: 1,
-        transition: {
-          delay: 1200,
-        },
-      }"
-    >
-      <div>
-        <h2 class="font-semibold lg:text-[61px] text-[30px]">Article</h2>
+    <section id="article">
+      <div id="article-content" class="flex justify-between">
+        <div>
+          <h2 class="font-semibold lg:text-[61px] text-[30px]">Article</h2>
 
-        <ContentList path="/blog" v-slot="{ list }">
-          <p
-            v-for="article in filterList(list)"
-            :key="article._path"
-            class="lg:text-[31px] text-[15px]"
-          >
-            <NuxtLink :to="article._path" class="hover:underline">
-              {{ article.title }}
-            </NuxtLink>
-            <span class="text-[#B1AFB0] ml-2 hover:no-underline">{{
-              article.date
-            }}</span>
+          <ContentList path="/blog" v-slot="{ list }">
+            <p
+              v-for="article in filterList(list)"
+              :key="article._path"
+              class="lg:text-[31px] text-[15px]"
+            >
+              <NuxtLink :to="article._path" class="hover:underline">
+                {{ article.title }}
+              </NuxtLink>
+              <span class="text-[#B1AFB0] ml-2 hover:no-underline">{{
+                article.date
+              }}</span>
+            </p>
+          </ContentList>
+        </div>
+        <div class="hidden lg:block">
+          <img src="/handbook.png" />
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-[110px]" id="package">
+      <div id="package-content" class="flex justify-start">
+        <div class="mr-[28px] hidden lg:block">
+          <img src="/laptop.png" />
+        </div>
+        <div>
+          <h2 class="font-semibold lg:text-[61px] text-[30px]">My Package</h2>
+          <p class="lg:text-[31px] text-[15px]">
+            <NuxtLink
+              :to="item.link"
+              target="_blank"
+              class="hover:underline block w-fit"
+              v-for="(item, index) in packageList"
+              :key="index"
+              >{{ item.name }}</NuxtLink
+            >
           </p>
-        </ContentList>
+        </div>
       </div>
-      <div class="hidden lg:block">
-        <img src="/handbook.png" />
-      </div>
-    </div>
-    <div
-      class="hidden justify-start mt-[110px]"
-      v-motion
-      :initial="{
-        x: -500,
-        opacity: 0,
-      }"
-      :visible-once="{
-        x: 0,
-        opacity: 1,
-        transition: {
-          delay: 200,
-        },
-      }"
-    >
-      <div class="mr-[28px] hidden lg:block">
-        <img src="/laptop.png" />
-      </div>
-      <div>
-        <h2 class="font-semibold lg:text-[61px] text-[30px]">My Package</h2>
-        <p class="lg:text-[31px] text-[15px]">
-          <NuxtLink
-            :to="item.link"
-            target="_blank"
-            class="hover:underline block w-fit"
-            v-for="(item, index) in packageList"
-            :key="index"
-            >{{ item.name }}</NuxtLink
-          >
-        </p>
-      </div>
-    </div>
-    <div
-      class="lg:flex justify-start mt-[110px]"
-      v-motion
-      :initial="{
-        x: -500,
-        opacity: 0,
-      }"
-      :visible-once="{
-        x: 0,
-        opacity: 1,
-        transition: {
-          delay: 200,
-        },
-      }"
-    >
-      <div class="mr-[28px] hidden lg:block">
-        <img src="/laptop.png" />
-      </div>
-      <div>
-        <h2 class="font-semibold lg:text-[61px] text-[30px]">My Package</h2>
-        <p class="lg:text-[31px] text-[15px]">
-          <NuxtLink
-            :to="item.link"
-            target="_blank"
-            class="hover:underline block w-fit"
-            v-for="(item, index) in packageList"
-            :key="index"
-            >{{ item.name }}</NuxtLink
-          >
-        </p>
-      </div>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -172,19 +127,63 @@ const packageList = [
 ]
 
 onMounted(() => {
-  const getChat = new Chat()
-  console.log(getChat.response)
+  // window.addEventListener('DOMContentLoaded', () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute('id') as string
+      const body = entry.target
+      const idPackage = document.getElementById(
+        'package-content'
+      ) as HTMLDivElement
+
+      if (entry.intersectionRatio > 0) {
+        if (id === 'article') {
+          document
+            .querySelector(`section div[id=article-content]`)
+            ?.classList.add('article-animation')
+        }
+        if (id === 'package') {
+          console.log(
+            document.querySelector(`section div[id=package-content]`),
+            'inientry'
+          )
+          document
+            .querySelector(`section div[id=package-content]`)
+            ?.classList.add('package-animation')
+        }
+      }
+    })
+  })
+  // Track all sections that have an `id` applied
+  document.querySelectorAll('section[id]').forEach((section) => {
+    //console.log(section);
+    observer.observe(section)
+  })
+  // })
 })
 </script>
 
 <style scoped lang="scss">
+#article-content {
+  transform: translateX(2000px);
+  transition: 1s ease-in-out;
+}
+#package-content {
+  transform: translateX(-2000px);
+  transition: 1s ease-in-out;
+}
+.package-animation,
+.article-animation {
+  transform: translateX(0px) !important;
+}
+
 .vignette-large {
   width: -webkit-fill-available;
   width: -moz-available;
   height: -webkit-fill-available;
   height: -moz-available;
   position: absolute;
-  background: black;
-  opacity: 0.5;
+  background: grey;
+  opacity: 0.6;
 }
 </style>

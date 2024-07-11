@@ -8,3 +8,7 @@
 body {
   font-family: 'Poppins';
 }
+
+::selection {
+  background-color: blue !important;
+}
