@@ -29,7 +29,7 @@
     class="lg:px-[160px] lg:py-[99px] px-[50px] py-[20px] z-[5] relative bg-white mt-[400px] dark:bg-[#121212]"
     :class="['lg:mt-[800px] md:mt-[394px]']"
   >
-    <section id="article">
+    <section id="article" class="relative">
       <div id="article-content" class="flex justify-between">
         <div>
           <h2 class="font-semibold lg:text-[61px] text-[30px]">Article</h2>
@@ -55,7 +55,7 @@
       </div>
     </section>
 
-    <section class="mt-[110px]" id="package">
+    <section class="mt-[110px] relative" id="package">
       <div id="package-content" class="flex justify-start">
         <div class="mr-[28px] hidden lg:block">
           <img src="/laptop.png" />
@@ -128,48 +128,43 @@ const packageList = [
 
 onMounted(() => {
   // window.addEventListener('DOMContentLoaded', () => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const id = entry.target.getAttribute('id') as string
-      const body = entry.target
-      const idPackage = document.getElementById(
-        'package-content'
-      ) as HTMLDivElement
-
-      if (entry.intersectionRatio > 0) {
-        if (id === 'article') {
-          document
-            .querySelector(`section div[id=article-content]`)
-            ?.classList.add('article-animation')
-        }
-        if (id === 'package') {
-          console.log(
-            document.querySelector(`section div[id=package-content]`),
-            'inientry'
-          )
-          document
-            .querySelector(`section div[id=package-content]`)
-            ?.classList.add('package-animation')
-        }
-      }
-    })
-  })
-  // Track all sections that have an `id` applied
-  document.querySelectorAll('section[id]').forEach((section) => {
-    //console.log(section);
-    observer.observe(section)
-  })
+  // const observer = new IntersectionObserver((entries) => {
+  //   entries.forEach((entry) => {
+  //     const id = entry.target.getAttribute('id') as string
+  //     const body = entry.target
+  //     const idPackage = document.getElementById(
+  //       'package-content'
+  //     ) as HTMLDivElement
+  //     if (entry.intersectionRatio > 0) {
+  //       if (id === 'article') {
+  //         document
+  //           .querySelector(`section div[id=article-content]`)
+  //           ?.classList.toggle('article-animation')
+  //       }
+  //       if (id === 'package') {
+  //         document
+  //           .querySelector(`section div[id=package-content]`)
+  //           ?.classList.toggle('package-animation')
+  //       }
+  //     }
+  //   })
+  // })
+  // // Track all sections that have an `id` applied
+  // document.querySelectorAll('section[id]').forEach((section) => {
+  //   //console.log(section);
+  //   observer.observe(section)
+  // })
   // })
 })
 </script>
 
 <style scoped lang="scss">
 #article-content {
-  transform: translateX(2000px);
+  // transform: translateX(-1000px);
   transition: 1s ease-in-out;
 }
 #package-content {
-  transform: translateX(-2000px);
+  // transform: translateX(-2000px);
   transition: 1s ease-in-out;
 }
 .package-animation,
