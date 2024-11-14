@@ -215,6 +215,8 @@ const dataProject = ref([
   'Ceisa 4.0',
   'Glasier Privy',
   'Tele App Privy',
+  'Landing Privy',
+  'Ronin Dashboard',
 ])
 
 onMounted(() => {
@@ -222,9 +224,7 @@ onMounted(() => {
   for (let i = 0; i < 100; i++) {
     j = [...j, ...JSON.parse(JSON.stringify(dataProject.value))]
   }
-  console.log(j)
   dataProject.value = j
-  console.log(dataProject.value)
   const idIframe = document.getElementById('inner')
   if (!idIframe) return
   nextTick(() => {
