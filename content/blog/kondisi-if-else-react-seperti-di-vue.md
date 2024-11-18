@@ -20,46 +20,82 @@ Dalam pembuatan kondisi react menggunakan {} langsung dari html. dalam hal ini m
 Berikut code untuk di react:
 
 ```react [IfComponent.tsx]
-import React, { ReactNode, createContext, useContext } from 'react';
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useEffect,
+} from "react";
 
-const ConditionContext = createContext({ shouldRender: true });
+// Context to manage condition state
+const ConditionContext = createContext<{
+  isConditionMet: boolean;
+  markConditionMet: () => void;
+}>({
+  isConditionMet: false,
+  markConditionMet: () => { },
+});
 
-interface IfProps {
-  condition: boolean;
-  children: ReactNode;
-}
+// Provider to manage condition states across components
+export const ConditionProvider: React.FC<{ children: ReactNode, condition: boolean }> = ({ children, condition }) => {
+  const [isConditionMet, setIsConditionMet] = useState(false);
 
-export const If: React.FC<IfProps> = ({ condition, children }) => {
+  // Reset isConditionMet whenever the children change
+  useEffect(() => {
+    if (condition) {
+      setIsConditionMet(true);
+    } else {
+      setIsConditionMet(false);
+    }
+  }, [children, condition]);
+
+  const markConditionMet = () => {
+    setIsConditionMet(false);
+  };
+
   return (
-    <ConditionContext.Provider value={{ shouldRender: condition }}>
-      {condition ? children : null}
+    <ConditionContext.Provider value={{ isConditionMet, markConditionMet }}>
+      {children}
     </ConditionContext.Provider>
   );
 };
 
-interface ElseIfProps {
-  condition: boolean;
-  children: ReactNode;
-}
+// If Component
+export const If: React.FC<{ condition: boolean; children: ReactNode }> = ({
+  condition,
+  children,
+}) => {
+  const { isConditionMet, markConditionMet } = useContext(ConditionContext);
+  if (isConditionMet && condition) {
+    markConditionMet(); // Mark condition as met
+    return <>{children}</>;
+  }
 
-export const ElseIf: React.FC<ElseIfProps> = ({ condition, children }) => {
-  const { shouldRender } = useContext(ConditionContext);
-
-  return (
-    <ConditionContext.Provider value={{ shouldRender: shouldRender && !condition }}>
-      {shouldRender && condition ? children : null}
-    </ConditionContext.Provider>
-  );
+  return null;
 };
 
-interface ElseProps {
-  children: ReactNode;
-}
+// ElseIf Component
+// export const ElseIf: React.FC<{ condition: boolean; children: ReactNode }> = ({
+//   condition,
+//   children,
+// }) => {
+//   const { isConditionMet, markConditionMet } = useContext(ConditionContext);
 
-export const Else: React.FC<ElseProps> = ({ children }) => {
-  const { shouldRender } = useContext(ConditionContext);
+//   if (!isConditionMet && condition) {
+//     markConditionMet(); // Mark condition as met
+//     return <>{children}</>;
+//   }
 
-  return shouldRender ? children : null;
+//   return null;
+// }; 
+// depreceted else if
+
+// Else Component
+export const Else: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { isConditionMet } = useContext(ConditionContext);
+  // Render only if no conditions are met
+  return isConditionMet ? null : <>{children}</>;
 };
 ```
 
