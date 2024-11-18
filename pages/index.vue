@@ -207,7 +207,7 @@
     <div
       v-show="holidayResult.length > 0 && !isModalHolidayResult"
       id="modal_holiday"
-      class="fixed left-0 bottom-0 z-[5] bg-white w-full p-10 transition ease delay-150 shadow-2xl shadow-blue-500/50"
+      class="fixed left-0 bottom-0 z-[5] bg-white dark:bg-[#121212] dark:text-white text-black w-full p-10 transition ease delay-150 shadow-2xl shadow-blue-500/50"
       :class="{
         'translate-y-[220px]': isModalHolidayResult,
       }"
@@ -913,7 +913,7 @@ onMounted(() => {
 <style lang="scss" setup>
 .fontTerminal {
   font-family: 'ByteBounce' !important;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 #me {
