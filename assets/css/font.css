@@ -5,10 +5,21 @@
   src: local('VT323'), url('/VT323-Regular.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'ByteBounce';
+  font-style: 'normal';
+  font-weight: 100;
+  src: local('ByteBounce'), url('/ByteBounce.ttf') format('truetype');
+}
+
 body {
   font-family: 'Poppins';
 }
 
 ::selection {
-  background-color: blue !important;
+  background-color: #e17055 !important;
+}
+
+.custom-family {
+  font-family: 'ByteBounce' !important;
 }

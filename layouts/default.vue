@@ -64,17 +64,17 @@
         </div>
 
         <div
-          class="text-[16px] font-medium text-[#504E4F] mb-[9px]"
+          class="text-[40px] font-medium text-[#504E4F] mb-[9px"
           v-for="(item, index) in menu"
           :key="'menu' + index"
         >
           <NuxtLink
             :to="item.link"
             v-slot="{ isActive }"
-            @click="closeMenu"
+            @click="closeMenu" 
             @blur="isMenuOpen = false"
             ><span :class="[isActive ? ' text-[#D1D0D0]' : 'text-[#6c6c6c]']">
-              {{ item.name }}
+              {{ item.name }} 
             </span>
           </NuxtLink>
         </div>
@@ -100,6 +100,7 @@
                 >
                   <NuxtLink :to="item.link" v-slot="{ isActive }"
                     ><span
+                     class="custom-family text-[32px]"
                       :class="[
                         isActive
                           ? 'text-black dark:text-white'

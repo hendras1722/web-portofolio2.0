@@ -12,6 +12,7 @@
             class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[18px] dark:text-white text-nowrap"
           >
             <div
+                class="custom-family"
               v-motion
               :initial="{
                 x: -500,
@@ -27,8 +28,9 @@
             >
               The Man &nbsp;
             </div>
-            <div>Behind</div>
+            <div  class="custom-family">Behind</div>
             <div
+            class="custom-family"
               v-motion
               :initial="{
                 x: 500,
@@ -100,7 +102,7 @@
               <div>
                 <span
                   class="text-white text-sm flex items-center fontTerminal text-wrap"
-                  style="width: 76px"
+                  style="width: 95px"
                 >
                   {{ item.created_at }} =&#62; $
                 </span>
@@ -318,7 +320,7 @@ const typeText = (e: string, value?: string) => {
     if (e === 'msa') {
       line1 = 'usage: <_optional_> msa <_command_>\n'
       line2 =
-        'where <_command_> is one of: \n\t name, age, clear, phone, email, marry\n'
+        'where <_command_> is one of: \n\t name, age, clear, phone, email, wife\n'
       line3 = 'where <_optional_> is: \n\t npm i or npm install'
       line4 = ''
       line5 = ``
@@ -347,6 +349,20 @@ const typeText = (e: string, value?: string) => {
     }
     if (e === 'msa name') {
       line1 = 'My Name is Muh Syahendra A'
+      line2 = ''
+      line3 = ''
+      line4 = ''
+      line5 = ``
+    }
+    if (e === 'msa wife') {
+      line1 = 'My wife is Afni'
+      line2 = ''
+      line3 = ''
+      line4 = ''
+      line5 = ``
+    }
+    if (e === 'msa phone') {
+      line1 = '6289663604258'
       line2 = ''
       line3 = ''
       line4 = ''
@@ -401,7 +417,7 @@ const typeText = (e: string, value?: string) => {
         errorMultiplier: 0,
         className:
           ((e.includes('npm not') || e.includes('mount')) &&
-            'text-sm italic') ||
+            'text-sm italic text-[20px]') ||
           '',
       })
       if (e === 'text empty') {
@@ -683,6 +699,32 @@ function handleSubmit(e: KeyboardEvent, props: any) {
       value
         .toLocaleLowerCase()
         .replace(/^\s{1,}/gm, '')
+        .includes('msa phone') 
+    ) {
+      dataTerminal.value.push({
+        html: 'text',
+        created_at: hour + ':' + minute + ':' + second,
+      })
+      typeText('msa phone')
+      return
+    }
+    if (
+      value
+        .toLocaleLowerCase()
+        .replace(/^\s{1,}/gm, '')
+        .includes('msa wife')
+    ) {
+      dataTerminal.value.push({
+        html: 'text',
+        created_at: hour + ':' + minute + ':' + second,
+      })
+      typeText('msa wife')
+      return
+    }
+    if (
+      value
+        .toLocaleLowerCase()
+        .replace(/^\s{1,}/gm, '')
         .includes('umur') ||
       value
         .toLocaleLowerCase()
@@ -870,7 +912,8 @@ onMounted(() => {
 
 <style lang="scss" setup>
 .fontTerminal {
-  font-family: 'VT323';
+  font-family: 'ByteBounce' !important;
+  font-size: 20px;
 }
 
 #me {

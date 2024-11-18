@@ -1,7 +1,7 @@
 <template>
   <div class="hello flex justify-center lg:mb-[40px]">
     <p
-      class="w-[1600px] min-h-[80px] lg:text-center md:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535] dark:text-white"
+      class="custom-family w-[1600px] min-h-[80px] lg:text-center md:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535] dark:text-white"
     >
       <div
         v-motion
