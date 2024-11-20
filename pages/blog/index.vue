@@ -2,15 +2,13 @@
   <section id="hero">
     <div class="fixed top-0">
       <div
-        class="thumbnail relative bg-[url(/coffee.svg)] w-dvw bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-scroll"
-      >
+        class="thumbnail relative bg-[url(/coffee.svg)] w-dvw bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-scroll">
         <div
           class="lg:px-[157px] sm:px-[100px] px-[20px] w-fit h-fit absolute top-12 bottom-0 mx-auto z-[1] right-0 left-0 my-auto text-white"
           style="
             mix-blend-mode: overlay;
             filter: drop-shadow(0px 5px 10px black);
-          "
-        >
+          ">
           <div class="text-white block">
             <p class="text-center font-bold lg:text-[66px] sm:text-[40px]">
               Reading is essential for those who seek to rise above the ordinary
@@ -19,33 +17,32 @@
               Jim Rohn
             </p>
           </div>
+          
+          <div class="flex justify-center mt-16">
+            <div class="mouse"></div>
+          </div>
         </div>
         <div class="vignette vignette-large"></div>
       </div>
     </div>
+    
   </section>
 
-  <div
-    class="lg:px-[160px] lg:py-[99px] px-[50px] py-[20px] z-[5] relative bg-white mt-[400px] dark:bg-[#121212]"
-    :class="['lg:mt-[800px] md:mt-[394px]']"
-  >
+  <div class="lg:px-[160px] lg:py-[99px] px-[50px] py-[20px] z-[5] relative bg-white mt-[400px] dark:bg-[#121212]"
+    :class="['lg:mt-[800px] md:mt-[394px]']">
     <section id="article" class="relative">
       <div id="article-content" class="flex justify-between">
         <div>
           <h2 class="font-semibold lg:text-[61px] text-[30px]">Article</h2>
 
           <ContentList path="/blog" v-slot="{ list }">
-            <p
-              v-for="article in filterList(list)"
-              :key="article._path"
-              class="lg:text-[31px] text-[15px]"
-            >
+            <p v-for="article in filterList(list)" :key="article._path" class="lg:text-[31px] text-[15px]">
               <NuxtLink :to="article._path" class="hover:underline">
                 {{ article.title }}
               </NuxtLink>
               <span class="text-[#B1AFB0] ml-2 hover:no-underline">{{
                 article.date
-              }}</span>
+                }}</span>
             </p>
           </ContentList>
         </div>
@@ -63,14 +60,8 @@
         <div>
           <h2 class="font-semibold lg:text-[61px] text-[30px]">My Package</h2>
           <p class="lg:text-[31px] text-[15px]">
-            <NuxtLink
-              :to="item.link"
-              target="_blank"
-              class="hover:underline block w-fit"
-              v-for="(item, index) in packageList"
-              :key="index"
-              >{{ item.name }}</NuxtLink
-            >
+            <NuxtLink :to="item.link" target="_blank" class="hover:underline block w-fit"
+              v-for="(item, index) in packageList" :key="index">{{ item.name }}</NuxtLink>
           </p>
         </div>
       </div>
@@ -180,5 +171,42 @@ onMounted(() => {
   position: absolute;
   background: grey;
   opacity: 0.6;
+}
+
+.mouse {
+  width: 30px;
+  height: 60px;
+  border: 3px solid white;
+  border-radius: 60px;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 50%;
+    opacity: 1;
+    animation: wheel 2s infinite;
+    -webkit-animation: wheel 2s infinite;
+  }
+}
+
+@keyframes wheel {
+  to {
+    opacity: 0;
+    top: 40px;
+  }
+}
+
+@-webkit-keyframes wheel {
+  to {
+    opacity: 0;
+    top: 40px;
+  }
 }
 </style>
