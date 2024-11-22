@@ -2,6 +2,7 @@
   <div class="flex flex-wrap justify-around w-fit mt-[10px]">
     <a href="https://www.linkedin.com/in/muhsyahendraa/" target="_blank">
       <img
+        alt="icon"
         v-motion
         :initial="{
           y: -500,
@@ -20,6 +21,7 @@
     </a>
     <a href="https://discordapp.com/users/squidy5488" target="_blank">
       <img
+        alt="icon"
         v-motion
         :initial="{
           y: -500,
@@ -38,6 +40,7 @@
     </a>
     <a href="https://www.instagram.com/msyaa240/" target="_blank">
       <img
+        alt="icon"
         v-motion
         :initial="{
           y: -500,
@@ -56,6 +59,7 @@
     </a>
     <a href="hhttps://github.com/hendras1722" target="_blank">
       <img
+        alt="icon"
         v-motion
         :initial="{
           y: -500,
