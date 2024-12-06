@@ -1,87 +1,66 @@
 <template>
   <div>
     <div class="lg:px-[160px] px-[20px] mt-[66px] mb-[86px]">
-      <div
-        class="font-bold lg:text-[61px] w-full text-center text-[#212020] mb-[109px] dark:text-white"
-      >
+      <div class="font-bold lg:text-[61px] w-full text-center text-[#212020] mb-[109px] dark:text-white">
         Experience
       </div>
-      <div
-        class="text-[#212020] dark:text-white relative mt-5"
-        v-for="(item, index) in dataExperience"
-        :key="index"
-      >
-        <h2
-          class="font-bold lg:text-[3vw] text-[#212020] dark:text-white dark:drop-shadow-md"
-        >
+      <div class="text-[#212020] dark:text-white relative mt-5" v-for="(item, index) in dataExperience" :key="index">
+        <h2 class="font-bold lg:text-[3vw] text-[#212020] dark:text-white dark:drop-shadow-md">
           {{ item.title }}
         </h2>
         <p
-          class="lg:text-[8vw] text-[10vw] dark:text-[#9e9d9d] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
-        >
+          class="lg:text-[8vw] text-[10vw] dark:text-[#9e9d9d] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]">
           {{ item.date }}
         </p>
         <p class="font-semibold lg:text-[22px] dark:drop-shadow-md">
           {{ item.desc }}
         </p>
       </div>
-      <div
-        class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px] dark:text-white"
-      >
+      <div class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px] dark:text-white">
         Education
       </div>
-      <div
-        class="text-[#212020] relative mt-5"
-        v-for="(item, index) in dataEducation"
-        :key="index"
-      >
-        <h2
-          class="font-bold lg:text-[3vw] text-[#212020] dark:text-white dark:drop-shadow-md"
-        >
+      <div class="text-[#212020] relative mt-5" v-for="(item, index) in dataEducation" :key="index">
+        <h2 class="font-bold lg:text-[3vw] text-[#212020] dark:text-white dark:drop-shadow-md">
           {{ item.title }}
         </h2>
         <p
-          class="lg:text-[8vw] text-[10vw] dark:text-[#9e9d9d] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]"
-        >
+          class="lg:text-[8vw] text-[10vw] dark:text-[#9e9d9d] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]">
           {{ item.date }}
         </p>
         <p class="font-semibold lg:text-[22px] dark:text-white">
           {{ item.desc }}
         </p>
       </div>
-      <div
-        class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px] dark:text-white"
-      >
+      <div class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px] dark:text-white">
         Project
       </div>
       <div class="container_scoller">
-        <!-- <div
-          class="grid grid-cols-3 grid-rows-2 gap-4 place-items-center scroller"
-        > -->
-        <div
-          class="font-bold lg:text-[30px] w-full text-left text-[#212020] dark:text-white scroller"
-        >
+        <div class="font-bold lg:text-[30px] w-full text-left text-[#212020] dark:text-white scroller">
           <span v-for="item in dataProject" :key="item">
             {{ item }} &nbsp; |
           </span>
         </div>
       </div>
 
-      <div
-        class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px] dark:text-white"
-      >
+      <div class="flex flex-wrap gap-8 align-middle justify-evenly mt-5 p-4">
+        <div class="p-4 flex-auto  w-[calc(100/3)] grid place-items-center shadow-md rounded-lg"
+          v-for="(item, index) in projectList" :key="index">
+          <img :src="item.img" class="!w-[230px]" alt="project" />
+          <h2 class="font-bold text-nowrap">{{handleTitle(item.img)}}</h2>
+          <small class="flex gap-2 items-center mt-2">Stack:
+            <img v-if="item.img.includes('react')" width="20" src="/react.svg" alt="react" />
+            <img v-else src="/vue.svg" width="20" alt="vue" />
+          </small>
+        </div>
+      </div>
+
+      <div class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px] dark:text-white">
         Certificate License
       </div>
       <div class="w-full">
-        <div
-          class="text-start cursor-auto"
-          v-for="(item, index) in dataCertificate"
-          :key="index"
-          @click="handleOpenCertificateModal(item.title)"
-        >
-          <div
-            class="hover:bg-gray-100 p-2 dark:hover:bg-slate-600 rounded-md flex items-center justify-between"
-          >
+        <div class="text-start cursor-auto" v-for="(item, index) in dataCertificate" :key="index"
+          @click="handleOpenCertificateModal(item.title)">
+          <div class="hover:bg-gray-100 p-2 dark:hover:bg-slate-600 rounded-md flex items-center justify-between">
             <div>
               <h3 class="font-bold text-[3vw]">{{ item.title }}</h3>
               <p class="sm:text-lg text-[12px] text-gray-400">
@@ -102,9 +81,7 @@
 
       <ModalContainer v-model="isOpen" class="relative">
         <div v-if="!loading">
-          <div
-            class="lds-roller align-center absolute w-full left-0 right-0 ml-auto mr-auto mt-20 -z-[1]"
-          >
+          <div class="lds-roller align-center absolute w-full left-0 right-0 ml-auto mr-auto mt-20 -z-[1]">
             <div></div>
             <div></div>
             <div></div>
@@ -115,12 +92,8 @@
             <div></div>
           </div>
         </div>
-        <iframe
-          id="idIframe"
-          :src="handleOpenCertificate(nameCertificate)"
-          title="Preview"
-          style="width: 100%; height: 600px; display: block"
-        ></iframe>
+        <iframe id="idIframe" :src="handleOpenCertificate(nameCertificate)" title="Preview"
+          style="width: 100%; height: 600px; display: block"></iframe>
       </ModalContainer>
     </div>
   </div>
@@ -149,6 +122,44 @@ const handleOpenCertificate = (event: string) => {
 
     default:
       break
+  }
+}
+
+const projectList = [{
+  img: '/1.vue.png',
+  stack: 'vue'
+},{
+  img: '/2.vue.png',
+  stack: 'vue'
+},{
+  img: '/3.vue.png',
+  stack: 'vue'
+},{
+  img: '/4.vue.png',
+  stack: 'vue'
+}, {
+  img: '/5.vue.png',
+  stack: 'vue'
+}, {
+  img: '/6.react.png',
+  stack: 'react'
+}]
+
+function handleTitle(item: string){
+  if(item.includes('1')){
+    return 'Ronda Indonesia'
+  }
+  if(item.includes('2')){
+    return 'CIMB CCPL'
+  }
+  if (item.includes('3')) {
+    return 'CIMB Octo Saver'
+  }
+  if(item.includes('4')){
+    return 'Ronin Dashboard'
+  }
+  if(item.includes('5')){
+    return 'BNI Regsand'
   }
 }
 
@@ -403,7 +414,8 @@ button:hover .button-text {
   left: 12px;
 }
 .container_scoller {
-  @apply relative flex  overflow-hidden;
+  @apply relative flex  overflow-hidden rounded;
+  box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.136), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.136);
 }
 
 .scroller {

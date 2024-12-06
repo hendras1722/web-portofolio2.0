@@ -10,28 +10,28 @@
         <div class="flex justify-center">
           <div class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[18px] dark:text-white text-nowrap">
             <div class="custom-family" v-motion :initial="{
-                x: -500,
-                opacity: 0,
-              }" :enter="{
-                x: 0,
-                opacity: 1,
-                transition: {
-                  delay: 500,
-                },
-              }">
+              x: -500,
+              opacity: 0,
+            }" :enter="{
+              x: 0,
+              opacity: 1,
+              transition: {
+                delay: 500,
+              },
+            }">
               The Man &nbsp;
             </div>
             <div class="custom-family">Behind</div>
             <div class="custom-family" v-motion :initial="{
-                x: 500,
-                opacity: 0,
-              }" :enter="{
-                x: 0,
-                opacity: 1,
-                transition: {
-                  delay: 500,
-                },
-              }">
+              x: 500,
+              opacity: 0,
+            }" :enter="{
+              x: 0,
+              opacity: 1,
+              transition: {
+                delay: 500,
+              },
+            }">
               &nbsp; The Microphone
             </div>
           </div>
@@ -103,10 +103,14 @@
           <SocialIcon />
         </div>
 
-        <div v-if="width < 1041 || width > 1201"
+        <<<<<<< HEAD <div v-if="width < 1041 || width > 1201"
           class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex absolute">
-          2024-PRESENT © Muh Syahendra A
-        </div>
+          =======
+          <div v-if="width < 1041 || width > 1201"
+            class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex absolute top-3">
+            >>>>>>> b24760349929a6efa6e04e6d72a4dd3bf295cd2f
+            2024-PRESENT © Muh Syahendra A
+          </div>
       </div>
       <div class="col-span-6 col-start-7 flex justify-end">
         <div class="lg:block md:block hidden relative">
@@ -125,9 +129,9 @@
               <div class="corner bottom-left"></div>
             </div>
           </div>
-
-          <img v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me_sleep.png'" />
-          <img v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" />
+          <img v-show="isDark" alt="sleep" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
+            :src="'/me_sleep.png'" />
+          <img v-show="!isDark" alt="light" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" />
         </div>
       </div>
     </div>
@@ -174,7 +178,7 @@
       </div>
       <div class="dark:text-black">Ada libur bulan ini:</div>
       <div class="flex flex-nowrap overflow-auto">
-        <div v-for="({name, date}) in holidayResult"
+        <div v-for="({ name, date }) in holidayResult"
           class="p-2 border border-black rounded-lg my-3 mx-3 dark:text-black">
           <h3 class="font-extrabold text-nowrap">
             {{ name }}
@@ -635,7 +639,7 @@ function handleSubmit(e: KeyboardEvent, props: any) {
       value
         .toLocaleLowerCase()
         .replace(/^\s{1,}/gm, '')
-        .includes('msa phone') 
+        .includes('msa phone')
     ) {
       dataTerminal.value.push({
         html: 'text',
@@ -877,6 +881,7 @@ onMounted(() => {
 }
 
 @keyframes blink {
+
   from,
   to {
     color: transparent;
@@ -888,6 +893,7 @@ onMounted(() => {
 }
 
 @-moz-keyframes blink {
+
   from,
   to {
     color: transparent;
@@ -899,6 +905,7 @@ onMounted(() => {
 }
 
 @-webkit-keyframes blink {
+
   from,
   to {
     color: transparent;
@@ -910,6 +917,7 @@ onMounted(() => {
 }
 
 @-ms-keyframes blink {
+
   from,
   to {
     color: transparent;
@@ -921,6 +929,7 @@ onMounted(() => {
 }
 
 @-o-keyframes blink {
+
   from,
   to {
     color: transparent;
@@ -985,10 +994,12 @@ onMounted(() => {
   animation-delay: 0s;
   right: 10px;
 }
+
 .zzz-zz {
   animation-delay: 0.5s;
   right: -20px;
 }
+
 .zzz-zzz {
   animation-delay: 1s;
   right: 0;
@@ -1003,6 +1014,7 @@ onMounted(() => {
     -webkit-transform: translateY(100%);
     transform: translateY(100%);
   }
+
   100% {
     font-size: 72px;
     -webkit-transform: translateY(-100%);
@@ -1017,6 +1029,7 @@ onMounted(() => {
     -webkit-transform: translateY(100%);
     transform: translateY(100%);
   }
+
   100% {
     font-size: 72px;
     -webkit-transform: translateY(-100%);
