@@ -103,14 +103,10 @@
           <SocialIcon />
         </div>
 
-        <<<<<<< HEAD <div v-if="width < 1041 || width > 1201"
+        <div v-if="width < 1041 || width > 1201"
           class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex absolute">
-          =======
-          <div v-if="width < 1041 || width > 1201"
-            class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex absolute top-3">
-            >>>>>>> b24760349929a6efa6e04e6d72a4dd3bf295cd2f
-            2024-PRESENT © Muh Syahendra A
-          </div>
+          2024-PRESENT © Muh Syahendra A
+        </div>
       </div>
       <div class="col-span-6 col-start-7 flex justify-end">
         <div class="lg:block md:block hidden relative">
@@ -129,9 +125,8 @@
               <div class="corner bottom-left"></div>
             </div>
           </div>
-          <img v-show="isDark" alt="sleep" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
-            :src="'/me_sleep.png'" />
-          <img v-show="!isDark" alt="light" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" />
+          <img v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me_sleep.png'" />
+          <img v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" />
         </div>
       </div>
     </div>
@@ -151,13 +146,12 @@
             <div class="corner bottom-left"></div>
           </div>
         </div>
-        <img v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me_sleep.png'"
-          alt="sleep" />
-        <img v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" alt="awake" />
+        <img v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me_sleep.png'" />
+        <img v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" />
       </div>
     </div>
     <div v-show="holidayResult.length > 0 && !isModalHolidayResult" id="modal_holiday"
-      class="fixed left-0 bottom-0 z-[5] bg-gray-100 dark:bg-[#121212] dark:text-white text-black w-full p-10 transition ease delay-150 shadow-2xl shadow-blue-500/50"
+      class="fixed left-0 bottom-0 z-[5] bg-white dark:bg-[#121212] dark:text-white text-black w-full p-10 transition ease delay-150 shadow-2xl shadow-blue-500/50"
       :class="{
         'translate-y-[220px]': isModalHolidayResult,
       }" v-motion :initial="{
@@ -178,12 +172,11 @@
       </div>
       <div class="dark:text-black">Ada libur bulan ini:</div>
       <div class="flex flex-nowrap overflow-auto">
-        <div v-for="({ name, date }) in holidayResult"
-          class="p-2 border border-black rounded-lg my-3 mx-3 dark:text-black">
+        <div v-for="(item, index) in holidayResult" class="p-2 border border-black rounded my-3 mx-3 dark:text-black">
           <h3 class="font-extrabold text-nowrap">
-            {{ name }}
+            {{ item.name }}
           </h3>
-          <p>{{ formatDate(date) }}</p>
+          <p>{{ formatDate(item.date) }}</p>
         </div>
       </div>
     </div>
@@ -718,7 +711,7 @@ function handleSubmit(e: KeyboardEvent, props: any) {
 
 function handleMouseEvent(e?: number) {
   const typing_text = document.getElementById(
-    `typing_text${e || dataTerminal.value.length - 1}`
+    `typing_text${e ? e : dataTerminal.value.length - 1}`
   )
   const container_typing = document.getElementById('container_typing')
 
@@ -729,14 +722,15 @@ function handleMouseEvent(e?: number) {
   if (typing_text) {
     typing_text.focus()
   }
+  return
 }
-// const typeValue = ref('')
-// const displayTextArray = ref([
-//   ' Hello I’m Muh Syahendra A a Software Engineer And UI Designer',
-// ])
-// const displayTextArrayIndex = ref(0)
-// const charIndex = ref(0)
-// const typingSpeed = 100
+const typeValue = ref('')
+const displayTextArray = ref([
+  ' Hello I’m Muh Syahendra A a Software Engineer And UI Designer',
+])
+const displayTextArrayIndex = ref(0)
+const charIndex = ref(0)
+const typingSpeed = 100
 
 // function typeTextTitle() {
 //   typeValue.value += displayTextArray.value[displayTextArrayIndex.value].charAt(
@@ -768,8 +762,39 @@ function formatDate(e: string) {
   )
 }
 
+async function getWebsite() {
+  const data = await $fetch('/api/getWebsiteGamePs')
+  const dom = new DOMParser().parseFromString(data, 'text/html')
+  const listGame = dom?.querySelectorAll('#main section')
+  const sectionSDK = listGame[0].querySelectorAll('section [data-qa="ems-sdk-grid"] div .psw-l-grid')
+  const selectUl = sectionSDK[0]?.querySelectorAll('#main section ul')
+  const resultGame = Array.from(selectUl[0]?.querySelectorAll('li')) as any[]
+  if (!resultGame) {
+    throw new Error('Failed to parse DOM')
+  }
+  const resultItems = (
+    Array.from(resultGame) as any[]
+  ).flatMap((item, index) => {
+    const checkEmpty = item.querySelector(`li [data-qa-index="${index}"]`)
+    if (!checkEmpty) {
+      return false
+    }
+    const img = item.querySelector(`li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art#image"] noscript img`)
+    const name = item.querySelector(`li section [data-qa="ems-sdk-grid#productTile${index}#product-name"]`)?.innerHTML
+    const categoryPS5 = item.querySelector(`li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag0"]`)?.innerHTML
+    const categoryPS4 = item.querySelector(`li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag1"]`)?.innerHTML
+    return {
+      img: img?.src,
+      name,
+      category: [categoryPS5, categoryPS4].filter(Boolean)
+    }
+  }).filter(Boolean)
+  console.log(resultItems, 'iniresultItems')
+}
+
 async function getDate() {
   const data = await $fetch<any>('/api/getWebsite')
+
   const dom = new DOMParser().parseFromString(data, 'text/html')
   const months = dom?.querySelectorAll('#main article ul')
 
@@ -836,6 +861,7 @@ function handleClose() {
 }
 onMounted(() => {
   getDate()
+  getWebsite()
   nextTick(() => {
     typeText('mount')
   })
