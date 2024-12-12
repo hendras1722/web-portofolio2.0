@@ -13,170 +13,143 @@ Create component UForm
   </form>
 </template>
 
-<script>
-import { provide, ref, defineComponent, onUnmounted, onMounted } from 'vue'
+<script lang="ts" setup>
+import { provide, ref, onUnmounted, onMounted } from 'vue'
 import { useEventBus } from '@vueuse/core'
-//   import { useId } from "#imports";
+
 class FormException extends Error {
-  constructor(message) {
+  constructor(message: string) {
     super(message)
     this.message = message
     Object.setPrototypeOf(this, FormException.prototype)
   }
 }
-export default defineComponent({
-  props: {
-    schema: {
-      type: Object,
-      default: void 0,
-    },
-    state: {
-      type: Object,
-      required: true,
-    },
-    validate: {
-      type: Function,
-      default: () => [],
-    },
-    validateOn: {
-      type: Array,
-      default: () => ['blur', 'input', 'change', 'submit'],
-    },
-  },
-  emits: ['submit', 'error'],
-  setup(props, { expose, emit }) {
-    //   const formId = useId();
-    const bus = useEventBus(`form-1`)
-    onMounted(() => {
-      bus.on(async (event) => {
-        if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
-          await validate(event.path, { silent: true })
-        }
-      })
-    })
-    onUnmounted(() => {
-      bus.reset()
-    })
 
-    const errors = ref([])
-    provide('form-errors', errors)
-    provide('form-events', bus)
-    const inputs = ref({})
-    provide('form-inputs', inputs)
-    async function getErrors() {
-      let errs = await props.validate(props.state)
-      if (props.schema) {
-        if (isZodSchema(props.schema)) {
-          errs = errs.concat(await getZodErrors(props.state, props.schema))
-        } else if (isYupSchema(props.schema)) {
-          errs = errs.concat(await getYupErrors(props.state, props.schema))
-        } else if (isJoiSchema(props.schema)) {
-          errs = errs.concat(await getJoiErrors(props.state, props.schema))
-        } else if (isValibotSchema(props.schema)) {
-          errs = errs.concat(await getValibotError(props.state, props.schema))
-        } else {
-          throw new Error('Form validation failed: Unsupported form schema')
-        }
-      }
-      return errs
-    }
-    async function validate(path, opts = { silent: false }) {
-      let paths = path
-      if (path && !Array.isArray(path)) {
-        paths = [path]
-      }
-      if (paths) {
-        const otherErrors = errors.value.filter(
-          (error) => !paths.includes(error.path)
-        )
-        const pathErrors = (await getErrors()).filter((error) =>
-          paths.includes(error.path)
-        )
-        errors.value = otherErrors.concat(pathErrors)
-      } else {
-        errors.value = await getErrors()
-      }
-      if (errors.value.length > 0) {
-        if (opts.silent) return false
-        throw new FormException(
-          `Form validation failed: ${JSON.stringify(errors.value, null, 2)}`
-        )
-      }
-      return props.state
-    }
-    async function onSubmit(payload) {
-      const event = payload
-      try {
-        if (props.validateOn?.includes('submit')) {
-          await validate()
-        }
-        const submitEvent = {
-          ...event,
-          data: props.state,
-        }
-        emit('submit', submitEvent)
-      } catch (error) {
-        if (!(error instanceof FormException)) {
-          throw error
-        }
-        const errorEvent = {
-          ...event,
-          errors: errors.value.map((err) => ({
-            ...err,
-            id: inputs.value[err.path],
-          })),
-        }
-        emit('error', errorEvent)
-      }
-    }
-    expose({
-      validate,
-      errors,
-      setErrors(errs, path) {
-        errors.value = errs
-        if (path) {
-          errors.value = errors.value
-            .filter((error) => error.path !== path)
-            .concat(errs)
-        } else {
-          errors.value = errs
-        }
-      },
-      async submit() {
-        await onSubmit(new Event('submit'))
-      },
-      getErrors(path) {
-        if (path) {
-          return errors.value.filter((err) => err.path === path)
-        }
-        return errors.value
-      },
-      clear(path) {
-        if (path) {
-          errors.value = errors.value.filter((err) => err.path !== path)
-        } else {
-          errors.value = []
-        }
-      },
-    })
-    return {
-      onSubmit,
-    }
+const props = defineProps({
+  schema: {
+    type: Object,
+    default: undefined,
+  },
+  state: {
+    type: Object,
+    required: true,
+  },
+  validate: {
+    type: Function,
+    default: () => [],
+  },
+  validateOn: {
+    type: Array,
+    default: () => ['blur', 'input', 'change', 'submit'],
   },
 })
-function isYupSchema(schema) {
+
+const emits = defineEmits(['submit', 'error'])
+
+const bus = useEventBus('form-1')
+const errors = ref<any[]>([])
+const inputs = ref<Record<string, any>>({})
+
+provide('form-errors', errors)
+provide('form-events', bus)
+provide('form-inputs', inputs)
+
+onMounted(() => {
+  bus.on(async (event: any) => {
+    if (event.type !== 'submit' && props.validateOn?.includes(event.type)) {
+      await performValidation(event.path, { silent: true })
+    }
+  })
+})
+
+onUnmounted(() => {
+  bus.reset()
+})
+
+async function getErrors() {
+  let errs = await props.validate(props.state)
+  if (props.schema) {
+    if (isZodSchema(props.schema)) {
+      errs = errs.concat(await getZodErrors(props.state, props.schema))
+    } else if (isYupSchema(props.schema)) {
+      errs = errs.concat(await getYupErrors(props.state, props.schema))
+    } else if (isJoiSchema(props.schema)) {
+      errs = errs.concat(await getJoiErrors(props.state, props.schema))
+    } else if (isValibotSchema(props.schema)) {
+      errs = errs.concat(await getValibotError(props.state, props.schema))
+    } else {
+      throw new Error('Form validation failed: Unsupported form schema')
+    }
+  }
+  return errs
+}
+
+async function performValidation(
+  path?: string | string[],
+  opts = { silent: false }
+) {
+  let paths = path
+  if (path && !Array.isArray(path)) {
+    paths = [path]
+  }
+
+  if (paths) {
+    const otherErrors = errors.value.filter(
+      (error) => !paths.includes(error.path)
+    )
+    const pathErrors = (await getErrors()).filter((error: { path: string }) =>
+      paths.includes(error.path)
+    )
+    errors.value = otherErrors.concat(pathErrors)
+  } else {
+    errors.value = await getErrors()
+  }
+
+  if (errors.value.length > 0) {
+    if (opts.silent) return false
+    throw new FormException(
+      `Form validation failed: ${JSON.stringify(errors.value, null, 2)}`
+    )
+  }
+
+  return props.state
+}
+
+async function onSubmit(payload: Event) {
+  try {
+    if (props.validateOn?.includes('submit')) {
+      await performValidation()
+    }
+    emits('submit', { ...payload, data: props.state })
+  } catch (error) {
+    if (!(error instanceof FormException)) {
+      throw error
+    }
+    emits('error', {
+      ...payload,
+      errors: errors.value.map((err) => ({
+        ...err,
+        id: inputs.value[err.path],
+      })),
+    })
+  }
+}
+
+function isYupSchema(schema: any): boolean {
   return schema.validate && schema.__isYupSchema__
 }
-function isYupError(error) {
-  return error.inner !== void 0
+
+function isYupError(error: any): boolean {
+  return error.inner !== undefined
 }
-async function getYupErrors(state, schema) {
+
+async function getYupErrors(state: any, schema: any) {
   try {
     await schema.validate(state, { abortEarly: false })
     return []
-  } catch (error) {
+  } catch (error: any) {
     if (isYupError(error)) {
-      return error.inner.map((issue) => ({
+      return error.inner.map((issue: any) => ({
         path: issue.path ?? '',
         message: issue.message,
       }))
@@ -185,32 +158,37 @@ async function getYupErrors(state, schema) {
     }
   }
 }
-function isZodSchema(schema) {
-  return schema.parse !== void 0
+
+function isZodSchema(schema: any): boolean {
+  return schema.parse !== undefined
 }
-async function getZodErrors(state, schema) {
+
+async function getZodErrors(state: any, schema: any) {
   const result = await schema.safeParseAsync(state)
-  if (result.success === false) {
-    return result.error.issues.map((issue) => ({
+  if (!result.success) {
+    return result.error.issues.map((issue: any) => ({
       path: issue.path.join('.'),
       message: issue.message,
     }))
   }
   return []
 }
-function isJoiSchema(schema) {
-  return schema.validateAsync !== void 0 && schema.id !== void 0
+
+function isJoiSchema(schema: any): boolean {
+  return schema.validateAsync !== undefined && schema.id !== undefined
 }
-function isJoiError(error) {
+
+function isJoiError(error: any): boolean {
   return error.isJoi === true
 }
-async function getJoiErrors(state, schema) {
+
+async function getJoiErrors(state: any, schema: any) {
   try {
     await schema.validateAsync(state, { abortEarly: false })
     return []
-  } catch (error) {
+  } catch (error: any) {
     if (isJoiError(error)) {
-      return error.details.map((detail) => ({
+      return error.details.map((detail: any) => ({
         path: detail.path.join('.'),
         message: detail.message,
       }))
@@ -219,14 +197,16 @@ async function getJoiErrors(state, schema) {
     }
   }
 }
-function isValibotSchema(schema) {
-  return schema._parse !== void 0
+
+function isValibotSchema(schema: any): boolean {
+  return schema._parse !== undefined
 }
-async function getValibotError(state, schema) {
+
+async function getValibotError(state: any, schema: any) {
   const result = await schema._parse(state)
   if (result.issues) {
-    return result.issues.map((issue) => ({
-      path: issue.path?.map((p) => p.key).join('.') || '',
+    return result.issues.map((issue: any) => ({
+      path: issue.path?.map((p: any) => p.key).join('.') || '',
       message: issue.message,
     }))
   }
