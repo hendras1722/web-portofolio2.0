@@ -8,30 +8,42 @@
       </ClientOnly>
       <div class="col-span-12">
         <div class="flex justify-center">
-          <div class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[18px] dark:text-white text-nowrap">
-            <div class="custom-family" v-motion :initial="{
-              x: -500,
-              opacity: 0,
-            }" :enter="{
-              x: 0,
-              opacity: 1,
-              transition: {
-                delay: 500,
-              },
-            }">
+          <div
+            class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[18px] dark:text-white text-nowrap"
+          >
+            <div
+              class="custom-family"
+              v-motion
+              :initial="{
+                x: -500,
+                opacity: 0,
+              }"
+              :enter="{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  delay: 500,
+                },
+              }"
+            >
               The Man &nbsp;
             </div>
             <div class="custom-family">Behind</div>
-            <div class="custom-family" v-motion :initial="{
-              x: 500,
-              opacity: 0,
-            }" :enter="{
-              x: 0,
-              opacity: 1,
-              transition: {
-                delay: 500,
-              },
-            }">
+            <div
+              class="custom-family"
+              v-motion
+              :initial="{
+                x: 500,
+                opacity: 0,
+              }"
+              :enter="{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  delay: 500,
+                },
+              }"
+            >
               &nbsp; The Microphone
             </div>
           </div>
@@ -73,24 +85,39 @@
         </div>
       </div>
       <div class="md:col-span-6 col-span-12 md:px-[35px] lg:relative">
-        <div class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] lg:mt-[76px] mt-[34px] overflow-auto"
-          :style="{ background: appConfig.colors['custom-black'][900] }" @click="handleMouseEvent()">
+        <div
+          class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] lg:mt-[76px] mt-[34px] overflow-auto"
+          :style="{ background: appConfig.colors['custom-black'][900] }"
+          @click="handleMouseEvent()"
+        >
           <div v-for="(item, index) in dataTerminal" :key="index">
-            <div v-if="item.html === 'text'" style="white-space: pre-wrap"
-              :style="{ color: appConfig.colors['custom-black'][50] }">
+            <div
+              v-if="item.html === 'text'"
+              style="white-space: pre-wrap"
+              :style="{ color: appConfig.colors['custom-black'][50] }"
+            >
               <span ref="el" class="fontTerminal" />
             </div>
             <div class="flex items-center" v-if="item.html === 'input'">
               <div>
-                <span class="text-white text-sm flex items-center fontTerminal text-wrap" style="width: 95px">
+                <span
+                  class="text-white text-sm flex items-center fontTerminal text-wrap"
+                  style="width: 95px"
+                >
                   {{ item.created_at }} =&#62; $
                 </span>
               </div>
               <div class="text-white">
                 <div class="break-words">
-                  <div suppressContentEditableWarning :id="`typing_text${index}`" contenteditable ref="editable"
+                  <div
+                    suppressContentEditableWarning
+                    :id="`typing_text${index}`"
+                    contenteditable
+                    ref="editable"
                     class="no-underline text-white focus:outline-none fontTerminal min-w-5"
-                    @keydown="handleSubmit($event, { props: item, index })" @mousedown="handleMouseEvent(index)"></div>
+                    @keydown="handleSubmit($event, { props: item, index })"
+                    @mousedown="handleMouseEvent(index)"
+                  ></div>
                 </div>
               </div>
             </div>
@@ -103,8 +130,10 @@
           <SocialIcon />
         </div>
 
-        <div v-if="width < 1041 || width > 1201"
-          class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex absolute">
+        <div
+          v-if="width < 1041 || width > 1201"
+          class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex absolute"
+        >
           2024-PRESENT © Muh Syahendra A
         </div>
       </div>
@@ -112,7 +141,9 @@
         <div class="lg:block md:block hidden relative">
           <div id="container" v-show="isDark">
             <div id="pillow" class="absolute">
-              <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">
+              <div
+                class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl"
+              >
                 Z
               </div>
               <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">
@@ -125,8 +156,18 @@
               <div class="corner bottom-left"></div>
             </div>
           </div>
-          <img v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me_sleep.png'" />
-          <img v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" />
+          <img
+            v-show="isDark"
+            id="me"
+            class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
+            :src="'/me_sleep.png'"
+          />
+          <img
+            v-show="!isDark"
+            id="me"
+            class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
+            :src="'/me.png'"
+          />
         </div>
       </div>
     </div>
@@ -135,7 +176,9 @@
       <div class="lg:hidden md:hidden">
         <div id="container" v-show="isDark">
           <div id="pillow" class="absolute">
-            <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">
+            <div
+              class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl"
+            >
               Z
             </div>
             <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">Z</div>
@@ -146,33 +189,56 @@
             <div class="corner bottom-left"></div>
           </div>
         </div>
-        <img v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me_sleep.png'" />
-        <img v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" />
+        <img
+          v-show="isDark"
+          id="me"
+          class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
+          :src="'/me_sleep.png'"
+        />
+        <img
+          v-show="!isDark"
+          id="me"
+          class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
+          :src="'/me.png'"
+        />
       </div>
     </div>
-    <div v-show="holidayResult.length > 0 && !isModalHolidayResult" id="modal_holiday"
+    <div
+      v-show="holidayResult.length > 0 && !isModalHolidayResult"
+      id="modal_holiday"
       class="fixed left-0 bottom-0 z-[5] bg-white dark:bg-[#121212] dark:text-white text-black w-full p-10 transition ease delay-150 shadow-2xl shadow-blue-500/50"
       :class="{
         'translate-y-[220px]': isModalHolidayResult,
-      }" v-motion :initial="{
+      }"
+      v-motion
+      :initial="{
         y: 500,
         opacity: 0,
-      }" :enter="{
+      }"
+      :enter="{
         y: 0,
         opacity: 1,
         transition: {
           delay: 500,
           ease: 'easeInOut',
         },
-      }">
+      }"
+    >
       <div class="flex justify-end">
-        <UButton variant="ghost" class="bg-white text-black" @click="handleClose">
+        <UButton
+          variant="ghost"
+          class="bg-white text-black"
+          @click="handleClose"
+        >
           <UIcon name="i-ic-baseline-close" class="dark:text-black" />
         </UButton>
       </div>
       <div class="dark:text-black">Ada libur bulan ini:</div>
       <div class="flex flex-nowrap overflow-auto">
-        <div v-for="(item, index) in holidayResult" class="p-2 border border-black rounded my-3 mx-3 dark:text-black">
+        <div
+          v-for="(item, index) in holidayResult"
+          class="p-2 border border-black rounded my-3 mx-3 dark:text-black"
+        >
           <h3 class="font-extrabold text-nowrap">
             {{ item.name }}
           </h3>
@@ -762,34 +828,160 @@ function formatDate(e: string) {
   )
 }
 
+async function getWebsiteDetail() {
+  const data = await $fetch('/api/getDetailWebsiteGamePs')
+  const dom = new DOMParser().parseFromString(data, 'text/html')
+  const listGame = dom?.querySelectorAll('#main')
+
+  const result = (Array.from(listGame) as any[]).flatMap((item, index) => {
+    const imgBackground =
+      item?.querySelector(
+        '[data-qa="gameBackgroundImage#heroImage"] noscript img'
+      ) || null
+    const nameGame =
+      item?.querySelector('[data-qa="mfe-game-title#name"]') || null
+
+    const publisher =
+      item?.querySelector('[data-qa="mfe-game-title#publisher"]') || null
+
+    const rating =
+      item?.querySelector(
+        '[data-track-click="starRating:selectStarRatingLink"]'
+      ) || null
+    const averageRating = rating?.querySelector(
+      '[data-qa="mfe-game-title#average-rating"]'
+    )
+    const totalRatingCount = rating?.querySelector(
+      '[data-qa="mfe-game-title#rating-count"]'
+    )
+    const product =
+      item?.querySelector('[data-qa="mfe-game-title#productTag0"]') || null
+    const product1 =
+      item?.querySelector('[data-qa="mfe-game-title#productTag1"]') || null
+
+    const online =
+      item?.querySelector([
+        '[data-qa="mfe-compatibility-notices#notices#notice0#compatText"]',
+      ]) || null
+    const player =
+      item?.querySelector(
+        '[data-qa="mfe-compatibility-notices#notices#notice1#compatText"]'
+      ) || null
+    const ratingContentGame =
+      item?.querySelector(
+        '[data-qa="mfe-content-rating#ratingImage"] noscript img'
+      ) || null
+    const descriptionContentGame =
+      item?.querySelector('[data-qa="mfe-content-rating#textDescriptors"]') ||
+      null
+
+    const descriptionGame =
+      item?.querySelector('[data-qa="mfe-game-overview#description"]') || null
+
+    const releaseGame =
+      item?.querySelector(
+        'dl [data-qa="gameInfo#releaseInformation#releaseDate-value"]'
+      ) || null
+
+    const genreGame =
+      item?.querySelector(
+        '[data-qa="gameInfo#releaseInformation#genre-value"] span'
+      ) || null
+
+    const voiceGame =
+      item?.querySelector(
+        '[data-qa="gameInfo#releaseInformation#voice-value"]'
+      ) || null
+    const screenLanguage =
+      item?.querySelector(
+        '[data-qa="gameInfo#releaseInformation#subtitles-value"]'
+      ) || null
+
+    const preOrder =
+      item?.querySelector('[data-qa="mfeCtaMain#cta#action"] span') || null
+
+    return {
+      img: imgBackground?.getAttribute('src') || null,
+      name: nameGame?.innerHTML || null,
+      publisher: publisher?.innerHTML || null,
+      rating: rating
+        ? {
+            average: averageRating?.innerHTML,
+            total: totalRatingCount?.innerHTML,
+          }
+        : null,
+      platform:
+        [product?.innerHTML, product1?.innerHTML].filter(Boolean).length > 0
+          ? [product?.innerHTML, product1?.innerHTML].filter(Boolean)
+          : [],
+      online: online ? true : false,
+      player: player?.innerHTML || null,
+      rating_content_game: {
+        img_rating: ratingContentGame?.getAttribute('src') || null,
+        description: descriptionContentGame?.innerHTML || null,
+      },
+      description_game: descriptionGame?.innerHTML || null,
+      release_game: releaseGame?.innerHTML || null,
+      genre: genreGame?.innerHTML || null,
+      voice: voiceGame?.innerHTML || null,
+      screen_language: screenLanguage?.innerHTML || null,
+      pre_order: preOrder ? true : false,
+    }
+  })
+}
+
+async function getSearchWebsite() {
+  const data = await $fetch('/api/getSearchGame')
+
+  console.log(data, 'iniitem')
+}
+
 async function getWebsite() {
   const data = await $fetch('/api/getWebsiteGamePs')
-  const dom = new DOMParser().parseFromString(data, 'text/html')
-  const listGame = dom?.querySelectorAll('#main section')
-  const sectionSDK = listGame[0].querySelectorAll('section [data-qa="ems-sdk-grid"] div .psw-l-grid')
-  const selectUl = sectionSDK[0]?.querySelectorAll('#main section ul')
-  const resultGame = Array.from(selectUl[0]?.querySelectorAll('li')) as any[]
-  if (!resultGame) {
-    throw new Error('Failed to parse DOM')
-  }
-  const resultItems = (
-    Array.from(resultGame) as any[]
-  ).flatMap((item, index) => {
-    const checkEmpty = item.querySelector(`li [data-qa-index="${index}"]`)
-    if (!checkEmpty) {
-      return false
-    }
-    const img = item.querySelector(`li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art#image"] noscript img`)
-    const name = item.querySelector(`li section [data-qa="ems-sdk-grid#productTile${index}#product-name"]`)?.innerHTML
-    const categoryPS5 = item.querySelector(`li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag0"]`)?.innerHTML
-    const categoryPS4 = item.querySelector(`li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag1"]`)?.innerHTML
-    return {
-      img: img?.src,
-      name,
-      category: [categoryPS5, categoryPS4].filter(Boolean)
-    }
-  }).filter(Boolean)
-  console.log(resultItems, 'iniresultItems')
+  console.log(data, 'inidata')
+  // const dom = new DOMParser().parseFromString(data, 'text/html')
+  // const listGame = await dom?.querySelectorAll('#main section')
+  // console.log(dom, 'inigame')
+
+  // const sectionSDK = listGame[0].querySelectorAll(
+  //   'section [data-qa="ems-sdk-grid"] div .psw-l-grid'
+  // )
+  // const selectUl = sectionSDK[0]?.querySelectorAll('#main section ul')
+  // const resultGame = Array.from(selectUl[0]?.querySelectorAll('li')) as any[]
+
+  // if (!resultGame) {
+  //   throw new Error('Failed to parse DOM')
+  // }
+  // const resultItems = (Array.from(resultGame) as any[])
+  //   .flatMap((item, index) => {
+  //     const checkEmpty = item.querySelector(`li [data-qa-index="${index}"]`)
+  //     if (!checkEmpty) {
+  //       return false
+  //     }
+  //     const img = item.querySelector(
+  //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art#image"] noscript img`
+  //     )
+  //     const name = item.querySelector(
+  //       `li section [data-qa="ems-sdk-grid#productTile${index}#product-name"]`
+  //     )?.innerHTML
+  //     const categoryPS5 = item.querySelector(
+  //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag0"]`
+  //     )?.innerHTML
+  //     const categoryPS4 = item.querySelector(
+  //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag1"]`
+  //     )?.innerHTML
+  //     const id = item.querySelector(
+  //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"]`
+  //     )
+  //     return {
+  //       img: img?.src,
+  //       name,
+  //       platforms: [categoryPS5, categoryPS4].filter(Boolean),
+  //       id: id.href.replace(window.location.origin + '/en-id/product/', ''),
+  //     }
+  //   })
+  //   .filter(Boolean)
+  // console.log(resultItems, 'iniresultItems')
 }
 
 async function getDate() {
@@ -860,9 +1052,14 @@ function handleClose() {
   isModalHolidayResult.value = true
 }
 onMounted(() => {
-  getDate()
-  getWebsite()
+  // getDate()
+  // getWebsiteDetail()
+  // getSearchWebsite()
   nextTick(() => {
+    console.log(import.meta.client)
+    if (import.meta.client) {
+      getWebsite()
+    }
     typeText('mount')
   })
 })
@@ -907,7 +1104,6 @@ onMounted(() => {
 }
 
 @keyframes blink {
-
   from,
   to {
     color: transparent;
@@ -919,7 +1115,6 @@ onMounted(() => {
 }
 
 @-moz-keyframes blink {
-
   from,
   to {
     color: transparent;
@@ -931,7 +1126,6 @@ onMounted(() => {
 }
 
 @-webkit-keyframes blink {
-
   from,
   to {
     color: transparent;
@@ -943,7 +1137,6 @@ onMounted(() => {
 }
 
 @-ms-keyframes blink {
-
   from,
   to {
     color: transparent;
@@ -955,7 +1148,6 @@ onMounted(() => {
 }
 
 @-o-keyframes blink {
-
   from,
   to {
     color: transparent;
