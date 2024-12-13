@@ -227,7 +227,7 @@ create UFormGroup
 <template>
   <div class="form-group">
     <label :for="name">{{ label }}</label>
-    <slot :on-blur="handleBlur" :error="error" />
+    <slot :on-blur="handleBlur" :on-input="handleInput" :on-change="handleChange" :error="error" />
     <p v-if="error" class="text-red-500 text-sm mt-1">{{ error }}</p>
   </div>
 </template>
@@ -239,18 +239,16 @@ export default {
   props: {
     label: {
       type: String,
-      default: '',
+      default: ''
     },
     name: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props) {
     // Inject form errors and events
-    const errors = inject<{ value: { path: string; message: string }[] }>(
-      'form-errors'
-    )
+    const errors = inject<{ value: { path: string; message: string }[] }>('form-errors')
     const formEvents = inject<{
       emit: (event: { type: string; path: string }) => Promise<void>
     }>('form-events')
@@ -273,12 +271,37 @@ export default {
       }
     }
 
+    // Handle input event to clear validation
+    const handleInput = async () => {
+      try {
+        if (formEvents) {
+          await formEvents.emit({ type: 'input', path: props.name })
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    const handleChange = async () => {
+      try {
+        if (formEvents) {
+          await formEvents.emit({ type: 'change', path: props.name })
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
     return {
       error,
       handleBlur,
+      handleInput,
+      handleChange
     }
-  },
+  }
 }
+</script>
+
 </script>
 ```
 
