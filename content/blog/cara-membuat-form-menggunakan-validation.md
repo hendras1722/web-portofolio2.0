@@ -14,7 +14,7 @@ Create component UForm
 </template>
 
 <script lang="ts" setup>
-import { provide, ref, onUnmounted, onMounted } from 'vue'
+import { provide, ref, onUnmounted, onMounted, computed } from 'vue'
 import { useEventBus } from '@vueuse/core'
 
 class FormException extends Error {
@@ -115,23 +115,29 @@ async function performValidation(
   return props.state
 }
 
+const localeData = computed(() => props.state)
+
 async function onSubmit(payload: Event) {
   try {
     if (props.validateOn?.includes('submit')) {
       await performValidation()
     }
-    emits('submit', { ...payload, data: props.state })
+    console.log('Submitting form with state:', props.state)
+    emits('submit', { ...payload, data: localeData })
   } catch (error) {
-    if (!(error instanceof FormException)) {
-      throw error
+    if (error instanceof FormException) {
+      emits('error', {
+        ...payload,
+        errors: errors.value.map((err) => ({
+          ...err,
+          id: inputs.value[err.path],
+        })),
+      })
+    } else {
+      // For other unexpected errors, log or rethrow
+      console.error('Unexpected error during form submission:', error)
+      throw error // Optional: Decide if the error should propagate
     }
-    emits('error', {
-      ...payload,
-      errors: errors.value.map((err) => ({
-        ...err,
-        id: inputs.value[err.path],
-      })),
-    })
   }
 }
 
