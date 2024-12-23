@@ -2,9 +2,11 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   extends: '@nuxt-themes/typography',
+
   build: {
     transpile: ['@vite-pwa/nuxt'],
   },
+
   modules: [
     '@nuxt/ui',
     '@nuxtjs/google-fonts',
@@ -14,16 +16,20 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@vueuse/motion/nuxt',
   ],
+
   runtimeConfig: {
     public: {
       usermail: '',
       passmail: '',
     },
   },
+
   css: ['~/assets/css/font.css'],
+
   colorMode: {
     preference: 'light',
   },
+
   pwa: {
     // mode: 'development',
     strategies: 'generateSW',
@@ -76,16 +82,21 @@ export default defineNuxtConfig({
       navigateFallbackAllowlist: [/^\/$/],
     },
   },
+
   ui: {
     icons: ['ic'],
   },
+
   supabase: {
     // Options
     redirect: false,
   },
+
   googleFonts: {
     families: {
       Poppins: [100, 200, 300, 400, 500, 600, 700, 800, 900],
     },
   },
+
+  compatibilityDate: '2024-12-23',
 })

@@ -2,7 +2,6 @@
   <div class="lg:px-[160px] px-[50px]">
     <UButton
       variant="ghost"
-      color="transparent"
       class="text-[#212020] dark:text-white dark:!bg-[#121212]"
       @click="$router.push('/blog')"
     >
