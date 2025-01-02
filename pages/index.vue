@@ -203,6 +203,7 @@
         />
       </div>
     </div>
+
     <div
       v-show="holidayResult.length > 0 && !isModalHolidayResult"
       id="modal_holiday"
@@ -932,13 +933,10 @@ async function getWebsiteDetail() {
 
 async function getSearchWebsite() {
   const data = await $fetch('/api/getSearchGame')
-
-  console.log(data, 'iniitem')
 }
 
 async function getWebsite() {
   const data = await $fetch('/api/getWebsiteGamePs')
-  console.log(data, 'inidata')
   // const dom = new DOMParser().parseFromString(data, 'text/html')
   // const listGame = await dom?.querySelectorAll('#main section')
   // console.log(dom, 'inigame')
@@ -1031,6 +1029,7 @@ async function getDate() {
       }
     })
   }) as Holiday[]
+
   let month = String(new Date().getMonth() + 1)
   let year = new Date().getFullYear()
 
@@ -1052,11 +1051,11 @@ function handleClose() {
   isModalHolidayResult.value = true
 }
 onMounted(() => {
-  // getDate()
+  getDate()
   // getWebsiteDetail()
   // getSearchWebsite()
   nextTick(() => {
-    console.log(import.meta.client)
+    // console.log(import.meta.client)
     if (import.meta.client) {
       getWebsite()
     }

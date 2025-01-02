@@ -1,7 +1,6 @@
-import { useFetch } from 'nuxt/app'
-
 export default defineEventHandler(async (event) => {
-  const data = await fetch('https://www.tanggalan.com/2024', {
+  const date = new Date().getFullYear()
+  const data = await fetch('https://www.tanggalan.com/' + date, {
     method: 'GET',
   })
   return data.text()
