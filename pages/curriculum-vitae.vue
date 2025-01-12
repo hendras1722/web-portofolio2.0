@@ -1,5 +1,12 @@
 <template>
+
   <div class="flex flex-col min-h-screen my-2" ref="refHtml">
+    <div class="fixed bottom-0 right-0 mr-5 mb-5 h-full z-10" v-if="!route.query.download">
+      <button @click="generatePDF"
+        class="absolute text-nowrap bottom-0 right-0 border rounded-lg  p-5 text-white bg-green-500  shadow-lg">
+        Download PDF
+      </button>
+    </div>
     <div>
       <div>
         <div class="rounded-full bg-[url(~/assets/me.jpg)] w-[200px] h-[200px] bg-cover bg-center mb-5">
@@ -37,7 +44,7 @@
         preparing for application releases and driving continuous improvement.
       </p>
       <div id="tech">
-        <div class="flex items-center gap-2 my-4">
+        <div class="flex items-center gap-2 my-7">
           <div class="w-3.5 ">
             <div class="border-2 rounded border-[#3D3C3C] w-full"></div>
           </div>
@@ -57,7 +64,7 @@
       </div>
 
       <div id="experience">
-        <div class="flex items-center gap-2 my-4">
+        <div class="flex items-center gap-2 my-7">
           <div class="w-3.5 ">
             <div class="border-2 rounded border-[#3D3C3C] w-full"></div>
           </div>
@@ -140,7 +147,7 @@
       </div>
 
       <div id="Education">
-        <div class="flex items-center gap-2 my-4">
+        <div class="flex items-center gap-2 my-7">
           <div class="w-3.5 ">
             <div class="border-2 rounded border-[#3D3C3C] w-full"></div>
           </div>
@@ -206,7 +213,7 @@
       </div>
 
       <div id="Education">
-        <div class="flex items-center gap-2 my-4">
+        <div class="flex items-center gap-2 my-7">
           <div class="w-3.5 ">
             <div class="border-2 rounded border-[#3D3C3C] w-full"></div>
           </div>
@@ -302,7 +309,9 @@
 
     </div>
   </div>
-  <button @click="generatePDF">Download PDF</button>
+
+
+
 </template>
 
 <script setup lang="ts">
@@ -313,6 +322,8 @@ definePageMeta({
 useHead({
   title: 'Curriculum Vitae-Muh Syahendra A',
 })
+
+const route = useRoute()
 
 async function generatePDF() {
 
