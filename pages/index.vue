@@ -194,12 +194,14 @@
           id="me"
           class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
           :src="'/me_sleep.png'"
+          alt="me"
         />
         <img
           v-show="!isDark"
           id="me"
           class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
           :src="'/me.png'"
+          alt="me"
         />
       </div>
     </div>
@@ -231,14 +233,14 @@
           class="bg-white text-black"
           @click="handleClose"
         >
-          <UIcon name="i-ic-baseline-close" class="dark:text-black" />
+          <UIcon name="i-ic-baseline-close" class="dark:text-white" />
         </UButton>
       </div>
-      <div class="dark:text-black">Ada libur bulan ini:</div>
+      <div class="dark:text-white">Ada libur bulan ini:</div>
       <div class="flex flex-nowrap overflow-auto">
         <div
           v-for="(item, index) in holidayResult"
-          class="p-2 border border-black rounded my-3 mx-3 dark:text-black"
+          class="p-2 border border-black rounded my-3 mx-3 dark:text-white"
         >
           <h3 class="font-extrabold text-nowrap">
             {{ item.name }}

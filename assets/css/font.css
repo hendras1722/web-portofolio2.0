@@ -23,3 +23,7 @@ body {
 .custom-family {
   font-family: 'ByteBounce' !important;
 }
+
+html {
+  @apply text-[#3D3C3C];
+}

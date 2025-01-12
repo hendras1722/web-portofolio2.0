@@ -24,7 +24,14 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/css/font.css'],
+  css: ['~/assets/css/font.css', '~/assets/css/tailwinds.css'],
+
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
 
   colorMode: {
     preference: 'light',
