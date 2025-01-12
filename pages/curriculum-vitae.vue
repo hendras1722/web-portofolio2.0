@@ -1,6 +1,20 @@
 <template>
-
   <div class="flex flex-col min-h-screen my-2" ref="refHtml">
+    <div v-if="!route.query.download"
+      class="fixed left-5 top-0 bottom-0 mt-auto mb-auto z-10 flex items-center bg-gray-100 h-fit px-2 py-5 rounded-lg border border-gray-200">
+      <ul>
+        <li class="cursor-pointer mb-5"
+          :class="{ 'font-bold': $i18n.locale === 'en', 'text-gray-200': $i18n.locale === 'id' }"
+          @click="$i18n.locale = 'en'">EN</li>
+        <li>
+          <div class="border border-gray-300 rounded-full w-full"></div>
+        </li>
+        <li class="cursor-pointer mt-5"
+          :class="{ 'font-bold': $i18n.locale === 'id', 'text-gray-200': $i18n.locale === 'en' }"
+          @click="$i18n.locale = 'id'">ID</li>
+      </ul>
+    </div>
+
     <div class="fixed bottom-0 right-0 mr-5 mb-5 h-full z-10" v-if="!route.query.download">
       <button @click="generatePDF"
         class="absolute text-nowrap bottom-0 right-0 border rounded-lg  p-5 text-white bg-green-500  shadow-lg">
@@ -16,15 +30,25 @@
       </div>
       <small>Yogyakarta, 2024</small>
       <div class="text-[12px] font-semibold">
-        Phone: 089663604258
+        {{ $t('me.phone') }}
       </div>
       <div class="text-[12px] font-semibold">
-        Address: Perumahan Griya Pratama Asri 2 No.H-12, Somoragen, Joho, Kec. Prambanan, Kabupaten Klaten, Jawa Tengah
-        57454
+        {{ $t('me.address') }}
       </div>
     </div>
     <div class="mt-5 flex-1">
       <p>
+        {{ $t('description.paragraph_1') }}
+      </p>
+      &nbsp;
+      <p>
+        {{ $t('description.paragraph_2') }}
+
+      </p>
+      &nbsp;
+      <p> {{ $t('description.paragraph_3') }}
+      </p>
+      <!-- <p>
         With over four years of professional experience, I am a dedicated
         Frontend Engineer at PrivyID, passionately committed to crafting
         user-friendly web pages and optimizing application performance. My
@@ -42,7 +66,7 @@
         troubleshooting alongside my colleagues to refine our applications.
         Staying at the forefront of emerging technologies, I play a key role in
         preparing for application releases and driving continuous improvement.
-      </p>
+      </p> -->
       <div id="tech">
         <div class="flex items-center gap-2 my-7">
           <div class="w-3.5 ">
@@ -73,77 +97,152 @@
             <div class="border-2 rounded border-[#3D3C3C] w-full"></div>
           </div>
         </div>
-        <div class="flex items-start relative">
-          <div class="absolute right-0 my-auto top-0  mx-auto flex justify-start items-start h-fit -z-10 opacity-50">
-            <img alt="icon" src="~/assets/privy.png" width="200" />
-          </div>
-          <div>
-            <div class="font-bold">Frontend Engineer</div>
-            <div class="my-1">PrivyID · Full-time</div>
-            <div class="my-1 text-[12px] text-[#3D3C3C]">
-              Jul 2021 - Present · 3 yrs 7 mosJul 2021 to Present · 3 yrs 7 mos
+
+        <div v-if="$i18n.locale === 'id'">
+          <div class=" relative">
+            <div class="absolute right-0 my-auto top-0  mx-auto flex justify-start items-start h-fit -z-10 opacity-50">
+              <img alt="icon" :src="logosDynamic.filter((logo) => logo.src.includes('privy'))?.[0]?.src" width="200" />
             </div>
-            <div class="text-[12px] text-[#3D3C3C]">Daerah Istimewa Yogyakarta, Indonesia · On-site</div>
-            <p>
-              Use mark-up language like HTML to create user-friendly web pages
-            <ul class="list-disc ml-5">
-              <li> Optimize applications for maximum speed</li>
-              <li> Create and implement the
-                design of the UI/UX team</li>
-              <li> Collaborate with back-end developers and
-                web designers to improve quality usability</li>
-              <li> Get feedback form and
-                build solutions for user and customers</li>
-              <li> Help backend developers
-                with coding and troubleshooting</li>
-              <li> Perform UI test to optimize
-                performance</li>
-              <li> fix bugs or problems that occurs during the
-                applications trial process when used</li>
-              <li> Prepare the applications
-                release process</li>
-              <li> stay up to date on emerging technologies</li>
-            </ul>
-            </p>
-          </div>
-        </div>
-        <div class="grid place-items-center my-5">
-          <div class="border-2 rounded border-[#3D3C3C] w-2/3 opacity-25"></div>
-        </div>
-        <div class="flex items-start relative">
-          <div class="absolute right-0 my-auto top-0  mx-auto flex justify-start items-start h-fit -z-10 opacity-50">
-            <img alt="icon" src="~/assets/nashta.jpg" width="200" />
-          </div>
-          <div>
-            <div class="font-bold">Frontend Developer</div>
-            <div class="my-1">PT. NashTa Global Utama · Contract</div>
-            <div class="my-1 text-[12px] text-[#3D3C3C]">
-              Jul 2020 - Jun 2021 · 1 yr
+            <div>
+              <div class="font-bold">Frontend Engineer</div>
+              <div class="my-1">PrivyID · Full-time</div>
+              <div class="my-1 text-[12px] text-[#3D3C3C]">
+                Jul 2021 - Present · 3 yrs 7 mosJul 2021 to Present · 3 yrs 7 mos
+              </div>
+              <div class="text-[12px] text-[#3D3C3C]">Daerah Istimewa Yogyakarta, Indonesia · On-site</div>
+              <p>
+                Gunakan bahasa mark-up seperti HTML untuk membuat halaman web yang ramah pengguna
+              <ul class="list-disc ml-5">
+                <li>Mengoptimalkan aplikasi untuk kecepatan maksimum</li>
+                <li> Create and implement the
+                  design of the UI/UX team</li>
+                <li>Membuat dan mengimplementasikan desain tim UI/UX</li>
+                <li> Dapatkan formulir umpan balik dan membangun solusi untuk pengguna dan pelanggan</li>
+                <li> Membantu pengembang backend dengan pengkodean dan pemecahan masalah</li>
+                <li> Lakukan tes UI untuk mengoptimalkan kinerja</li>
+                <li> memperbaiki bug atau masalah yang terjadi selama proses uji coba aplikasi saat digunakan</li>
+                <li> Mempersiapkan aplikasi proses rilis</li>
+                <li> mengikuti perkembangan teknologi yang sedang berkembang</li>
+              </ul>
+              </p>
             </div>
-            <div class="text-[12px] text-[#3D3C3C]">Depok, Jawa Barat, Indonesia</div>
-            <p>
-              On site Bea Cukai CEISA 4.0.
-            <ul class="list-disc ml-5">
-              <li> Develop module by bea cukai </li>
-              <li> Maintenance Application CEISA </li>
-              <li> Develop module Perijinan, and Manifest bea cukai</li>
-            </ul>
-            </p>
-          </div>
-        </div>
-        <div class="grid place-items-center my-5">
-          <div class="border-2 rounded border-[#3D3C3C] w-2/3 opacity-25"></div>
-        </div>
-        <div class="flex items-start relative">
-          <div>
-            <div class="font-bold">Technical Support Engineer</div>
-            <div class="my-1">PT. Binter Jet Indonesia</div>
-            <div class="my-1 text-[12px] text-[#3D3C3C]">
-              Feb 2019 - Mar 2019 · 2 mos
+
+            <div class="grid place-items-center my-5">
+              <div class="border-2 rounded border-[#3D3C3C] w-2/3 opacity-25"></div>
             </div>
-            <div class="text-[12px] text-[#3D3C3C]">Provinsi Jawa Tengah, Indonesia</div>
+            <div class="flex items-start relative">
+              <div
+                class="absolute right-0 my-auto top-0  mx-auto flex justify-start items-start h-fit -z-10 opacity-50">
+                <img alt="icon" :src="logosDynamic.filter((logo) => logo.src.includes('nashta'))?.[0]?.src"
+                  width="200" />
+              </div>
+              <div>
+                <div class="font-bold">Frontend Developer</div>
+                <div class="my-1">PT. NashTa Global Utama · Contract</div>
+                <div class="my-1 text-[12px] text-[#3D3C3C]">
+                  Jul 2020 - Jun 2021 · 1 yr
+                </div>
+                <div class="text-[12px] text-[#3D3C3C]">Depok, Jawa Barat, Indonesia</div>
+                <p>
+                  Kerja langsung di Bea Cukai CEISA 4.0.
+                <ul class="list-disc ml-5">
+                  <li> Mengembangkan modul oleh bea cukai </li>
+                  <li> Aplikasi Pemeliharaan CEISA </li>
+                  <li> Mengembangkan modul Perijinan, dan Manifes bea cukai</li>
+                </ul>
+                </p>
+              </div>
+            </div>
+            <div class="grid place-items-center my-5">
+              <div class="border-2 rounded border-[#3D3C3C] w-2/3 opacity-25"></div>
+            </div>
+            <div class="flex items-start relative">
+              <div>
+                <div class="font-bold">Technical Support Engineer</div>
+                <div class="my-1">PT. Binter Jet Indonesia</div>
+                <div class="my-1 text-[12px] text-[#3D3C3C]">
+                  Feb 2019 - Mar 2019 · 2 mos
+                </div>
+                <div class="text-[12px] text-[#3D3C3C]">Provinsi Jawa Tengah, Indonesia</div>
+              </div>
+            </div>
+
           </div>
         </div>
+        <div v-else-if="$i18n.locale === 'en'">
+          <div class="flex items-start relative">
+            <div class="absolute right-0 my-auto top-0  mx-auto flex justify-start items-start h-fit -z-10 opacity-50">
+              <img alt="icon" :src="logosDynamic.filter((logo) => logo.src.includes('privy'))?.[0]?.src" width="200" />
+            </div>
+            <div>
+              <div class="font-bold">Frontend Engineer</div>
+              <div class="my-1">PrivyID · Full-time</div>
+              <div class="my-1 text-[12px] text-[#3D3C3C]">
+                Jul 2021 - Present · 3 yrs 7 mosJul 2021 to Present · 3 yrs 7 mos
+              </div>
+              <div class="text-[12px] text-[#3D3C3C]">Daerah Istimewa Yogyakarta, Indonesia · On-site</div>
+              <p>
+                Use mark-up language like HTML to create user-friendly web pages
+              <ul class="list-disc ml-5">
+                <li> Optimize applications for maximum speed</li>
+                <li> Create and implement the
+                  design of the UI/UX team</li>
+                <li> Collaborate with back-end developers and
+                  web designers to improve quality usability</li>
+                <li> Get feedback form and
+                  build solutions for user and customers</li>
+                <li> Help backend developers
+                  with coding and troubleshooting</li>
+                <li> Perform UI test to optimize
+                  performance</li>
+                <li> fix bugs or problems that occurs during the
+                  applications trial process when used</li>
+                <li> Prepare the applications
+                  release process</li>
+                <li> stay up to date on emerging technologies</li>
+              </ul>
+              </p>
+            </div>
+          </div>
+          <div class="grid place-items-center my-5">
+            <div class="border-2 rounded border-[#3D3C3C] w-2/3 opacity-25"></div>
+          </div>
+          <div class="flex items-start relative">
+            <div class="absolute right-0 my-auto top-0  mx-auto flex justify-start items-start h-fit -z-10 opacity-50">
+              <img alt="icon" :src="logosDynamic.filter((logo) => logo.src.includes('nashta'))?.[0]?.src" width="200" />
+            </div>
+            <div>
+              <div class="font-bold">Frontend Developer</div>
+              <div class="my-1">PT. NashTa Global Utama · Contract</div>
+              <div class="my-1 text-[12px] text-[#3D3C3C]">
+                Jul 2020 - Jun 2021 · 1 yr
+              </div>
+              <div class="text-[12px] text-[#3D3C3C]">Depok, Jawa Barat, Indonesia</div>
+              <p>
+                On site Customs CEISA 4.0.
+              <ul class="list-disc ml-5">
+                <li> Develop module by bea cukai </li>
+                <li> Maintenance Application CEISA </li>
+                <li> Develop module Perijinan, and Manifest bea cukai</li>
+              </ul>
+              </p>
+            </div>
+          </div>
+          <div class="grid place-items-center my-5">
+            <div class="border-2 rounded border-[#3D3C3C] w-2/3 opacity-25"></div>
+          </div>
+          <div class="flex items-start relative">
+            <div>
+              <div class="font-bold">Technical Support Engineer</div>
+              <div class="my-1">PT. Binter Jet Indonesia</div>
+              <div class="my-1 text-[12px] text-[#3D3C3C]">
+                Feb 2019 - Mar 2019 · 2 mos
+              </div>
+              <div class="text-[12px] text-[#3D3C3C]">Provinsi Jawa Tengah, Indonesia</div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div id="Education">
@@ -167,7 +266,7 @@
               2020 - 2021
             </div>
             <p>
-              Activities and societies: <br /> - Learn ReactJS, NodeJS, and React Native programming
+              {{ $t('education.arkademy') }}
             </p>
           </div>
         </div>
@@ -187,7 +286,7 @@
               2019 - 2019
             </div>
             <p>
-              Activities and societies: Digital Talent Scholarship class IoT
+              {{ $t('education.itb') }}
             </p>
           </div>
         </div>
@@ -205,8 +304,7 @@
               2014 - 2018
             </div>
             <p>
-              Grade: 3.39 <br />
-              Graduates of Bachelor of Electrical Engineering in Strong Current at Universitas Muhammadiyah Surakarta
+              {{ $t('education.ums') }}
             </p>
           </div>
         </div>
@@ -227,7 +325,7 @@
             <div class="font-bold">CIMB Octo Saver</div>
           </div>
           <div class="text-[12px]">
-            Maintenance landing octo saver
+            {{ $t('project.octo') }}
           </div>
           <div class="border border-black p-1 my-2 rounded-lg w-fit">
             <div class="font-bold text-[10px]">Nuxt</div>
@@ -239,7 +337,8 @@
               Landing Privy</div>
           </div>
           <div class="text-[12px]">
-            Update wording and update needed website privy
+            {{ $t('project.landing_privy') }}
+
           </div>
           <div class="border border-black p-1 my-2 rounded-lg w-fit">
             <div class="font-bold text-[10px]">Nuxt</div>
@@ -251,7 +350,8 @@
               CIMB Credit Card and Personal Loan</div>
           </div>
           <div class="text-[12px]">
-            CIMB app for credit card applications and loan applications
+            {{ $t('project.ccpl') }}
+
           </div>
           <div class="border border-black p-1 my-2 rounded-lg w-fit">
             <div class="font-bold text-[10px]">Nuxt</div>
@@ -263,7 +363,8 @@
               Ronin Dashboard </div>
           </div>
           <div class="text-[12px]">
-            Application privy internal for check log by Application privy orther
+            {{ $t('project.ronin') }}
+
           </div>
           <div class="border border-black p-1 my-2 rounded-lg w-fit">
             <div class="font-bold text-[10px]">Nuxt</div>
@@ -275,7 +376,8 @@
               BNI Regsand </div>
           </div>
           <div class="text-[12px]">
-            Maintenance dashboard and landing for applying credit card bank BNI
+            {{ $t('project.bni') }}
+
           </div>
           <div class="border border-black p-1 my-2 rounded-lg w-fit">
             <div class="font-bold text-[10px]">Nuxt</div>
@@ -287,7 +389,8 @@
               Ceisa 4.0 </div>
           </div>
           <div class="text-[12px]">
-            Application for taxation from customs
+            {{ $t('project.ceisa') }}
+
           </div>
           <div class="border border-black p-1 my-2 rounded-lg w-fit">
             <div class="font-bold text-[10px]">React</div>
@@ -299,7 +402,8 @@
               Alat Monitoring Suhu di Panel Gardu Induk </div>
           </div>
           <div class="text-[12px]">
-            Temperature monitoring device for wonogiri substation panel.
+            {{ $t('project.gardu') }}
+
           </div>
           <div class="border border-black p-1 my-2 rounded-lg w-fit">
             <div class="font-bold text-[10px]">Arduino</div>
@@ -329,7 +433,10 @@ async function generatePDF() {
 
 }
 
+const localePath = useLocalePath()
+
 const logos = ref()
+const logosDynamic = ref<{ src: string }[]>([])
 
 onMounted(async () => {
   logos.value = await Promise.all([
@@ -352,6 +459,10 @@ onMounted(async () => {
     import('@/assets/logo/Brand=typescript.jpg'),
     import('@/assets/logo/Brand=vitejs.jpg'),
     import('@/assets/logo/Brand=vuejs.jpg'),
+  ].map(async (module) => ({ src: (await module).default })))
+  logosDynamic.value = await Promise.all([
+    import('@/assets/privy.png'),
+    import('@/assets/nashta.jpg'),
   ].map(async (module) => ({ src: (await module).default })))
 })
 </script>

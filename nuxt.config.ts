@@ -15,7 +15,17 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
     '@vueuse/motion/nuxt',
+    '@nuxtjs/i18n',
   ],
+  i18n: {
+    strategy: 'prefix',
+    vueI18n: './language.config.ts', // if you are using custom path, default
+    locales: [
+      { code: 'en', iso: 'en-US', name: 'English' },
+      { code: 'id', iso: 'id-ID', name: 'Indonesia' },
+    ],
+    defaultLocale: 'id',
+  },
 
   runtimeConfig: {
     public: {
