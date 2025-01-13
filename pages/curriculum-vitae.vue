@@ -1,17 +1,22 @@
 <template>
   <div class="flex flex-col min-h-screen my-2" ref="refHtml">
     <div v-if="!route.query.download"
-      class="fixed left-5 top-0 bottom-0 mt-auto mb-auto z-10 flex items-center bg-gray-100 h-fit px-2 py-5 rounded-lg border border-gray-200">
+      class="fixed left-5 top-0 bottom-0 mt-auto mb-auto z-10 flex items-center bg-gray-100 h-fit px-2 py-5 rounded-lg border border-gray-200"
+      :style="{ top: `${position.y}px`, left: `${position.x}px` }" @mousedown="startDrag" @touchstart="startDrag">
       <ul>
         <li class="cursor-pointer mb-5"
           :class="{ 'font-bold': $i18n.locale === 'en', 'text-gray-200': $i18n.locale === 'id' }"
-          @click="$i18n.locale = 'en'">EN</li>
+          @click="$i18n.locale = 'en'">
+          EN
+        </li>
         <li>
           <div class="border border-gray-300 rounded-full w-full"></div>
         </li>
         <li class="cursor-pointer mt-5"
           :class="{ 'font-bold': $i18n.locale === 'id', 'text-gray-200': $i18n.locale === 'en' }"
-          @click="$i18n.locale = 'id'">ID</li>
+          @click="$i18n.locale = 'id'">
+          ID
+        </li>
       </ul>
     </div>
 
@@ -48,25 +53,6 @@
       &nbsp;
       <p> {{ $t('description.paragraph_3') }}
       </p>
-      <!-- <p>
-        With over four years of professional experience, I am a dedicated
-        Frontend Engineer at PrivyID, passionately committed to crafting
-        user-friendly web pages and optimizing application performance. My
-        expertise lies in React and Vue, which are the cornerstones of my
-        mission to enhance user experience. PrivyID's culture of innovation
-        resonates with my goal to deliver cutting-edge solutions while
-        contributing diverse perspectives to our dynamic team.
-      </p>
-      &nbsp;
-      <p>
-        Currently, I am focused on implementing the UI/UX team's design vision,
-        collaborating closely with back-end developers to ensure seamless
-        quality and usability. My daily responsibilities include optimizing UI
-        performance, gathering user feedback to inform our solutions, and
-        troubleshooting alongside my colleagues to refine our applications.
-        Staying at the forefront of emerging technologies, I play a key role in
-        preparing for application releases and driving continuous improvement.
-      </p> -->
       <div id="tech">
         <div class="flex items-center gap-2 my-7">
           <div class="w-3.5 ">
@@ -476,4 +462,74 @@ onMounted(async () => {
     import('@/assets/nashta.jpg'),
   ].map(async (module) => ({ src: (await module).default })))
 })
+
+const position = ref({ x: 5, y: 5 }); // Posisi awal elemen
+let isDragging = false;
+let offset = { x: 0, y: 0 };
+
+// Ambil ukuran jendela dan ukuran elemen
+function getWindowBounds(element: any) {
+  const { innerWidth: width, innerHeight: height } = window;
+  const rect = element.getBoundingClientRect(); // Ukuran elemen
+  const margin = 5; // Jarak margin dari tepi layar
+  return {
+    minX: margin,
+    maxX: width - rect.width - margin,
+    minY: margin,
+    maxY: height - rect.height - margin,
+  };
+}
+
+function startDrag(event: any) {
+  event.preventDefault();
+  isDragging = true;
+
+  const clientX = event.type === "touchstart" ? event.touches[0].clientX : event.clientX;
+  const clientY = event.type === "touchstart" ? event.touches[0].clientY : event.clientY;
+
+  offset = {
+    x: clientX - position.value.x,
+    y: clientY - position.value.y,
+  };
+
+  if (event.type === "mousedown") {
+    document.addEventListener("mousemove", onDrag);
+    document.addEventListener("mouseup", stopDrag);
+  } else if (event.type === "touchstart") {
+    document.addEventListener("touchmove", onDrag, { passive: false });
+    document.addEventListener("touchend", stopDrag);
+  }
+}
+
+function onDrag(event: any) {
+  if (isDragging) {
+    event.preventDefault();
+
+    const clientX = event.type === "touchmove" ? event.touches[0].clientX : event.clientX;
+    const clientY = event.type === "touchmove" ? event.touches[0].clientY : event.clientY;
+
+    // Hitung posisi baru
+    const bounds = getWindowBounds(document.querySelector(".fixed"));
+    let newX = clientX - offset.x;
+    let newY = clientY - offset.y;
+
+    // Batasi posisi agar tetap di dalam layar
+    newX = Math.max(bounds.minX, Math.min(newX, bounds.maxX));
+    newY = Math.max(bounds.minY, Math.min(newY, bounds.maxY));
+
+    position.value = { x: newX, y: newY };
+  }
+}
+
+function stopDrag(event: any) {
+  isDragging = false;
+
+  if (event.type === "mouseup") {
+    document.removeEventListener("mousemove", onDrag);
+    document.removeEventListener("mouseup", stopDrag);
+  } else if (event.type === "touchend") {
+    document.removeEventListener("touchmove", onDrag);
+    document.removeEventListener("touchend", stopDrag);
+  }
+}
 </script>
