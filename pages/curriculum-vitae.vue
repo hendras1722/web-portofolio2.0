@@ -481,7 +481,7 @@ function getWindowBounds(element: any) {
 }
 
 function startDrag(event: any) {
-  event.preventDefault();
+  // event.preventDefault();
   isDragging = true;
 
   const clientX = event.type === "touchstart" ? event.touches[0].clientX : event.clientX;
@@ -503,7 +503,7 @@ function startDrag(event: any) {
 
 function onDrag(event: any) {
   if (isDragging) {
-    event.preventDefault();
+    // event.preventDefault();
 
     const clientX = event.type === "touchmove" ? event.touches[0].clientX : event.clientX;
     const clientY = event.type === "touchmove" ? event.touches[0].clientY : event.clientY;
