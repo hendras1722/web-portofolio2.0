@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col min-h-screen my-2" ref="refHtml">
     <div v-if="!route.query.download"
-      class="fixed left-5 top-0 bottom-0 mt-auto mb-auto z-10 flex items-center bg-gray-100 h-fit px-2 py-5 rounded-lg border border-gray-200"
+      class="fixed left-5 z-10 flex items-center bg-gray-100 h-fit px-2 py-5 rounded-lg border border-gray-200"
       :style="{ top: `${position.y}px`, left: `${position.x}px` }" @mousedown="startDrag" @touchstart="startDrag">
       <ul>
         <li class="cursor-pointer mb-5"
@@ -463,7 +463,7 @@ onMounted(async () => {
   ].map(async (module) => ({ src: (await module).default })))
 })
 
-const position = ref({ x: 5, y: 5 }); // Posisi awal elemen
+const position = ref({ x: 12, y: 205 }); // Posisi awal elemen
 let isDragging = false;
 let offset = { x: 0, y: 0 };
 
