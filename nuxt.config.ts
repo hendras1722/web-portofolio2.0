@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
   ],
   i18n: {
-    strategy: 'prefix',
+    strategy: 'prefix_except_default',
     vueI18n: './language.config.ts', // if you are using custom path, default
     locales: [
       { code: 'en', iso: 'en-US', name: 'English' },

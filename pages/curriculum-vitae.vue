@@ -427,10 +427,21 @@ useHead({
   title: 'Curriculum Vitae-Muh Syahendra A',
 })
 
+const { locale } = useI18n();
+
 const route = useRoute()
 
 async function generatePDF() {
-
+  const cv = locale.value === 'en' ? 'cv_syahendra_en.pdf' : 'cv_syahendra_id.pdf'
+  const doc = await fetch('/' + cv).then((res) => res.blob())
+  const file = new Blob([doc], { type: 'application/pdf' })
+  const fileURL = URL.createObjectURL(file)
+  const link = document.createElement('a')
+  link.href = fileURL
+  link.download = cv;
+  link.target = '_blank'
+  link.click()
+  URL.revokeObjectURL(fileURL)
 }
 
 const localePath = useLocalePath()
