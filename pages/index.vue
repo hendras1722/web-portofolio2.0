@@ -32,7 +32,7 @@
                 delay: 500,
               },
             }">
-              &nbsp; The Microphone
+              &nbsp; The Keyboard
             </div>
           </div>
           <!-- <p
