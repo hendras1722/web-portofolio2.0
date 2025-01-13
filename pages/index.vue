@@ -304,8 +304,8 @@ const typeText = (e: string, value?: string) => {
       line5 = ``
     }
     if (e === 'msa cv') {
-      line1 = `click link this <a href="/curriculum-vitae" target="_blank" class="text-blue-600 hover:text-blue-800">Open CV Syahendra</a>`
-      line2 = ''
+      line1 = `click link this, please wait...  \n`
+      line2 = `<button onClick="window.open('/curriculum-vitae')" class="text-blue-500">Click this</button>`
       line3 = ''
       line4 = ''
       line5 = ``
