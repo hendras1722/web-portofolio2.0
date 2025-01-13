@@ -8,42 +8,30 @@
       </ClientOnly>
       <div class="col-span-12">
         <div class="flex justify-center">
-          <div
-            class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[18px] dark:text-white text-nowrap"
-          >
-            <div
-              class="custom-family"
-              v-motion
-              :initial="{
-                x: -500,
-                opacity: 0,
-              }"
-              :enter="{
-                x: 0,
-                opacity: 1,
-                transition: {
-                  delay: 500,
-                },
-              }"
-            >
+          <div class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[18px] dark:text-white text-nowrap">
+            <div class="custom-family" v-motion :initial="{
+              x: -500,
+              opacity: 0,
+            }" :enter="{
+              x: 0,
+              opacity: 1,
+              transition: {
+                delay: 500,
+              },
+            }">
               The Man &nbsp;
             </div>
             <div class="custom-family">Behind</div>
-            <div
-              class="custom-family"
-              v-motion
-              :initial="{
-                x: 500,
-                opacity: 0,
-              }"
-              :enter="{
-                x: 0,
-                opacity: 1,
-                transition: {
-                  delay: 500,
-                },
-              }"
-            >
+            <div class="custom-family" v-motion :initial="{
+              x: 500,
+              opacity: 0,
+            }" :enter="{
+              x: 0,
+              opacity: 1,
+              transition: {
+                delay: 500,
+              },
+            }">
               &nbsp; The Microphone
             </div>
           </div>
@@ -85,39 +73,24 @@
         </div>
       </div>
       <div class="md:col-span-6 col-span-12 md:px-[35px] lg:relative">
-        <div
-          class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] lg:mt-[76px] mt-[34px] overflow-auto"
-          :style="{ background: appConfig.colors['custom-black'][900] }"
-          @click="handleMouseEvent()"
-        >
+        <div class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] lg:mt-[76px] mt-[34px] overflow-auto"
+          :style="{ background: appConfig.colors['custom-black'][900] }" @click="handleMouseEvent()">
           <div v-for="(item, index) in dataTerminal" :key="index">
-            <div
-              v-if="item.html === 'text'"
-              style="white-space: pre-wrap"
-              :style="{ color: appConfig.colors['custom-black'][50] }"
-            >
+            <div v-if="item.html === 'text'" style="white-space: pre-wrap"
+              :style="{ color: appConfig.colors['custom-black'][50] }">
               <span ref="el" class="fontTerminal" />
             </div>
             <div class="flex items-center" v-if="item.html === 'input'">
               <div>
-                <span
-                  class="text-white text-sm flex items-center fontTerminal text-wrap"
-                  style="width: 95px"
-                >
+                <span class="text-white text-sm flex items-center fontTerminal text-wrap" style="width: 95px">
                   {{ item.created_at }} =&#62; $
                 </span>
               </div>
               <div class="text-white">
                 <div class="break-words">
-                  <div
-                    suppressContentEditableWarning
-                    :id="`typing_text${index}`"
-                    contenteditable
-                    ref="editable"
+                  <div suppressContentEditableWarning :id="`typing_text${index}`" contenteditable ref="editable"
                     class="no-underline text-white focus:outline-none fontTerminal min-w-5"
-                    @keydown="handleSubmit($event, { props: item, index })"
-                    @mousedown="handleMouseEvent(index)"
-                  ></div>
+                    @keydown="handleSubmit($event, { props: item, index })" @mousedown="handleMouseEvent(index)"></div>
                 </div>
               </div>
             </div>
@@ -130,10 +103,8 @@
           <SocialIcon />
         </div>
 
-        <div
-          v-if="width < 1041 || width > 1201"
-          class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex absolute"
-        >
+        <div v-if="width < 1041 || width > 1201"
+          class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex absolute">
           2024-PRESENT © Muh Syahendra A
         </div>
       </div>
@@ -141,9 +112,7 @@
         <div class="lg:block md:block hidden relative">
           <div id="container" v-show="isDark">
             <div id="pillow" class="absolute">
-              <div
-                class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl"
-              >
+              <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">
                 Z
               </div>
               <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">
@@ -156,18 +125,9 @@
               <div class="corner bottom-left"></div>
             </div>
           </div>
-          <img
-            v-show="isDark"
-            id="me"
-            class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
-            :src="'/me_sleep.png'"
-          />
-          <img
-            v-show="!isDark"
-            id="me"
-            class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
-            :src="'/me.png'"
-          />
+          <img alt="me" v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
+            :src="'/me_sleep.png'" />
+          <img alt="me" v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" />
         </div>
       </div>
     </div>
@@ -176,9 +136,7 @@
       <div class="lg:hidden md:hidden">
         <div id="container" v-show="isDark">
           <div id="pillow" class="absolute">
-            <div
-              class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl"
-            >
+            <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">
               Z
             </div>
             <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">Z</div>
@@ -189,59 +147,34 @@
             <div class="corner bottom-left"></div>
           </div>
         </div>
-        <img
-          v-show="isDark"
-          id="me"
-          class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
-          :src="'/me_sleep.png'"
-          alt="me"
-        />
-        <img
-          v-show="!isDark"
-          id="me"
-          class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
-          :src="'/me.png'"
-          alt="me"
-        />
+        <img v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me_sleep.png'" alt="me" />
+        <img v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" alt="me" />
       </div>
     </div>
 
-    <div
-      v-show="holidayResult.length > 0 && !isModalHolidayResult"
-      id="modal_holiday"
+    <div v-show="holidayResult.length > 0 && !isModalHolidayResult" id="modal_holiday"
       class="fixed left-0 bottom-0 z-[5] bg-white dark:bg-[#121212] dark:text-white text-black w-full p-10 transition ease delay-150 shadow-2xl shadow-blue-500/50"
       :class="{
         'translate-y-[220px]': isModalHolidayResult,
-      }"
-      v-motion
-      :initial="{
+      }" v-motion :initial="{
         y: 500,
         opacity: 0,
-      }"
-      :enter="{
+      }" :enter="{
         y: 0,
         opacity: 1,
         transition: {
           delay: 500,
           ease: 'easeInOut',
         },
-      }"
-    >
+      }">
       <div class="flex justify-end">
-        <UButton
-          variant="ghost"
-          class="bg-white text-black"
-          @click="handleClose"
-        >
+        <UButton variant="ghost" class="bg-white text-black" @click="handleClose">
           <UIcon name="i-ic-baseline-close" class="dark:text-white" />
         </UButton>
       </div>
       <div class="dark:text-white">Ada libur bulan ini:</div>
       <div class="flex flex-nowrap overflow-auto">
-        <div
-          v-for="(item, index) in holidayResult"
-          class="p-2 border border-black rounded my-3 mx-3 dark:text-white"
-        >
+        <div v-for="(item, index) in holidayResult" class="p-2 border border-black rounded my-3 mx-3 dark:text-white">
           <h3 class="font-extrabold text-nowrap">
             {{ item.name }}
           </h3>
@@ -322,7 +255,7 @@ const typeText = (e: string, value?: string) => {
     if (e === 'msa') {
       line1 = 'usage: <_optional_> msa <_command_>\n'
       line2 =
-        'where <_command_> is one of: \n\t name, age, clear, phone, email, wife\n'
+        'where <_command_> is one of: \n\t name, age, clear, phone, email, wife, cv\n'
       line3 = 'where <_optional_> is: \n\t npm i or npm install'
       line4 = ''
       line5 = ``
@@ -365,6 +298,13 @@ const typeText = (e: string, value?: string) => {
     }
     if (e === 'msa phone') {
       line1 = '6289663604258'
+      line2 = ''
+      line3 = ''
+      line4 = ''
+      line5 = ``
+    }
+    if (e === 'msa cv') {
+      line1 = `click link this <a href="/curriculum-vitae" target="_blank" class="text-blue-600 hover:text-blue-800">Open CV Syahendra</a>`
       line2 = ''
       line3 = ''
       line4 = ''
@@ -727,6 +667,19 @@ function handleSubmit(e: KeyboardEvent, props: any) {
       value
         .toLocaleLowerCase()
         .replace(/^\s{1,}/gm, '')
+        .includes('msa cv')
+    ) {
+      dataTerminal.value.push({
+        html: 'text',
+        created_at: hour + ':' + minute + ':' + second,
+      })
+      typeText('msa cv')
+      return
+    }
+    if (
+      value
+        .toLocaleLowerCase()
+        .replace(/^\s{1,}/gm, '')
         .includes('umur') ||
       value
         .toLocaleLowerCase()
@@ -909,9 +862,9 @@ async function getWebsiteDetail() {
       publisher: publisher?.innerHTML || null,
       rating: rating
         ? {
-            average: averageRating?.innerHTML,
-            total: totalRatingCount?.innerHTML,
-          }
+          average: averageRating?.innerHTML,
+          total: totalRatingCount?.innerHTML,
+        }
         : null,
       platform:
         [product?.innerHTML, product1?.innerHTML].filter(Boolean).length > 0
@@ -1105,6 +1058,7 @@ onMounted(() => {
 }
 
 @keyframes blink {
+
   from,
   to {
     color: transparent;
@@ -1116,6 +1070,7 @@ onMounted(() => {
 }
 
 @-moz-keyframes blink {
+
   from,
   to {
     color: transparent;
@@ -1127,6 +1082,7 @@ onMounted(() => {
 }
 
 @-webkit-keyframes blink {
+
   from,
   to {
     color: transparent;
@@ -1138,6 +1094,7 @@ onMounted(() => {
 }
 
 @-ms-keyframes blink {
+
   from,
   to {
     color: transparent;
@@ -1149,6 +1106,7 @@ onMounted(() => {
 }
 
 @-o-keyframes blink {
+
   from,
   to {
     color: transparent;
