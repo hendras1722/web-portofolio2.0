@@ -6,8 +6,8 @@
     <div class="relative col-span-12 lg:hidden" ref="target">
       <div id="navbar1" class="fixed w-full z-10" :class="[scrollStatus && 'bg-white']">
         <div class="h-[60px] py-[25px] items-center flex justify-between px-[20px]">
-          <div class="font-bold text-2xl">
-            <NuxtLink to="/">MSA</NuxtLink>
+          <div class="font-bold text-2xl ">
+            <NuxtLink to="/"><span class="dark:text-white">MSA</span></NuxtLink>
           </div>
           <div class="flex items-center justify-between w-32">
             <label class="switch switch--mobile ml-3">
@@ -19,7 +19,7 @@
             </label>
             <div>
               <UButton variant="ghost" class="bg-white text-black dark:bg-transparent" @click="openMenu">
-                <UIcon name="i-ic-baseline-dehaze dark:text-white" class="text-2xl" />
+                <UIcon name="i-ic-baseline-dehaze" class="text-2xl  dark:text-white" />
               </UButton>
             </div>
           </div>
@@ -51,7 +51,7 @@
         <div class="h-[119px] py-[32px]">
           <div class="flex justify-between items-center py-[10px]">
             <div class="font-bold text-2xl">
-              <NuxtLink to="/">MSA</NuxtLink>
+              <NuxtLink to="/"><span class="dark:text-white">MSA</span></NuxtLink>
             </div>
             <div class="flex items-center">
               <ul class="flex justify-between">
@@ -154,7 +154,7 @@
         </div>
       </div>
       <div
-        class="lg:absolute bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end lg:text-[22px] text-[14px] text-[#E7E6E6] flex h-[84px]">
+        class="lg:absolute bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end lg:text-[22px] text-[14px] text-[#E7E6E6] flex h-[84px] ">
         2024-PRESENT © Muh Syahendra A
       </div>
     </div>
@@ -234,6 +234,36 @@ useHead({
   ],
 })
 
+onMounted(() => {
+  let installPrompt = null as any;
+  const installButton = document.querySelector("#install");
+
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    installPrompt = event;
+    installButton?.removeAttribute("hidden");
+
+  });
+
+  installButton?.addEventListener("click", async () => {
+    if (!installPrompt) {
+      return;
+    }
+    const result = await installPrompt.prompt();
+    console.log(`Install prompt was: ${result.outcome}`);
+    disableInAppInstallPrompt();
+  });
+
+  function disableInAppInstallPrompt() {
+    installPrompt = null;
+    installButton?.setAttribute("hidden", "");
+  }
+  window.addEventListener("appinstalled", () => {
+    disableInAppInstallPrompt();
+  });
+
+
+})
 const scrollStatus = ref(false)
 
 function handleSwitch() {

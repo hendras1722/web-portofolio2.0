@@ -2,15 +2,13 @@
   <section id="hero">
     <div class="fixed top-0">
       <div
-        class="thumbnail relative bg-[url(/coffee.svg)] w-dvw bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-scroll"
-      >
+        class="thumbnail relative bg-[url(/coffee.svg)] w-dvw bg-no-repeat bg-center lg:h-[801px] h-[450px] bg-cover bg-scroll">
         <div
           class="lg:px-[157px] sm:px-[100px] px-[20px] w-fit h-fit absolute top-12 bottom-0 mx-auto z-[1] right-0 left-0 my-auto text-white"
           style="
             mix-blend-mode: overlay;
             filter: drop-shadow(0px 5px 10px black);
-          "
-        >
+          ">
           <div class="text-white block">
             <p class="text-center font-bold lg:text-[66px] sm:text-[40px]">
               Reading is essential for those who seek to rise above the ordinary
@@ -28,23 +26,17 @@
       </div>
     </div>
   </section>
-
-  <div
-    class="lg:px-[160px] lg:py-[99px] px-[50px] py-[20px] z-[5] relative bg-white mt-[400px] dark:bg-[#121212]"
-    :class="['lg:mt-[800px] md:mt-[394px]']"
-  >
-    <section id="article" class="relative">
+  <div class="lg:px-[160px] lg:py-[99px] px-[50px] py-[20px] z-[5] relative  mt-[400px] dark:bg-[#121212] bg-white"
+    :class="['lg:mt-[800px] md:mt-[394px]'
+    ]">
+    <section id="article" class="relative dark:bg-[#121212 ]">
       <div id="article-content" class="flex justify-between">
         <div>
-          <h2 class="font-semibold lg:text-[61px] text-[30px]">Article</h2>
+          <h2 class="font-semibold lg:text-[61px] text-[30px] dark:text-white">Article </h2>
 
           <ContentList path="/blog" v-slot="{ list }">
-            <p
-              v-for="article in filterList(list)"
-              :key="article._path"
-              class="lg:text-[31px] text-[15px]"
-            >
-              <NuxtLink :to="article._path" class="hover:underline">
+            <p v-for="article in filterList(list)" :key="article._path" class="lg:text-[31px] text-[15px]">
+              <NuxtLink :to="article._path" class="hover:underline dark:text-white">
                 {{ article.title }}
               </NuxtLink>
               <span class="text-[#B1AFB0] ml-2 hover:no-underline">{{
@@ -54,7 +46,7 @@
           </ContentList>
         </div>
         <div class="hidden lg:block">
-          <img src="/handbook.png" />
+          <img src="/handbook.png" alt="handbook" />
         </div>
       </div>
     </section>
@@ -62,19 +54,13 @@
     <section class="mt-[110px] relative" id="package">
       <div id="package-content" class="flex justify-start">
         <div class="mr-[28px] hidden lg:block">
-          <img src="/laptop.png" />
+          <img src="/laptop.png" alt="laptop" />
         </div>
         <div>
-          <h2 class="font-semibold lg:text-[61px] text-[30px]">My Package</h2>
+          <h2 class="font-semibold lg:text-[61px] text-[30px] dark:text-white">My Package</h2>
           <p class="lg:text-[31px] text-[15px]">
-            <NuxtLink
-              :to="item.link"
-              target="_blank"
-              class="hover:underline block w-fit"
-              v-for="(item, index) in packageList"
-              :key="index"
-              >{{ item.name }}</NuxtLink
-            >
+            <NuxtLink :to="item.link" target="_blank" class="hover:underline block w-fit dark:text-white"
+              v-for="(item, index) in packageList" :key="index">{{ item.name }}</NuxtLink>
           </p>
         </div>
       </div>
@@ -83,7 +69,17 @@
 </template>
 
 <script lang="ts" setup>
-import Chat from '~/types/getChat'
+// import Chat from '~/types/getChat'
+
+const colorMode = useColorMode()
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set() {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  },
+})
 
 function filterList(e: any) {
   const newDateList = e.sort(
@@ -167,10 +163,12 @@ onMounted(() => {
   // transform: translateX(-1000px);
   transition: 1s ease-in-out;
 }
+
 #package-content {
   // transform: translateX(-2000px);
   transition: 1s ease-in-out;
 }
+
 .package-animation,
 .article-animation {
   transform: translateX(0px) !important;

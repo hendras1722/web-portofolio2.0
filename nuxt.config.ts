@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  extends: '@nuxt-themes/typography',
 
   build: {
     transpile: ['@vite-pwa/nuxt'],
@@ -71,17 +70,17 @@ export default defineNuxtConfig({
     pwaAssets: {
       config: true,
     },
-    workbox: {
-      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
-      sourcemap: true,
-      navigateFallback: '/',
-      runtimeCaching: [
-        {
-          urlPattern: '/*',
-          handler: 'NetworkFirst', // Memaksa untuk selalu mengambil file terbaru dari jaringan
-        },
-      ],
-    },
+    // workbox: {
+    //   globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+    //   sourcemap: true,
+    //   navigateFallback: '/',
+    //   runtimeCaching: [
+    //     {
+    //       urlPattern: '/*',
+    //       handler: 'NetworkFirst', // Memaksa untuk selalu mengambil file terbaru dari jaringan
+    //     },
+    //   ],
+    // },
     client: {
       installPrompt: true,
     },
