@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/css/font.css', '~/assets/css/tailwinds.css'],
+  css: ['~/assets/css/font.css'],
 
   colorMode: {
     preference: 'light',
