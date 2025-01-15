@@ -1,13 +1,9 @@
 <template>
   <UModal v-model="vModel" fullscreen>
     <div class="w-full flex justify-between p-5">
-      <span class="text-2xl font-bold">Certificate </span>
+      <span class="text-2xl font-bold dark:text-white">Certificate </span>
       <button>
-        <IconClose
-          @click="vModel = false"
-          class="w-10 h-10"
-          :color="(isDark && 'white') || 'black'"
-        />
+        <IconClose @click="vModel = false" class="w-10 h-10" :color="(isDark && 'white') || 'black'" />
       </button>
     </div>
     <slot />

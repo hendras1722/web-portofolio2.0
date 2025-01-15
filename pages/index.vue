@@ -168,7 +168,8 @@
         },
       }">
       <div class="flex justify-end">
-        <UButton variant="ghost" class="bg-white text-black" @click="handleClose">
+        <UButton variant="ghost" class="bg-white text-black dark:bg-transparent hover:!bg-transparent"
+          @click="handleClose">
           <UIcon name="i-ic-baseline-close" class="dark:text-white" />
         </UButton>
       </div>

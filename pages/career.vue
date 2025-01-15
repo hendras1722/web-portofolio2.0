@@ -9,7 +9,7 @@
           {{ item.title }}
         </h2>
         <p
-          class="lg:text-[8vw] text-[10vw] dark:text-[#9e9d9d] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]">
+          class="lg:text-[5vw] text-[10vw] dark:text-[#9e9d9d] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]">
           {{ item.date }}
         </p>
         <p class="font-semibold lg:text-[22px] dark:drop-shadow-md">
@@ -24,7 +24,7 @@
           {{ item.title }}
         </h2>
         <p
-          class="lg:text-[8vw] text-[10vw] dark:text-[#9e9d9d] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]">
+          class="lg:text-[5vw] text-[10vw] dark:text-[#9e9d9d] text-white absolute left-0 right-0 mx-auto flex justify-center w-full -top-4 -z-[1] font-medium drop-shadow-[0_0.5px_0.5px_#464444]">
           {{ item.date }}
         </p>
         <p class="font-semibold lg:text-[22px] dark:text-white">
@@ -46,10 +46,10 @@
         <div class="p-4 flex-auto  w-[calc(100/3)] grid place-items-center shadow-md rounded-lg"
           v-for="(item, index) in projectList" :key="index">
           <img :src="item.img" class="!w-[230px]" alt="project" />
-          <h2 class="font-bold text-nowrap">{{handleTitle(item.img)}}</h2>
-          <small class="flex gap-2 items-center mt-2">Stack:
-            <img v-if="item.img.includes('react')" width="20" src="/react.svg" alt="react" />
-            <img v-else src="/vue.svg" width="20" alt="vue" />
+          <h2 class="font-bold text-nowrap dark:text-white">{{ handleTitle(item.img) }}</h2>
+          <small class="flex gap-2 items-center mt-2 dark:text-white">Stack:
+            <img v-if="item.img.includes('react')" class=" dark:invert" width="20" src="/react.svg" alt="react" />
+            <img v-else src="/vue.svg" width="20" alt="vue" class=" dark:invert" />
           </small>
         </div>
       </div>
@@ -62,7 +62,7 @@
           @click="handleOpenCertificateModal(item.title)">
           <div class="hover:bg-gray-100 p-2 dark:hover:bg-slate-600 rounded-md flex items-center justify-between">
             <div>
-              <h3 class="font-bold text-[3vw]">{{ item.title }}</h3>
+              <h3 class="font-bold text-[3vw] dark:text-white">{{ item.title }}</h3>
               <p class="sm:text-lg text-[12px] text-gray-400">
                 {{ item.date }}
               </p>
@@ -70,9 +70,9 @@
             <div class="text-end">
               <button class="learn-more">
                 <span class="circle" aria-hidden="true">
-                  <span class="icon arrow"></span>
+                  <span class="icon arrow dark:!text-white"></span>
                 </span>
-                <span class="button-text">Open File</span>
+                <span class="button-text dark:!text-white">Open File</span>
               </button>
             </div>
           </div>
@@ -128,13 +128,13 @@ const handleOpenCertificate = (event: string) => {
 const projectList = [{
   img: '/1.vue.png',
   stack: 'vue'
-},{
+}, {
   img: '/2.vue.png',
   stack: 'vue'
-},{
+}, {
   img: '/3.vue.png',
   stack: 'vue'
-},{
+}, {
   img: '/4.vue.png',
   stack: 'vue'
 }, {
@@ -145,20 +145,20 @@ const projectList = [{
   stack: 'react'
 }]
 
-function handleTitle(item: string){
-  if(item.includes('1')){
+function handleTitle(item: string) {
+  if (item.includes('1')) {
     return 'Ronda Indonesia'
   }
-  if(item.includes('2')){
+  if (item.includes('2')) {
     return 'CIMB CCPL'
   }
   if (item.includes('3')) {
     return 'CIMB Octo Saver'
   }
-  if(item.includes('4')){
+  if (item.includes('4')) {
     return 'Ronin Dashboard'
   }
-  if(item.includes('5')){
+  if (item.includes('5')) {
     return 'BNI Regsand'
   }
 }
@@ -343,10 +343,12 @@ button:hover .button-text {
   width: 80px;
   height: 80px;
 }
+
 .lds-roller div {
   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   transform-origin: 40px 40px;
 }
+
 .lds-roller div:after {
   content: ' ';
   display: block;
@@ -357,64 +359,81 @@ button:hover .button-text {
   background: #780109;
   margin: -4px 0 0 -4px;
 }
+
 .lds-roller div:nth-child(1) {
   animation-delay: -0.036s;
 }
+
 .lds-roller div:nth-child(1):after {
   top: 63px;
   left: 63px;
 }
+
 .lds-roller div:nth-child(2) {
   animation-delay: -0.072s;
 }
+
 .lds-roller div:nth-child(2):after {
   top: 68px;
   left: 56px;
 }
+
 .lds-roller div:nth-child(3) {
   animation-delay: -0.108s;
 }
+
 .lds-roller div:nth-child(3):after {
   top: 71px;
   left: 48px;
 }
+
 .lds-roller div:nth-child(4) {
   animation-delay: -0.144s;
 }
+
 .lds-roller div:nth-child(4):after {
   top: 72px;
   left: 40px;
 }
+
 .lds-roller div:nth-child(5) {
   animation-delay: -0.18s;
 }
+
 .lds-roller div:nth-child(5):after {
   top: 71px;
   left: 32px;
 }
+
 .lds-roller div:nth-child(6) {
   animation-delay: -0.216s;
 }
+
 .lds-roller div:nth-child(6):after {
   top: 68px;
   left: 24px;
 }
+
 .lds-roller div:nth-child(7) {
   animation-delay: -0.252s;
 }
+
 .lds-roller div:nth-child(7):after {
   top: 63px;
   left: 17px;
 }
+
 .lds-roller div:nth-child(8) {
   animation-delay: -0.288s;
 }
+
 .lds-roller div:nth-child(8):after {
   top: 56px;
   left: 12px;
 }
+
 .container_scoller {
-  @apply relative flex  overflow-hidden rounded;
+  @apply relative flex overflow-hidden rounded;
   box-shadow: inset 25px 0px 25px -25px rgba(0, 0, 0, 0.136), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.136);
 }
 
@@ -422,6 +441,7 @@ button:hover .button-text {
   @apply flex items-center justify-around text-nowrap gap-5;
   animation: scroll 50s linear infinite;
   animation-play-state: running;
+
   &:hover {
     animation-play-state: paused;
   }
@@ -431,6 +451,7 @@ button:hover .button-text {
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
     transform: translate3d(-1050%, 0, 0);
   }
@@ -440,6 +461,7 @@ button:hover .button-text {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
