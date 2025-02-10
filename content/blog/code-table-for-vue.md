@@ -22,13 +22,6 @@ create file table.vue in /components/table.vue
     </tr>
     <tr v-for="(item, index) in items" :key="'items-' + index">
       <td v-for="field in $props.fields" :key="field.key">
-        <div v-if="!$slots[`cell(${field.label})`]">
-          {{
-            field.key === 'price'
-              ? 'Rp. ' + Number(item[field.key]).toLocaleString('id-ID')
-              : item[field.key]
-          }}
-        </div>
         <slot :name="`cell(${field.label})`" :item="item" v-else />
       </td>
     </tr>
@@ -56,14 +49,6 @@ const props = defineProps({
   class_table: {
     type: String,
     default: '',
-  },
-  total: {
-    type: String,
-    default: '',
-  },
-  refresh: {
-    type: Function,
-    default: () => {},
   },
 })
 </script>
