@@ -1,7 +1,7 @@
 ---
 title: 'Code for vue'
 description: 'Vue'
-date: '2024-03-15'
+date: '2025-02-10'
 ---
 
 <!-- Content of the page -->
