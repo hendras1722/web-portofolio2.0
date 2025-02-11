@@ -22,7 +22,7 @@ create file table.vue in /components/table.vue
     </tr>
     <tr v-for="(item, index) in items" :key="'items-' + index">
       <td v-for="field in $props.fields" :key="field.key">
-        <slot :name="`cell(${field.label})`" :item="item" v-else />
+        <slot :name="`cell(${field.key})`" :item="item" v-else />
       </td>
     </tr>
   </table>
