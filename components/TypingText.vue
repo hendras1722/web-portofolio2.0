@@ -1,28 +1,23 @@
 <template>
   <div class="hello flex justify-center lg:mb-[40px]">
     <div
-      class="custom-family w-[1600px] min-h-[80px] lg:text-center md:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535] dark:text-white"
-    >
-      <div
-        v-motion
-        :initial="{
+      class="custom-family w-[1600px] min-h-[80px] lg:text-center md:text-center text-left md:text-[86px] text-[31px] lg:font-semibold font-bold text-[#363535] dark:text-white">
+      <div v-motion :initial="{
           y: -500,
           opacity: 0,
-        }"
-        :enter="{
+        }" :enter="{
           y: 0,
           opacity: 1,
           transition: {
             delay: 200,
           },
-        }"
-      >
+        }">
         Hello I’m Muh Syahendra A
       </div>
       <span v-if="ClientOnlyRef">
         {{ typeValue }}
       </span>
-      <span class="blinking-cursor md:text-[86px] text-[31px] dark:text-white">
+      <span class="blinking-cursor md:text-[86px] text-[31px] dark:text-white animate-ping delay-150 ease-in-out">
         |
       </span>
     </div>

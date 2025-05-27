@@ -41,7 +41,7 @@
         </div>
       </div>
       <div v-show="isMenuOpen"
-        class="top-0 fixed bg-white w-full px-6 pb-6 pt-[50px] shadow-[0px_10px_10px_-8px_rgba(49,46,46,0.77)] z-20 -5 dark:bg-[#121212]"
+        class="top-0 fixed left-2 bg-white w-[calc(100vw-20px)] rounded-xl mt-3 px-6 pb-6 pt-[50px] shadow-[0px_10px_10px_0px_rgba(49,46,46,0.77)] z-20 -5 dark:bg-[#121212]"
         id="navbar-mobile" ref="target">
         <div class="absolute top-0 right-0 mr-6 mt-3">
           <UButton variant="ghost" class="bg-white text-black" @click="closeMenu">
@@ -169,7 +169,7 @@
               <div class="mt-3 text-[36px] font-semibold text-[#E7E6E6]">
                 Find Me
               </div>
-              <SocialIcon />
+              <SocialIcon :isMobile="-200"/>
             </div>
           </div>
         </div>
@@ -385,6 +385,17 @@ function openMenu() {
 function closeMenu() {
   isMenuOpen.value = false
 }
+
+watchEffect(() => {
+  const date = new Date().getHours()
+  const pm = date >= 16 && date < 5
+  // const am = date >= 0 && date < 12
+  if(pm){
+    isDark.value = true
+  } else {
+    isDark.value = false
+  }
+})
 </script>
 
 <style lang="scss" setup>
