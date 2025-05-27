@@ -72,8 +72,8 @@
           </p> -->
         </div>
       </div>
-      <div class="md:col-span-6 col-span-12 md:px-[35px] lg:relative">
-        <div class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] lg:mt-[76px] mt-[34px] overflow-auto"
+      <div class="md:col-span-5 col-span-12 col-start-7 md:px-[35px]  !h-fit  hidden md:flex">
+        <!-- <div class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] lg:mt-[76px] mt-[34px] overflow-auto"
           :style="{ background: appConfig.colors['custom-black'][900] }" @click="handleMouseEvent()">
           <div v-for="(item, index) in dataTerminal" :key="index">
             <div v-if="item.html === 'text'" style="white-space: pre-wrap"
@@ -95,20 +95,35 @@
               </div>
             </div>
           </div>
-        </div>
-        <div>
+        </div> -->
+        <div class="absolute bottom-0">
+          Hari libur bulan ini:
+          <div
+            class="mb-20 py-1 px-1 rounded-lg flex gap-5 items-center  w-[700px] overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none">
+            <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
+              <div class="shadow-lg border border-black/10 rounded p-2 h-fit ">
+                <div>{{ item.name }}</div>
+                <div>{{ item.date }}</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            free to contact me <UButton @click="() => $router.push('/curriculum-vitae')" variant="solid" color="green"
+              size="xl" class="text-center w-fit ml-2">View
+              Resume</UButton>
+          </div>
           <div class="mt-3 text-[16px] font-semibold text-[#464444]">
             Find Me
           </div>
           <SocialIcon />
+          <div v-if="width < 1041 || width > 1201"
+            class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex">
+            2024-PRESENT © Muh Syahendra A
+          </div>
         </div>
 
-        <div v-if="width < 1041 || width > 1201"
-          class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex absolute">
-          2024-PRESENT © Muh Syahendra A
-        </div>
       </div>
-      <div class="col-span-6 col-start-7 flex justify-end">
+      <div class="col-span-5 col-start-7  justify-end sticky bottom-0 hidden lg:flex">
         <div class="lg:block md:block hidden relative">
           <div id="container" v-show="isDark">
             <div id="pillow" class="absolute">
@@ -125,15 +140,16 @@
               <div class="corner bottom-left"></div>
             </div>
           </div>
-          <img alt="me" v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit"
-            :src="'/me_sleep.png'" />
-          <img alt="me" v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" />
+          <img alt="me" v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-[395px]"
+            :src="useAsset('me_sleep.png')" />
+          <img alt="me" v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-[395px]"
+            :src="useAsset('me.png')" />
         </div>
       </div>
     </div>
 
     <div>
-      <div class="lg:hidden md:hidden">
+      <div class="lg:hidden hidden">
         <div id="container" v-show="isDark">
           <div id="pillow" class="absolute">
             <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">
@@ -147,12 +163,28 @@
             <div class="corner bottom-left"></div>
           </div>
         </div>
-        <img v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me_sleep.png'" alt="me" />
-        <img v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="'/me.png'" alt="me" />
+        <img v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="useAsset('me_sleep.png')"
+          alt="me" />
+        <img v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="useAsset('me.png')"
+          alt="me" />
+      </div>
+      <div class="absolute bottom-16 left-0 ml-auto mr-auto right-0 lg:hidden">
+        <div class=" grid place-items-center mb-16">
+          <div class="w-[240px]">
+            <SocialIcon :isMobile="-70" />
+          </div>
+
+        </div>
+
+        <div class="lg:hidden flex justify-center items-center">
+          <UButton @click="() => $router.push('/curriculum-vitae')" variant="solid" color="green" size="xl"
+            class="text-center w-fit">View Resume</UButton>
+
+        </div>
       </div>
     </div>
 
-    <div v-show="holidayResult.length > 0 && !isModalHolidayResult" id="modal_holiday"
+    <!-- <div v-show="holidayResult.length > 0 && !isModalHolidayResult" id="modal_holiday"
       class="fixed left-0 bottom-0 z-[5] bg-white dark:bg-[#121212] dark:text-white text-black w-full p-10 transition ease delay-150 shadow-2xl shadow-blue-500/50"
       :class="{
         'translate-y-[220px]': isModalHolidayResult,
@@ -182,13 +214,14 @@
           <p>{{ formatDate(item.date) }}</p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script lang="ts" setup>
 import { Typed } from '@/utils/typed'
 import { useWindowSize } from '@vueuse/core'
+import useAsset from '~/composable/use-assets'
 
 interface Holiday {
   date: string
@@ -532,228 +565,228 @@ const typeText = (e: string, value?: string) => {
   type()
 }
 
-function handleSubmit(e: KeyboardEvent, props: any) {
-  let value = null
+// function handleSubmit(e: KeyboardEvent, props: any) {
+//   let value = null
 
-  const typing_text = document.getElementById(`typing_text${props.index}`)
-  const second =
-    new Date().getSeconds() <= 9
-      ? '0' + new Date().getSeconds()
-      : '' + new Date().getSeconds()
-  const minute =
-    new Date().getMinutes() <= 9
-      ? '0' + new Date().getMinutes()
-      : '' + new Date().getMinutes()
-  const hour =
-    new Date().getHours() <= 9
-      ? '0' + new Date().getHours()
-      : '' + new Date().getHours()
+//   const typing_text = document.getElementById(`typing_text${props.index}`)
+//   const second =
+//     new Date().getSeconds() <= 9
+//       ? '0' + new Date().getSeconds()
+//       : '' + new Date().getSeconds()
+//   const minute =
+//     new Date().getMinutes() <= 9
+//       ? '0' + new Date().getMinutes()
+//       : '' + new Date().getMinutes()
+//   const hour =
+//     new Date().getHours() <= 9
+//       ? '0' + new Date().getHours()
+//       : '' + new Date().getHours()
 
-  let charCode = e.keyCode || e.which
-  value = typing_text?.innerText.replace(/\n/gm, '')
+//   let charCode = e.keyCode || e.which
+//   value = typing_text?.innerText.replace(/\n/gm, '')
 
-  if (!typing_text) return
+//   if (!typing_text) return
 
-  if (charCode === 13 || e.key == 'Enter' || e.code == 'Enter') {
-    e.preventDefault()
-    value = typing_text?.innerText.replace(/\n/gm, '')
+//   if (charCode === 13 || e.key == 'Enter' || e.code == 'Enter') {
+//     e.preventDefault()
+//     value = typing_text?.innerText.replace(/\n/gm, '')
 
-    const input = document.createElement('input')
-    input.value = typing_text.innerHTML
+//     const input = document.createElement('input')
+//     input.value = typing_text.innerHTML
 
-    container_typing?.scrollTo({
-      left: 0,
-      top: container_typing?.scrollHeight,
-      behavior: 'smooth',
-    })
+//     container_typing?.scrollTo({
+//       left: 0,
+//       top: container_typing?.scrollHeight,
+//       behavior: 'smooth',
+//     })
 
-    typing_text.setAttribute('contentEditable', 'false')
-    typing_text.blur()
+//     typing_text.setAttribute('contentEditable', 'false')
+//     typing_text.blur()
 
-    if (!value) {
-      dataTerminal.value.push({
-        html: 'input',
-        created_at: hour + ':' + minute + ':' + second,
-      })
+//     if (!value) {
+//       dataTerminal.value.push({
+//         html: 'input',
+//         created_at: hour + ':' + minute + ':' + second,
+//       })
 
-      typing_text.focus()
-      return
-    }
+//       typing_text.focus()
+//       return
+//     }
 
-    if (value.toLocaleLowerCase().includes('npm')) {
-      if (value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm') {
-        dataTerminal.value.push({
-          html: 'text',
-          created_at: hour + ':' + minute + ':' + second,
-        })
-        typeText('npm list', "'npm i msa'")
-        typing_text.focus()
-        return
-      }
-      if (
-        value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm i' ||
-        value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm install' ||
-        value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm i msa' ||
-        value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm install msa'
-      ) {
-        dataTerminal.value.push({
-          html: 'text',
-          created_at: hour + ':' + minute + ':' + second,
-        })
-        typeText('npm')
-        typing_text.focus()
+//     if (value.toLocaleLowerCase().includes('npm')) {
+//       if (value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm') {
+//         dataTerminal.value.push({
+//           html: 'text',
+//           created_at: hour + ':' + minute + ':' + second,
+//         })
+//         typeText('npm list', "'npm i msa'")
+//         typing_text.focus()
+//         return
+//       }
+//       if (
+//         value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm i' ||
+//         value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm install' ||
+//         value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm i msa' ||
+//         value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm install msa'
+//       ) {
+//         dataTerminal.value.push({
+//           html: 'text',
+//           created_at: hour + ':' + minute + ':' + second,
+//         })
+//         typeText('npm')
+//         typing_text.focus()
 
-        if (container_typing)
-          container_typing.scrollTo({
-            left: 0,
-            top: container_typing.scrollHeight,
-            behavior: 'smooth',
-          })
-      } else {
-        const textsplit = value.toLocaleLowerCase().split(' ')
+//         if (container_typing)
+//           container_typing.scrollTo({
+//             left: 0,
+//             top: container_typing.scrollHeight,
+//             behavior: 'smooth',
+//           })
+//       } else {
+//         const textsplit = value.toLocaleLowerCase().split(' ')
 
-        dataTerminal.value.push({
-          html: 'text',
-          created_at: hour + ':' + minute + ':' + second,
-        })
-        typeText('npm not', textsplit[textsplit.length - 1])
-        typing_text.focus()
-      }
-      return
-    }
-    if (
-      value
-        .toLocaleLowerCase()
-        .replace(/^\s{1,}/gm, '')
-        .includes('msa name') ||
-      value
-        ?.toLocaleLowerCase()
-        .replace(/^\s{1,}/gm, '')
-        .includes('my name')
-    ) {
-      dataTerminal.value.push({
-        html: 'text',
-        created_at: hour + ':' + minute + ':' + second,
-      })
-      typeText('msa name')
-      return
-    }
-    if (
-      value
-        .toLocaleLowerCase()
-        .replace(/^\s{1,}/gm, '')
-        .includes('msa phone')
-    ) {
-      dataTerminal.value.push({
-        html: 'text',
-        created_at: hour + ':' + minute + ':' + second,
-      })
-      typeText('msa phone')
-      return
-    }
-    if (
-      value
-        .toLocaleLowerCase()
-        .replace(/^\s{1,}/gm, '')
-        .includes('msa wife')
-    ) {
-      dataTerminal.value.push({
-        html: 'text',
-        created_at: hour + ':' + minute + ':' + second,
-      })
-      typeText('msa wife')
-      return
-    }
-    if (
-      value
-        .toLocaleLowerCase()
-        .replace(/^\s{1,}/gm, '')
-        .includes('msa cv')
-    ) {
-      dataTerminal.value.push({
-        html: 'text',
-        created_at: hour + ':' + minute + ':' + second,
-      })
-      typeText('msa cv')
-      return
-    }
-    if (
-      value
-        .toLocaleLowerCase()
-        .replace(/^\s{1,}/gm, '')
-        .includes('umur') ||
-      value
-        .toLocaleLowerCase()
-        .replace(/^\s{1,}/gm, '')
-        .includes('msa age')
-    ) {
-      dataTerminal.value.push({
-        html: 'text',
-        created_at: hour + ':' + minute + ':' + second,
-      })
-      typeText('msa age')
-      return
-    }
-    if (
-      value
-        .toLocaleLowerCase()
-        .replace(/^\s{1,}/gm, '')
-        .includes('msa clear')
-    ) {
-      dataTerminal.value.push({
-        html: 'input',
-        created_at: hour + ':' + minute + ':' + second,
-      })
-      return
-    }
+//         dataTerminal.value.push({
+//           html: 'text',
+//           created_at: hour + ':' + minute + ':' + second,
+//         })
+//         typeText('npm not', textsplit[textsplit.length - 1])
+//         typing_text.focus()
+//       }
+//       return
+//     }
+//     if (
+//       value
+//         .toLocaleLowerCase()
+//         .replace(/^\s{1,}/gm, '')
+//         .includes('msa name') ||
+//       value
+//         ?.toLocaleLowerCase()
+//         .replace(/^\s{1,}/gm, '')
+//         .includes('my name')
+//     ) {
+//       dataTerminal.value.push({
+//         html: 'text',
+//         created_at: hour + ':' + minute + ':' + second,
+//       })
+//       typeText('msa name')
+//       return
+//     }
+//     if (
+//       value
+//         .toLocaleLowerCase()
+//         .replace(/^\s{1,}/gm, '')
+//         .includes('msa phone')
+//     ) {
+//       dataTerminal.value.push({
+//         html: 'text',
+//         created_at: hour + ':' + minute + ':' + second,
+//       })
+//       typeText('msa phone')
+//       return
+//     }
+//     if (
+//       value
+//         .toLocaleLowerCase()
+//         .replace(/^\s{1,}/gm, '')
+//         .includes('msa wife')
+//     ) {
+//       dataTerminal.value.push({
+//         html: 'text',
+//         created_at: hour + ':' + minute + ':' + second,
+//       })
+//       typeText('msa wife')
+//       return
+//     }
+//     if (
+//       value
+//         .toLocaleLowerCase()
+//         .replace(/^\s{1,}/gm, '')
+//         .includes('msa cv')
+//     ) {
+//       dataTerminal.value.push({
+//         html: 'text',
+//         created_at: hour + ':' + minute + ':' + second,
+//       })
+//       typeText('msa cv')
+//       return
+//     }
+//     if (
+//       value
+//         .toLocaleLowerCase()
+//         .replace(/^\s{1,}/gm, '')
+//         .includes('umur') ||
+//       value
+//         .toLocaleLowerCase()
+//         .replace(/^\s{1,}/gm, '')
+//         .includes('msa age')
+//     ) {
+//       dataTerminal.value.push({
+//         html: 'text',
+//         created_at: hour + ':' + minute + ':' + second,
+//       })
+//       typeText('msa age')
+//       return
+//     }
+//     if (
+//       value
+//         .toLocaleLowerCase()
+//         .replace(/^\s{1,}/gm, '')
+//         .includes('msa clear')
+//     ) {
+//       dataTerminal.value.push({
+//         html: 'input',
+//         created_at: hour + ':' + minute + ':' + second,
+//       })
+//       return
+//     }
 
-    if (value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === '') {
-      dataTerminal.value.push({
-        html: 'input',
-        created_at: hour + ':' + minute + ':' + second,
-      })
-      return
-    }
+//     if (value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === '') {
+//       dataTerminal.value.push({
+//         html: 'input',
+//         created_at: hour + ':' + minute + ':' + second,
+//       })
+//       return
+//     }
 
-    if (value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'msa') {
-      dataTerminal.value.push({
-        html: 'text',
-        created_at: hour + ':' + minute + ':' + second,
-      })
-      typeText('msa')
-      return
-    }
+//     if (value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'msa') {
+//       dataTerminal.value.push({
+//         html: 'text',
+//         created_at: hour + ':' + minute + ':' + second,
+//       })
+//       typeText('msa')
+//       return
+//     }
 
-    dataTerminal.value.push({
-      html: 'text',
-      created_at: hour + ':' + minute + ':' + second,
-    })
-    typeText('not found')
-  }
-}
+//     dataTerminal.value.push({
+//       html: 'text',
+//       created_at: hour + ':' + minute + ':' + second,
+//     })
+//     typeText('not found')
+//   }
+// }
 
-function handleMouseEvent(e?: number) {
-  const typing_text = document.getElementById(
-    `typing_text${e ? e : dataTerminal.value.length - 1}`
-  )
-  const container_typing = document.getElementById('container_typing')
+// function handleMouseEvent(e?: number) {
+//   const typing_text = document.getElementById(
+//     `typing_text${e ? e : dataTerminal.value.length - 1}`
+//   )
+//   const container_typing = document.getElementById('container_typing')
 
-  if (!typing_text) return
-  if (container_typing) {
-    typing_text.focus()
-  }
-  if (typing_text) {
-    typing_text.focus()
-  }
-  return
-}
-const typeValue = ref('')
-const displayTextArray = ref([
-  ' Hello I’m Muh Syahendra A a Software Engineer And UI Designer',
-])
-const displayTextArrayIndex = ref(0)
-const charIndex = ref(0)
-const typingSpeed = 100
+//   if (!typing_text) return
+//   if (container_typing) {
+//     typing_text.focus()
+//   }
+//   if (typing_text) {
+//     typing_text.focus()
+//   }
+//   return
+// }
+// const typeValue = ref('')
+// const displayTextArray = ref([
+//   ' Hello I’m Muh Syahendra A a Software Engineer And UI Designer',
+// ])
+// const displayTextArrayIndex = ref(0)
+// const charIndex = ref(0)
+// const typingSpeed = 100
 
 // function typeTextTitle() {
 //   typeValue.value += displayTextArray.value[displayTextArrayIndex.value].charAt(
@@ -785,158 +818,158 @@ function formatDate(e: string) {
   )
 }
 
-async function getWebsiteDetail() {
-  const data = await $fetch('/api/getDetailWebsiteGamePs')
-  const dom = new DOMParser().parseFromString(data, 'text/html')
-  const listGame = dom?.querySelectorAll('#main')
+// async function getWebsiteDetail() {
+//   const data = await $fetch('/api/getDetailWebsiteGamePs')
+//   const dom = new DOMParser().parseFromString(data, 'text/html')
+//   const listGame = dom?.querySelectorAll('#main')
 
-  const result = (Array.from(listGame) as any[]).flatMap((item, index) => {
-    const imgBackground =
-      item?.querySelector(
-        '[data-qa="gameBackgroundImage#heroImage"] noscript img'
-      ) || null
-    const nameGame =
-      item?.querySelector('[data-qa="mfe-game-title#name"]') || null
+//   const result = (Array.from(listGame) as any[]).flatMap((item, index) => {
+//     const imgBackground =
+//       item?.querySelector(
+//         '[data-qa="gameBackgroundImage#heroImage"] noscript img'
+//       ) || null
+//     const nameGame =
+//       item?.querySelector('[data-qa="mfe-game-title#name"]') || null
 
-    const publisher =
-      item?.querySelector('[data-qa="mfe-game-title#publisher"]') || null
+//     const publisher =
+//       item?.querySelector('[data-qa="mfe-game-title#publisher"]') || null
 
-    const rating =
-      item?.querySelector(
-        '[data-track-click="starRating:selectStarRatingLink"]'
-      ) || null
-    const averageRating = rating?.querySelector(
-      '[data-qa="mfe-game-title#average-rating"]'
-    )
-    const totalRatingCount = rating?.querySelector(
-      '[data-qa="mfe-game-title#rating-count"]'
-    )
-    const product =
-      item?.querySelector('[data-qa="mfe-game-title#productTag0"]') || null
-    const product1 =
-      item?.querySelector('[data-qa="mfe-game-title#productTag1"]') || null
+//     const rating =
+//       item?.querySelector(
+//         '[data-track-click="starRating:selectStarRatingLink"]'
+//       ) || null
+//     const averageRating = rating?.querySelector(
+//       '[data-qa="mfe-game-title#average-rating"]'
+//     )
+//     const totalRatingCount = rating?.querySelector(
+//       '[data-qa="mfe-game-title#rating-count"]'
+//     )
+//     const product =
+//       item?.querySelector('[data-qa="mfe-game-title#productTag0"]') || null
+//     const product1 =
+//       item?.querySelector('[data-qa="mfe-game-title#productTag1"]') || null
 
-    const online =
-      item?.querySelector([
-        '[data-qa="mfe-compatibility-notices#notices#notice0#compatText"]',
-      ]) || null
-    const player =
-      item?.querySelector(
-        '[data-qa="mfe-compatibility-notices#notices#notice1#compatText"]'
-      ) || null
-    const ratingContentGame =
-      item?.querySelector(
-        '[data-qa="mfe-content-rating#ratingImage"] noscript img'
-      ) || null
-    const descriptionContentGame =
-      item?.querySelector('[data-qa="mfe-content-rating#textDescriptors"]') ||
-      null
+//     const online =
+//       item?.querySelector([
+//         '[data-qa="mfe-compatibility-notices#notices#notice0#compatText"]',
+//       ]) || null
+//     const player =
+//       item?.querySelector(
+//         '[data-qa="mfe-compatibility-notices#notices#notice1#compatText"]'
+//       ) || null
+//     const ratingContentGame =
+//       item?.querySelector(
+//         '[data-qa="mfe-content-rating#ratingImage"] noscript img'
+//       ) || null
+//     const descriptionContentGame =
+//       item?.querySelector('[data-qa="mfe-content-rating#textDescriptors"]') ||
+//       null
 
-    const descriptionGame =
-      item?.querySelector('[data-qa="mfe-game-overview#description"]') || null
+//     const descriptionGame =
+//       item?.querySelector('[data-qa="mfe-game-overview#description"]') || null
 
-    const releaseGame =
-      item?.querySelector(
-        'dl [data-qa="gameInfo#releaseInformation#releaseDate-value"]'
-      ) || null
+//     const releaseGame =
+//       item?.querySelector(
+//         'dl [data-qa="gameInfo#releaseInformation#releaseDate-value"]'
+//       ) || null
 
-    const genreGame =
-      item?.querySelector(
-        '[data-qa="gameInfo#releaseInformation#genre-value"] span'
-      ) || null
+//     const genreGame =
+//       item?.querySelector(
+//         '[data-qa="gameInfo#releaseInformation#genre-value"] span'
+//       ) || null
 
-    const voiceGame =
-      item?.querySelector(
-        '[data-qa="gameInfo#releaseInformation#voice-value"]'
-      ) || null
-    const screenLanguage =
-      item?.querySelector(
-        '[data-qa="gameInfo#releaseInformation#subtitles-value"]'
-      ) || null
+//     const voiceGame =
+//       item?.querySelector(
+//         '[data-qa="gameInfo#releaseInformation#voice-value"]'
+//       ) || null
+//     const screenLanguage =
+//       item?.querySelector(
+//         '[data-qa="gameInfo#releaseInformation#subtitles-value"]'
+//       ) || null
 
-    const preOrder =
-      item?.querySelector('[data-qa="mfeCtaMain#cta#action"] span') || null
+//     const preOrder =
+//       item?.querySelector('[data-qa="mfeCtaMain#cta#action"] span') || null
 
-    return {
-      img: imgBackground?.getAttribute('src') || null,
-      name: nameGame?.innerHTML || null,
-      publisher: publisher?.innerHTML || null,
-      rating: rating
-        ? {
-          average: averageRating?.innerHTML,
-          total: totalRatingCount?.innerHTML,
-        }
-        : null,
-      platform:
-        [product?.innerHTML, product1?.innerHTML].filter(Boolean).length > 0
-          ? [product?.innerHTML, product1?.innerHTML].filter(Boolean)
-          : [],
-      online: online ? true : false,
-      player: player?.innerHTML || null,
-      rating_content_game: {
-        img_rating: ratingContentGame?.getAttribute('src') || null,
-        description: descriptionContentGame?.innerHTML || null,
-      },
-      description_game: descriptionGame?.innerHTML || null,
-      release_game: releaseGame?.innerHTML || null,
-      genre: genreGame?.innerHTML || null,
-      voice: voiceGame?.innerHTML || null,
-      screen_language: screenLanguage?.innerHTML || null,
-      pre_order: preOrder ? true : false,
-    }
-  })
-}
+//     return {
+//       img: imgBackground?.getAttribute('src') || null,
+//       name: nameGame?.innerHTML || null,
+//       publisher: publisher?.innerHTML || null,
+//       rating: rating
+//         ? {
+//           average: averageRating?.innerHTML,
+//           total: totalRatingCount?.innerHTML,
+//         }
+//         : null,
+//       platform:
+//         [product?.innerHTML, product1?.innerHTML].filter(Boolean).length > 0
+//           ? [product?.innerHTML, product1?.innerHTML].filter(Boolean)
+//           : [],
+//       online: online ? true : false,
+//       player: player?.innerHTML || null,
+//       rating_content_game: {
+//         img_rating: ratingContentGame?.getAttribute('src') || null,
+//         description: descriptionContentGame?.innerHTML || null,
+//       },
+//       description_game: descriptionGame?.innerHTML || null,
+//       release_game: releaseGame?.innerHTML || null,
+//       genre: genreGame?.innerHTML || null,
+//       voice: voiceGame?.innerHTML || null,
+//       screen_language: screenLanguage?.innerHTML || null,
+//       pre_order: preOrder ? true : false,
+//     }
+//   })
+// }
 
-async function getSearchWebsite() {
-  const data = await $fetch('/api/getSearchGame')
-}
+// async function getSearchWebsite() {
+//   const data = await $fetch('/api/getSearchGame')
+// }
 
-async function getWebsite() {
-  const data = await $fetch('/api/getWebsiteGamePs')
-  // const dom = new DOMParser().parseFromString(data, 'text/html')
-  // const listGame = await dom?.querySelectorAll('#main section')
-  // console.log(dom, 'inigame')
+// async function getWebsite() {
+//   const data = await $fetch('/api/getWebsiteGamePs')
+//   // const dom = new DOMParser().parseFromString(data, 'text/html')
+//   // const listGame = await dom?.querySelectorAll('#main section')
+//   // console.log(dom, 'inigame')
 
-  // const sectionSDK = listGame[0].querySelectorAll(
-  //   'section [data-qa="ems-sdk-grid"] div .psw-l-grid'
-  // )
-  // const selectUl = sectionSDK[0]?.querySelectorAll('#main section ul')
-  // const resultGame = Array.from(selectUl[0]?.querySelectorAll('li')) as any[]
+//   // const sectionSDK = listGame[0].querySelectorAll(
+//   //   'section [data-qa="ems-sdk-grid"] div .psw-l-grid'
+//   // )
+//   // const selectUl = sectionSDK[0]?.querySelectorAll('#main section ul')
+//   // const resultGame = Array.from(selectUl[0]?.querySelectorAll('li')) as any[]
 
-  // if (!resultGame) {
-  //   throw new Error('Failed to parse DOM')
-  // }
-  // const resultItems = (Array.from(resultGame) as any[])
-  //   .flatMap((item, index) => {
-  //     const checkEmpty = item.querySelector(`li [data-qa-index="${index}"]`)
-  //     if (!checkEmpty) {
-  //       return false
-  //     }
-  //     const img = item.querySelector(
-  //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art#image"] noscript img`
-  //     )
-  //     const name = item.querySelector(
-  //       `li section [data-qa="ems-sdk-grid#productTile${index}#product-name"]`
-  //     )?.innerHTML
-  //     const categoryPS5 = item.querySelector(
-  //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag0"]`
-  //     )?.innerHTML
-  //     const categoryPS4 = item.querySelector(
-  //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag1"]`
-  //     )?.innerHTML
-  //     const id = item.querySelector(
-  //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"]`
-  //     )
-  //     return {
-  //       img: img?.src,
-  //       name,
-  //       platforms: [categoryPS5, categoryPS4].filter(Boolean),
-  //       id: id.href.replace(window.location.origin + '/en-id/product/', ''),
-  //     }
-  //   })
-  //   .filter(Boolean)
-  // console.log(resultItems, 'iniresultItems')
-}
+//   // if (!resultGame) {
+//   //   throw new Error('Failed to parse DOM')
+//   // }
+//   // const resultItems = (Array.from(resultGame) as any[])
+//   //   .flatMap((item, index) => {
+//   //     const checkEmpty = item.querySelector(`li [data-qa-index="${index}"]`)
+//   //     if (!checkEmpty) {
+//   //       return false
+//   //     }
+//   //     const img = item.querySelector(
+//   //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art#image"] noscript img`
+//   //     )
+//   //     const name = item.querySelector(
+//   //       `li section [data-qa="ems-sdk-grid#productTile${index}#product-name"]`
+//   //     )?.innerHTML
+//   //     const categoryPS5 = item.querySelector(
+//   //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag0"]`
+//   //     )?.innerHTML
+//   //     const categoryPS4 = item.querySelector(
+//   //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag1"]`
+//   //     )?.innerHTML
+//   //     const id = item.querySelector(
+//   //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"]`
+//   //     )
+//   //     return {
+//   //       img: img?.src,
+//   //       name,
+//   //       platforms: [categoryPS5, categoryPS4].filter(Boolean),
+//   //       id: id.href.replace(window.location.origin + '/en-id/product/', ''),
+//   //     }
+//   //   })
+//   //   .filter(Boolean)
+//   // console.log(resultItems, 'iniresultItems')
+// }
 
 async function getDate() {
   const data = await $fetch<any>('/api/getWebsite')
@@ -1012,9 +1045,9 @@ onMounted(() => {
   // getSearchWebsite()
   nextTick(() => {
     // console.log(import.meta.client)
-    if (import.meta.client) {
-      getWebsite()
-    }
+    // if (import.meta.client) {
+    //   getWebsite()
+    // }
     typeText('mount')
   })
 })
@@ -1027,7 +1060,10 @@ onMounted(() => {
 // })
 </script>
 
-<style lang="scss" setup>
+<style lang="scss" scoped>
+:deep() body{
+  @apply overflow-hidden;
+}
 .fontTerminal {
   font-family: 'ByteBounce' !important;
   font-size: 14px;

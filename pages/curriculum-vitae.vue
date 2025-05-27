@@ -29,11 +29,11 @@
     <div>
       <div>
         <div class="rounded-full bg-[url(~/assets/me.jpg)] w-[200px] h-[200px] bg-cover bg-center mb-5">
-          <img src="~/assets/me.jpg" class=" w-[200px] h-[200px] object-cover rounded-full" alt="me" />
+          <img :src="useAsset('/me.jpg')" class=" w-[200px] h-[200px] object-cover rounded-full" alt="me" />
         </div>
-        <h1 class="text-5xl font-bold">Muhammad Syahendra Anindyantoro</h1>
+        <h1 class="md:text-5xl text-2xl font-bold">Muhammad Syahendra Anindyantoro</h1>
       </div>
-      <small>Yogyakarta, 2024</small>
+      <small>Yogyakarta, {{new Date().getFullYear()}}</small>
       <div class="text-[12px] font-semibold">
         {{ $t('me.phone') }}
       </div>
@@ -93,24 +93,24 @@
               <div class="font-bold">Frontend Engineer</div>
               <div class="my-1">PrivyID · Full-time</div>
               <div class="my-1 text-[12px] text-[#3D3C3C]">
-                Jul 2021 - Present · 3 yrs 7 mos
+                Jul 2021 - Present · 3 yrs 11 mos
               </div>
               <div class="text-[12px] text-[#3D3C3C]">Daerah Istimewa Yogyakarta, Indonesia · On-site</div>
-              <p>
+              <div class="text-[12px]">
                 Gunakan bahasa mark-up seperti HTML untuk membuat halaman web yang ramah pengguna
-              <ul class="list-disc ml-5">
-                <li>Mengoptimalkan aplikasi untuk kecepatan maksimum</li>
-                <li> Create and implement the
-                  design of the UI/UX team</li>
-                <li>Membuat dan mengimplementasikan desain tim UI/UX</li>
-                <li> Dapatkan formulir umpan balik dan membangun solusi untuk pengguna dan pelanggan</li>
-                <li> Membantu pengembang backend dengan pengkodean dan pemecahan masalah</li>
-                <li> Lakukan tes UI untuk mengoptimalkan kinerja</li>
-                <li> memperbaiki bug atau masalah yang terjadi selama proses uji coba aplikasi saat digunakan</li>
-                <li> Mempersiapkan aplikasi proses rilis</li>
-                <li> mengikuti perkembangan teknologi yang sedang berkembang</li>
-              </ul>
-              </p>
+                <ul class="list-disc ml-5">
+                  <li>Mengoptimalkan aplikasi untuk kecepatan maksimum</li>
+                  <li> Create and implement the
+                    design of the UI/UX team</li>
+                  <li>Membuat dan mengimplementasikan desain tim UI/UX</li>
+                  <li> Dapatkan formulir umpan balik dan membangun solusi untuk pengguna dan pelanggan</li>
+                  <li> Membantu pengembang backend dengan pengkodean dan pemecahan masalah</li>
+                  <li> Lakukan tes UI untuk mengoptimalkan kinerja</li>
+                  <li> memperbaiki bug atau masalah yang terjadi selama proses uji coba aplikasi saat digunakan</li>
+                  <li> Mempersiapkan aplikasi proses rilis</li>
+                  <li> mengikuti perkembangan teknologi yang sedang berkembang</li>
+                </ul>
+              </div>
             </div>
 
             <div class="grid place-items-center my-5">
@@ -129,14 +129,14 @@
                   Jul 2020 - Jun 2021 · 1 yr
                 </div>
                 <div class="text-[12px] text-[#3D3C3C]">Depok, Jawa Barat, Indonesia</div>
-                <p>
+                <div class="text-[12px]">
                   Kerja langsung di Bea Cukai CEISA 4.0.
-                <ul class="list-disc ml-5">
-                  <li> Mengembangkan modul oleh bea cukai </li>
-                  <li> Aplikasi Pemeliharaan CEISA </li>
-                  <li> Mengembangkan modul Perijinan, dan Manifes bea cukai</li>
-                </ul>
-                </p>
+                  <ul class="list-disc ml-5">
+                    <li> Mengembangkan modul oleh bea cukai </li>
+                    <li> Aplikasi Pemeliharaan CEISA </li>
+                    <li> Mengembangkan modul Perijinan, dan Manifes bea cukai</li>
+                  </ul>
+                </div>
               </div>
             </div>
             <div class="grid place-items-center my-5">
@@ -164,30 +164,30 @@
               <div class="font-bold">Frontend Engineer</div>
               <div class="my-1">PrivyID · Full-time</div>
               <div class="my-1 text-[12px] text-[#3D3C3C]">
-                Jul 2021 - Present · 3 yrs 7 mos
+                Jul 2021 - Present · 3 yrs 11 mos
               </div>
               <div class="text-[12px] text-[#3D3C3C]">Daerah Istimewa Yogyakarta, Indonesia · On-site</div>
-              <p>
+              <div class="text-[12px]">
                 Use mark-up language like HTML to create user-friendly web pages
-              <ul class="list-disc ml-5">
-                <li> Optimize applications for maximum speed</li>
-                <li> Create and implement the
-                  design of the UI/UX team</li>
-                <li> Collaborate with back-end developers and
-                  web designers to improve quality usability</li>
-                <li> Get feedback form and
-                  build solutions for user and customers</li>
-                <li> Help backend developers
-                  with coding and troubleshooting</li>
-                <li> Perform UI test to optimize
-                  performance</li>
-                <li> fix bugs or problems that occurs during the
-                  applications trial process when used</li>
-                <li> Prepare the applications
-                  release process</li>
-                <li> stay up to date on emerging technologies</li>
-              </ul>
-              </p>
+                <ul class="list-disc ml-5">
+                  <li> Optimize applications for maximum speed</li>
+                  <li> Create and implement the
+                    design of the UI/UX team</li>
+                  <li> Collaborate with back-end developers and
+                    web designers to improve quality usability</li>
+                  <li> Get feedback form and
+                    build solutions for user and customers</li>
+                  <li> Help backend developers
+                    with coding and troubleshooting</li>
+                  <li> Perform UI test to optimize
+                    performance</li>
+                  <li> fix bugs or problems that occurs during the
+                    applications trial process when used</li>
+                  <li> Prepare the applications
+                    release process</li>
+                  <li> stay up to date on emerging technologies</li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="grid place-items-center my-5">
@@ -204,14 +204,14 @@
                 Jul 2020 - Jun 2021 · 1 yr
               </div>
               <div class="text-[12px] text-[#3D3C3C]">Depok, Jawa Barat, Indonesia</div>
-              <p>
+              <div class="text-[12px]">
                 On site Customs CEISA 4.0.
-              <ul class="list-disc ml-5">
-                <li> Develop module by bea cukai </li>
-                <li> Maintenance Application CEISA </li>
-                <li> Develop module Perijinan, and Manifest bea cukai</li>
-              </ul>
-              </p>
+                <ul class="list-disc ml-5">
+                  <li> Develop module by bea cukai </li>
+                  <li> Maintenance Application CEISA </li>
+                  <li> Develop module Perijinan, and Manifest bea cukai</li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="grid place-items-center my-5">
@@ -405,6 +405,8 @@
 </template>
 
 <script setup lang="ts">
+import useAsset from '~/composable/use-assets';
+
 definePageMeta({
   layout: 'without-layout',
 })

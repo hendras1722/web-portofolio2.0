@@ -10,13 +10,28 @@
             <NuxtLink to="/"><span class="dark:text-white">MSA</span></NuxtLink>
           </div>
           <div class="flex items-center justify-between w-32">
-            <label class="switch switch--mobile ml-3">
+            <label class="switch">
+              <input checked="true" id="checkbox" type="checkbox" @change="handleSwitch"/>
+              <span class="slider">
+                <div class="star star_1"></div>
+                <div class="star star_2"></div>
+                <div class="star star_3"></div>
+                <svg viewBox="0 0 16 16" class="cloud_1 cloud">
+                  <path transform="matrix(.77976 0 0 .78395-299.99-418.63)" fill="#fff"
+                    d="m391.84 540.91c-.421-.329-.949-.524-1.523-.524-1.351 0-2.451 1.084-2.485 2.435-1.395.526-2.388 1.88-2.388 3.466 0 1.874 1.385 3.423 3.182 3.667v.034h12.73v-.006c1.775-.104 3.182-1.584 3.182-3.395 0-1.747-1.309-3.186-2.994-3.379.007-.106.011-.214.011-.322 0-2.707-2.271-4.901-5.072-4.901-2.073 0-3.856 1.202-4.643 2.925">
+                  </path>
+                </svg>
+              </span>
+            </label>
+
+
+            <!-- <label class="switch switch--mobile ml-3">
               <input class="cb" type="checkbox" @change="handleSwitch" v-model="i" />
               <span class="toggle toggle--mobile">
                 <span id="off" class="left left--mobile">off</span>
                 <span id="on" class="right right--mobile dark:text-white">on</span>
               </span>
-            </label>
+            </label> -->
             <div>
               <UButton variant="ghost" class="bg-white text-black dark:bg-transparent" @click="openMenu">
                 <UIcon name="i-ic-baseline-dehaze" class="text-2xl  dark:text-white" />
@@ -66,11 +81,17 @@
                   </NuxtLink>
                 </li>
               </ul>
-              <label class="switch ml-3">
-                <input class="cb" type="checkbox" @change="handleSwitch" v-model="i" />
-                <span class="toggle">
-                  <span id="off" class="left">off</span>
-                  <span id="on" class="right dark:text-white">on</span>
+              <label class="switch">
+                <input checked="true" id="checkbox" type="checkbox"  @change="handleSwitch"/>
+                <span class="slider">
+                  <div class="star star_1"></div>
+                  <div class="star star_2"></div>
+                  <div class="star star_3"></div>
+                  <svg viewBox="0 0 16 16" class="cloud_1 cloud">
+                    <path transform="matrix(.77976 0 0 .78395-299.99-418.63)" fill="#fff"
+                      d="m391.84 540.91c-.421-.329-.949-.524-1.523-.524-1.351 0-2.451 1.084-2.485 2.435-1.395.526-2.388 1.88-2.388 3.466 0 1.874 1.385 3.423 3.182 3.667v.034h12.73v-.006c1.775-.104 3.182-1.584 3.182-3.395 0-1.747-1.309-3.186-2.994-3.379.007-.106.011-.214.011-.322 0-2.707-2.271-4.901-5.072-4.901-2.073 0-3.856 1.202-4.643 2.925">
+                    </path>
+                  </svg>
                 </span>
               </label>
             </div>
@@ -204,7 +225,6 @@ onClickOutside(target, (event) => {
 
 function hande() {
   showNotif.value = false
-  console.log('wewe')
 }
 const menu = ref([
   {
@@ -218,10 +238,6 @@ const menu = ref([
   {
     link: '/career',
     name: 'Career',
-  },
-  {
-    link: '/Chat',
-    name: 'Chat',
   },
 ])
 
@@ -384,133 +400,229 @@ function closeMenu() {
   transition: 1s;
 }
 
-// switch on of
-
+/* Theme Switch */
 /* The switch - the box around the slider */
 .switch {
   font-size: 17px;
   position: relative;
   display: inline-block;
-  width: 5em;
-  height: 2.5em;
-  user-select: none;
-
-  &--mobile {
-    font-size: 14px;
-  }
+  width: 4em;
+  height: 2.2em;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Hide default HTML checkbox */
-.switch .cb {
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
 /* The slider */
-.toggle {
+.slider {
   position: absolute;
   cursor: pointer;
-  width: 100%;
-  height: 100%;
-  background-color: #373737;
-  border-radius: 0.1em;
-  transition: 0.4s;
-  text-transform: uppercase;
-  font-weight: 700;
-  overflow: hidden;
-  box-shadow: -0.3em 0 0 0 #373737, -0.3em 0.3em 0 0 #373737,
-    0.3em 0 0 0 #373737, 0.3em 0.3em 0 0 #373737, 0 0.3em 0 0 #373737;
-
-  &--mobile {
-    width: 80%;
-    height: 80%;
-  }
-}
-
-.toggle>.left {
-  position: absolute;
-  display: flex;
-  width: 50%;
-  height: 88%;
-  background-color: #f3f3f3;
-  color: #373737;
+  top: 0;
   left: 0;
+  right: 0;
   bottom: 0;
-  align-items: center;
-  justify-content: center;
-  transform-origin: right;
-  transform: rotateX(10deg);
-  transform-style: preserve-3d;
-  transition: all 150ms;
+  background-color: #2a2a2a;
+  transition: 0.4s;
+  border-radius: 30px;
+  overflow: hidden;
 }
 
-.left::before {
+.slider:before {
   position: absolute;
-  content: '';
-  width: 100%;
-  height: 100%;
-  background-color: rgb(206, 206, 206);
-  transform-origin: center left;
-  transform: rotateY(90deg);
+  content: "";
+  height: 1.2em;
+  width: 1.2em;
+  border-radius: 20px;
+  left: 0.5em;
+  bottom: 0.5em;
+  transition: 0.4s;
+  transition-timing-function: cubic-bezier(0.81, -0.04, 0.38, 1.5);
+  box-shadow: inset 8px -4px 0px 0px #fff;
 }
 
-.left::after {
+.switch input:checked+.slider {
+  background-color: #00a6ff;
+}
+
+.switch input:checked+.slider:before {
+  transform: translateX(1.8em);
+  box-shadow: inset 15px -4px 0px 15px #ffcf48;
+}
+
+.star {
+  background-color: #fff;
+  border-radius: 50%;
   position: absolute;
-  content: '';
-  width: 100%;
-  height: 100%;
-  background-color: rgb(112, 112, 112);
-  transform-origin: center bottom;
-  transform: rotateX(90deg);
+  width: 5px;
+  transition: all 0.4s;
+  height: 5px;
 }
 
-.toggle>.right {
+.star_1 {
+  left: 2.5em;
+  top: 0.5em;
+}
+
+.star_2 {
+  left: 2.2em;
+  top: 1.2em;
+}
+
+.star_3 {
+  left: 3em;
+  top: 0.9em;
+}
+
+.switch input:checked~.slider .star {
+  opacity: 0;
+}
+
+.cloud {
+  width: 3.5em;
   position: absolute;
-  display: flex;
-  width: 50%;
-  height: 88%;
-  background-color: #f3f3f3;
-  color: rgb(206, 206, 206);
-  right: 1px;
-  bottom: 0;
-  align-items: center;
-  justify-content: center;
-  transform-origin: left;
-  transform: rotateX(10deg) rotateY(-45deg);
-  transform-style: preserve-3d;
-  transition: all 150ms;
+  bottom: -1.4em;
+  left: -1.1em;
+  opacity: 0;
+  transition: all 0.4s;
 }
 
-.right::before {
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 100%;
-  background-color: rgb(206, 206, 206);
-  transform-origin: center right;
-  transform: rotateY(-90deg);
+.switch input:checked~.slider .cloud {
+  opacity: 1;
 }
 
-.right::after {
-  position: absolute;
-  content: '';
-  width: 100%;
-  height: 100%;
-  background-color: rgb(112, 112, 112);
-  transform-origin: center bottom;
-  transform: rotateX(90deg);
-}
+// // switch on of
 
-.switch input:checked+.toggle>.left {
-  transform: rotateX(10deg) rotateY(45deg);
-  color: rgb(206, 206, 206);
-}
+// /* The switch - the box around the slider */
+// .switch {
+//   font-size: 17px;
+//   position: relative;
+//   display: inline-block;
+//   width: 5em;
+//   height: 2.5em;
+//   user-select: none;
 
-.switch input:checked+.toggle>.right {
-  transform: rotateX(10deg) rotateY(0deg);
-  color: #487bdb;
-}
+//   &--mobile {
+//     font-size: 14px;
+//   }
+// }
+
+// /* Hide default HTML checkbox */
+// .switch .cb {
+//   opacity: 0;
+//   width: 0;
+//   height: 0;
+// }
+
+// /* The slider */
+// .toggle {
+//   position: absolute;
+//   cursor: pointer;
+//   width: 100%;
+//   height: 100%;
+//   background-color: #373737;
+//   border-radius: 0.1em;
+//   transition: 0.4s;
+//   text-transform: uppercase;
+//   font-weight: 700;
+//   overflow: hidden;
+//   box-shadow: -0.3em 0 0 0 #373737, -0.3em 0.3em 0 0 #373737,
+//     0.3em 0 0 0 #373737, 0.3em 0.3em 0 0 #373737, 0 0.3em 0 0 #373737;
+
+//   &--mobile {
+//     width: 80%;
+//     height: 80%;
+//   }
+// }
+
+// .toggle>.left {
+//   position: absolute;
+//   display: flex;
+//   width: 50%;
+//   height: 88%;
+//   background-color: #f3f3f3;
+//   color: #373737;
+//   left: 0;
+//   bottom: 0;
+//   align-items: center;
+//   justify-content: center;
+//   transform-origin: right;
+//   transform: rotateX(10deg);
+//   transform-style: preserve-3d;
+//   transition: all 150ms;
+// }
+
+// .left::before {
+//   position: absolute;
+//   content: '';
+//   width: 100%;
+//   height: 100%;
+//   background-color: rgb(206, 206, 206);
+//   transform-origin: center left;
+//   transform: rotateY(90deg);
+// }
+
+// .left::after {
+//   position: absolute;
+//   content: '';
+//   width: 100%;
+//   height: 100%;
+//   background-color: rgb(112, 112, 112);
+//   transform-origin: center bottom;
+//   transform: rotateX(90deg);
+// }
+
+// .toggle>.right {
+//   position: absolute;
+//   display: flex;
+//   width: 50%;
+//   height: 88%;
+//   background-color: #f3f3f3;
+//   color: rgb(206, 206, 206);
+//   right: 1px;
+//   bottom: 0;
+//   align-items: center;
+//   justify-content: center;
+//   transform-origin: left;
+//   transform: rotateX(10deg) rotateY(-45deg);
+//   transform-style: preserve-3d;
+//   transition: all 150ms;
+// }
+
+// .right::before {
+//   position: absolute;
+//   content: '';
+//   width: 100%;
+//   height: 100%;
+//   background-color: rgb(206, 206, 206);
+//   transform-origin: center right;
+//   transform: rotateY(-90deg);
+// }
+
+// .right::after {
+//   position: absolute;
+//   content: '';
+//   width: 100%;
+//   height: 100%;
+//   background-color: rgb(112, 112, 112);
+//   transform-origin: center bottom;
+//   transform: rotateX(90deg);
+// }
+
+// .switch input:checked+.toggle>.left {
+//   transform: rotateX(10deg) rotateY(45deg);
+//   color: rgb(206, 206, 206);
+// }
+
+// .switch input:checked+.toggle>.right {
+//   transform: rotateX(10deg) rotateY(0deg);
+//   color: #487bdb;
+// }
 
 /*Change text in autofill textbox*/
 .input input:-webkit-autofill {
