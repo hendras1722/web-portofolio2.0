@@ -1,127 +1,13 @@
 <template>
-  <div class="lg:px-[160px] px-[20px] relative h-[calc(100% - 119px)] w-full relative">
-    <div>
+  <div class="lg:px-[160px] px-[20px] relative min-h-[calc(100vh-120px)] w-full flex flex-col">
+    <!-- Main content area -->
+    <div class="flex-1">
       <ClientOnly>
         <div class="col-span-12">
           <TypingText />
         </div>
       </ClientOnly>
-    </div>
-    <div class="mt-3">
-      <div class="flex justify-center">
-        <div class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[18px] dark:text-white text-nowrap">
-          <div class="custom-family" v-motion :initial="{
-            x: -500,
-            opacity: 0,
-          }" :enter="{
-              x: 0,
-              opacity: 1,
-              transition: {
-                delay: 500,
-              },
-            }">
-            The Man &nbsp;
-          </div>
-          <div class="custom-family">Behind</div>
-          <div class="custom-family" v-motion :initial="{
-            x: 500,
-            opacity: 0,
-          }" :enter="{
-              x: 0,
-              opacity: 1,
-              transition: {
-                delay: 500,
-              },
-            }">
-            &nbsp; The Keyboard
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-    v-if="width > 1040 && width < 2000"
-      className="grid-cols-2 grid-rows-1 gap-4 place-items-center  w-[calc(100%-320px)] fixed bottom-0 grid">
-      <div>
-        <template v-if="holidayResult.length > 0 && !isModalHolidayResult">
-          <div class="dark:text-white">
-            Libur bulan ini:
-          </div>
-          <div
-            class="mb-20 py-1 px-1 rounded-lg flex gap-5 items-center w-[700px] overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none min-h-[100px]">
-            <div class="flex items-center gap-2 bg-white " v-for="(item, index) in holidayResult" :key="index">
-              <div class="shadow-lg border border-black/10 rounded p-2 h-fit ">
-                <div>{{ item.name }}</div>
-                <div>{{ item.date }}</div>
-              </div>
-            </div>
-          </div>
-        </template>
-        <div class="dark:text-white">
-          free to contact me <UButton @click="() => $router.push('/curriculum-vitae')" variant="solid" color="green"
-            size="xl" class="text-center w-fit ml-2">View
-            Resume</UButton>
-        </div>
-        <div class="mt-3 text-[16px] dark:text-white font-semibold text-[#464444]">
-          Find Me
-        </div>
-        <SocialIcon />
-        <div v-if="width < 1041 || width > 1201"
-          class="hidden bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end text-[16px] text-[#5F5B5B] lg:flex">
-          2024-PRESENT © Muh Syahendra A
-        </div>
-      </div>
-      <div>
-        <div id="container" v-show="isDark">
-          <div id="pillow" class="absolute">
-            <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">Z</div>
-            <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">Z</div>
-            <div class="zzz zzz-z dark:text-white dark:drop-shadow-xl">Z</div>
-            <div class="corner top-left"></div>
-            <div class="corner top-right"></div>
-            <div class="corner bottom-right"></div>
-            <div class="corner bottom-left"></div>
-          </div>
-        </div>
-        <img alt="me" v-show="isDark" id="me" class="lg:w-fit lg:h-[395px]" :src="useAsset('me_sleep.png')" />
-        <img alt="me" v-show="!isDark" id="me" class="lg:w-fit lg:h-[395px]" :src="useAsset('me.png')" />
-      </div>
-    </div>
-
-
-    <div class="lg:hidden px-3 fixed bottom-10 left-0 right-0 mx-auto mb-20  ">
-      <template v-if="holidayResult.length > 0 && !isModalHolidayResult">
-        <div class="dark:text-white  font-semibold text-[16px] mb-2">
-          Libur bulan ini:
-        </div>
-        <div
-          class="mb-5 py-1 px-1 rounded-lg flex gap-5 items-center w-full overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none ">
-          <div class="flex items-center gap-2 bg-white " v-for="(item, index) in holidayResult" :key="index">
-            <div class="shadow-lg border border-black/10 rounded p-2 h-fit  ">
-              <div>{{ item.name }}</div>
-              <div>{{ item.date }}</div>
-            </div>
-          </div>
-        </div>
-      </template>
-      <SocialIcon :isMobile="-370" />
-    </div>
-
-    <div class="lg:hidden flex justify-center items-center fixed bottom-10 left-0 right-0 mx-auto">
-      <div class="block">
-
-        <UButton @click="() => $router.push('/curriculum-vitae')" variant="solid" color="green" size="xl"
-          class="text-center w-fit">View Resume</UButton>
-
-      </div>
-    </div>
-
-    <!-- <div class="grid grid-cols-12 grid-rows-1 gap-4">
-      <ClientOnly>
-        <div class="col-span-12">
-          <TypingText />
-        </div>
-      </ClientOnly>
-      <div class="col-span-12">
+      <div class="mt-2">
         <div class="flex justify-center">
           <div class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[18px] dark:text-white text-nowrap">
             <div class="custom-family" v-motion :initial="{
@@ -134,7 +20,7 @@
                 delay: 500,
               },
             }">
-              The Man &nbsp;
+              The Man
             </div>
             <div class="custom-family">Behind</div>
             <div class="custom-family" v-motion :initial="{
@@ -147,68 +33,97 @@
                 delay: 500,
               },
             }">
-              &nbsp; The Keyboard
+              The Keyboard
             </div>
           </div>
-        </div>
-      </div>
-      
-      <div class="md:col-span-5 col-span-12 col-start-7 md:px-[35px] !h-fit hidden md:flex">
-        <div class="absolute bottom-0">
-          <template v-if="holidayResult.length > 0 && !isModalHolidayResult">
-            Hari libur bulan ini:
-            <div
-              class="mb-20 py-1 px-1 rounded-lg flex gap-5 items-center w-[700px] overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none min-h-[100px]">
-              <div class="flex items-center gap-2 bg-white " v-for="(item, index) in holidayResult" :key="index">
-                <div class="shadow-lg border border-black/10 rounded p-2 h-fit ">
-                  <div>{{ item.name }}</div>
-                  <div>{{ item.date }}</div>
-                </div>
-              </div>
-            </div>
-          </template>
-       
-        </div>
-      </div>
-      
-      <div class="col-span-5 col-start-7 hidden lg:flex relative h-screen">
-        <div class="absolute bottom-0 right-0 lg:block md:block hidden">
-         
         </div>
       </div>
     </div>
 
-    <div>
-      <div class="lg:hidden hidden">
-        <div id="container" v-show="isDark">
-          <div id="pillow" class="absolute">
-            <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">Z</div>
-            <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">Z</div>
-            <div class="zzz zzz-z dark:text-white dark:drop-shadow-xl">Z</div>
-            <div class="corner top-left"></div>
-            <div class="corner top-right"></div>
-            <div class="corner bottom-right"></div>
-            <div class="corner bottom-left"></div>
+    <ClientOnly>
+      <div v-if="width > 1200 && width < 5000" class="items-end justify-around flex w-full ">
+        <div>
+          <template v-if="holidayResult.length > 0 && !isModalHolidayResult">
+            <div class="dark:text-white">
+              Libur bulan ini:
+            </div>
+            <div
+              class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-[700px] overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none min-h-[100px]">
+              <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
+                <div class="shadow-lg border border-black/10 rounded p-2 h-fit">
+                  <div>{{ item?.name }}</div>
+                  <div>{{ item?.date }}</div>
+                </div>
+              </div>
+            </div>
+          </template>
+  
+          <div class="dark:text-white mb-3">
+            free to contact me
+            <UButton @click="() => router.push('/curriculum-vitae')" variant="solid" color="green" size="xl"
+              class="text-center w-fit ml-2">
+              View Resume
+            </UButton>
+          </div>
+  
+          <div class="mb-3 text-[16px] dark:text-white font-semibold text-[#464444]">
+            Find Me
+          </div>
+  
+          <ClientOnly>
+            <SocialIcon />
+          </ClientOnly>
+  
+          <div v-if="width < 1041 || width > 1201" class="mt-4 text-[16px] text-[#5F5B5B] lg:block hidden">
+            2024-PRESENT © Muh Syahendra A
           </div>
         </div>
-        <img v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="useAsset('me_sleep.png')"
-          alt="me" />
-        <img v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="useAsset('me.png')"
-          alt="me" />
-      </div>
-      
-      <div class="absolute bottom-16 left-0 ml-auto mr-auto right-0 lg:hidden">
-        <div class="grid place-items-center mb-16">
-          <div class="w-[240px]">
-            <SocialIcon :isMobile="-70" />
+  
+        <!-- Right side - Image positioned at bottom -->
+        <div class="flex-shrink-0 relative">
+          <div id="container" v-show="isDark" class="relative">
+            <div id="pillow" class="absolute">
+              <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">Z</div>
+              <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">Z</div>
+              <div class="zzz zzz-z dark:text-white dark:drop-shadow-xl">Z</div>
+              <div class="corner top-left"></div>
+              <div class="corner top-right"></div>
+              <div class="corner bottom-right"></div>
+              <div class="corner bottom-left"></div>
+            </div>
           </div>
-        </div>
-        <div class="lg:hidden flex justify-center items-center">
-          <UButton @click="() => $router.push('/curriculum-vitae')" variant="solid" color="green" size="xl"
-            class="text-center w-fit">View Resume</UButton>
+          <img alt="me" v-show="isDark" id="me" class="lg:w-fit lg:h-[395px] block" :src="useAsset('me_sleep.png')" />
+          <img alt="me" v-show="!isDark" id="me" class="lg:w-fit lg:h-[395px] block" :src="useAsset('me.png')" />
         </div>
       </div>
-    </div> -->
+      <div v-else class="mb-28">
+        <template v-if="holidayResult.length > 0 && !isModalHolidayResult">
+          <div class="dark:text-white">
+            Libur bulan ini:
+          </div>
+          <div
+            class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-[700px] overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none min-h-[100px]">
+            <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
+              <div class="shadow-lg border border-black/10 rounded p-2 h-fit">
+                <div>{{ item?.name }}</div>
+                <div>{{ item?.date }}</div>
+              </div>
+            </div>
+          </div>
+        </template>
+        <ClientOnly>
+          <SocialIcon :isMobile="-150" />
+        </ClientOnly>
+        <div class=" flex justify-center  w-full mt-6">
+          <UButton @click="() => router.push('/curriculum-vitae')" variant="solid" color="green" size="xl"
+            class="text-center w-fit ml-2">
+            View Resume
+          </UButton>
+  
+        </div>
+      </div>
+
+    </ClientOnly>
   </div>
 </template>
 
@@ -257,11 +172,12 @@ const dataTerminal = ref([
 const startIndex = ref(0)
 const holidayResult = ref<Holiday[]>([])
 const isModalHolidayResult = ref(false)
+const router = useRouter()
 
-const appConfig = useAppConfig()
+// const appConfig = useAppConfig()
 
 const container_typing = document?.getElementById('container_typing')
-const editable = ref<HTMLDivElement>()
+// const editable = ref<HTMLDivElement>()
 
 const typeText = (e: string, value?: string) => {
   const typed = new Typed({
@@ -1056,7 +972,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 :deep() body{
-  @apply overflow-hidden;
+  overflow: hidden !important;
 }
 .fontTerminal {
   font-family: 'ByteBounce' !important;

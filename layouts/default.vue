@@ -1,7 +1,7 @@
 <template>
   <div :class="[
     route.path === '/' &&
-    `lg:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover bg-center bg-no-repeat min-h-lvh`,
+    `lg:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover lg:bg-center bg-left bg-no-repeat min-h-lvh`,
   ]">
     <div class="relative col-span-12 lg:hidden" ref="target">
       <div id="navbar1" class="fixed w-full z-10" :class="[scrollStatus && 'bg-white']">
@@ -386,16 +386,17 @@ function closeMenu() {
   isMenuOpen.value = false
 }
 
-watchEffect(() => {
-  const date = new Date().getHours()
-  const pm = date >= 16 && date < 5
-  // const am = date >= 0 && date < 12
-  if(pm){
-    isDark.value = true
-  } else {
-    isDark.value = false
-  }
-})
+// watchEffect(() => {
+//   if(process.server) return
+//   const date = new Date().getHours()
+//   const pm = date >= 16 && date < 5
+//   // const am = date >= 0 && date < 12
+//   if(pm){
+//     isDark.value = true
+//   } else {
+//     isDark.value = false
+//   }
+// })
 </script>
 
 <style lang="scss" setup>
