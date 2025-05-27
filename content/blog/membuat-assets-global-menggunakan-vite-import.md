@@ -1,6 +1,6 @@
 ---
 title: 'Membuat assets global menggunakan vite import'
-description: 'React'
+description: 'Javascript'
 date: '2025-05-27'
 ---
 
@@ -29,7 +29,7 @@ penggunannya cukup begini
  <img :src="useAsset('/me.jpg')" class=" w-[200px] h-[200px] object-cover rounded-full" alt="me" />
 ```
 
-```react
+```js
  <img src={useAsset('/me.jpg')} class=" w-[200px] h-[200px] object-cover rounded-full" alt="me" />
 ```
 
