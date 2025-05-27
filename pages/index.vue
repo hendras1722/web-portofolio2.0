@@ -97,16 +97,18 @@
           </div>
         </div> -->
         <div class="absolute bottom-0">
-          Hari libur bulan ini:
-          <div
-            class="mb-20 py-1 px-1 rounded-lg flex gap-5 items-center  w-[700px] overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none">
-            <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
-              <div class="shadow-lg border border-black/10 rounded p-2 h-fit ">
-                <div>{{ item.name }}</div>
-                <div>{{ item.date }}</div>
+          <template v-if="holidayResult.length > 0 && !isModalHolidayResult">
+            Hari libur bulan ini:
+            <div
+              class="mb-20 py-1 px-1 rounded-lg flex gap-5 items-center  w-[700px] overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none  min-h-[100px]">
+              <div class="flex items-center gap-2 bg-white " v-for="(item, index) in holidayResult" :key="index">
+                <div class="shadow-lg border border-black/10 rounded p-2 h-fit ">
+                  <div>{{ item.name }}</div>
+                  <div>{{ item.date }}</div>
+                </div>
               </div>
             </div>
-          </div>
+          </template>
           <div>
             free to contact me <UButton @click="() => $router.push('/curriculum-vitae')" variant="solid" color="green"
               size="xl" class="text-center w-fit ml-2">View
