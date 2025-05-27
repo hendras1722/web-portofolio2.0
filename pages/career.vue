@@ -161,6 +161,9 @@ function handleTitle(item: string) {
   if (item.includes('5')) {
     return 'BNI Regsand'
   }
+  if (item.includes('6')) {
+    return 'Adonara Dashboard'
+  }
 }
 
 const dataCertificate = ref([
@@ -228,6 +231,7 @@ const dataProject = ref([
   'Tele App Privy',
   'Landing Privy',
   'Ronin Dashboard',
+  'Adonara Dashboard',
 ])
 
 onMounted(() => {
@@ -439,7 +443,7 @@ button:hover .button-text {
 
 .scroller {
   @apply flex items-center justify-around text-nowrap gap-5;
-  animation: scroll 50s linear infinite;
+  animation: scroll 80s linear infinite;
   animation-play-state: running;
 
   &:hover {

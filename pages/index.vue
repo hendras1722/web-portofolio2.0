@@ -48,7 +48,8 @@
               Libur bulan ini:
             </div>
             <div
-              class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-[700px] overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none min-h-[100px]">
+              class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-[700px] overflow-auto text-nowrap dark:shadow-none min-h-[100px]"
+              style=" box-shadow: inset 25px 20px 25px -25px rgba(0, 0, 0, 0.136), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.136);">
               <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
                 <div class="shadow-lg border border-black/10 rounded p-2 h-fit">
                   <div>{{ item?.name }}</div>
@@ -57,7 +58,7 @@
               </div>
             </div>
           </template>
-  
+
           <div class="dark:text-white mb-3">
             free to contact me
             <UButton @click="() => router.push('/curriculum-vitae')" variant="solid" color="green" size="xl"
@@ -65,20 +66,20 @@
               View Resume
             </UButton>
           </div>
-  
+
           <div class="mb-3 text-[16px] dark:text-white font-semibold text-[#464444]">
             Find Me
           </div>
-  
+
           <ClientOnly>
             <SocialIcon />
           </ClientOnly>
-  
+
           <div v-if="width < 1041 || width > 1201" class="mt-4 text-[16px] text-[#5F5B5B] lg:block hidden">
             2024-PRESENT © Muh Syahendra A
           </div>
         </div>
-  
+
         <!-- Right side - Image positioned at bottom -->
         <div class="flex-shrink-0 relative">
           <div id="container" v-show="isDark" class="relative">
@@ -119,7 +120,7 @@
             class="text-center w-fit ml-2">
             View Resume
           </UButton>
-  
+
         </div>
       </div>
 
