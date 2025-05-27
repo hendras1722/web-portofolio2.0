@@ -102,7 +102,7 @@
             Libur bulan ini:
           </div>
           <div
-            class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-[700px] overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none min-h-[100px]">
+            class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-full overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none min-h-[100px]">
             <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
               <div class="shadow-lg border border-black/10 rounded p-2 h-fit">
                 <div>{{ item?.name }}</div>
