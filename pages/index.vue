@@ -22,7 +22,7 @@
             }">
               The Man
             </div>
-            <div class="custom-family">Behind</div>
+            <div class="custom-family mx-2">Behind</div>
             <div class="custom-family" v-motion :initial="{
               x: 500,
               opacity: 0,
