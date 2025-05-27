@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:px-[160px] px-[20px]">
+  <div class="lg:px-[160px] px-[20px] relative min-h-screen">
     <div class="grid grid-cols-12 grid-rows-1 gap-4">
       <ClientOnly>
         <div class="col-span-12">
@@ -35,72 +35,15 @@
               &nbsp; The Keyboard
             </div>
           </div>
-          <!-- <p
-            class="text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[22px] dark:text-white"
-          >
-            <span
-              v-motion
-              :initial="{
-                x: -500,
-                opacity: 0,
-              }"
-              :enter="{
-                x: 0,
-                opacity: 1,
-                transition: {
-                  delay: 500,
-                },
-              }"
-            >
-              The Man
-            </span>
-            Behind
-            <span
-              v-motion
-              :initial="{
-                x: 500,
-              }"
-              :enter="{
-                x: 0,
-                transition: {
-                  delay: 500,
-                },
-              }"
-            >
-              The Keyboard</span
-            >
-          </p> -->
         </div>
       </div>
-      <div class="md:col-span-5 col-span-12 col-start-7 md:px-[35px]  !h-fit  hidden md:flex">
-        <!-- <div class="w-full h-[287px] rounded-[8px] py-[26px] px-[33px] lg:mt-[76px] mt-[34px] overflow-auto"
-          :style="{ background: appConfig.colors['custom-black'][900] }" @click="handleMouseEvent()">
-          <div v-for="(item, index) in dataTerminal" :key="index">
-            <div v-if="item.html === 'text'" style="white-space: pre-wrap"
-              :style="{ color: appConfig.colors['custom-black'][50] }">
-              <span ref="el" class="fontTerminal" />
-            </div>
-            <div class="flex items-center" v-if="item.html === 'input'">
-              <div>
-                <span class="text-white text-sm flex items-center fontTerminal text-wrap" style="width: 95px">
-                  {{ item.created_at }} =&#62; $
-                </span>
-              </div>
-              <div class="text-white">
-                <div class="break-words">
-                  <div suppressContentEditableWarning :id="`typing_text${index}`" contenteditable ref="editable"
-                    class="no-underline text-white focus:outline-none fontTerminal min-w-5"
-                    @keydown="handleSubmit($event, { props: item, index })" @mousedown="handleMouseEvent(index)"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
+      
+      <div class="md:col-span-5 col-span-12 col-start-7 md:px-[35px] !h-fit hidden md:flex">
         <div class="absolute bottom-0">
           <template v-if="holidayResult.length > 0 && !isModalHolidayResult">
             Hari libur bulan ini:
             <div
-              class="mb-20 py-1 px-1 rounded-lg flex gap-5 items-center  w-[700px] overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none  min-h-[100px]">
+              class="mb-20 py-1 px-1 rounded-lg flex gap-5 items-center w-[700px] overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none min-h-[100px]">
               <div class="flex items-center gap-2 bg-white " v-for="(item, index) in holidayResult" :key="index">
                 <div class="shadow-lg border border-black/10 rounded p-2 h-fit ">
                   <div>{{ item.name }}</div>
@@ -123,18 +66,15 @@
             2024-PRESENT © Muh Syahendra A
           </div>
         </div>
-
       </div>
-      <div class="col-span-5 col-start-7  justify-end sticky bottom-0 hidden lg:flex">
-        <div class="lg:block md:block hidden relative">
+      
+      <!-- Alternative 1: Using absolute positioning with proper parent -->
+      <div class="col-span-5 col-start-7 hidden lg:flex relative h-screen">
+        <div class="absolute bottom-0 right-0 lg:block md:block hidden">
           <div id="container" v-show="isDark">
             <div id="pillow" class="absolute">
-              <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">
-                Z
-              </div>
-              <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">
-                Z
-              </div>
+              <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">Z</div>
+              <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">Z</div>
               <div class="zzz zzz-z dark:text-white dark:drop-shadow-xl">Z</div>
               <div class="corner top-left"></div>
               <div class="corner top-right"></div>
@@ -142,21 +82,20 @@
               <div class="corner bottom-left"></div>
             </div>
           </div>
-          <img alt="me" v-show="isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-[395px]"
+          <img alt="me" v-show="isDark" id="me" class="lg:w-fit lg:h-[395px]"
             :src="useAsset('me_sleep.png')" />
-          <img alt="me" v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-[395px]"
+          <img alt="me" v-show="!isDark" id="me" class="lg:w-fit lg:h-[395px]"
             :src="useAsset('me.png')" />
         </div>
       </div>
     </div>
 
+    <!-- Mobile Section -->
     <div>
       <div class="lg:hidden hidden">
         <div id="container" v-show="isDark">
           <div id="pillow" class="absolute">
-            <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">
-              Z
-            </div>
+            <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">Z</div>
             <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">Z</div>
             <div class="zzz zzz-z dark:text-white dark:drop-shadow-xl">Z</div>
             <div class="corner top-left"></div>
@@ -170,53 +109,19 @@
         <img v-show="!isDark" id="me" class="mt-[22px] lg:mr-[84px] lg:w-fit lg:h-fit" :src="useAsset('me.png')"
           alt="me" />
       </div>
+      
       <div class="absolute bottom-16 left-0 ml-auto mr-auto right-0 lg:hidden">
-        <div class=" grid place-items-center mb-16">
+        <div class="grid place-items-center mb-16">
           <div class="w-[240px]">
             <SocialIcon :isMobile="-70" />
           </div>
-
         </div>
-
         <div class="lg:hidden flex justify-center items-center">
           <UButton @click="() => $router.push('/curriculum-vitae')" variant="solid" color="green" size="xl"
             class="text-center w-fit">View Resume</UButton>
-
         </div>
       </div>
     </div>
-
-    <!-- <div v-show="holidayResult.length > 0 && !isModalHolidayResult" id="modal_holiday"
-      class="fixed left-0 bottom-0 z-[5] bg-white dark:bg-[#121212] dark:text-white text-black w-full p-10 transition ease delay-150 shadow-2xl shadow-blue-500/50"
-      :class="{
-        'translate-y-[220px]': isModalHolidayResult,
-      }" v-motion :initial="{
-        y: 500,
-        opacity: 0,
-      }" :enter="{
-        y: 0,
-        opacity: 1,
-        transition: {
-          delay: 500,
-          ease: 'easeInOut',
-        },
-      }">
-      <div class="flex justify-end">
-        <UButton variant="ghost" class="bg-white text-black dark:bg-transparent hover:!bg-transparent"
-          @click="handleClose">
-          <UIcon name="i-ic-baseline-close" class="dark:text-white" />
-        </UButton>
-      </div>
-      <div class="dark:text-white">Ada libur bulan ini:</div>
-      <div class="flex flex-nowrap overflow-auto">
-        <div v-for="(item, index) in holidayResult" class="p-2 border border-black rounded my-3 mx-3 dark:text-white">
-          <h3 class="font-extrabold text-nowrap">
-            {{ item.name }}
-          </h3>
-          <p>{{ formatDate(item.date) }}</p>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
