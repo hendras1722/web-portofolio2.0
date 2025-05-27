@@ -162,7 +162,7 @@ function handleTitle(item: string) {
     return 'BNI Regsand'
   }
   if (item.includes('6')) {
-    return 'Adonara Dashboard'
+    return 'CEISA 4.0'
   }
 }
 
