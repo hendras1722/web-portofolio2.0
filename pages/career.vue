@@ -43,7 +43,7 @@
       </div>
 
       <div class="flex flex-wrap gap-8 align-middle justify-evenly mt-5 p-4">
-        <div class="p-4 flex-auto  w-[calc(100/3)] grid place-items-center shadow-md rounded-lg"
+        <div class="p-4 flex-auto  w-[calc(100%/5)] grid place-items-center shadow-md rounded-lg"
           v-for="(item, index) in projectList" :key="index">
           <img :src="item.img" class="!w-[230px]" alt="project" />
           <h2 class="font-bold text-nowrap dark:text-white">{{ handleTitle(item.img) }}</h2>
