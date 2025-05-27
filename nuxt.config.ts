@@ -109,6 +109,6 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-12-23',
   vite: {
-    assetsInclude: ['~/assets/**/*', '**/*.html'],
+    assetsInclude: ['~/assets/**/*'],
   },
 })

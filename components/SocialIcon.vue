@@ -76,7 +76,7 @@
 defineProps({
   isMobile: {
     type: Number,
-    default: 500,
+    default: -500,
   },
 });
 </script>

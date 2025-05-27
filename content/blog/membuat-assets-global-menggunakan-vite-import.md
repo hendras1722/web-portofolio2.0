@@ -1,5 +1,5 @@
 ---
-title: 'Mapping data menggunakan component react'
+title: 'Membuat assets global menggunakan vite import'
 description: 'React'
 date: '2025-05-27'
 ---
