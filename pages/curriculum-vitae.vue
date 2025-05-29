@@ -33,7 +33,7 @@
         </div>
         <h1 class="md:text-5xl text-2xl font-bold">Muhammad Syahendra Anindyantoro</h1>
       </div>
-      <small>Yogyakarta, {{new Date().getFullYear()}}</small>
+      <small>Yogyakarta, {{ new Date().getFullYear() }}</small>
       <div class="text-[12px] font-semibold">
         {{ $t('me.phone') }}
       </div>
@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="flex flex-wrap">
-          <div v-for=" logo in logos" :key="logo">
+          <div v-for="logo in logos" :key="logo">
             <a :href="'https://github.com/hendras1722'" target="_blank" v-if="logo.src.includes('github')">
               <img :src="logo.src" :alt="logo.src" />
             </a>
@@ -317,20 +317,22 @@
             <div class="font-bold text-[10px]">Nuxt</div>
           </div>
         </div>
-        <div class="border rounded-lg border-[#3D3C3C] p-5 first:mt-0 my-2 last:mb-0">
-          <div>
-            <div class="font-bold">
-              Landing Privy</div>
-          </div>
-          <div class="text-[12px]">
-            {{ $t('project.landing_privy') }}
-
-          </div>
-          <div class="border border-black p-1 my-2 rounded-lg w-fit">
-            <div class="font-bold text-[10px]">Nuxt</div>
+        <div v-for="(project, index) in projects" :key="index">
+          <div class="border rounded-lg border-[#3D3C3C] p-5  mt-2  last:mb-0">
+            <div>
+              <div class="font-bold">
+                {{ project.title }}
+              </div>
+            </div>
+            <div class="text-[12px]">
+              {{ $t(project.descriptionKey) }}
+            </div>
+            <div class="border border-black p-1 my-2 rounded-lg w-fit">
+              <div class="font-bold text-[10px]">{{ project.technology }}</div>
+            </div>
           </div>
         </div>
-        <div class="border rounded-lg border-[#3D3C3C] p-5 first:mt-0 my-2 last:mb-0">
+        <!-- <div class="border rounded-lg border-[#3D3C3C] p-5 first:mt-0 my-2 last:mb-0">
           <div>
             <div class="font-bold">
               CIMB Credit Card and Personal Loan</div>
@@ -394,9 +396,8 @@
           <div class="border border-black p-1 my-2 rounded-lg w-fit">
             <div class="font-bold text-[10px]">Arduino</div>
           </div>
-        </div>
+        </div> -->
       </div>
-
     </div>
   </div>
 
@@ -418,6 +419,49 @@ useHead({
 const { locale } = useI18n();
 
 const route = useRoute()
+
+const projects = ref([
+  {
+    title: "Adonara Dashboard",
+    descriptionKey: "project.adonara_dashboard",
+    technology: "Nuxt",
+  },
+  {
+    title: "Landing Privy",
+    descriptionKey: "project.landing_privy",
+    technology: "Nuxt",
+  },
+  {
+    title: "CIMB Credit Card and Personal Loan",
+    descriptionKey: "project.ccpl",
+    technology: "Nuxt",
+  },
+  {
+    title: "App Tele Privy",
+    descriptionKey: "project.App_tele_privy",
+    technology: "Next",
+  },
+  {
+    title: "Ronin Dashboard",
+    descriptionKey: "project.ronin",
+    technology: "Nuxt",
+  },
+  {
+    title: "BNI Regsand",
+    descriptionKey: "project.bni",
+    technology: "Nuxt",
+  },
+  {
+    title: "Ceisa 4.0",
+    descriptionKey: "project.ceisa",
+    technology: "React",
+  },
+  {
+    title: "Alat Monitoring Suhu di Panel Gardu Induk",
+    descriptionKey: "project.gardu",
+    technology: "Arduino",
+  },
+])
 
 async function generatePDF() {
   const cv = locale.value === 'en' ? 'cv_syahendra_en.pdf' : 'cv_syahendra_id.pdf'
