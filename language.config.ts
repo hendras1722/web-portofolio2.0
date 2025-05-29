@@ -32,6 +32,9 @@ export default defineI18nConfig(() => ({
         bni: 'Maintenance dashboard and landing for applying credit card bank BNI',
         ceisa: 'Application for taxation from customs',
         gardu: 'Temperature monitoring device for wonogiri substation panel.',
+        App_tele_privy: 'Apps for document verification and data validation',
+        adonara_dashboard:
+          'Similar to the tele privy app this is the updated version but more updated',
       },
     },
     id: {
@@ -64,6 +67,9 @@ export default defineI18nConfig(() => ({
         bni: 'Dasbor pemeliharaan dan arahan untuk pengajuan kartu kredit bank BNI',
         ceisa: 'Aplikasi untuk permohonan perpajakan dari bea cukai',
         gardu: 'Alat pemantau suhu untuk panel gardu induk wonogiri.',
+        App_tele_privy: 'Apps untuk memverifikasi document serta validasi data',
+        adonara_dashboard:
+          'Mirip seperti app tele privy ini versi pembaruannya tapi lebih update',
       },
     },
   },
