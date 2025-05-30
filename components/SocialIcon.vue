@@ -42,7 +42,7 @@
         'w-[50px]': isMobile === -70
       }" src="/instagram.svg" />
     </a>
-    <a href="hhttps://github.com/hendras1722" target="_blank">
+    <a href="https://github.com/hendras1722" target="_blank">
       <img alt="icon" v-motion :initial="{
         y: isMobile,
         opacity: 0,
