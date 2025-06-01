@@ -11,7 +11,7 @@ export default defineI18nConfig(() => ({
       },
       description: {
         paragraph_1:
-          'I am Muhammad Syahendra Anindyantoro a Frontend Developer or Frontend Engineer with a Bachelor`s degree in Electrical Engineering and 4 years of experience in IT. I have expertise in using modern technologies such as React and Vue to develop interactive, detailed, and high-quality user interfaces.',
+          'I am Muhammad Syahendra Anindyantoro a Frontend Developer or Frontend Engineer with a Bachelor`s degree in Electrical Engineering and 5 years of experience in IT. I have expertise in using modern technologies such as React and Vue to develop interactive, detailed, and high-quality user interfaces.',
         paragraph_2:
           'My strengths are that I am a hardworking person. I like teams because I can get the job done quickly. I`m a fast learner, and I like challenges. however, I`m not a very good speaker so I`m used to getting to know and building teams so I can communicate well.',
         paragraph_3:
@@ -45,7 +45,7 @@ export default defineI18nConfig(() => ({
       },
       description: {
         paragraph_1:
-          'Saya Muhammad Syahendra Anindyantoro seorang Frontend Developer atau Frontend Engineer dengan latar belakang pendidikan Sarjana Teknik Elektro dan pengalaman selama 4 tahun di dunia IT. Saya memiliki keahlian dalam menggunakan teknologi modern seperti React dan Vue untuk mengembangkan antarmuka pengguna yang interaktif, detail, dan berkualitas tinggi.',
+          'Saya Muhammad Syahendra Anindyantoro seorang Frontend Developer atau Frontend Engineer dengan latar belakang pendidikan Sarjana Teknik Elektro dan pengalaman selama 5 tahun di dunia IT. Saya memiliki keahlian dalam menggunakan teknologi modern seperti React dan Vue untuk mengembangkan antarmuka pengguna yang interaktif, detail, dan berkualitas tinggi.',
         paragraph_2:
           'Kelebihan saya orangnya pekerja keras. saya menyukai tim karna dapat menyelesaikan pekerjaan dengan cepat. Saya orangnya berdapatasi dengan cepat. dan juga menyukai tantangan. namun kekurangannya saya orangnya tidak pandai berbicara maka dari itu saya dibiasakan untuk mengenal dan membuat tim agar bisa berkomunikasi dengan baik.',
         paragraph_3:
