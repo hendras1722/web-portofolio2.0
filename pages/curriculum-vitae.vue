@@ -93,7 +93,7 @@
               <div class="font-bold">Frontend Engineer</div>
               <div class="my-1">PrivyID · Full-time</div>
               <div class="my-1 text-[12px] text-[#3D3C3C]">
-                Jul 2021 - Present · 3 yrs 11 mos
+                Jul 2021 - 2025 · 4 yrs 11 mos
               </div>
               <div class="text-[12px] text-[#3D3C3C]">Daerah Istimewa Yogyakarta, Indonesia · On-site</div>
               <div class="text-[12px]">
@@ -164,7 +164,7 @@
               <div class="font-bold">Frontend Engineer</div>
               <div class="my-1">PrivyID · Full-time</div>
               <div class="my-1 text-[12px] text-[#3D3C3C]">
-                Jul 2021 - Present · 3 yrs 11 mos
+                Jul 2021 - 2025 · 4 yrs 11 mos
               </div>
               <div class="text-[12px] text-[#3D3C3C]">Daerah Istimewa Yogyakarta, Indonesia · On-site</div>
               <div class="text-[12px]">
