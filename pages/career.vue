@@ -183,8 +183,8 @@ const dataCertificate = ref([
 const dataExperience = [
   {
     title: 'Privy - Frontend Engineer',
-    date: '2021-NOW',
-    desc: `My career in privy for 3 years where I maintain and hold CIMB project
+    date: '2021-2025',
+    desc: `My career in privy for 4 years where I maintain and hold CIMB project
           (Credit Card and Personal Loan). In addition, I helped projects in the
           BNI section, CIMB Octo Server, Internal Application from Privy. using
           javascript language (Nuxt)`,
