@@ -82,7 +82,7 @@
 
         <!-- Right side - Image positioned at bottom -->
         <div class="flex-shrink-0 relative">
-          <div id="container" v-show="isDark" class="relative">
+          <!-- <div id="container" v-show="isDark" class="relative">
             <div id="pillow" class="absolute">
               <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">Z</div>
               <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">Z</div>
@@ -92,9 +92,8 @@
               <div class="corner bottom-right"></div>
               <div class="corner bottom-left"></div>
             </div>
-          </div>
-          <img alt="me" v-show="isDark" id="me" class="lg:w-fit lg:h-[395px] block" :src="useAsset('me_sleep.png')" />
-          <img alt="me" v-show="!isDark" id="me" class="lg:w-fit lg:h-[395px] block" :src="useAsset('me.png')" />
+          </div> -->
+          <img alt="me" id="me" class="lg:w-fit lg:h-[495px] block" :src="useAsset('me_cartoon.png')" />
         </div>
       </div>
       <div v-else class="mb-28">
