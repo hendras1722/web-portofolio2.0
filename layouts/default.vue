@@ -1,6 +1,6 @@
 <template>
   <div :class="[
-    route.path === '/' &&
+  (route.path === '/en' || route.path === '/id' || route.path === '/' )&&
     `lg:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover lg:bg-center bg-left bg-no-repeat min-h-lvh`,
   ]">
     <div class="relative col-span-12 lg:hidden" ref="target">
