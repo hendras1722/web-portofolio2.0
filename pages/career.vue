@@ -143,6 +143,9 @@ const projectList = [{
 }, {
   img: '/6.react.png',
   stack: 'react'
+}, {
+  img: '/7.vue.png',
+  stack: 'vue'
 }]
 
 function handleTitle(item: string) {
@@ -163,6 +166,9 @@ function handleTitle(item: string) {
   }
   if (item.includes('6')) {
     return 'CEISA 4.0'
+  }
+  if (item.includes('7')) {
+    return 'Adonara Dashboard'
   }
 }
 
