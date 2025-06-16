@@ -114,7 +114,7 @@
               <p class="text-[12px] mt-3 ">Stack used:</p>
               <div class="text-[12px]">
                 <ul class="list-disc ml-5">
-                  <li>Next dan Nuxt 2/3</li>
+                  <li>Next dan Nuxt 2 & Nuxt 3</li>
                   <li>Gitlab</li>
                   <li>Tailwinds</li>
                   <li>Vuetify</li>
@@ -211,7 +211,7 @@
               <p class="text-[12px] mt-3 ">Stack used:</p>
               <div class="text-[12px]">
                 <ul class="list-disc ml-5">
-                  <li>Next dan Nuxt 2/3</li>
+                  <li>Next dan Nuxt 2 & Nuxt 3</li>
                   <li>Gitlab</li>
                   <li>Tailwinds</li>
                   <li>Vuetify</li>
