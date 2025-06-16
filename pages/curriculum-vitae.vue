@@ -424,17 +424,17 @@ const projects = ref([
   {
     title: "Adonara Dashboard",
     descriptionKey: "project.adonara_dashboard",
-    technology: "Nuxt",
+    technology: "Nuxt 3",
   },
   {
     title: "Landing Privy",
     descriptionKey: "project.landing_privy",
-    technology: "Nuxt",
+    technology: "Nuxt 3",
   },
   {
     title: "CIMB Credit Card and Personal Loan",
     descriptionKey: "project.ccpl",
-    technology: "Nuxt",
+    technology: "Nuxt 2",
   },
   {
     title: "App Tele Privy",
@@ -444,17 +444,17 @@ const projects = ref([
   {
     title: "Ronin Dashboard",
     descriptionKey: "project.ronin",
-    technology: "Nuxt",
+    technology: "Nuxt 3",
   },
   {
     title: "BNI Regsand",
     descriptionKey: "project.bni",
-    technology: "Nuxt",
+    technology: "Nuxt 2",
   },
   {
     title: "Ceisa 4.0",
     descriptionKey: "project.ceisa",
-    technology: "React",
+    technology: "ReactJS",
   },
   {
     title: "Alat Monitoring Suhu di Panel Gardu Induk",
