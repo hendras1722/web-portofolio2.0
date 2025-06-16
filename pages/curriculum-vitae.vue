@@ -314,7 +314,7 @@
             {{ $t('project.octo') }}
           </div>
           <div class="border border-black p-1 my-2 rounded-lg w-fit">
-            <div class="font-bold text-[10px]">Nuxt</div>
+            <div class="font-bold text-[10px]">Nuxt 2</div>
           </div>
         </div>
         <div v-for="(project, index) in projects" :key="index">
