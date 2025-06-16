@@ -111,6 +111,16 @@
                   <li> mengikuti perkembangan teknologi yang sedang berkembang</li>
                 </ul>
               </div>
+              <p class="text-[12px] mt-3 ">Stack used:</p>
+              <div class="text-[12px]">
+                <ul class="list-disc ml-5">
+                  <li>Next dan Nuxt 2/3</li>
+                  <li>Gitlab</li>
+                  <li>Tailwinds</li>
+                  <li>Vuetify</li>
+                  <li>Pinia and Vuex state management</li>
+                </ul>
+              </div>
             </div>
 
             <div class="grid place-items-center my-5">
@@ -135,6 +145,16 @@
                     <li> Mengembangkan modul oleh bea cukai </li>
                     <li> Aplikasi Pemeliharaan CEISA </li>
                     <li> Mengembangkan modul Perijinan, dan Manifes bea cukai</li>
+                  </ul>
+                </div>
+                <p class="text-[12px] mt-3 ">Stack used:</p>
+                <div class="text-[12px]">
+                  <ul class="list-disc ml-5">
+                    <li>React JS</li>
+                    <li>Gitlab</li>
+                    <li>Tailwinds</li>
+                    <li>Antd Design</li>
+                    <li>Redux</li>
                   </ul>
                 </div>
               </div>
@@ -188,6 +208,16 @@
                   <li> stay up to date on emerging technologies</li>
                 </ul>
               </div>
+              <p class="text-[12px] mt-3 ">Stack used:</p>
+              <div class="text-[12px]">
+                <ul class="list-disc ml-5">
+                  <li>Next dan Nuxt 2/3</li>
+                  <li>Gitlab</li>
+                  <li>Tailwinds</li>
+                  <li>Vuetify</li>
+                  <li>Pinia and Vuex state management</li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="grid place-items-center my-5">
@@ -210,6 +240,16 @@
                   <li> Develop module by bea cukai </li>
                   <li> Maintenance Application CEISA </li>
                   <li> Develop module Perijinan, and Manifest bea cukai</li>
+                </ul>
+              </div>
+              <p class="text-[12px] mt-3 ">Stack used:</p>
+              <div class="text-[12px]">
+                <ul class="list-disc ml-5">
+                  <li>React JS</li>
+                  <li>Gitlab</li>
+                  <li>Tailwinds</li>
+                  <li>Antd Design</li>
+                  <li>Redux</li>
                 </ul>
               </div>
             </div>
