@@ -58,6 +58,8 @@ export default defineI18nConfig(() => ({
         ums: 'IPK 3.39, Lulusan Sarjana Teknik Elektro Arus Kuat Universitas Muhammadiyah Surakarta',
       },
       project: {
+        seller_dashboard :  'Portofolio ini menggunakan Next 15 dengan fitur auth login, register dan create article dan category',
+        auth: 'Portofolio ini dibuat menggunakan ExpressJS, dan hanya fitur auth login, register, dan logout.',
         octo: 'Memperbaiki bug landing octo saver',
         landing_privy:
           'Perbarui kata-kata dan perbarui situs web yang diperlukan',

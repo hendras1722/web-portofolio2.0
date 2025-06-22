@@ -111,7 +111,7 @@
                   <li> mengikuti perkembangan teknologi yang sedang berkembang</li>
                 </ul>
               </div>
-              <p class="text-[12px] mt-3 ">Stack used:</p>
+              <p class="text-[12px] mt-3 ">Menggunakan stack:</p>
               <div class="text-[12px]">
                 <ul class="list-disc ml-5">
                   <li>Next dan Nuxt 2 & Nuxt 3</li>
@@ -147,7 +147,7 @@
                     <li> Mengembangkan modul Perijinan, dan Manifes bea cukai</li>
                   </ul>
                 </div>
-                <p class="text-[12px] mt-3 ">Stack used:</p>
+                <p class="text-[12px] mt-3 ">Menggunakan stack:</p>
                 <div class="text-[12px]">
                   <ul class="list-disc ml-5">
                     <li>React JS</li>
@@ -346,17 +346,6 @@
             <div class="border-2 rounded border-[#3D3C3C] w-full"></div>
           </div>
         </div>
-        <div class="border rounded-lg border-[#3D3C3C] p-5 first:mt-0 my-2 last:mb-0">
-          <div>
-            <div class="font-bold">CIMB Octo Saver</div>
-          </div>
-          <div class="text-[12px]">
-            {{ $t('project.octo') }}
-          </div>
-          <div class="border border-black p-1 my-2 rounded-lg w-fit">
-            <div class="font-bold text-[10px]">Nuxt 2</div>
-          </div>
-        </div>
         <div v-for="(project, index) in projects" :key="index">
           <div class="border rounded-lg border-[#3D3C3C] p-5  mt-2  last:mb-0">
             <div>
@@ -366,6 +355,9 @@
             </div>
             <div class="text-[12px]">
               {{ $t(project.descriptionKey) }}
+              <span v-if="project.link">
+                <a :href="project.link" target="_blank" class="text-blue-500 hover:underline">Documentation</a>
+              </span>
             </div>
             <div class="border border-black p-1 my-2 rounded-lg w-fit">
               <div class="font-bold text-[10px]">{{ project.technology }}</div>
@@ -462,6 +454,24 @@ const route = useRoute()
 
 const projects = ref([
   {
+    title: "Test Seller Backend Express",
+    descriptionKey: "Ini adalah backend untuk test seller",
+    link: "https://github.com/hendras1722/backend_sp",
+    technology: "ExpressJS",
+  },
+  {
+    title: "Test Seller Dashboard",
+    descriptionKey: "project.seller_dashboard",
+    link: "https://test-seller.syahendra.com/",
+    technology: "Next 15",
+  },
+  {
+    title: "Auth",
+    descriptionKey: "project.auth",
+    link: "https://auth.syahendra.com/docs",
+    technology: "ExpressJS & mongodb",
+  },
+  {
     title: "Adonara Dashboard",
     descriptionKey: "project.adonara_dashboard",
     technology: "Nuxt 3",
@@ -470,6 +480,11 @@ const projects = ref([
     title: "Landing Privy",
     descriptionKey: "project.landing_privy",
     technology: "Nuxt 3",
+  },
+  {
+    title: "CIMB Octo Saver",
+    descriptionKey: "project.octo",
+    technology: "Nuxt 2",
   },
   {
     title: "CIMB Credit Card and Personal Loan",
