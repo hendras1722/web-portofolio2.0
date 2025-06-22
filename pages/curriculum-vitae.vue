@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="flex flex-col min-h-screen my-2" ref="refHtml">
     <div v-if="!route.query.download"
       class="fixed left-5 z-10 flex items-center bg-gray-100 h-fit px-2 py-5 rounded-lg border border-gray-200"
@@ -370,71 +370,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="border rounded-lg border-[#3D3C3C] p-5 first:mt-0 my-2 last:mb-0">
-          <div>
-            <div class="font-bold">
-              CIMB Credit Card and Personal Loan</div>
-          </div>
-          <div class="text-[12px]">
-            {{ $t('project.ccpl') }}
-
-          </div>
-          <div class="border border-black p-1 my-2 rounded-lg w-fit">
-            <div class="font-bold text-[10px]">Nuxt</div>
-          </div>
-        </div>
-        <div class="border rounded-lg border-[#3D3C3C] p-5 first:mt-0 my-2 last:mb-0">
-          <div>
-            <div class="font-bold">
-              Ronin Dashboard </div>
-          </div>
-          <div class="text-[12px]">
-            {{ $t('project.ronin') }}
-
-          </div>
-          <div class="border border-black p-1 my-2 rounded-lg w-fit">
-            <div class="font-bold text-[10px]">Nuxt</div>
-          </div>
-        </div>
-        <div class="border rounded-lg border-[#3D3C3C] p-5 first:mt-0 my-2 last:mb-0">
-          <div>
-            <div class="font-bold">
-              BNI Regsand </div>
-          </div>
-          <div class="text-[12px]">
-            {{ $t('project.bni') }}
-
-          </div>
-          <div class="border border-black p-1 my-2 rounded-lg w-fit">
-            <div class="font-bold text-[10px]">Nuxt</div>
-          </div>
-        </div>
-        <div class="border rounded-lg border-[#3D3C3C] p-5 first:mt-0 my-2 last:mb-0">
-          <div>
-            <div class="font-bold">
-              Ceisa 4.0 </div>
-          </div>
-          <div class="text-[12px]">
-            {{ $t('project.ceisa') }}
-
-          </div>
-          <div class="border border-black p-1 my-2 rounded-lg w-fit">
-            <div class="font-bold text-[10px]">React</div>
-          </div>
-        </div>
-        <div class="border rounded-lg border-[#3D3C3C] p-5 first:mt-0 my-2 last:mb-0">
-          <div>
-            <div class="font-bold">
-              Alat Monitoring Suhu di Panel Gardu Induk </div>
-          </div>
-          <div class="text-[12px]">
-            {{ $t('project.gardu') }}
-
-          </div>
-          <div class="border border-black p-1 my-2 rounded-lg w-fit">
-            <div class="font-bold text-[10px]">Arduino</div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -639,4 +574,227 @@ function stopDrag(event: any) {
     document.removeEventListener("touchend", stopDrag);
   }
 }
+</script> -->
+
+
+<template>
+  <div class="fixed bottom-0 right-0 mr-5 mb-5 h-full z-10" v-if="!route.query.download">
+    <button @click="generatePDF"
+      class="absolute text-nowrap bottom-0 right-0 border rounded-lg  p-5 text-white bg-green-500  shadow-lg">
+      Download PDF
+    </button>
+  </div>
+  <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg max-w-3xl" v-if="!route.query.download">
+    <div class="flex justify-end space-x-4 mb-6">
+      <button class="px-4 py-1 rounded border text-sm"
+        :class="locale === 'id' ? 'bg-blue-600 text-white' : 'bg-gray-200'" @click="setLanguage('id')">
+        Indonesia
+      </button>
+      <button class="px-4 py-1 rounded border text-sm"
+        :class="locale === 'en' ? 'bg-blue-600 text-white' : 'bg-gray-200'" @click="setLanguage('en')">
+        English
+      </button>
+    </div>
+
+    <header class="mb-6 text-center">
+      <h1 class="text-3xl font-bold">{{ $t('name') }}</h1>
+      <p class="text-gray-600">{{ $t('title') }}</p>
+      <div class="mt-2 flex justify-center space-x-4 text-gray-500">
+        <a :href="locationLink"><i class="fas fa-map-marker-alt"></i> {{ $t('location') }}</a>
+        <a :href="websiteLink" target="_blank"><i class="fas fa-globe"></i> {{ websiteText }}</a>
+        <a :href="emailLink"><i class="fas fa-envelope"></i> {{ email }}</a>
+        <a :href="phoneLink"><i class="fas fa-phone"></i> {{ phone }}</a>
+      </div>
+    </header>
+
+    <section class="mb-6">
+      <h2 class="text-2xl font-semibold border-b pb-2">{{ $t('aboutTitle') }}</h2>
+      <div class="px-3">
+        <p class="mt-2 text-gray-700 text-justify text-pretty">{{ $t('paragraph_1') }}</p>
+        <p class="mt-2 text-gray-700 text-justify text-pretty">{{ $t('paragraph_2') }}</p>
+        <p class="mt-2 text-gray-700 text-justify text-pretty">{{ $t('paragraph_3') }}</p>
+
+      </div>
+    </section>
+
+
+    <section class="mb-6">
+      <h2 class="text-2xl font-semibold border-b pb-2">{{ $t('workTitle') }}</h2>
+      <div v-for="(job, index) in work" :key="index" class="mb-4 px-3">
+        <h2 class="text-lg font-semibold">{{ job.role }}</h2>
+        <p class="text-sm text-gray-500">{{ job.location }} • {{ job.period }}</p>
+        <p class="text-sm">{{ job.company }} – {{ job.type }}</p>
+        <p class="text-sm mt-1">{{ job.desc }}</p>
+        <ul class="text-sm text-gray-600 list-disc list-inside mt-2" v-if="job.stackUsed">
+          <li v-for="(tech, i) in job.stackUsed" :key="i">{{ tech }}</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold border-b pb-2">{{ $t('educationTitle') }}</h2>
+      <div v-for="(edu, idx) in education" :key="idx" class="mt-4 px-3">
+        <h3 class="text-lg font-bold">{{ edu.institution }}</h3>
+        <p class="text-gray-500">{{ edu.period }}</p>
+        <p class="text-gray-700">{{ $t(edu.degree) }}</p>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <h2 class="text-2xl font-semibold border-b pb-2">{{ $t('skillsTitle') }}</h2>
+      <ul class="flex flex-wrap mt-2 space-x-2 space-y-3 text-sm px-3">
+        <li v-for="(skill, s) in skills" :key="s" class="px-3 py-1 bg-gray-200 rounded-full text-gray-700 text-pretty">
+          {{ skill }}
+        </li>
+      </ul>
+    </section>
+
+    <section class="mt-6">
+      <h2 class="text-2xl font-semibold border-b pb-2">Project</h2>
+      <div class="mt-4 px-3">
+        <div v-for="(desc, key) in projects" :key="key" class="mt-4 border-b border-gray-200 pb-4">
+          <h4 class="text-lg  capitalize text-gray-800 font-bold">{{ desc.title }}</h4>
+          <p class="text-gray-600 mt-1">{{ $t(desc.descriptionKey) }} <span v-if="desc.link"><a :href="desc.link"
+                target="_blank" class="text-blue-500 hover:underline">Documentation</a></span></p>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { locale,tm,t } = useI18n()
+function setLanguage(lang) {
+  locale.value = lang
+}
+
+definePageMeta({
+  layout: 'without-layout',
+  title: 'Curriculum Vitae-Muh Syahendra A',
+  name: 'cv',
+  keepalive: true,
+})
+
+useHead({
+  title: 'Curriculum Vitae-Muh Syahendra A',
+})
+
+const locationLink = ref('https://www.google.com/maps?q=Yogyakarta+Indonesia')
+const websiteText = ref('syahendra.com')
+const websiteLink = ref('https://syahendra.com')
+const email = ref('muhsyahendraa1722@gmail.com')
+const emailLink = ref('mailto:muhsyahendraa1722@gmail.com')
+const phone = ref('+6289663604258')
+const phoneLink = ref('tel:+6289663604258')
+const route = useRoute()
+
+
+const work = computed(() => tm('workExperiences', { returnObjects: true }))
+
+const education = ref([
+  { institution: 'Pijar Camp (ex Arkademy)', period: '2020 - 2021', degree: 'FullStack Developer, Teknologi Informasi' },
+  { institution: 'Institut Teknologi Bandung', period: '2019 - 2019', degree: 'Digital Talent Scholarship‑Internet of Things' },
+  { institution: 'Muhammadiyah University of Surakarta', period: '2014 - 2018', degree: 'education.ums' },
+])
+
+const skills = ref(['React', 'Vue', 'Next.js', 'Nuxt.js', 'HTML', 'CSS', 'Tailwind CSS', 'Git', 'Redux', 'Vuetify', 'Nuxt Ui', 'Pinia', 'JavaScript', 'TypeScript', 'PostgreSQL', 'MySQL', 'Firebase', 'Figma', 'Jira', 'Postman', 'GitLab', 'Bootstrap', 'Vite', 'Node.js', 'Express.js', 'MongoDB', 'Go', 'HTML5', 'CSS3'])
+
+
+const projects = ref([
+  {
+    title: "Test Seller Backend Express",
+    descriptionKey: "Ini adalah backend untuk test seller",
+    link: "https://github.com/hendras1722/backend_sp",
+    technology: "ExpressJS",
+  },
+  {
+    title: "Test Seller Dashboard",
+    descriptionKey: "project.seller_dashboard",
+    link: "https://test-seller.syahendra.com/",
+    technology: "Next 15",
+  },
+  {
+    title: "Auth",
+    descriptionKey: "project.auth",
+    link: "https://auth.syahendra.com/docs",
+    technology: "ExpressJS & mongodb",
+  },
+  {
+    title: "Adonara Dashboard",
+    descriptionKey: "project.adonara_dashboard",
+    technology: "Nuxt 3",
+  },
+  {
+    title: "Landing Privy",
+    descriptionKey: "project.landing_privy",
+    technology: "Nuxt 3",
+  },
+  {
+    title: "CIMB Octo Saver",
+    descriptionKey: "project.octo",
+    technology: "Nuxt 2",
+  },
+  {
+    title: "CIMB Credit Card and Personal Loan",
+    descriptionKey: "project.ccpl",
+    technology: "Nuxt 2",
+  },
+  {
+    title: "App Tele Privy",
+    descriptionKey: "project.App_tele_privy",
+    technology: "Next",
+  },
+  {
+    title: "Ronin Dashboard",
+    descriptionKey: "project.ronin",
+    technology: "Nuxt 3",
+  },
+  {
+    title: "BNI Regsand",
+    descriptionKey: "project.bni",
+    technology: "Nuxt 2",
+  },
+  {
+    title: "Ceisa 4.0",
+    descriptionKey: "project.ceisa",
+    technology: "ReactJS",
+  },
+  {
+    title: "Alat Monitoring Suhu di Panel Gardu Induk",
+    descriptionKey: "project.gardu",
+    technology: "Arduino",
+  },
+])
+
+async function generatePDF() {
+  const cv = locale.value === 'en' ? 'cv_syahendra_en.pdf' : 'cv_syahendra_id.pdf'
+  const doc = await fetch(locale.value + '/' + cv + '?download=true').then((res) => res.blob())
+  const file = new Blob([doc], { type: 'application/pdf' })
+  const fileURL = URL.createObjectURL(file)
+  const link = document.createElement('a')
+  link.href = fileURL
+  link.download = cv;
+  link.target = '_blank'
+  link.click()
+  URL.revokeObjectURL(fileURL)
+}
 </script>
+
+<style scoped>
+.container {
+  font-family: 'Inter', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+</style>
+
