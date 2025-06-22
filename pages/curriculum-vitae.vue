@@ -34,6 +34,12 @@
         <h1 class="md:text-5xl text-2xl font-bold">Muhammad Syahendra Anindyantoro</h1>
       </div>
       <small>Yogyakarta, {{ new Date().getFullYear() }}</small>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-[12px] font-semibold">Email: </span>
+          <a href="mailto:muhsyahendraa1722@gmail.com" class="text-[12px] font-semibold">muhsyahendraa1722@gmail.com</a>
+        </div>
+      </div>
       <div class="text-[12px] font-semibold">
         {{ $t('me.phone') }}
       </div>
