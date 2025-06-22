@@ -584,8 +584,8 @@ function stopDrag(event: any) {
       Download PDF
     </button>
   </div>
-  <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg max-w-3xl" v-if="!route.query.download">
-    <div class="flex justify-end space-x-4 mb-6">
+  <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg max-w-3xl" >
+    <div class="flex justify-end space-x-4 mb-6" v-if="!route.query.download">
       <button class="px-4 py-1 rounded border text-sm"
         :class="locale === 'id' ? 'bg-blue-600 text-white' : 'bg-gray-200'" @click="setLanguage('id')">
         Indonesia
@@ -772,7 +772,7 @@ const projects = ref([
 
 async function generatePDF() {
   const cv = locale.value === 'en' ? 'cv_syahendra_en.pdf' : 'cv_syahendra_id.pdf'
-  const doc = await fetch(locale.value + '/' + cv + '?download=true').then((res) => res.blob())
+  const doc = await fetch('/' + 'cv_syahendra_' + locale.value + '.pdf').then((res) => res.blob())
   const file = new Blob([doc], { type: 'application/pdf' })
   const fileURL = URL.createObjectURL(file)
   const link = document.createElement('a')
