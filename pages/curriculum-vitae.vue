@@ -584,7 +584,7 @@ function stopDrag(event: any) {
       Download PDF
     </button>
   </div>
-  <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg max-w-3xl" >
+  <div class="container mx-auto p-6 bg-white rounded-lg " :class="{ 'shadow-lg max-w-3xl': !route.query.download, 'p-3' : route.query.download }">
     <div class="flex justify-end space-x-4 mb-6" v-if="!route.query.download">
       <button class="px-4 py-1 rounded border text-sm"
         :class="locale === 'id' ? 'bg-blue-600 text-white' : 'bg-gray-200'" @click="setLanguage('id')">
