@@ -54,6 +54,16 @@
         </div>
       </div>
 
+      <section>
+        <ul class="list-disc ml-8 text-[14px] mt-2">
+          <li v-for="(item, index) in porjectMe" :key="index"><span class="font-bold">{{ item.label }}</span> - <a
+              class="text-blue-500" :href="item.link" target="_blank">link</a> <span class="text-gray-400">({{
+                item.technology }})</span></li>
+        </ul>
+
+      </section>
+
+
       <div class="font-bold lg:text-[61px] mt-[86px] w-full text-center text-[#212020] mb-[109px] dark:text-white">
         Certificate License
       </div>
@@ -239,6 +249,20 @@ const dataProject = ref([
   'Ronin Dashboard',
   'Adonara Dashboard',
 ])
+
+const porjectMe = reactive([{
+  label: 'Auth Dummy',
+  link: 'https://auth.syahendra.com/docs',
+  technology: 'ExpressJS & mongodb',
+}, {
+  label: 'Operator Provider',
+  link: 'https://provider.syahendra.com',
+  technology: 'ExpressJS',
+}, {
+  label: 'Dashboard Menu Configuration',
+  link: 'http://vcog44ocsk4kwscsgokwg80g.103.181.182.113.sslip.io/login',
+  technology: 'Next 15',
+}])
 
 onMounted(() => {
   let j: any[] = []

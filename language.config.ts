@@ -131,8 +131,11 @@ export default defineI18nConfig(() => ({
       email: 'Email',
       website: 'Website',
       project: {
+        operator:
+          'This project is for checking provider number and prefix around the world',
+        seller_be: 'This project was built using ExpressJS, prisma, posgresql',
         seller_dashboard:
-          'This project was built using Next.js version 15 and includes authentication features such as login, registration, and the ability to create articles and categories.',
+          'This project was built using Next.js version 15 and includes authentication features such as login, registration, and the ability to create Menu and Menu management.',
         auth: 'This project was developed using ExpressJS, featuring a simple authentication system with login, registration, and logout functionality.',
         octo: 'Maintenance landing octo saver',
         landing_privy: 'Update wording and update needed website privy',
@@ -202,6 +205,9 @@ export default defineI18nConfig(() => ({
       email: 'Email',
       website: 'Situs Web',
       project: {
+        operator:
+          'Portofolio ini untuk cek nomer provider dan prefix diberbagai negara didunia',
+        seller_be: 'Portofolio ini menggunakan ExpressJS, prisma, posgresql',
         seller_dashboard:
           'Portofolio ini menggunakan Next 15 dengan fitur auth login, register dan create article dan category',
         auth: 'Portofolio ini dibuat menggunakan ExpressJS, dan hanya fitur auth login, register, dan logout.',

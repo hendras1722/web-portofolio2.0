@@ -584,7 +584,8 @@ function stopDrag(event: any) {
       Download PDF
     </button>
   </div>
-  <div class="container mx-auto p-6 bg-white rounded-lg " :class="{ 'shadow-lg max-w-3xl': !route.query.download, 'p-3' : route.query.download }">
+  <div class="container mx-auto p-6 bg-white rounded-lg "
+    :class="{ 'shadow-lg max-w-3xl': !route.query.download, 'p-3': route.query.download }">
     <div class="flex justify-end space-x-4 mb-6" v-if="!route.query.download">
       <button class="px-4 py-1 rounded border text-sm"
         :class="locale === 'id' ? 'bg-blue-600 text-white' : 'bg-gray-200'" @click="setLanguage('id')">
@@ -667,7 +668,7 @@ function stopDrag(event: any) {
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-const { locale,tm,t } = useI18n()
+const { locale, tm, t } = useI18n()
 function setLanguage(lang) {
   locale.value = lang
 }
@@ -706,15 +707,21 @@ const skills = ref(['React', 'Vue', 'Next.js', 'Nuxt.js', 'HTML', 'CSS', 'Tailwi
 
 const projects = ref([
   {
+    title: "Operator Provider",
+    descriptionKey: "project.operator",
+    link: "https://provider.syahendra.com",
+    technology: "ExpressJS",
+  },
+  {
     title: "Test Seller Backend Express",
-    descriptionKey: "Ini adalah backend untuk test seller",
+    descriptionKey: "project.seller_be",
     link: "https://github.com/hendras1722/backend_sp",
     technology: "ExpressJS",
   },
   {
-    title: "Test Seller Dashboard",
+    title: "Dashboard Configuration",
     descriptionKey: "project.seller_dashboard",
-    link: "https://test-seller.syahendra.com/",
+    link: "http://vcog44ocsk4kwscsgokwg80g.103.181.182.113.sslip.io/login",
     technology: "Next 15",
   },
   {
@@ -797,4 +804,3 @@ a:hover {
   text-decoration: underline;
 }
 </style>
-
