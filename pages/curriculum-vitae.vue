@@ -626,7 +626,9 @@ function stopDrag(event: any) {
         <p class="text-sm text-gray-500">{{ job.location }} • {{ job.period }}</p>
         <p class="text-sm">{{ job.company }} – {{ job.type }}</p>
         <p class="text-sm mt-1">{{ job.desc }}</p>
-        <ul class="text-sm text-gray-600 list-disc list-inside mt-2" v-if="job.stackUsed">
+        <p class="text-sm mt-1" v-html="job.project"></p>
+        <p class="text-sm mt-1" v-if="job.stackUsed">Stack :</p>
+        <ul class="text-sm text-gray-600 list-disc list-inside mt-2">
           <li v-for="(tech, i) in job.stackUsed" :key="i">{{ tech }}</li>
         </ul>
       </div>
