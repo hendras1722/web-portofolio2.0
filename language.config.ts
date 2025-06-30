@@ -165,7 +165,7 @@ export default defineI18nConfig(() => ({
         {
           role: 'Frontend Engineer',
           location: 'Yogyakarta, Indonesia',
-          period: 'Jul 2021 - Des 2025',
+          period: 'Jul 2021 - Jun 2025',
           company: 'Privy ID',
           type: 'Penuh waktu',
           desc: 'Mengembangkan halaman web interaktif menggunakan Vue dan React.',
