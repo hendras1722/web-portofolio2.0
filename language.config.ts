@@ -91,7 +91,7 @@ export default defineI18nConfig(() => ({
         {
           role: 'Frontend Engineer',
           location: 'Yogyakarta, Indonesia',
-          period: 'Jul 2021 - Dec 2025',
+          period: 'Jul 2021 - Jun 2025',
           company: 'Privy ID',
           type: 'Full time',
           desc: 'Developed interactive web pages using Vue and React.',
@@ -104,21 +104,11 @@ export default defineI18nConfig(() => ({
             'Pinia & Vuex',
             'Jira',
           ],
-          project: `
-            <div class="text-[12px]">
-              Used markup languages like HTML to build user-friendly web pages
-              <ul class="list-disc ml-5">
-                <li>Optimized applications for maximum speed</li>
-                <li>Created and implemented the design from the UI/UX team</li>
-                <li>Built and implemented UI/UX team designs</li>
-                <li>Collected feedback forms and built solutions for users and customers</li>
-                <li>Assisted backend developers with coding and troubleshooting</li>
-                <li>Performed UI testing to optimize performance</li>
-                <li>Fixed bugs or issues encountered during application trial phases</li>
-                <li>Prepared applications for release processes</li>
-                <li>Kept up with emerging technologies</li>
-              </ul>
-            </div>`,
+          project: {
+            title: '',
+            paragraph:
+              'Used markup languages like HTML to build user-friendly web pages_Optimized applications for maximum speed_Created and implemented the design from the UI/UX team_Built and implemented UI/UX team designs_Collected feedback forms and built solutions for users and customers_Assisted backend developers with coding and troubleshooting_Performed UI testing to optimize performance_Fixed bugs or issues encountered during application trial phases_Prepared applications for release processes_Kept up with emerging technologies',
+          },
         },
         {
           role: 'Frontend Developer',
@@ -134,16 +124,11 @@ export default defineI18nConfig(() => ({
             'Antd Design',
             'Redux',
           ],
-          project: `
-            <div class="text-[12px]">
-              On-site Customs CEISA 4.0.
-              <ul class="list-disc ml-5">
-                <li>Developed modules for the customs office</li>
-                <li>Maintained the CEISA application</li>
-                <li>Developed licensing and manifest modules for customs</li>
-              </ul>
-            </div>
-          `,
+          project: {
+            title: '',
+            paragraph:
+              'On-site Customs CEISA 4.0._Developed modules for the customs office_Maintained the CEISA application_Developed licensing and manifest modules for customs',
+          },
         },
       ],
       educationTitle: 'Education',
@@ -203,22 +188,11 @@ export default defineI18nConfig(() => ({
             'Pinia & Vuex',
             'Jira',
           ],
-          project: `
-          <div class="text-[12px]">
-         Gunakan bahasa mark-up seperti HTML untuk membuat halaman web yang ramah pengguna
-         <ul class="list-disc ml-5">
-           <li>Mengoptimalkan aplikasi untuk kecepatan maksimum</li>
-           <li> Create and implement the
-             design of the UI/UX team</li>
-           <li>Membuat dan mengimplementasikan desain tim UI/UX</li>
-           <li> Dapatkan formulir umpan balik dan membangun solusi untuk pengguna dan pelanggan</li>
-           <li> Membantu pengembang backend dengan pengkodean dan pemecahan masalah</li>
-           <li> Lakukan tes UI untuk mengoptimalkan kinerja</li>
-           <li> memperbaiki bug atau masalah yang terjadi selama proses uji coba aplikasi saat digunakan</li>
-           <li> Mempersiapkan aplikasi proses rilis</li>
-           <li> mengikuti perkembangan teknologi yang sedang berkembang</li>
-         </ul>
-       </div>`,
+          project: {
+            title: '',
+            paragraph:
+              'Gunakan bahasa mark-up seperti HTML untuk membuat halaman web yang ramah pengguna_Mengoptimalkan aplikasi untuk kecepatan maksimum_Membuat dan mengimplementasikan desain tim UI/UX_ Dapatkan formulir umpan balik dan membangun solusi untuk pengguna dan pelanggan_Membantu pengembang backend dengan pengkodean dan pemecahan masalah_Lakukan tes UI untuk mengoptimalkan kinerja_memperbaiki bug atau masalah yang terjadi selama proses uji coba aplikasi saat digunakan_Mempersiapkan aplikasi proses rilis_Mengikuti perkembangan teknologi yang sedang berkembang',
+          },
         },
         {
           role: 'Frontend Developer',
@@ -234,16 +208,11 @@ export default defineI18nConfig(() => ({
             'Antd Design',
             'Redux',
           ],
-          project: `
-             <div class="text-[12px]">
-                On site Customs CEISA 4.0.
-                <ul class="list-disc ml-5">
-                  <li> Develop module by bea cukai </li>
-                  <li> Maintenance Application CEISA </li>
-                  <li> Develop module Perijinan, and Manifest bea cukai</li>
-                </ul>
-              </div>
-          `,
+          project: {
+            title: '',
+            paragraph:
+              'On site Customs CEISA 4.0._ Develop module by bea cukai _Maintenance Application CEISA_ Develop module Perijinan, and Manifest bea cukai',
+          },
         },
       ],
       educationTitle: 'Pendidikan',
