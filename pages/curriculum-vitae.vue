@@ -600,11 +600,19 @@ function stopDrag(event: any) {
     <header class="mb-6 text-center">
       <h1 class="text-3xl font-bold">{{ $t('name') }}</h1>
       <p class="text-gray-600">{{ $t('title') }}</p>
-      <div class="mt-2 flex justify-center space-x-4 text-gray-500">
-        <a :href="locationLink"><i class="fas fa-map-marker-alt"></i> {{ $t('location') }}</a>
-        <a :href="websiteLink" target="_blank"><i class="fas fa-globe"></i> {{ websiteText }}</a>
-        <a :href="emailLink"><i class="fas fa-envelope"></i> {{ email }}</a>
-        <a :href="phoneLink"><i class="fas fa-phone"></i> {{ phone }}</a>
+      <div class="mt-2 flex justify-center space-x-4 text-gray-500 sm:flex-row md:flex-row lg:flex-row flex-col">
+        <div class="break-words">
+          <a :href="locationLink"><i class="fas fa-map-marker-alt"></i> {{ $t('location') }}</a>
+        </div>
+        <div class="break-words">
+          <a :href="websiteLink" target="_blank"><i class="fas fa-globe"></i> {{ websiteText }}</a>
+        </div>
+        <div class="break-words">
+          <a :href="emailLink"><i class="fas fa-envelope"></i> {{ email }}</a>
+        </div>
+        <div class="break-words">
+          <a :href="phoneLink"><i class="fas fa-phone"></i> {{ phone }}</a>
+        </div>
       </div>
     </header>
 
