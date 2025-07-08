@@ -141,6 +141,8 @@ export default defineI18nConfig(() => ({
       email: 'Email',
       website: 'Website',
       project: {
+        cashsir_app:
+          'This project uses Next.js version 15, which is a simple POSapp and can still be developed',
         operator:
           'This project is for checking provider number and prefix around the world',
         seller_be: 'This project was built using ExpressJS, prisma, posgresql',
@@ -225,6 +227,8 @@ export default defineI18nConfig(() => ({
       email: 'Email',
       website: 'Situs Web',
       project: {
+        cashsir_app:
+          'Portofolio ini menggunakan Next 15 ini simple POSapp dan masih bisa dikembangkan',
         operator:
           'Portofolio ini untuk cek nomer provider dan prefix diberbagai negara didunia',
         seller_be: 'Portofolio ini menggunakan ExpressJS, prisma, posgresql',

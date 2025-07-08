@@ -251,6 +251,10 @@ const dataProject = ref([
 ])
 
 const porjectMe = reactive([{
+  label: 'Cashsir App',
+  link: 'https://cashsir.syahendra.com',
+  technology: 'Next 15',
+}, {
   label: 'Auth Dummy',
   link: 'https://auth.syahendra.com/docs',
   technology: 'ExpressJS & mongodb',
