@@ -141,6 +141,8 @@ export default defineI18nConfig(() => ({
       email: 'Email',
       website: 'Website',
       project: {
+        cashsir_app2:
+          'This project uses Nuxt 3, which is a simple POSapp and can still be developed',
         cashsir_app:
           'This project uses Next.js version 15, which is a simple POSapp and can still be developed',
         operator:
@@ -227,6 +229,8 @@ export default defineI18nConfig(() => ({
       email: 'Email',
       website: 'Situs Web',
       project: {
+        cashsir_app2:
+          'Portofolio ini menggunakan Nuxt 3, simple POSapp dan masih bisa dikembangkan',
         cashsir_app:
           'Portofolio ini menggunakan Next 15 ini simple POSapp dan masih bisa dikembangkan',
         operator:
