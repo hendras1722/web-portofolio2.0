@@ -724,6 +724,12 @@ const skills = ref(['React', 'Vue', 'Next.js', 'Nuxt.js', 'HTML', 'CSS', 'Tailwi
 
 const projects = ref([
   {
+    title: "Ronda App",
+    descriptionKey: "Project ronda app",
+    link: "https://ronda.syahendra.com/",
+    technology: "Nuxt 3",
+  },
+  {
     title: "New Cashsir App",
     descriptionKey: "project.cashsir_app2",
     link: "https://newcashsir.syahendra.com/",
