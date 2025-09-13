@@ -89,6 +89,26 @@ export default defineI18nConfig(() => ({
       workTitle: 'Work Experience',
       workExperiences: [
         {
+          role: 'Frontend Developer',
+          location: 'Jakarta, Indonesia',
+          period: 'Aug 2025 - Dec 2025',
+          company: 'Geek Garden',
+          type: 'Contract',
+          desc: 'Developed the Scyllax TPM (Trade Promotion Management) App using Vue 3, worked on the Annual Budget and Approval Schema modules',
+          stackUsed: [
+            'Vue 3',
+            'Gitlab',
+            'Tailwind CSS',
+            'Pinia',
+            'Jira',
+          ],
+          project: {
+            title: '',
+            paragraph:
+              'Implemented UI/UX designs_built new features_fixed existing bugs.',
+          },
+        },
+        {
           role: 'Frontend Engineer',
           location: 'Yogyakarta, Indonesia',
           period: 'Jul 2021 - Jun 2025',
@@ -176,6 +196,26 @@ export default defineI18nConfig(() => ({
         'Dengan kombinasi keahlian teknis, kemampuan interpersonal, dan semangat belajar yang tinggi, Saya terus berkomitmen pada pekerjaan saya.',
       workTitle: 'Pengalaman Kerja',
       workExperiences: [
+        {
+          role: 'Frontend Developer',
+          location: 'Jakarta, Indonesia',
+          period: 'Ags 2025 - Des 2025',
+          company: 'Geek Garden',
+          type: 'Kontrak',
+          desc: 'Mengembangkan Apps Scyllax TPM (Trade Promotion Management) dengan Vue 3, Mengerjakan module Annual Budget dan Approval Schema',
+          stackUsed: [
+            'Vue 3',
+            'Gitlab',
+            'Tailwind CSS',
+            'Pinia',
+            'Jira',
+          ],
+          project: {
+            title: '',
+            paragraph:
+              'Mengimplementasikan desain dari UI/UX_mengembangkan fitur-fitur baru_memperbaiki bug yang ada.',
+          },
+        },
         {
           role: 'Frontend Engineer',
           location: 'Yogyakarta, Indonesia',

@@ -198,6 +198,11 @@ const dataCertificate = ref([
 ])
 const dataExperience = [
   {
+    title: 'Geek Garden',
+    date: '2025-2025',
+    desc: `Project base 5 month where I maintain apps Scyllax TPM (Trade Promotion Management), handle module Annual budget and Approval Schema`,
+  },
+  {
     title: 'Privy - Frontend Engineer',
     date: '2021-2025',
     desc: `My career in privy for 4 years where I maintain and hold CIMB project
