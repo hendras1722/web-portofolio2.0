@@ -90,6 +90,25 @@ export default defineI18nConfig(() => ({
       workExperiences: [
         {
           role: 'Frontend Developer',
+          location: 'Yogyakarta, Indonesia',
+          period: 'Okt 2025 - Dec 2025',
+          company: 'Panglima Propertindo',
+          type: 'Contract',
+          desc: 'Developing a funeral booking app called the Insira appDevelop apps ',
+          stackUsed: [
+            'Next 15 & 16',
+            'Github',
+            'Shadcn UI',
+            'Lark',
+          ],
+          project: {
+            title: '',
+            paragraph:
+              'Implemented UI/UX designs_built new features_fixed existing bugs.',
+          },
+        },
+        {
+          role: 'Frontend Developer',
           location: 'Jakarta, Indonesia',
           period: 'Aug 2025 - Dec 2025',
           company: 'Geek Garden',
@@ -196,6 +215,25 @@ export default defineI18nConfig(() => ({
         'Dengan kombinasi keahlian teknis, kemampuan interpersonal, dan semangat belajar yang tinggi, Saya terus berkomitmen pada pekerjaan saya.',
       workTitle: 'Pengalaman Kerja',
       workExperiences: [
+        {
+          role: 'Frontend Developer',
+          location: 'Yogyakarta, Indonesia',
+          period: 'Okt 2025 - Des 2025',
+          company: 'Panglima Propertindo',
+          type: 'Contract',
+          desc: 'Develop apps pemesanan pemakaman bernama apps insira',
+          stackUsed: [
+            'Next 15 & 16',
+            'Github',
+            'Shadcn UI',
+            'Lark',
+          ],
+          project: {
+            title: '',
+            paragraph:
+            'Mengimplementasikan desain dari UI/UX_mengembangkan fitur-fitur baru_memperbaiki bug yang ada.',
+          },
+        },
         {
           role: 'Frontend Developer',
           location: 'Jakarta, Indonesia',
