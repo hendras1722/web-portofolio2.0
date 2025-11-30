@@ -72,8 +72,21 @@
     "website": "Website",
     "project": {
       "cashsir_app2": "This project uses Nuxt 3, which is a simple POSapp and can still be developed",
-      "cashsir_app": "This project uses Next.js version 15, which is a simple POSapp and can still be developed"
-    }
+      "cashsir_app":  "This project uses Next.js version 15, which is a simple POSapp and can still be developed",
+      "operator":  "This project is for checking provider number and prefix around the world",
+      "seller_be": "This project was built using ExpressJS, prisma, posgresql",
+      "seller_dashboard": "This project was built using Next.js version 15 and includes authentication features such as login, registration, and the ability to create Menu and Menu management.",
+      "auth": "This project was developed using ExpressJS, featuring a simple authentication system with login, registration, and logout functionality.",
+      "octo": "Maintenance landing octo saver",
+      "landing_privy": "Update wording and update needed website privy",
+      "ccpl": "CIMB app for credit card applications and loan applications",
+      "ronin": "Application privy internal for check log by Application privy orther",
+      "bni": "Maintenance dashboard and landing for applying credit card bank BNI",
+      "ceisa": "Application for taxation from customs",
+      "gardu": "Temperature monitoring device for wonogiri substation panel.",
+      "App_tele_privy": "Apps for document verification and data validation",
+      "adonara_dashboard": "Similar to the tele privy app this is the updated version but more updated"
+      }
   },
 
   "id": {
@@ -148,8 +161,21 @@
     "email": "Surel",
     "website": "Website",
     "project": {
-      "cashsir_app2": "Proyek ini menggunakan Nuxt 3, aplikasi POS sederhana yang masih dapat dikembangkan",
-      "cashsir_app": "Proyek ini menggunakan Next.js 15, aplikasi POS sederhana yang masih dapat dikembangkan"
-    }
+        "cashsir_app2": "Portofolio ini menggunakan Nuxt 3, simple POSapp dan masih bisa dikembangkan",
+        "cashsir_app": "Portofolio ini menggunakan Next 15 ini simple POSapp dan masih bisa dikembangkan",
+        "operator": "Portofolio ini untuk cek nomer provider dan prefix diberbagai negara didunia",
+        "seller_be": "Portofolio ini menggunakan ExpressJS, prisma, posgresql",
+        "seller_dashboard": "Portofolio ini menggunakan Next 15 dengan fitur auth login, register dan create article dan category",
+        "auth": "Portofolio ini dibuat menggunakan ExpressJS, dan hanya fitur auth login, register, dan logout.",
+        "octo": "Memperbaiki bug landing octo saver",
+        "landing_privy": "Perbarui kata-kata dan perbarui situs web yang diperlukan",
+        "ccpl": "Aplikasi CIMB untuk pengajuan kartu kredit dan pengajuan pinjaman",
+        "ronin": "Aplikasi website internal untuk memeriksa log oleh Aplikasi privy atau lainnya",
+        "bni": "Dasbor pemeliharaan dan arahan untuk pengajuan kartu kredit bank BNI",
+        "ceisa": "Aplikasi untuk permohonan perpajakan dari bea cukai",
+        "gardu": "Alat pemantau suhu untuk panel gardu induk wonogiri.",
+        "App_tele_privy": "Apps untuk memverifikasi document serta validasi data",
+        "adonara_dashboard": "Mirip seperti app tele privy ini versi pembaruannya tapi lebih update"
+      }
   }
 }
