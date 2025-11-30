@@ -1,0 +1,155 @@
+{
+  "en": {
+    "name": "Muhammad Syahendra Anindyantoro",
+    "title": "Frontend Developer",
+    "aboutTitle": "About Me",
+    "paragraph_1": "I am Muhammad Syahendra Anindyantoro a Frontend Developer or Frontend Engineer with a Bachelor's degree in Electrical Engineering and 5 years of experience in IT. I have expertise in using modern technologies such as React and Vue to develop interactive, detailed, and high-quality user interfaces.",
+    "paragraph_2": "My strengths are that I am a hardworking person. I like teams because I can get the job done quickly. I'm a fast learner, and I like challenges. however, I'm not a very good speaker so I'm used to getting to know and building teams so I can communicate well.",
+    "paragraph_3": "With a combination of technical expertise, interpersonal skills, and a passion for learning, I remain committed to my work.",
+    "workTitle": "Work Experience",
+    "workExperiences": [
+      {
+        "role": "Frontend Developer",
+        "location": "Yogyakarta, Indonesia",
+        "period": "Okt 2025 - Dec 2025",
+        "company": "Panglima Propertindo",
+        "type": "Contract",
+        "desc": "Developing a funeral booking app called the Insira appDevelop apps",
+        "stackUsed": ["Next 15 & 16", "Github", "Shadcn UI", "Lark"],
+        "project": {
+          "title": "",
+          "paragraph": "Implemented UI/UX designs_built new features_fixed existing bugs."
+        }
+      },
+      {
+        "role": "Frontend Developer",
+        "location": "Jakarta, Indonesia",
+        "period": "Aug 2025 - Dec 2025",
+        "company": "Geek Garden",
+        "type": "Contract",
+        "desc": "Developed the Scyllax TPM (Trade Promotion Management) App using Vue 3, worked on the Annual Budget and Approval Schema modules",
+        "stackUsed": ["Vue 3", "Gitlab", "Tailwind CSS", "Pinia", "Jira"],
+        "project": {
+          "title": "",
+          "paragraph": "Implemented UI/UX designs_built new features_fixed existing bugs."
+        }
+      },
+      {
+        "role": "Frontend Engineer",
+        "location": "Yogyakarta, Indonesia",
+        "period": "Jul 2021 - Jun 2025",
+        "company": "Privy ID",
+        "type": "Full time",
+        "desc": "Developed interactive web pages using Vue and React.",
+        "stackUsed": ["Next.js", "Nuxt 2 & 3", "Gitlab", "Tailwind CSS", "Vuetify", "Pinia & Vuex", "Jira"],
+        "project": {
+          "title": "",
+          "paragraph": "Used markup languages like HTML to build user-friendly web pages_Optimized applications for maximum speed_Created and implemented the design from the UI/UX team_Built and implemented UI/UX team designs_Collected feedback forms and built solutions for users and customers_Assisted backend developers with coding and troubleshooting_Performed UI testing to optimize performance_Fixed bugs or issues encountered during application trial phases_Prepared applications for release processes_Kept up with emerging technologies"
+        }
+      },
+      {
+        "role": "Frontend Developer",
+        "location": "Depok, Indonesia",
+        "period": "Jul 2020 - Jun 2021",
+        "company": "PT. Nashta Global Utama",
+        "type": "Contract",
+        "desc": "Developed application modules for Customs CEISA 4.0.",
+        "stackUsed": ["React.js", "Gitlab", "Tailwind CSS", "Antd Design", "Redux"],
+        "project": {
+          "title": "",
+          "paragraph": "On-site Customs CEISA 4.0._Developed modules for the customs office_Maintained the CEISA application_Developed licensing and manifest modules for customs"
+        }
+      }
+    ],
+    "educationTitle": "Education",
+    "education": {
+      "ums": "Bachelor's degree, Electrical Engineering (Strong Current) at Universitas Muhammadiyah Surakarta, GPA: 3.39"
+    },
+    "skillsTitle": "Skills",
+    "location": "Yogyakarta, Indonesia",
+    "phone": "Phone",
+    "email": "Email",
+    "website": "Website",
+    "project": {
+      "cashsir_app2": "This project uses Nuxt 3, which is a simple POSapp and can still be developed",
+      "cashsir_app": "This project uses Next.js version 15, which is a simple POSapp and can still be developed"
+    }
+  },
+
+  "id": {
+    "name": "Muhammad Syahendra Anindyantoro",
+    "title": "Frontend Developer",
+    "aboutTitle": "Tentang Saya",
+    "paragraph_1": "Saya Muhammad Syahendra Anindyantoro seorang Frontend Developer atau Frontend Engineer dengan gelar Sarjana Teknik Elektro dan pengalaman 5 tahun di dunia IT. Saya memiliki keahlian dalam menggunakan teknologi modern seperti React dan Vue untuk mengembangkan antarmuka pengguna yang interaktif, detail, dan berkualitas tinggi.",
+    "paragraph_2": "Kelebihan saya adalah saya seorang pekerja keras. Saya suka bekerja dalam tim karena bisa menyelesaikan pekerjaan lebih cepat. Saya cepat belajar dan suka tantangan. Namun, saya bukan pembicara yang baik sehingga saya membiasakan diri untuk membangun dan mengenal tim agar dapat berkomunikasi dengan baik.",
+    "paragraph_3": "Dengan kombinasi keahlian teknis, kemampuan interpersonal, dan semangat belajar yang tinggi, saya tetap berkomitmen pada pekerjaan saya.",
+    "workTitle": "Pengalaman Kerja",
+    "workExperiences": [
+      {
+        "role": "Frontend Developer",
+        "location": "Yogyakarta, Indonesia",
+        "period": "Okt 2025 - Des 2025",
+        "company": "Panglima Propertindo",
+        "type": "Kontrak",
+        "desc": "Mengembangkan aplikasi pemesanan pemakaman bernama aplikasi Insira",
+        "stackUsed": ["Next 15 & 16", "Github", "Shadcn UI", "Lark"],
+        "project": {
+          "title": "",
+          "paragraph": "Implementasi desain UI/UX_membangun fitur baru_memperbaiki bug yang ada."
+        }
+      },
+      {
+        "role": "Frontend Developer",
+        "location": "Jakarta, Indonesia",
+        "period": "Agu 2025 - Des 2025",
+        "company": "Geek Garden",
+        "type": "Kontrak",
+        "desc": "Mengembangkan aplikasi Scyllax TPM menggunakan Vue 3 dan mengerjakan modul Annual Budget serta Approval Schema",
+        "stackUsed": ["Vue 3", "Gitlab", "Tailwind CSS", "Pinia", "Jira"],
+        "project": {
+          "title": "",
+          "paragraph": "Implementasi desain UI/UX_membangun fitur baru_memperbaiki bug."
+        }
+      },
+      {
+        "role": "Frontend Engineer",
+        "location": "Yogyakarta, Indonesia",
+        "period": "Jul 2021 - Jun 2025",
+        "company": "Privy ID",
+        "type": "Full time",
+        "desc": "Mengembangkan halaman web interaktif menggunakan Vue dan React.",
+        "stackUsed": ["Next.js", "Nuxt 2 & 3", "Gitlab", "Tailwind CSS", "Vuetify", "Pinia & Vuex", "Jira"],
+        "project": {
+          "title": "",
+          "paragraph": "Mengembangkan halaman web yang ramah pengguna_Mengoptimalkan aplikasi agar cepat_Mengimplementasikan desain UI/UX_Mengumpulkan feedback dan membangun solusi_Membantu backend troubleshooting_Melakukan pengujian UI_Memperbaiki bug_Mempersiapkan aplikasi untuk proses rilis_Mengikuti perkembangan teknologi"
+        }
+      },
+      {
+        "role": "Frontend Developer",
+        "location": "Depok, Indonesia",
+        "period": "Jul 2020 - Jun 2021",
+        "company": "PT. Nashta Global Utama",
+        "type": "Kontrak",
+        "desc": "Mengembangkan modul aplikasi untuk Bea Cukai CEISA 4.0.",
+        "stackUsed": ["React.js", "Gitlab", "Tailwind CSS", "Antd Design", "Redux"],
+        "project": {
+          "title": "",
+          "paragraph": "On-site Bea Cukai CEISA 4.0_Mengembangkan modul untuk kantor bea cukai_Menangani maintenance CEISA_Mengembangkan modul perizinan dan manifest"
+        }
+      }
+    ],
+    "educationTitle": "Pendidikan",
+    "education": {
+      "ums": "Sarjana Teknik Elektro (Arus Kuat) di Universitas Muhammadiyah Surakarta, IPK: 3.39"
+    },
+    "skillsTitle": "Keahlian",
+    "location": "Yogyakarta, Indonesia",
+    "phone": "Telepon",
+    "email": "Surel",
+    "website": "Website",
+    "project": {
+      "cashsir_app2": "Proyek ini menggunakan Nuxt 3, aplikasi POS sederhana yang masih dapat dikembangkan",
+      "cashsir_app": "Proyek ini menggunakan Next.js 15, aplikasi POS sederhana yang masih dapat dikembangkan"
+    }
+  }
+}
