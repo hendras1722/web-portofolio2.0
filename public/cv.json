@@ -1,0 +1,91 @@
+{
+  "project": [
+    {
+      "title": "Ronda App",
+      "descriptionKey": "Project ronda app",
+      "link": "https://ronda.syahendra.com/",
+      "technology": "Nuxt 3"
+    },
+    {
+      "title": "New Cashsir App",
+      "descriptionKey": "project.cashsir_app2",
+      "link": "https://newcashsir.syahendra.com/",
+      "technology": "Nuxt 3"
+    },
+    {
+      "title": "Cashsir App",
+      "descriptionKey": "project.cashsir_app",
+      "link": "https://cashsir.syahendra.com/",
+      "technology": "Next 15"
+    },
+    {
+      "title": "Operator Provider",
+      "descriptionKey": "project.operator",
+      "link": "https://provider.syahendra.com",
+      "technology": "ExpressJS"
+    },
+    {
+      "title": "Test Seller Backend Express",
+      "descriptionKey": "project.seller_be",
+      "link": "https://github.com/hendras1722/backend_sp",
+      "technology": "ExpressJS"
+    },
+    {
+      "title": "Dashboard Configuration",
+      "descriptionKey": "project.seller_dashboard",
+      "link": "http://vcog44ocsk4kwscsgokwg80g.103.181.182.113.sslip.io/login",
+      "technology": "Next 15"
+    },
+    {
+      "title": "Auth",
+      "descriptionKey": "project.auth",
+      "link": "https://auth.syahendra.com/docs",
+      "technology": "ExpressJS & mongodb"
+    },
+    {
+      "title": "Adonara Dashboard",
+      "descriptionKey": "project.adonara_dashboard",
+      "technology": "Nuxt 3"
+    },
+    {
+      "title": "Landing Privy",
+      "descriptionKey": "project.landing_privy",
+      "technology": "Nuxt 3"
+    },
+    {
+      "title": "CIMB Octo Saver",
+      "descriptionKey": "project.octo",
+      "technology": "Nuxt 2"
+    },
+    {
+      "title": "CIMB Credit Card and Personal Loan",
+      "descriptionKey": "project.ccpl",
+      "technology": "Nuxt 2"
+    },
+    {
+      "title": "App Tele Privy",
+      "descriptionKey": "project.App_tele_privy",
+      "technology": "Next"
+    },
+    {
+      "title": "Ronin Dashboard",
+      "descriptionKey": "project.ronin",
+      "technology": "Nuxt 3"
+    },
+    {
+      "title": "BNI Regsand",
+      "descriptionKey": "project.bni",
+      "technology": "Nuxt 2"
+    },
+    {
+      "title": "Ceisa 4.0",
+      "descriptionKey": "project.ceisa",
+      "technology": "ReactJS"
+    },
+    {
+      "title": "Alat Monitoring Suhu di Panel Gardu Induk",
+      "descriptionKey": "project.gardu",
+      "technology": "Arduino"
+    }
+  ]
+}
