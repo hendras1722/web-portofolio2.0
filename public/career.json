@@ -13,7 +13,7 @@
     {
       "title": "PT Nastha Global Utama - Frontend Developer",
       "date": "2020-2021",
-      "desc": "My career at PT Nastha Global Utama for 1 year where I maintain and hold Ceisa 4.0 project from Tax. using javascript language ( React )"
+      "desc": "My career at PT Nastha Global Utama for 1 year where I maintain and hold Ceisa 4.0 project from Tax. using javascript language (React)"
     },
     {
       "title": "BLPT Yogyakarta - Trainner Arduino",
@@ -23,7 +23,7 @@
     {
       "title": "PT Binterjet - Technical Support Engineer",
       "date": "2019",
-      "desc": "My career at PT Binterjet for 1 month where I held technicians and sales to customers. this company focuses on screen printing"
+      "desc": "My career at PT Binterjet for 1 month where I held technicians and sales to customers. This company focuses on screen printing."
     }
   ],
   "project": [
@@ -45,7 +45,7 @@
     {
       "label": "Auth Dummy",
       "link": "https://auth.syahendra.com/docs",
-      "technology": "ExpressJS & mongodb"
+      "technology": "ExpressJS & MongoDB"
     },
     {
       "label": "Operator Provider",
