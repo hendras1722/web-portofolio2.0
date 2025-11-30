@@ -1,0 +1,34 @@
+{
+  "project": [
+    "BNI",
+    "CIMB",
+    "Ceisa 4.0",
+    "Glasier Privy",
+    "Tele App Privy",
+    "Landing Privy",
+    "Ronin Dashboard",
+    "Adonara Dashboard"
+  ],
+  "project_individu": [
+    {
+      "label": "Cashsir App",
+      "link": "https://cashsir.syahendra.com",
+      "technology": "Next 15"
+    },
+    {
+      "label": "Auth Dummy",
+      "link": "https://auth.syahendra.com/docs",
+      "technology": "ExpressJS & mongodb"
+    },
+    {
+      "label": "Operator Provider",
+      "link": "https://provider.syahendra.com",
+      "technology": "ExpressJS"
+    },
+    {
+      "label": "Dashboard Menu Configuration",
+      "link": "http://vcog44ocsk4kwscsgokwg80g.103.181.182.113.sslip.io/login",
+      "technology": "Next 15"
+    }
+  ]
+}
