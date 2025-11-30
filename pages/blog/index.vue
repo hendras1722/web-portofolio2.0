@@ -250,6 +250,6 @@ onMounted(() => {
 <template>
   <div class="flex-1 custom-family text-xl px-[50px] lg:px-[250px] py-[20px]">
     <h1 class="text-5xl text-center">You can read my article here</h1>
-    <div class="text-center text-9xl">Blog is still under maintenance !</div>
+    <div class="text-center text-5xl break-words">Blog is still under maintenance !</div>
   </div>
 </template>
