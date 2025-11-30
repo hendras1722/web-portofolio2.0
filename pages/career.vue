@@ -56,7 +56,7 @@
 
       <section>
         <ul class="list-disc ml-8 text-[14px] mt-2">
-          <li v-for="(item, index) in porjectMe" :key="index"><span class="font-bold">{{ item.label }}</span> - <a
+          <li v-for="(item, index) in projectMe" :key="index"><span class="font-bold">{{ item.label }}</span> - <a
               class="text-blue-500" :href="item.link" target="_blank">link</a> <span class="text-gray-400">({{
                 item.technology }})</span></li>
         </ul>
@@ -110,9 +110,24 @@
 </template>
 
 <script setup lang="ts">
+export interface Career {
+  project: string[];
+  project_individu: ProjectIndividu[];
+}
+
+export interface ProjectIndividu {
+  label: string;
+  link: string;
+  technology: string;
+}
+
+
+
 const isOpen = ref(false)
 const nameCertificate = ref('')
 const loading = ref(false)
+
+const { data, status } = await useFetch<string>('https://raw.githubusercontent.com/hendras1722/web-portofolio2.0/refs/heads/master/public/career.json')
 
 function handleOpenCertificateModal(e: string) {
   isOpen.value = true
@@ -196,36 +211,7 @@ const dataCertificate = ref([
     date: 'Sep 2014 - Mar 2018',
   },
 ])
-const dataExperience = [
-  {
-    title: 'Geek Garden',
-    date: '2025-2025',
-    desc: `Project base 5 month where I maintain apps Scyllax TPM (Trade Promotion Management), handle module Annual budget and Approval Schema`,
-  },
-  {
-    title: 'Privy - Frontend Engineer',
-    date: '2021-2025',
-    desc: `My career in privy for 4 years where I maintain and hold CIMB project
-          (Credit Card and Personal Loan). In addition, I helped projects in the
-          BNI section, CIMB Octo Server, Internal Application from Privy. using
-          javascript language (Nuxt)`,
-  },
-  {
-    title: 'PT Nastha Global Utama - Frontend Developer',
-    date: '2020-2021',
-    desc: `My career at PT Nastha Global Utama for 1 year where I maintain and hold Ceisa 4.0 project from Tax. using javascript language ( React )`,
-  },
-  {
-    title: 'BLPT Yogyakarta - Trainner Arduino',
-    date: '2019',
-    desc: `I worked at BLPT Yogyakarta for 3 days. There I taught teachers about Arduino programming.`,
-  },
-  {
-    title: 'PT Binterjet - Technical Support Engineer',
-    date: '2019',
-    desc: `My career at PT Binterjet for 1 month where I held technicians and sales to customers. this company focuses on screen printing`,
-  },
-]
+const dataExperience = ref([])
 
 const dataEducation = [
   {
@@ -244,41 +230,26 @@ const dataEducation = [
     desc: `Activities to major in strong current electrical engineering and graduate in 2018 `,
   },
 ]
-const dataProject = ref([
-  'BNI',
-  'CIMB',
-  'Ceisa 4.0',
-  'Glasier Privy',
-  'Tele App Privy',
-  'Landing Privy',
-  'Ronin Dashboard',
-  'Adonara Dashboard',
-])
+const dataProject = ref<string[]>([])
 
-const porjectMe = reactive([{
-  label: 'Cashsir App',
-  link: 'https://cashsir.syahendra.com',
-  technology: 'Next 15',
-}, {
-  label: 'Auth Dummy',
-  link: 'https://auth.syahendra.com/docs',
-  technology: 'ExpressJS & mongodb',
-}, {
-  label: 'Operator Provider',
-  link: 'https://provider.syahendra.com',
-  technology: 'ExpressJS',
-}, {
-  label: 'Dashboard Menu Configuration',
-  link: 'http://vcog44ocsk4kwscsgokwg80g.103.181.182.113.sslip.io/login',
-  technology: 'Next 15',
-}])
+const projectMe = ref<ProjectIndividu[]>([])
+
+if(status.value === 'success'){
+  const result = JSON.parse(data.value as string)
+  dataProject.value = result?.project ?? []
+  projectMe.value = result?.project_individu ?? []
+  dataExperience.value = result?.experience ?? []
+}
+
 
 onMounted(() => {
   let j: any[] = []
   for (let i = 0; i < 100; i++) {
     j = [...j, ...JSON.parse(JSON.stringify(dataProject.value))]
   }
-  dataProject.value = j
+  if(dataProject.value.length > 0){
+    dataProject.value = j
+  }
   const idIframe = document.getElementById('inner')
   if (!idIframe) return
   nextTick(() => {

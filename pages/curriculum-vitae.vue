@@ -660,8 +660,8 @@ function stopDrag(event: any) {
 
     <section class="mt-6">
       <h2 class="text-2xl font-semibold border-b pb-2">{{ $t('skillsTitle') }}</h2>
-      <ul class="flex flex-wrap mt-2 space-x-2 space-y-3 text-sm px-3">
-        <li v-for="(skill, s) in skills" :key="s" class="px-3 py-1 bg-gray-200 rounded-full text-gray-700 text-pretty">
+      <ul class="flex flex-wrap mt-2 space-x-2 space-y-3 text-sm px-3 items-end">
+        <li v-for="(skill, s) in skills" :key="s" class="px-3 py-1 bg-gray-200 rounded-full text-gray-700 text-pretty h-fit">
           {{ skill }}
         </li>
       </ul>
@@ -721,108 +721,27 @@ const education = ref([
 
 const skills = ref(['React', 'Vue', 'Next.js', 'Nuxt.js', 'HTML', 'CSS', 'Tailwind CSS', 'Git', 'Redux', 'Vuetify', 'Nuxt Ui', 'Pinia', 'JavaScript', 'TypeScript', 'PostgreSQL', 'MySQL', 'Firebase', 'Figma', 'Jira', 'Postman', 'GitLab', 'Bootstrap', 'Vite', 'Node.js', 'Express.js', 'MongoDB', 'Go', 'HTML5', 'CSS3'])
 
+const { data: getProjects, status } = useFetch('https://raw.githubusercontent.com/hendras1722/web-portofolio2.0/refs/heads/master/public/cv.json')
 
-const projects = ref([
-  {
-    title: "Ronda App",
-    descriptionKey: "Project ronda app",
-    link: "https://ronda.syahendra.com/",
-    technology: "Nuxt 3",
-  },
-  {
-    title: "New Cashsir App",
-    descriptionKey: "project.cashsir_app2",
-    link: "https://newcashsir.syahendra.com/",
-    technology: "Nuxt 3",
-  },
-  {
-    title: "Cashsir App",
-    descriptionKey: "project.cashsir_app",
-    link: "https://cashsir.syahendra.com/",
-    technology: "Next 15",
-  },
-  {
-    title: "Operator Provider",
-    descriptionKey: "project.operator",
-    link: "https://provider.syahendra.com",
-    technology: "ExpressJS",
-  },
-  {
-    title: "Test Seller Backend Express",
-    descriptionKey: "project.seller_be",
-    link: "https://github.com/hendras1722/backend_sp",
-    technology: "ExpressJS",
-  },
-  {
-    title: "Dashboard Configuration",
-    descriptionKey: "project.seller_dashboard",
-    link: "http://vcog44ocsk4kwscsgokwg80g.103.181.182.113.sslip.io/login",
-    technology: "Next 15",
-  },
-  {
-    title: "Auth",
-    descriptionKey: "project.auth",
-    link: "https://auth.syahendra.com/docs",
-    technology: "ExpressJS & mongodb",
-  },
-  {
-    title: "Adonara Dashboard",
-    descriptionKey: "project.adonara_dashboard",
-    technology: "Nuxt 3",
-  },
-  {
-    title: "Landing Privy",
-    descriptionKey: "project.landing_privy",
-    technology: "Nuxt 3",
-  },
-  {
-    title: "CIMB Octo Saver",
-    descriptionKey: "project.octo",
-    technology: "Nuxt 2",
-  },
-  {
-    title: "CIMB Credit Card and Personal Loan",
-    descriptionKey: "project.ccpl",
-    technology: "Nuxt 2",
-  },
-  {
-    title: "App Tele Privy",
-    descriptionKey: "project.App_tele_privy",
-    technology: "Next",
-  },
-  {
-    title: "Ronin Dashboard",
-    descriptionKey: "project.ronin",
-    technology: "Nuxt 3",
-  },
-  {
-    title: "BNI Regsand",
-    descriptionKey: "project.bni",
-    technology: "Nuxt 2",
-  },
-  {
-    title: "Ceisa 4.0",
-    descriptionKey: "project.ceisa",
-    technology: "ReactJS",
-  },
-  {
-    title: "Alat Monitoring Suhu di Panel Gardu Induk",
-    descriptionKey: "project.gardu",
-    technology: "Arduino",
-  },
-])
+const projects = ref([])
+
+if (status.value === 'success') {
+  const result = JSON.parse(getProjects.value)
+  projects.value = result?.project || []
+}
 
 async function generatePDF() {
-  const cv = locale.value === 'en' ? 'cv_syahendra_en.pdf' : 'cv_syahendra_id.pdf'
-  const doc = await fetch('/' + 'cv_syahendra_' + locale.value + '.pdf').then((res) => res.blob())
-  const file = new Blob([doc], { type: 'application/pdf' })
-  const fileURL = URL.createObjectURL(file)
-  const link = document.createElement('a')
-  link.href = fileURL
-  link.download = cv;
-  link.target = '_blank'
-  link.click()
-  URL.revokeObjectURL(fileURL)
+  const cv = locale.value === 'en' ? 'https://raw.githubusercontent.com/hendras1722/web-portofolio2.0/09a10c102db179beb30883b206edc4adc1a988fa/public/cv_syahendra_en.pdf' : 'https://raw.githubusercontent.com/hendras1722/web-portofolio2.0/09a10c102db179beb30883b206edc4adc1a988fa/public/cv_syahendra_id.pdf'
+  window.open(cv, '_blank')
+  // const doc = await fetch(cv).then((res) => res.blob())
+  // const file = new Blob([doc], { type: 'application/pdf' })
+  // const fileURL = URL.createObjectURL(file)
+  // const link = document.createElement('a')
+  // link.href = fileURL
+  // link.download = cv;
+  // link.target = '_blank'
+  // link.click()
+  // URL.revokeObjectURL(fileURL)
 }
 </script>
 

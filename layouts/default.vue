@@ -1,17 +1,17 @@
 <template>
-  <div :class="[
-  (route.path === '/en' || route.path === '/id' || route.path === '/' )&&
-    `lg:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover lg:bg-center bg-left bg-no-repeat min-h-lvh`,
+  <div class="flex flex-col min-h-dvh" :class="[
+    (route.path === '/en' || route.path === '/id' || route.path === '/') &&
+    `lg:bg-[url('/background.png')] bg-[url('/Backgroundmobile.png')]  bg-cover lg:bg-center bg-left bg-no-repeat`,
   ]">
     <div class="relative col-span-12 lg:hidden" ref="target">
-      <div id="navbar1" class="fixed w-full z-10" :class="[scrollStatus && 'bg-white']">
+      <div id="navbar1" class="sticky top-0 w-full z-10" :class="[scrollStatus && 'bg-white']">
         <div class="h-[60px] py-[25px] items-center flex justify-between px-[20px]">
           <div class="font-bold text-2xl ">
             <NuxtLink to="/"><span class="dark:text-white">MSA</span></NuxtLink>
           </div>
           <div class="flex items-center justify-between w-32">
             <label class="switch">
-              <input checked="true" id="checkbox" type="checkbox" @change="handleSwitch"/>
+              <input checked="true" id="checkbox" type="checkbox" @change="handleSwitch" />
               <span class="slider">
                 <div class="star star_1"></div>
                 <div class="star star_2"></div>
@@ -23,15 +23,6 @@
                 </svg>
               </span>
             </label>
-
-
-            <!-- <label class="switch switch--mobile ml-3">
-              <input class="cb" type="checkbox" @change="handleSwitch" v-model="i" />
-              <span class="toggle toggle--mobile">
-                <span id="off" class="left left--mobile">off</span>
-                <span id="on" class="right right--mobile dark:text-white">on</span>
-              </span>
-            </label> -->
             <div>
               <UButton variant="ghost" class="bg-white text-black dark:bg-transparent" @click="openMenu">
                 <UIcon name="i-ic-baseline-dehaze" class="text-2xl  dark:text-white" />
@@ -61,7 +52,7 @@
     </div>
 
     <div id="navbar"
-      class="grid grid-cols-12 grid-rows-1 gap-4 lg:px-[160px] px-[20px] w-full md:hidden lg:block fixed z-20">
+      class="sm:grid grid-cols-12 grid-rows-1 gap-4 lg:px-[160px] px-[20px] w-full hidden lg:block sticky top-0 z-20">
       <div class="col-span-12 hidden lg:block">
         <div class="h-[119px] py-[32px]">
           <div class="flex justify-between items-center py-[10px]">
@@ -82,7 +73,7 @@
                 </li>
               </ul>
               <label class="switch">
-                <input checked="true" id="checkbox" type="checkbox"  @change="handleSwitch"/>
+                <input checked="true" id="checkbox" type="checkbox" @change="handleSwitch" />
                 <span class="slider">
                   <div class="star star_1"></div>
                   <div class="star star_2"></div>
@@ -99,11 +90,10 @@
         </div>
       </div>
     </div>
-    <main :class="[
-      'pt-[80px]',
-      route.path === '/blog' ? 'pt-[17px]' : 'sm:pt-[120px]',
-    ]">
-      <slot />
+    <main class="flex-1 flex flex-col">
+      <div class="flex-1 w-full flex flex-col">
+        <slot />
+      </div>
     </main>
 
     <div v-if="route.path !== '/' && route.path !== '/' + $i18n.locale"
@@ -169,14 +159,14 @@
               <div class="mt-3 text-[36px] font-semibold text-[#E7E6E6]">
                 Find Me
               </div>
-              <SocialIcon :isMobile="-200"/>
+              <SocialIcon :isMobile="-200" />
             </div>
           </div>
         </div>
       </div>
       <div
         class="lg:absolute bottom-0 ml-0 mr-0 left-0 right-0 justify-center items-end lg:text-[22px] text-[14px] text-[#E7E6E6] flex h-[84px] ">
-        2024-PRESENT © Muh Syahendra A
+        2020-PRESENT © Muh Syahendra A
       </div>
     </div>
   </div>

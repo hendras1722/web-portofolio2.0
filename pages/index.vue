@@ -1,7 +1,7 @@
 <template>
-  <div class="lg:px-[160px] px-[20px] relative min-h-[calc(100vh-120px)] w-full flex flex-col">
+  <div class="lg:px-[160px] px-[20px] relative w-full flex-1 flex flex-col">
     <!-- Main content area -->
-    <div class="flex-1">
+    <div class="flex-1 content flex flex-col justify-center">
       <ClientOnly>
         <div class="col-span-12">
           <TypingText />
@@ -43,21 +43,19 @@
     <ClientOnly>
       <div v-if="width > 1200 && width < 5000" class="items-end justify-around flex w-full ">
         <div>
-          <template v-if="holidayResult.length > 0 && !isModalHolidayResult">
-            <div class="dark:text-white">
-              Libur bulan ini:
-            </div>
-            <div
-              class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-[700px] overflow-auto text-nowrap dark:shadow-none min-h-[100px]"
-              style=" box-shadow: inset 25px 20px 25px -25px rgba(0, 0, 0, 0.136), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.136);">
-              <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
-                <div class="shadow-lg border border-black/10 rounded p-2 h-fit">
-                  <div>{{ item?.name }}</div>
-                  <div>{{ item?.date }}</div>
-                </div>
+          <div class="dark:text-white">
+            Libur bulan ini:
+          </div>
+          <div
+            class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-[700px] overflow-auto text-nowrap dark:shadow-none min-h-[100px]"
+            style=" box-shadow: inset 25px 20px 25px -25px rgba(0, 0, 0, 0.136), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.136);">
+            <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
+              <div class="shadow-lg border border-black/10 rounded p-2 h-fit">
+                <div>{{ item?.name }}</div>
+                <div>{{ item?.date }}</div>
               </div>
             </div>
-          </template>
+          </div>
 
           <div class="dark:text-white mb-3">
             free to contact me
@@ -76,7 +74,7 @@
           </ClientOnly>
 
           <div v-if="width < 1041 || width > 1201" class="mt-4 text-[16px] text-[#5F5B5B] lg:block hidden">
-            2024-PRESENT © Muh Syahendra A
+            2020-PRESENT © Muh Syahendra A
           </div>
         </div>
 
@@ -93,24 +91,22 @@
               <div class="corner bottom-left"></div>
             </div>
           </div> -->
-          <img alt="me" id="me" class="lg:w-fit lg:h-[495px] block" :src="useAsset('me_cartoon.png')" />
+          <img alt="me" id="me" class="lg:w-fit lg:h-[400px] block" :src="useAsset('me_cartoon.png')" />
         </div>
       </div>
-      <div v-else class="mb-28">
-        <template v-if="holidayResult.length > 0 && !isModalHolidayResult">
-          <div class="dark:text-white">
-            Libur bulan ini:
-          </div>
-          <div
-            class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-full overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none min-h-[100px]">
-            <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
-              <div class="shadow-lg border border-black/10 rounded p-2 h-fit">
-                <div>{{ item?.name }}</div>
-                <div>{{ item?.date }}</div>
-              </div>
+      <div v-else class="mb-28 flex flex-col justify-center">
+        <div class="dark:text-white">
+          Libur bulan ini:
+        </div>
+        <div
+          class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-full overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none min-h-[100px]">
+          <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
+            <div class="shadow-lg border border-black/10 rounded p-2 h-fit">
+              <div>{{ item?.name }}</div>
+              <div>{{ item?.date }}</div>
             </div>
           </div>
-        </template>
+        </div>
         <ClientOnly>
           <SocialIcon :isMobile="-150" />
         </ClientOnly>
@@ -720,13 +716,13 @@ const MONTH_NAME = {
   desember: '12',
 } as const
 
-function formatDate(e: string) {
-  const date = new Date(e)
-  const monthName = Object.keys(MONTH_NAME)[date.getMonth()]
-  return (
-    date.getDate() + ' ' + monthName.toUpperCase() + ' ' + date.getFullYear()
-  )
-}
+// function formatDate(e: string) {
+//   const date = new Date(e)
+//   const monthName = Object.keys(MONTH_NAME)[date.getMonth()]
+//   return (
+//     date.getDate() + ' ' + monthName.toUpperCase() + ' ' + date.getFullYear()
+//   )
+// }
 
 // async function getWebsiteDetail() {
 //   const data = await $fetch('/api/getDetailWebsiteGamePs')
@@ -971,9 +967,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-:deep() body{
+:deep() body {
   overflow: hidden !important;
 }
+
 .fontTerminal {
   font-family: 'ByteBounce' !important;
   font-size: 14px;

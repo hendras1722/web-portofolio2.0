@@ -2,10 +2,8 @@
   <div>
     <!-- <ClientOnly> -->
     <NuxtLayout>
-      <div>
-        <VitePwaManifest />
-        <NuxtPage />
-      </div>
+      <VitePwaManifest />
+      <NuxtPage />
     </NuxtLayout>
     <!-- </ClientOnly> -->
   </div>

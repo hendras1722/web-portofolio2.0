@@ -1,5 +1,5 @@
 <template>
-  <div class="flex md:flex-nowrap flex-wrap justify-around w-fit mt-[10px]">
+  <div class="flex flex-wrap justify-around w-full mt-[10px]">
     <a href="https://www.linkedin.com/in/muhsyahendraa/" target="_blank">
       <img alt="icon" v-motion :initial="{
         y: isMobile,
