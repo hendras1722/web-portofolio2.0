@@ -1,19 +1,37 @@
 {
   "project": [
+     {
+      "title": "Application School",
+      "descriptionKey": "Management sekolah berbasis web masih development",
+      "link": "https://github.com/hendras1722/application_school",
+      "technology": "Nuxt 4"
+    },
+    {
+      "title": "Insira",
+      "descriptionKey": "Product untuk jual beli pemakaman",
+      "link": "https://insira.id/",
+      "technology": "Next 15"
+    },
+     {
+      "title": "TPM Scyllax",
+      "descriptionKey": "Project client untuk management promosi",
+      "link": "https://tpm-fe.scylla.id/",
+      "technology": "Vue 3"
+    },
     {
       "title": "Ronda App",
       "descriptionKey": "Project ronda app",
-      "link": "https://ronda.syahendra.com/",
+      "link": "https://github.com/hendras1722/ronda",
       "technology": "Nuxt 3"
     },
     {
-      "title": "New Cashsir App",
+      "title": "New Cashsir App build with Nuxt 3",
       "descriptionKey": "project.cashsir_app2",
       "link": "https://newcashsir.syahendra.com/",
       "technology": "Nuxt 3"
     },
     {
-      "title": "Cashsir App",
+      "title": "Cashsir App build with Next 15",
       "descriptionKey": "project.cashsir_app",
       "link": "https://cashsir.syahendra.com/",
       "technology": "Next 15"
@@ -23,18 +41,6 @@
       "descriptionKey": "project.operator",
       "link": "https://provider.syahendra.com",
       "technology": "ExpressJS"
-    },
-    {
-      "title": "Test Seller Backend Express",
-      "descriptionKey": "project.seller_be",
-      "link": "https://github.com/hendras1722/backend_sp",
-      "technology": "ExpressJS"
-    },
-    {
-      "title": "Dashboard Configuration",
-      "descriptionKey": "project.seller_dashboard",
-      "link": "http://vcog44ocsk4kwscsgokwg80g.103.181.182.113.sslip.io/login",
-      "technology": "Next 15"
     },
     {
       "title": "Auth",
