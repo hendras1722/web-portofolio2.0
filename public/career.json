@@ -3,6 +3,11 @@
     {
       "title": "Geek Garden",
       "date": "2025-2025",
+      "desc": "Develop apps insira, about the apps is public cemetery. Handle 3 apps Petugas, Insira, Client Insira"
+    },
+    {
+      "title": "Geek Garden",
+      "date": "2025-2025",
       "desc": "Project base 5 month where I maintain apps Scyllax TPM (Trade Promotion Management), handle module Annual budget and Approval Schema"
     },
     {
@@ -34,7 +39,8 @@
     "Tele App Privy",
     "Landing Privy",
     "Ronin Dashboard",
-    "Adonara Dashboard"
+    "Adonara Dashboard",
+    "Insira",
   ],
   "project_individu": [
     {
