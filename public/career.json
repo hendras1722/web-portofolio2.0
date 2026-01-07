@@ -1,67 +1,67 @@
 {
-  "experience": [
-    {
-      "title": "Geek Garden",
-      "date": "2025-2025",
-      "desc": "Develop apps insira, about the apps is public cemetery. Handle 3 apps Petugas, Insira, Client Insira"
-    },
-    {
-      "title": "Geek Garden",
-      "date": "2025-2025",
-      "desc": "Project base 5 month where I maintain apps Scyllax TPM (Trade Promotion Management), handle module Annual budget and Approval Schema"
-    },
-    {
-      "title": "Privy - Frontend Engineer",
-      "date": "2021-2025",
-      "desc": "My career in privy for 4 years where I maintain and hold CIMB project (Credit Card and Personal Loan). In addition, I helped projects in the BNI section, CIMB Octo Server, Internal Application from Privy. using javascript language (Nuxt)"
-    },
-    {
-      "title": "PT Nastha Global Utama - Frontend Developer",
-      "date": "2020-2021",
-      "desc": "My career at PT Nastha Global Utama for 1 year where I maintain and hold Ceisa 4.0 project from Tax. using javascript language (React)"
-    },
-    {
-      "title": "BLPT Yogyakarta - Trainner Arduino",
-      "date": "2019",
-      "desc": "I worked at BLPT Yogyakarta for 3 days. There I taught teachers about Arduino programming."
-    },
-    {
-      "title": "PT Binterjet - Technical Support Engineer",
-      "date": "2019",
-      "desc": "My career at PT Binterjet for 1 month where I held technicians and sales to customers. This company focuses on screen printing."
-    }
-  ],
-  "project": [
-    "BNI",
-    "CIMB",
-    "Ceisa 4.0",
-    "Glasier Privy",
-    "Tele App Privy",
-    "Landing Privy",
-    "Ronin Dashboard",
-    "Adonara Dashboard",
-    "Insira",
-  ],
-  "project_individu": [
-    {
-      "label": "Cashsir App",
-      "link": "https://cashsir.syahendra.com",
-      "technology": "Next 15"
-    },
-    {
-      "label": "Auth Dummy",
-      "link": "https://auth.syahendra.com/docs",
-      "technology": "ExpressJS & MongoDB"
-    },
-    {
-      "label": "Operator Provider",
-      "link": "https://provider.syahendra.com",
-      "technology": "ExpressJS"
-    },
-    {
-      "label": "Dashboard Menu Configuration",
-      "link": "http://vcog44ocsk4kwscsgokwg80g.103.181.182.113.sslip.io/login",
-      "technology": "Next 15"
-    }
-  ]
+   "experience":[
+      {
+         "title":"Panglima Propertindo",
+         "date":"2025-2025",
+         "desc":"Develop apps insira, about the apps is public cemetery. Handle 3 apps Petugas, Insira, Client Insira"
+      },
+      {
+         "title":"Geek Garden",
+         "date":"2025-2025",
+         "desc":"Project base 5 month where I maintain apps Scyllax TPM (Trade Promotion Management), handle module Annual budget and Approval Schema"
+      },
+      {
+         "title":"Privy - Frontend Engineer",
+         "date":"2021-2025",
+         "desc":"My career in privy for 4 years where I maintain and hold CIMB project (Credit Card and Personal Loan). In addition, I helped projects in the BNI section, CIMB Octo Server, Internal Application from Privy. using javascript language (Nuxt)"
+      },
+      {
+         "title":"PT Nastha Global Utama - Frontend Developer",
+         "date":"2020-2021",
+         "desc":"My career at PT Nastha Global Utama for 1 year where I maintain and hold Ceisa 4.0 project from Tax. using javascript language (React)"
+      },
+      {
+         "title":"BLPT Yogyakarta - Trainner Arduino",
+         "date":"2019",
+         "desc":"I worked at BLPT Yogyakarta for 3 days. There I taught teachers about Arduino programming."
+      },
+      {
+         "title":"PT Binterjet - Technical Support Engineer",
+         "date":"2019",
+         "desc":"My career at PT Binterjet for 1 month where I held technicians and sales to customers. This company focuses on screen printing."
+      }
+   ],
+   "project":[
+      "BNI",
+      "CIMB",
+      "Ceisa 4.0",
+      "Glasier Privy",
+      "Tele App Privy",
+      "Landing Privy",
+      "Ronin Dashboard",
+      "Adonara Dashboard",
+      "Insira"
+   ],
+   "project_individu":[
+      {
+         "label":"Cashsir App",
+         "link":"https://cashsir.syahendra.com",
+         "technology":"Next 15"
+      },
+      {
+         "label":"Auth Dummy",
+         "link":"https://auth.syahendra.com/docs",
+         "technology":"ExpressJS & MongoDB"
+      },
+      {
+         "label":"Operator Provider",
+         "link":"https://provider.syahendra.com",
+         "technology":"ExpressJS"
+      },
+      {
+         "label":"Dashboard Menu Configuration",
+         "link":"http://vcog44ocsk4kwscsgokwg80g.103.181.182.113.sslip.io/login",
+         "technology":"Next 15"
+      }
+   ]
 }
