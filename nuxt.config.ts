@@ -48,6 +48,12 @@ export default defineNuxtConfig({
       short_name: 'msame',
       description: 'OIOIOOi',
       theme_color: '#ffffff',
+      display: 'standalone',
+      scope: '/',
+      start_url: '/',
+      launch_handler: {
+        client_mode: ['navigate-existing', 'auto']
+      },
       icons: [
         {
           src: 'icons/icon-192x192.png',
