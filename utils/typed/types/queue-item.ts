@@ -1,4 +1,4 @@
-import { EraseTypingOptions, SentanceTypingOptions } from './options.js';
+import type { EraseTypingOptions, SentanceTypingOptions } from './options.ts';
 
 export type QueueItem = Sentance | Backspace | Wait;
 

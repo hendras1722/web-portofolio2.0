@@ -211,7 +211,7 @@ const dataCertificate = ref([
     date: 'Sep 2014 - Mar 2018',
   },
 ])
-const dataExperience = ref([])
+const dataExperience = ref<{ title: string, date: string, desc: string }[]>([])
 
 const dataEducation = [
   {
@@ -234,7 +234,7 @@ const dataProject = ref<string[]>([])
 
 const projectMe = ref<ProjectIndividu[]>([])
 
-if(status.value === 'success'){
+if (status.value === 'success') {
   const result = JSON.parse(data.value as string)
   dataProject.value = result?.project ?? []
   projectMe.value = result?.project_individu ?? []
@@ -247,7 +247,7 @@ onMounted(() => {
   for (let i = 0; i < 100; i++) {
     j = [...j, ...JSON.parse(JSON.stringify(dataProject.value))]
   }
-  if(dataProject.value.length > 0){
+  if (dataProject.value.length > 0) {
     dataProject.value = j
   }
   const idIframe = document.getElementById('inner')

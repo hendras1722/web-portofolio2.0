@@ -171,6 +171,9 @@
     </div>
   </div>
 
+  <!-- only desktop -->
+  <MorphCursor v-if="width > 1024" :amount="20" dot-color="#9e2e2e" />
+
   <div class="fixed z-[9999] top-5 right-5">
     <transition name="fade">
       <UNotification v-if="showNotif" icon="i-heroicons-check-circle" description="Berhasil Terkirim" :id="3"
@@ -179,13 +182,16 @@
         }" @close="hande" />
     </transition>
   </div>
+
+  <PWAInstallPopup />
 </template>
 
 <script lang="ts" setup>
 import { onClickOutside } from '@vueuse/core'
-// import { useWindowSize } from '@vueuse/core'
+import { useWindowSize } from '@vueuse/core'
 
 const colorMode = useColorMode()
+const { width } = useWindowSize()
 const isDark = computed({
   get() {
     return colorMode.value === 'dark'
@@ -241,34 +247,7 @@ useHead({
 })
 
 onMounted(() => {
-  let installPrompt = null as any;
-  const installButton = document.querySelector("#install");
-
-  window.addEventListener("beforeinstallprompt", (event) => {
-    event.preventDefault();
-    installPrompt = event;
-    installButton?.removeAttribute("hidden");
-
-  });
-
-  installButton?.addEventListener("click", async () => {
-    if (!installPrompt) {
-      return;
-    }
-    const result = await installPrompt.prompt();
-    console.log(`Install prompt was: ${result.outcome}`);
-    disableInAppInstallPrompt();
-  });
-
-  function disableInAppInstallPrompt() {
-    installPrompt = null;
-    installButton?.setAttribute("hidden", "");
-  }
-  window.addEventListener("appinstalled", () => {
-    disableInAppInstallPrompt();
-  });
-
-
+  // Logic for PWA is now handled by components/PWAInstallPopup.vue using @vite-pwa/nuxt
 })
 const scrollStatus = ref(false)
 

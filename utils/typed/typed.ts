@@ -1,21 +1,21 @@
-import { keyboards } from './data/keyboards.js';
-import { RandomChars } from './utils/random-char.js';
-import { Resetter } from './utils/resetter.js';
-import { Keyboard } from './types/keyboard.js';
-import {
+import { keyboards } from './data/keyboards.ts';
+import { RandomChars } from './utils/random-char.ts';
+import { Resetter } from './utils/resetter.ts';
+import type { Keyboard } from './types/keyboard.ts';
+import type {
   ConstructorTypingOptions,
   CustomUpdateSetup,
   EraseTypingOptions,
   FullTypingOptions,
   PartialTypingOptions,
   SentanceTypingOptions
-} from './types/options';
-import { Backspace, Sentance, Wait } from './types/queue-item.js';
-import { ResultItem } from './types/result-item.js';
-import { isSpecialChar } from './utils/is-special-char.js';
-import { wait } from './utils/wait.js';
-import { Letter } from './types/letter.js';
-import { Queue } from './types/queue.js';
+} from './types/options.ts';
+import type { Backspace, Sentance, Wait } from './types/queue-item.ts';
+import type { ResultItem } from './types/result-item.ts';
+import { isSpecialChar } from './utils/is-special-char.ts';
+import { wait } from './utils/wait.ts';
+import type { Letter } from './types/letter.ts';
+import { Queue } from './types/queue.ts';
 
 export class Typed<T = never> {
   private readonly setupUpdater?: T;

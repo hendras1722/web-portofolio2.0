@@ -1,4 +1,4 @@
-import { Keyboards } from '../types/keyboard.js';
+import type { Keyboards } from '../types/keyboard.ts';
 
 export const keyboards: Keyboards = {
   en: {

@@ -250,15 +250,15 @@ onMounted(() => {
 <script lang="tsx" setup>
 import BackgroundWaterfall from '~/components/BackgroundWaterfall.vue';
 
-definePageMeta({
-  layout: false,
-})
+// definePageMeta({
+//   layout: false,
+// })
 
 </script>
 
 
 <template>
-  <div class="relative bg-black min-h-screen">
+  <div class="relative  min-h-screen">
     <!-- <BackgroundWaterfall /> -->
     <div class="flex-1 custom-family text-xl px-[50px] lg:px-[250px] py-[20px]">
       <h1 class="text-5xl text-center">You can read my article here</h1>

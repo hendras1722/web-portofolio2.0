@@ -1,4 +1,4 @@
-import { MinMax } from './min-max.js';
+import type { MinMax } from './min-max.ts';
 
 export type CustomUpdateSetup<T> = {
   setUp: () => T;

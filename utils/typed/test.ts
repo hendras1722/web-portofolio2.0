@@ -1,4 +1,4 @@
-import { Typed } from './typed.js';
+import { Typed } from './typed.ts';
 import { BehaviorSubject } from 'rxjs';
 
 const typedFac = Typed.factory({

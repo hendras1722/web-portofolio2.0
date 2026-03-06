@@ -1,17 +1,17 @@
 <template>
   <div class="hello flex justify-center lg:mb-[40px]">
     <div
-      class="custom-family w-[1600px] min-h-[80px] lg:text-center md:text-center text-left lg:text-[86px] md:text-[66px] text-[28px] lg:font-semibold font-bold text-[#363535] dark:text-white">
+      class="custom-family w-[1600px] min-h-[80px] lg:text-center md:text-center text-left lg:text-[80px] md:text-[62px] text-[28px] lg:font-semibold font-bold text-[#363535] dark:text-white">
       <div v-motion :initial="{
-          y: -500,
-          opacity: 0,
-        }" :enter="{
-          y: 0,
-          opacity: 1,
-          transition: {
-            delay: 200,
-          },
-        }">
+        y: -500,
+        opacity: 0,
+      }" :enter="{
+        y: 0,
+        opacity: 1,
+        transition: {
+          delay: 200,
+        },
+      }">
         Hello I’m Muh Syahendra Anindyantoro
       </div>
       <span v-if="ClientOnlyRef">

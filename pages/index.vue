@@ -118,7 +118,6 @@
 
         </div>
       </div>
-
     </ClientOnly>
   </div>
 </template>
