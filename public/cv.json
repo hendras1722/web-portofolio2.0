@@ -1,11 +1,5 @@
 {
   "project": [
-     {
-      "title": "Application School",
-      "descriptionKey": "Management sekolah berbasis web masih development",
-      "link": "https://github.com/hendras1722/application_school",
-      "technology": "Nuxt 4"
-    },
     {
       "title": "Insira",
       "descriptionKey": "Product untuk jual beli pemakaman",
@@ -21,7 +15,7 @@
     {
       "title": "Ronda App",
       "descriptionKey": "Project ronda app",
-      "link": "https://github.com/hendras1722/ronda",
+      "link": "https://gpa.syahendra.com/",
       "technology": "Nuxt 3"
     },
     {
@@ -87,11 +81,6 @@
       "title": "Ceisa 4.0",
       "descriptionKey": "project.ceisa",
       "technology": "ReactJS"
-    },
-    {
-      "title": "Alat Monitoring Suhu di Panel Gardu Induk",
-      "descriptionKey": "project.gardu",
-      "technology": "Arduino"
     }
   ]
 }
