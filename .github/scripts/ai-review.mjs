@@ -12,7 +12,9 @@ const ai = new GoogleGenAI({ apiKey });
 
 async function main() {
   try {
-    const diff = execSync("git diff HEAD^ HEAD").toString();
+    const diff = execSync(`git diff origin/master...HEAD`)
+      .toString()
+      .slice(0, 12000);
 
     if (!diff || diff.trim().length < 10) {
       console.log("ℹ️ Diff kosong, skip review.");
