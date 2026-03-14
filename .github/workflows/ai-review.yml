@@ -3,7 +3,7 @@ name: AI Review Pull Request
 on:
   pull_request:
     branches:
-      - main # Jalankan review jika ada PR ke branch main
+      - master # Jalankan review jika ada PR ke branch main
 
 jobs:
   ai-review:
