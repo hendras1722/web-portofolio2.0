@@ -23,18 +23,18 @@ async function main() {
       model: "gemini-2.5-flash",
       contents: [{ role: "user", parts: [{ text: `Review diff ini:\n\n${diff}` }] }],
       config: {
-        temperature: 0.2, // Rendah agar AI lebih fokus mengikuti instruksi
+        temperature: 0.1, // Rendah agar AI lebih fokus mengikuti instruksi
         systemInstruction: `Kamu Senior Developer. 
 TUGAS: Review git diff.
 ATURAN:
-1. Jika kode BAGUS, balas HANYA: "bisa dilanjutkan mergenya".
-2. Jika ada MASALAH, gunakan format:
-   ISSUE: <deskripsi>
+1. ABAIKAN masalah formatting sepele seperti: "missing newline at end of file", spasi berlebih, atau trailing spaces. Anggap hal itu sudah diurus oleh formatter (Prettier/Biome).
+2. FOKUS HANYA pada: Bug logika, celah keamanan, performa buruk, atau pelanggaran struktur framework (Nuxt/Vue).
+3. Jika tidak ada masalah KRUSIAL, balas HANYA: "Kode terlihat bagus! Tidak ada masalah logika yang ditemukan."
+4. Jika ada MASALAH SERIUS, gunakan format:
+   ISSUE: <deskripsi singkat>
    FIX: <kode saran>
-   SEVERITY: LOW|MEDIUM|HIGH
-3. Bahasa Indonesia.
-4. Kode mengikuti aturan eslint sendiri kalau error eslint berikan solusinya.
-5. Jika kode BAGUS, balas dengan pesan positif yang informatif, misalnya: "AI tidak menemukan masalah signifikan pada perubahan ini. Terlihat bagus!"
+   SEVERITY: MEDIUM|HIGH
+5. Gunakan Bahasa Indonesia yang santai tapi profesional.
 `
       }
     });
