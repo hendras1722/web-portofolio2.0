@@ -23,8 +23,7 @@ async function main() {
       model: "gemini-2.5-flash",
       contents: [{ role: "user", parts: [{ text: `Review diff ini:\n\n${diff}` }] }],
       config: {
-        maxOutputTokens: 1000,
-        temperature: 0.9,
+        temperature: 0.2, // Rendah agar AI lebih fokus mengikuti instruksi
         systemInstruction: `Kamu Senior Developer. 
 TUGAS: Review git diff.
 ATURAN:
