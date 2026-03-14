@@ -1,85 +1,50 @@
 import { execSync } from "node:child_process";
 import { GoogleGenAI } from "@google/genai";
 
+// Pastikan API Key ini aktif (Dashboard menunjukkan 2.5 Flash sudah limit 20/day)
 const apiKey = "AIzaSyCaVb4S43ORdEg9SPJ9uRf2Xp84Eu2H19Y";
-
-if (!apiKey) {
-  console.error("❌ API Key tidak ditemukan");
-  process.exit(1);
-}
 
 const ai = new GoogleGenAI({ apiKey });
 
 async function main() {
   try {
-    const base = process.env.GITHUB_BASE_REF || "main";
+    const base = process.env.GITHUB_BASE_REF || "master";
+
+    // Pastikan origin di-fetch agar origin/master ditemukan
+    execSync("git fetch origin " + base);
 
     const diff = execSync(`git diff origin/${base}...HEAD`)
       .toString()
-      .slice(0, 12000);
+      .slice(0, 10000);
 
     if (!diff || diff.trim().length < 10) {
       console.log("ℹ️ Diff kosong, skip review.");
       process.exit(0);
     }
 
-    const prompt = `
-Anda adalah AI Code Reviewer senior.
-
-Tugas Anda adalah menganalisis git diff dan menemukan masalah pada kode.
-
-ATURAN REVIEW:
-1. Fokus pada keamanan, bug, performa, dan best practice.
-2. Jangan memberikan saran yang berbahaya atau merusak logika program.
-3. Jika tidak ada masalah, tulis: "NO ISSUE".
-4. Jika ada masalah, jelaskan dengan jelas dan berikan perbaikan yang aman.
-5. Sertakan command CLI jika diperlukan.
-
-FORMAT OUTPUT (WAJIB):
-
-ISSUE:
-<deskripsi masalah>
-
-FILE:
-<file yang bermasalah>
-
-OLD_CODE:
-<kode lama yang bermasalah>
-
-FIX:
-<kode yang disarankan>
-
-COMMAND:
-<command yang perlu dijalankan jika ada, jika tidak tulis NONE>
-
-REASON:
-<alasan teknis kenapa perlu diperbaiki>
-
-SEVERITY:
-LOW | MEDIUM | HIGH | CRITICAL
-
-
-GIT DIFF:
-${diff}
-`
-
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: [
         {
           role: "user",
-          parts: [
-            {
-              text: prompt
-            }
-          ]
+          parts: [{ text: `Review diff berikut:\n\n${diff}` }]
         }
       ],
       config: {
-        maxOutputTokens: 1000,
-        temperature: 0.5,
-        systemInstruction:
-          "Kamu Senior Developer. Jika kode bagus, HANYA balas: 'bisa dilanjutkan mergenya'. Jika ada bug tolong kasih solusinya."
+        maxOutputTokens: 1500,
+        temperature: 0.2, // Rendah agar konsisten mengikuti format
+        systemInstruction: `Kamu adalah Senior Developer.
+TUGAS: Review git diff.
+ATURAN:
+1. Jika kode BAGUS, balas HANYA: "bisa dilanjutkan mergenya".
+2. Jika ada MASALAH, gunakan format:
+   ISSUE: <deskripsi>
+   FILE: <nama file>
+   OLD_CODE: <kode lama>
+   FIX: <kode saran>
+   REASON: <alasan teknis>
+   SEVERITY: LOW|MEDIUM|HIGH
+3. Bahasa: Indonesia.`
       }
     });
 
@@ -89,16 +54,17 @@ ${diff}
     console.log(text);
     console.log("------------------------\n");
 
+    // Logika Kelulusan: Jika AI tidak memberikan kalimat persetujuan, maka dianggap ada issue
     if (text.toLowerCase().includes("bisa dilanjutkan mergenya")) {
       console.log("✅ AI Approve.");
       process.exit(0);
     } else {
-      console.error("❌ Ada saran perbaikan.");
+      console.error("❌ AI menemukan masalah.");
       process.exit(1);
     }
   } catch (error) {
     console.error("⚠️ Review Gagal:", error.message);
-    process.exit(0);
+    process.exit(0); // Tetap lanjut jika error teknis agar CI tidak stuck
   }
 }
 
