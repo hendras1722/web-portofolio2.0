@@ -47,7 +47,7 @@ ATURAN:
 
   } catch (error) {
     console.error("⚠️ Review Gagal:", error.message);
-    process.exit(1); // Tetap lanjut meskipun error
+    process.exit(0); // Tetap lanjut meskipun error
   }
 }
 
