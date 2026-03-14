@@ -19,6 +19,46 @@ async function main() {
       process.exit(0);
     }
 
+    const prompt = `
+Anda adalah AI Code Reviewer senior.
+
+Tugas Anda adalah menganalisis git diff dan menemukan masalah pada kode.
+
+ATURAN REVIEW:
+1. Fokus pada keamanan, bug, performa, dan best practice.
+2. Jangan memberikan saran yang berbahaya atau merusak logika program.
+3. Jika tidak ada masalah, tulis: "NO ISSUE".
+4. Jika ada masalah, jelaskan dengan jelas dan berikan perbaikan yang aman.
+5. Sertakan command CLI jika diperlukan.
+
+FORMAT OUTPUT (WAJIB):
+
+ISSUE:
+<deskripsi masalah>
+
+FILE:
+<file yang bermasalah>
+
+OLD_CODE:
+<kode lama yang bermasalah>
+
+FIX:
+<kode yang disarankan>
+
+COMMAND:
+<command yang perlu dijalankan jika ada, jika tidak tulis NONE>
+
+REASON:
+<alasan teknis kenapa perlu diperbaiki>
+
+SEVERITY:
+LOW | MEDIUM | HIGH | CRITICAL
+
+
+GIT DIFF:
+${diff}
+`
+
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: [
@@ -26,16 +66,16 @@ async function main() {
           role: "user",
           parts: [
             {
-              text: `Review diff ini:\n\n${diff.substring(0, 8000)}`
+              text: prompt
             }
           ]
         }
       ],
       config: {
         maxOutputTokens: 1000,
-        temperature: 0.1,
+        temperature: 0.5,
         systemInstruction:
-          "Kamu Senior Developer. Jika kode bagus, HANYA balas: 'bisa dilanjutkan mergenya'. Jika ada bug, berikan format: [Masalah], [Kode Lama], [Saran Perbaikan], [Alasan]. Bahasa Indonesia. Tanpa salam."
+          "Kamu Senior Developer. Jika kode bagus, HANYA balas: 'bisa dilanjutkan mergenya'. Jika ada bug tolong kasih solusinya."
       }
     });
 
