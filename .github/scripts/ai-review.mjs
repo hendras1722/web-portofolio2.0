@@ -20,7 +20,7 @@ async function main() {
     }
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-2.5-flash",
       contents: [{ role: "user", parts: [{ text: `Review diff ini:\n\n${diff}` }] }],
       config: {
         maxOutputTokens: 1000,
