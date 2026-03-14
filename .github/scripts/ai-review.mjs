@@ -24,7 +24,7 @@ async function main() {
       contents: [{ role: "user", parts: [{ text: `Review diff ini:\n\n${diff}` }] }],
       config: {
         maxOutputTokens: 1000,
-        temperature: 0.2,
+        temperature: 0.9,
         systemInstruction: `Kamu Senior Developer. 
 TUGAS: Review git diff.
 ATURAN:
