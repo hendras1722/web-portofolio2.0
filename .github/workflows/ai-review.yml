@@ -34,9 +34,17 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            github.rest.issues.createComment({
+            const fs = require('fs');
+
+            let result = "⚠️ AI review tidak menghasilkan output.";
+
+            if (fs.existsSync("review_result.txt")) {
+              result = fs.readFileSync("review_result.txt", "utf8");
+            }
+
+            await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "🤖 AI menemukan masalah pada kode ini."
-            })
+              body: "🤖 **AI Code Review Result**\n\n" + result
+            });
