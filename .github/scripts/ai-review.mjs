@@ -1,7 +1,7 @@
 import { execSync } from "node:child_process";
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = process.env.GEMINI_API_KEY;
+const apiKey = "AIzaSyCaVb4S43ORdEg9SPJ9uRf2Xp84Eu2H19Y";
 
 if (!apiKey) {
   console.error("❌ API Key tidak ditemukan");
@@ -20,7 +20,7 @@ async function main() {
     }
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-pro",
+      model: "gemini-2.5-flash",
       contents: [
         {
           role: "user",
