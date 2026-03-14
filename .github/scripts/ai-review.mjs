@@ -1,5 +1,5 @@
 import { execSync } from "node:child_process";
-import { GoogleGenerativeAI } from "@google/generative-ai"; // Gunakan package ini
+import { GoogleGenAI } from "@google/genai"; // Sesuai pilihanmu
 
 const apiKey = process.env.GEMINI_API_KEY;
 if (!apiKey) {
@@ -7,8 +7,8 @@ if (!apiKey) {
   process.exit(1);
 }
 
-// Inisialisasi SDK yang benar
-const genAI = new GoogleGenerativeAI(apiKey);
+// Inisialisasi sesuai SDK @google/genai
+const ai = new GoogleGenAI({ apiKey });
 
 async function main() {
   try {
@@ -19,30 +19,31 @@ async function main() {
       process.exit(0);
     }
 
-    // CARA PANGGIL MODEL YANG BENAR
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash",
-      systemInstruction: "Kamu Senior Developer. Jika kode bagus, HANYA balas: 'bisa dilanjutkan mergenya'. Jika ada bug, berikan format: [Masalah], [Kode Lama], [Saran Perbaikan], [Alasan]. Bahasa Indonesia. Tanpa salam."
-    });
+    // DI SDK @google/genai, cara panggilnya adalah lewat ai.models.get()
+    // Tapi kita panggil method generateContent langsung dari instance model
+    const model = ai.models.get("gemini-2.0-flash");
 
-    const result = await model.generateContent({
+    const response = await model.generateContent({
       contents: [{ role: "user", parts: [{ text: `Review diff ini:\n\n${diff.substring(0, 8000)}` }] }],
-      generationConfig: {
+      config: {
         maxOutputTokens: 1000,
         temperature: 0.1,
+        systemInstruction: "Kamu Senior Developer. Jika kode bagus, HANYA balas: 'bisa dilanjutkan mergenya'. Jika ada bug, berikan format: [Masalah], [Kode Lama], [Saran Perbaikan], [Alasan]. Bahasa Indonesia. Tanpa salam.",
       },
     });
 
-    const response = await result.response;
-    const text = response.text();
+    // Ambil text langsung dari response
+    const text = response.text;
 
     console.log("\n--- AI REVIEW RESULT ---");
     console.log(text);
     console.log("------------------------\n");
 
     if (text.toLowerCase().includes("bisa dilanjutkan mergenya")) {
+      console.log("✅ AI Approve.");
       process.exit(0);
     } else {
+      console.error("❌ Ada saran perbaikan.");
       process.exit(1);
     }
   } catch (error) {
