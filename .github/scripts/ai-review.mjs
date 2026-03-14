@@ -3,7 +3,7 @@ import { GoogleGenAI } from "@google/genai";
 import fs from "node:fs";
 
 // Ambil dari env agar lebih aman dan tidak diomeli AI
-const apiKey = "AIzaSyAvz6H_UfA-oklOKBYCCbQzEXk4d_x2hoY"
+const apiKey = process.env.GEMINI_API_KEY
 const ai = new GoogleGenAI({ apiKey });
 
 async function main() {
