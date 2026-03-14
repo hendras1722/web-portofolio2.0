@@ -13,40 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-
-      - name: Install @google/genai
-        run: bun install @google/genai
-
-      - name: Run AI Review
-        run: bun .github/scripts/ai-review.mjs
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-
-  steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-
-      - name: Install Dependencies
-        run: bun add @google/genai
-
-      - name: Run AI Review
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: bun .github/scripts/ai-review.mjs
-
-     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
@@ -68,4 +34,4 @@ jobs:
         uses: thollander/actions-comment-pull-request@v2
         with:
           filePath: review_result.txt
-          comment_tag: ai_review # Agar komentar lama diupdate/tidak numpuk
+          comment_tag: ai_review

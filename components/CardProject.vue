@@ -5,5 +5,5 @@
 <script lang="ts" setup>
 const token = useState('token')
 
-const submit = cardProject()
+const submit = hello()
 </script>
