@@ -32,7 +32,10 @@ ATURAN:
    ISSUE: <deskripsi>
    FIX: <kode saran>
    SEVERITY: LOW|MEDIUM|HIGH
-3. Bahasa Indonesia.`
+3. Bahasa Indonesia.
+4. Jika tidak ada masalah, balas HANYA: "bisa dilanjutkan mergenya".
+5. Kode mengikuti aturan eslint sendiri kalau error eslint berikan solusinya 
+`
       }
     });
 
