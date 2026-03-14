@@ -21,7 +21,7 @@ try {
 
   const response = await ai.models.generateContent({
     // Gunakan gemini-1.5-flash jika 2.0 limit, atau 2.0-flash-exp
-    model: "gemini-1.5-flash",
+    model: "gemini-2.5-flash",
     contents: [{ role: "user", text: `Review diff ini:\n\n${diff.substring(0, 8000)}` }],
     config: {
       maxOutputTokens: 1000,
