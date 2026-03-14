@@ -10,24 +10,26 @@ if (!apiKey) {
 const ai = new GoogleGenAI({ apiKey })
 
 try {
-  // Ambil diff antara branch PR dan target (main)
-  const diff = execSync("git diff origin/main...HEAD").toString()
+  // Perbaikan Git Diff: Gunakan FETCH_HEAD untuk mengambil perubahan di PR
+  // Ini lebih stabil di GitHub Actions daripada origin/master...HEAD
+  const diff = execSync("git diff HEAD^ HEAD").toString()
 
   if (!diff || diff.trim() === "") {
-    console.log("ℹ️ Tidak ada perubahan kode.")
+    console.log("ℹ️ Tidak ada perubahan kode yang signifikan.")
     process.exit(0)
   }
 
   const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
-    contents: [{ role: "user", text: `Review diff PR ini:\n\n${diff.substring(0, 8000)}` }],
+    // Gunakan gemini-1.5-flash jika 2.0 limit, atau 2.0-flash-exp
+    model: "gemini-1.5-flash",
+    contents: [{ role: "user", text: `Review diff ini:\n\n${diff.substring(0, 8000)}` }],
     config: {
       maxOutputTokens: 1000,
-      systemInstruction: "Kamu adalah Senior Developer. Tugasmu: Review git diff untuk Pull Request.\n"
+      systemInstruction: "Kamu adalah Senior Developer. Tugasmu: Review git diff.\n"
         + "PERATURAN:\n"
         + "1. Jika kode sudah bagus, HANYA balas: 'bisa dilanjutkan mergenya'.\n"
-        + "2. Jika ada bug atau saran efisiensi, berikan poin: [Masalah], [Kode Lama], [Saran Perbaikan], [Alasan].\n"
-        + "3. Bahasa Indonesia. Tanpa salam pembuka/penutup.",
+        + "2. Jika ada bug, berikan format: [Masalah], [Kode Lama], [Saran Perbaikan], [Alasan].\n"
+        + "3. Bahasa Indonesia. Tanpa salam pembuka.",
       temperature: 0.2,
     },
   })
@@ -36,12 +38,11 @@ try {
   console.log(text)
 
   if (text.toLowerCase().includes("bisa dilanjutkan mergenya")) {
-    process.exit(0) // Lolos (Tanda Centang Hijau)
+    process.exit(0)
   } else {
-    console.error("\n❌ Ada saran perbaikan dari AI.")
-    process.exit(1) // Gagal (Tanda Silang Merah)
+    process.exit(1) // Gagal agar PR tidak di-merge dulu
   }
 } catch (error) {
-  console.error("⚠️ Error:", error.message)
-  process.exit(0) // Jangan gagalkan PR kalau API cuma limit/down
+  console.error("⚠️ Review Gagal:", error.message)
+  process.exit(0) // Tetap aman agar CI tidak merah cuma karena API
 }

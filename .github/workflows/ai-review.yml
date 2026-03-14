@@ -3,30 +3,31 @@ name: AI Review Pull Request
 on:
   pull_request:
     branches:
-      - master # Jalankan review jika ada PR ke branch main
+      - master # Sesuaikan dengan branch utama kamu
 
 jobs:
   ai-review:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write # Penting jika nanti ingin posting komen otomatis
+      pull-requests: write
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Ambil semua history agar bisa git diff
+          fetch-depth: 0 # Wajib 0 agar history git terbaca untuk diff
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: '20'
+          bun-version: latest
 
       - name: Install Dependencies
-        run: npm install @google/genai
+        run: bun add @google/genai
 
       - name: Run AI Review
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: node .github/scripts/ai-review.mjs
+        # Pakai bun run, tidak perlu --env-file karena secret sudah di-inject lewat env
+        run: bun .github/scripts/ai-review.mjs
