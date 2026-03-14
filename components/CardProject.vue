@@ -4,4 +4,6 @@
 
 <script lang="ts" setup>
 const token = useState('token')
+
+const submit = hello()
 </script>
