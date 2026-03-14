@@ -12,7 +12,9 @@ const ai = new GoogleGenAI({ apiKey });
 
 async function main() {
   try {
-    const diff = execSync(`git diff origin/master...HEAD`)
+    const base = process.env.GITHUB_BASE_REF || "main";
+
+    const diff = execSync(`git diff origin/${base}...HEAD`)
       .toString()
       .slice(0, 12000);
 
