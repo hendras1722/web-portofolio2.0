@@ -13,25 +13,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 2
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
 
-      - name: Install Dependencies
-        run: bun add @google/genai
+      - name: Install @google/genai
+        run: bun install @google/genai
 
       - name: Run AI Review
+        run: bun .github/scripts/ai-review.mjs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: bun .github/scripts/ai-review.mjs
 
       - name: Comment PR
         if: always()
-        uses: thollander/actions-comment-pull-request@v2
+        uses: actions/github-script@v7
         with:
-          filePath: review_result.txt
-          comment_tag: ai_review
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "🤖 AI menemukan masalah pada kode ini."
+            })
