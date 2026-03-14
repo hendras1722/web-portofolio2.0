@@ -1,0 +1,32 @@
+name: AI Review Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main # Jalankan review jika ada PR ke branch main
+
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write # Penting jika nanti ingin posting komen otomatis
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ambil semua history agar bisa git diff
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install @google/genai
+
+      - name: Run AI Review
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node .github/scripts/ai-review.mjs
