@@ -29,13 +29,43 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
-      - name: Comment PR
-        uses: actions/github-script@v7
+  steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
         with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: "🤖 AI menemukan masalah pada kode ini."
-            })
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install Dependencies
+        run: bun add @google/genai
+
+      - name: Run AI Review
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: bun .github/scripts/ai-review.mjs
+
+     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install Dependencies
+        run: bun add @google/genai
+
+      - name: Run AI Review
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: bun .github/scripts/ai-review.mjs
+
+      - name: Comment PR
+        if: always()
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: review_result.txt
+          comment_tag: ai_review # Agar komentar lama diupdate/tidak numpuk
