@@ -1,0 +1,27 @@
+name: Merge into branch main
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if tag exists for HEAD
+        run: |
+          TAG=$(git tag --points-at HEAD)
+          
+          if [ -z "$TAG" ]; then
+            echo "❌ No tag found on this commit. Please create a tag (e.g. v1.0.0)"
+            exit 1
+          else
+            echo "✅ Tag found: $TAG"
+          fi
