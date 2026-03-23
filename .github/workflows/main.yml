@@ -1,4 +1,4 @@
-name: Require Tag Before Merge
+name: Require Tag on PR
 
 on:
   pull_request:
@@ -10,24 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout full history + tags
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Fetch all tags
+      - name: Fetch tags
         run: git fetch --tags
 
       - name: Check tag on PR commit
         run: |
           PR_SHA=${{ github.event.pull_request.head.sha }}
 
-          echo "Checking commit: $PR_SHA"
-
           TAG=$(git tag --points-at $PR_SHA)
 
           if [ -z "$TAG" ]; then
-            echo "❌ No tag found for this commit"
+            echo "❌ No tag found on this commit"
             exit 1
           else
             echo "✅ Tag found: $TAG"
