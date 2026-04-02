@@ -43,6 +43,7 @@ export default defineNuxtConfig({
     // mode: 'development',
     strategies: 'generateSW',
     registerType: 'autoUpdate',
+
     manifest: {
       name: 'MSA me',
       short_name: 'msame',

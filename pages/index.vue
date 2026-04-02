@@ -134,15 +134,15 @@ interface Holiday {
 
 const { width } = useWindowSize()
 
-const colorMode = useColorMode()
-const isDark = computed({
-  get() {
-    return colorMode.value === 'dark'
-  },
-  set() {
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-  },
-})
+// const colorMode = useColorMode()
+// const isDark = computed({
+//   get() {
+//     return colorMode.value === 'dark'
+//   },
+//   set() {
+//     colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+//   },
+// })
 
 const el = ref<HTMLSpanElement[]>([])
 const secondDate =
@@ -880,49 +880,38 @@ async function getDate() {
   const data = await $fetch<any>('/api/getWebsite')
 
   const dom = new DOMParser().parseFromString(data, 'text/html')
-  const months = dom?.querySelectorAll('#main article ul')
+  const trs = dom.querySelectorAll('table tbody tr')
 
-  if (!months) {
-    throw new Error('Failed to parse DOM')
-  }
+  const result: any[] = []
 
-  const result = (Array.from(months) as any[]).flatMap((item) => {
-    const [monthName, year] =
-      item
-        .querySelector('li:first-child a')
-        ?.getAttribute('href')
-        ?.split('-') || []
+  Array.from(trs).forEach((row) => {
+    const tds = row.querySelectorAll('td')
+    if (tds.length >= 3) {
+      const dateText = tds[0]?.textContent?.trim() || ''
+      const name = tds[2]?.textContent?.trim() || ''
 
-    const month = MONTH_NAME[monthName as keyof typeof MONTH_NAME]
+      const parts = dateText.split(' ')
+      if (parts.length >= 2) {
+        const dayStr = parts[0]
+        const monthStr = parts[1]
+        const monthLower = monthStr?.toLowerCase() as keyof typeof MONTH_NAME
+        const monthNumStr = MONTH_NAME[monthLower]
 
-    return (
-      Array.from(item.querySelectorAll('li:last-child table tr')) as any[]
-    ).flatMap((holiday) => {
-      const day = holiday.querySelector('td:first-child')?.textContent.trim()
-      const name = holiday.querySelector('td:last-child')?.textContent.trim()
-      if (day && day.includes('-')) {
-        const split = day.split('-', 2)
-        const start = Number(split[0])
-        const end = Number(split[1])
+        if (monthNumStr && name.toLowerCase() !== 'sabtu' && name.toLowerCase() !== 'minggu') {
+          const year = new Date().getFullYear()
+          const date = `${year}-${monthNumStr}-${dayStr?.padStart(2, '0')}`
 
-        return Array.from({ length: end - start })
-          .fill(start)
-          .flatMap((value, index) => {
-            return {
-              date: `${year}-${month}-${(Number(value) + index)
-                .toString()
-                .padStart(2, '0')}`,
+          const isDuplicate = result.some(item => item.date === date && item.name === name)
+          if (!isDuplicate) {
+            result.push({
+              date,
               name,
-            }
-          })
+            })
+          }
+        }
       }
-
-      return {
-        date: `${year}-${month}-${day?.padStart(2, '0')}`,
-        name,
-      }
-    })
-  }) as Holiday[]
+    }
+  })
 
   let month = String(new Date().getMonth() + 1)
   let year = new Date().getFullYear()
@@ -936,14 +925,15 @@ async function getDate() {
     isModalHolidayResult.value = true
     return
   }
-  holidayResult.value = result.filter((item) =>
+  console.log(result, resultDateYear, 'iniresult')
+  holidayResult.value = result.filter((item: any) =>
     item.date.includes(resultDateYear)
   )
 }
 
-function handleClose() {
-  isModalHolidayResult.value = true
-}
+// function handleClose() {
+//   isModalHolidayResult.value = true
+// }
 onMounted(() => {
   getDate()
   // getWebsiteDetail()
