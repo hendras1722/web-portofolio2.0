@@ -34,13 +34,15 @@
                 <span>{{ profile.location }}</span>
               </p>
               <p v-if="profile.linkedin">
-                <a :href="profile.linkedin" target="_blank" class="hover:underline flex items-center justify-center space-x-2">
+                <a :href="profile.linkedin" target="_blank"
+                  class="hover:underline flex items-center justify-center space-x-2">
                   <i class="fab fa-linkedin"></i>
                   <span>LinkedIn</span>
                 </a>
               </p>
               <p v-if="profile.github">
-                <a :href="profile.github" target="_blank" class="hover:underline flex items-center justify-center space-x-2">
+                <a :href="profile.github" target="_blank"
+                  class="hover:underline flex items-center justify-center space-x-2">
                   <i class="fab fa-github"></i>
                   <span>GitHub</span>
                 </a>
@@ -52,10 +54,12 @@
         <SkillsSection :skills="skills.body" />
         <ExperienceSection :experiences="experience" />
         <ProjectsSection :projects="projects" />
-        
+
         <!-- New Education Section -->
-        <section v-if="educationData && educationData.length > 0" class="education-section container mx-auto px-4 py-16">
-          <h2 class="text-4xl font-bold text-center mb-8" v-motion-slide-visible-once-bottom>{{ $t('educationTitle') }}</h2>
+        <section v-if="educationData && educationData.length > 0"
+          class="education-section container mx-auto px-4 py-16">
+          <h2 class="text-4xl font-bold text-center mb-8" v-motion-slide-visible-once-bottom>{{ $t('educationTitle') }}
+          </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div v-for="(edu, idx) in educationData" :key="idx" class="p-6 bg-white rounded-lg shadow-md">
               <h3 class="text-2xl font-bold mb-2">{{ edu.institution }}</h3>
@@ -74,13 +78,12 @@
 </template>
 
 <script setup lang="ts">
-import { useAsyncData, computed, ref } from '#app'; // Import ref
 import AppHeader from '~/components/AppHeader.vue';
 import HeroSection from '~/components/HeroSection.vue';
 // AboutMeSection component is not directly used for rendering contact details anymore, as they are now in the page.
 // If AboutMeSection has other responsibilities, it can remain imported or be refactored.
 // For now, I'll keep it imported as it might be used by HeroSection or other parts.
-import AboutMeSection from '~/components/AboutMeSection.vue'; 
+import AboutMeSection from '~/components/AboutMeSection.vue';
 import SkillsSection from '~/components/SkillsSection.vue';
 import ExperienceSection from '~/components/ExperienceSection.vue';
 import ProjectsSection from '~/components/ProjectsSection.vue';
@@ -171,6 +174,7 @@ useHead({
 .about-me-section p a {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem; /* space between icon and text */
+  gap: 0.5rem;
+  /* space between icon and text */
 }
 </style>
