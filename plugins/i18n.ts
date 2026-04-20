@@ -1,14 +1,11 @@
+import en from '~/public/i18n.json'; // Directly import the JSON file
+import id from '~/public/i18n.json'; // Assuming the structure allows direct import for both locales
+
 export default defineNuxtPlugin(async (nuxtApp) => {
-  const { $i18n } = nuxtApp
+  const { $i18n } = nuxtApp;
 
-  const locales = ['en', 'id']
-
-  const data = await $fetch('https://raw.githubusercontent.com/hendras1722/web-portofolio2.0/refs/heads/master/public/i18n.json')
-
-  for (const locale of locales) {
-    const result = JSON.parse(data as string ?? {})
-   if (Object.keys(result).length > 0) {
-      $i18n.mergeLocaleMessage(locale, result[locale])
-    }
-  }
-})
+  // The structure of i18n.json is { en: {...}, id: {...} }
+  // So we can directly access the locale messages
+  $i18n.mergeLocaleMessage('en', en.en);
+  $i18n.mergeLocaleMessage('id', id.id);
+});

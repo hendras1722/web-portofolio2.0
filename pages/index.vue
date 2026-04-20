@@ -1,1153 +1,176 @@
 <template>
-  <div class="lg:px-[160px] px-[20px] relative w-full flex-1 flex flex-col">
-    <!-- Main content area -->
-    <div class="flex-1 content flex flex-col justify-center">
-      <ClientOnly>
-        <div class="col-span-12">
-          <TypingText />
-        </div>
-      </ClientOnly>
-      <div class="mt-2">
-        <div class="flex justify-center">
-          <div class="flex text-[#B1AFB0] font-bold lg:text-[1.5vw] text-[18px] dark:text-white text-nowrap">
-            <div class="custom-family" v-motion :initial="{
-              x: -500,
-              opacity: 0,
-            }" :enter="{
-              x: 0,
-              opacity: 1,
-              transition: {
-                delay: 500,
-              },
-            }">
-              The Man
-            </div>
-            <div class="custom-family mx-2">Behind</div>
-            <div class="custom-family" v-motion :initial="{
-              x: 500,
-              opacity: 0,
-            }" :enter="{
-              x: 0,
-              opacity: 1,
-              transition: {
-                delay: 500,
-              },
-            }">
-              The Keyboard
+  <div>
+    <AppHeader />
+    <div v-if="pending">Loading content...</div>
+    <div v-else-if="error">Error loading content: {{ error.message }}</div>
+    <div v-else>
+      <div id="print-content">
+        <HeroSection :profile="profile" />
+
+        <!-- About Me Section with enhanced contact details -->
+        <section class="about-me-section container mx-auto px-4 py-16" v-if="profile">
+          <h2 class="text-4xl font-bold text-center mb-8" v-motion-slide-visible-once-bottom>{{ $t('about_me') }}</h2>
+          <div class="flex flex-col items-center">
+            <UAvatar :src="profile?.image || '/me.png'" alt="Avatar" size="3xl" class="mb-8" />
+            <p class="text-lg text-center max-w-3xl leading-relaxed" v-motion-slide-visible-once-bottom>
+              {{ profile?.bio }}
+            </p>
+            <!-- Detailed Contact Info from CV -->
+            <div class="mt-6 text-lg text-center text-gray-700 flex flex-col space-y-2">
+              <p v-if="profile.email">
+                <a :href="'mailto:' + profile.email" class="hover:underline flex items-center justify-center space-x-2">
+                  <i class="fas fa-envelope"></i>
+                  <span>{{ profile.email }}</span>
+                </a>
+              </p>
+              <p v-if="profile.phone">
+                <a :href="'tel:' + profile.phone" class="hover:underline flex items-center justify-center space-x-2">
+                  <i class="fas fa-phone"></i>
+                  <span>{{ profile.phone }}</span>
+                </a>
+              </p>
+              <p v-if="profile.location" class="flex items-center justify-center space-x-2">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>{{ profile.location }}</span>
+              </p>
+              <p v-if="profile.linkedin">
+                <a :href="profile.linkedin" target="_blank" class="hover:underline flex items-center justify-center space-x-2">
+                  <i class="fab fa-linkedin"></i>
+                  <span>LinkedIn</span>
+                </a>
+              </p>
+              <p v-if="profile.github">
+                <a :href="profile.github" target="_blank" class="hover:underline flex items-center justify-center space-x-2">
+                  <i class="fab fa-github"></i>
+                  <span>GitHub</span>
+                </a>
+              </p>
             </div>
           </div>
-        </div>
+        </section>
+
+        <SkillsSection :skills="skills.body" />
+        <ExperienceSection :experiences="experience" />
+        <ProjectsSection :projects="projects" />
+        
+        <!-- New Education Section -->
+        <section v-if="educationData && educationData.length > 0" class="education-section container mx-auto px-4 py-16">
+          <h2 class="text-4xl font-bold text-center mb-8" v-motion-slide-visible-once-bottom>{{ $t('educationTitle') }}</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div v-for="(edu, idx) in educationData" :key="idx" class="p-6 bg-white rounded-lg shadow-md">
+              <h3 class="text-2xl font-bold mb-2">{{ edu.institution }}</h3>
+              <p class="text-gray-600 mb-1">{{ edu.period }}</p>
+              <p class="text-lg text-gray-800">{{ $t(edu.degree) }}</p>
+            </div>
+          </div>
+        </section>
+
+        <ContactSection />
       </div>
+      <PdfDownloadButton />
+      <AppFooter />
     </div>
-
-    <ClientOnly>
-      <div v-if="width > 1200 && width < 5000" class="items-end justify-around flex w-full ">
-        <div>
-          <div class="dark:text-white">
-            Libur bulan ini:
-          </div>
-          <div
-            class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-[700px] overflow-auto text-nowrap dark:shadow-none min-h-[100px]"
-            style=" box-shadow: inset 25px 20px 25px -25px rgba(0, 0, 0, 0.136), inset -25px 0px 25px -25px rgba(0, 0, 0, 0.136);">
-            <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
-              <div class="shadow-lg border border-black/10 rounded p-2 h-fit">
-                <div>{{ item?.name }}</div>
-                <div>{{ item?.date }}</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dark:text-white mb-3">
-            free to contact me
-            <UButton @click="() => router.push('/curriculum-vitae')" variant="solid" color="green" size="xl"
-              class="text-center w-fit ml-2">
-              View Resume
-            </UButton>
-          </div>
-
-          <div class="mb-3 text-[16px] dark:text-white font-semibold text-[#464444]">
-            Find Me
-          </div>
-
-          <ClientOnly>
-            <SocialIcon />
-          </ClientOnly>
-
-          <div v-if="width < 1041 || width > 1201" class="mt-4 text-[16px] text-[#5F5B5B] lg:block hidden">
-            2020-PRESENT © Muh Syahendra A
-          </div>
-        </div>
-
-        <!-- Right side - Image positioned at bottom -->
-        <div class="flex-shrink-0 relative">
-          <!-- <div id="container" v-show="isDark" class="relative">
-            <div id="pillow" class="absolute">
-              <div class="zzz zzz-zzz rounded-full dark:text-white dark:drop-shadow-xl">Z</div>
-              <div class="zzz zzz-zz dark:text-white dark:drop-shadow-xl">Z</div>
-              <div class="zzz zzz-z dark:text-white dark:drop-shadow-xl">Z</div>
-              <div class="corner top-left"></div>
-              <div class="corner top-right"></div>
-              <div class="corner bottom-right"></div>
-              <div class="corner bottom-left"></div>
-            </div>
-          </div> -->
-          <img alt="me" id="me" class="lg:w-fit lg:h-[400px] block" :src="useAsset('me_cartoon.png')" />
-        </div>
-      </div>
-      <div v-else class="mb-28 flex flex-col justify-center">
-        <div class="dark:text-white">
-          Libur bulan ini:
-        </div>
-        <div
-          class="mb-4 py-1 px-1 rounded-lg flex gap-5 items-center w-full overflow-auto text-nowrap shadow-inner shadow-black/50 dark:shadow-none min-h-[100px]">
-          <div class="flex items-center gap-2 bg-white" v-for="(item, index) in holidayResult" :key="index">
-            <div class="shadow-lg border border-black/10 rounded p-2 h-fit">
-              <div>{{ item?.name }}</div>
-              <div>{{ item?.date }}</div>
-            </div>
-          </div>
-        </div>
-        <ClientOnly>
-          <SocialIcon :isMobile="-150" />
-        </ClientOnly>
-        <div class=" flex justify-center  w-full mt-6">
-          <UButton @click="() => router.push('/curriculum-vitae')" variant="solid" color="green" size="xl"
-            class="text-center w-fit ml-2">
-            View Resume
-          </UButton>
-
-        </div>
-      </div>
-    </ClientOnly>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { Typed } from '@/utils/typed'
-import { useWindowSize } from '@vueuse/core'
-import useAsset from '~/composable/use-assets'
-
-interface Holiday {
-  date: string
-  name?: string | any
-}
-
-const { width } = useWindowSize()
-
-// const colorMode = useColorMode()
-// const isDark = computed({
-//   get() {
-//     return colorMode.value === 'dark'
-//   },
-//   set() {
-//     colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-//   },
-// })
-
-const el = ref<HTMLSpanElement[]>([])
-const secondDate =
-  new Date().getSeconds() <= 9
-    ? '0' + new Date().getSeconds()
-    : '' + new Date().getSeconds()
-const minuteDate =
-  new Date().getMinutes() <= 9
-    ? '0' + new Date().getMinutes()
-    : '' + new Date().getMinutes()
-const hourDate =
-  new Date().getHours() <= 9
-    ? '0' + new Date().getHours()
-    : '' + new Date().getHours()
-
-const dataTerminal = ref([
-  {
-    html: 'text',
-    created_at: hourDate + ':' + minuteDate + ':' + secondDate,
-  },
-])
-const startIndex = ref(0)
-const holidayResult = ref<Holiday[]>([])
-const isModalHolidayResult = ref(false)
-const router = useRouter()
-
-// const appConfig = useAppConfig()
-
-const container_typing = document?.getElementById('container_typing')
-// const editable = ref<HTMLDivElement>()
-
-const typeText = (e: string, value?: string) => {
-  const typed = new Typed({
-    callback: (text) => {
-      // dataTerminal.value[startIndex.value].html = text
-      if (el.value || el.value[startIndex.value]) {
-        el.value[startIndex.value].innerHTML = text
-      }
-    },
-  })
-  const type = async () => {
-    let line1 = ''
-    let line2 = ''
-    let line3 = ''
-    let line4 = ''
-    let line5 = ''
-    let randomValue = undefined
-    const a = [true, false]
-    if (e === 'msa') {
-      line1 = 'usage: <_optional_> msa <_command_>\n'
-      line2 =
-        'where <_command_> is one of: \n\t name, age, clear, phone, email, wife, cv\n'
-      line3 = 'where <_optional_> is: \n\t npm i or npm install'
-      line4 = ''
-      line5 = ``
-    }
-    if (e.includes('npm')) {
-      if (e.includes('npm list')) {
-        line1 = `msa: what do you mean ${value}?\n`
-        line2 = ''
-        line3 = ''
-        line4 = ''
-        line5 = ``
-      } else if (e.includes('npm not')) {
-        line1 = `msa: package ${value} not registered\n`
-        line2 = ''
-        line3 = ''
-        line4 = ''
-        line5 = ``
-      } else {
-        randomValue = a[Math.floor(a.length * Math.random())]
-        line1 = 'npm install MSA\n'
-        line2 = 'Installing components...\n'
-        line3 = 'Fetching from source...\n'
-        line4 = 'Success 200 🤪\n'
-        line5 = `Failed 403 😭\n`
-      }
-    }
-    if (e === 'msa name') {
-      line1 = 'My Name is Muh Syahendra A'
-      line2 = ''
-      line3 = ''
-      line4 = ''
-      line5 = ``
-    }
-    if (e === 'msa wife') {
-      line1 = 'My wife is Afni'
-      line2 = ''
-      line3 = ''
-      line4 = ''
-      line5 = ``
-    }
-    if (e === 'msa phone') {
-      line1 = '6289663604258'
-      line2 = ''
-      line3 = ''
-      line4 = ''
-      line5 = ``
-    }
-    if (e === 'msa cv') {
-      line1 = `click link this, please wait...  \n`
-      line2 = `<button onClick="window.open('/curriculum-vitae')" class="text-blue-500">Click this</button>`
-      line3 = ''
-      line4 = ''
-      line5 = ``
-    }
-    if (e === 'mount 1') {
-      line1 = 'Instruction:\n'
-      line2 =
-        '\t\t npm install msa => for get my profile\n \t\tname or my name => for get my name\n \t\tclear => for clear text'
-      line3 = ''
-      line4 = ''
-      line5 = ``
-    }
-    if (e === 'mount') {
-      line1 = 'Welcome to juggle. for help command you can typing msa\n'
-      line2 = ''
-      line3 = ''
-      line4 = ''
-      line5 = ``
-    }
-
-    if (e === 'text empty') {
-      line1 = '     '
-      line2 = ''
-      line3 = ''
-      line4 = ''
-      line5 = ``
-    }
-    const birtday = new Date('1996-12-22')
-    const today = new Date()
-
-    const ageMilisecond = Number(today) - Number(birtday)
-    const ageYears = Math.floor(ageMilisecond / (1000 * 60 * 60 * 24 * 365.25))
-
-    if (e === 'msa age') {
-      line1 = ageYears + ' ' + 'years old'
-      line2 = ''
-      line3 = ''
-      line4 = ''
-      line5 = ``
-    }
-    if (e === 'not found') {
-      line1 = 'msa: command not found'
-      line2 = ''
-      line3 = ''
-      line4 = ''
-      line5 = ``
-    }
-
-    if (line1) {
-      typed.type(line1, {
-        errorMultiplier: 0,
-        className:
-          ((e.includes('npm not') || e.includes('mount')) &&
-            'text-sm italic text-[20px]') ||
-          '',
-      })
-      if (e === 'text empty') {
-        typed.wait(2)
-      } else {
-        typed.wait(1500)
-      }
-      if (container_typing) {
-        const height = container_typing.scrollHeight + 100
-        container_typing.scrollTo({
-          left: 0,
-          top: height,
-          behavior: 'smooth',
-        })
-      }
-    }
-    if (line2) {
-      typed.type(line2, {
-        errorMultiplier: 0,
-        className: (e.includes('mount') && 'text-sm italic') || '',
-      })
-      typed.wait(1500)
-      if (container_typing) {
-        const height = container_typing.scrollHeight + 100
-        container_typing.scrollTo({
-          left: 0,
-          top: height,
-          behavior: 'smooth',
-        })
-      }
-    }
-    if (line3) {
-      typed.type(line3, { errorMultiplier: 0 })
-      typed.wait(1500)
-      if (container_typing) {
-        const height = container_typing.scrollHeight + 100
-        container_typing.scrollTo({
-          left: 0,
-          top: height,
-          behavior: 'smooth',
-        })
-      }
-    }
-    if (randomValue) {
-      if (line4) {
-        typed.type(line4, { errorMultiplier: 0, className: 'successTyped' })
-        typed.wait(1500)
-        if (container_typing) {
-          const height = container_typing.scrollHeight + 100
-          container_typing.scrollTo({
-            left: 0,
-            top: height,
-            behavior: 'smooth',
-          })
-        }
-
-        typed.type('====================\n', { errorMultiplier: 0 })
-        typed.wait(1000)
-        if (container_typing) {
-          const height = container_typing.scrollHeight + 100
-          container_typing.scrollTo({
-            left: 0,
-            top: height,
-            behavior: 'smooth',
-          })
-        }
-
-        typed.type('MSA Begin\n', {
-          errorMultiplier: 0,
-          className: 'fontWeight',
-        })
-        typed.wait(1000)
-        typed.type('====================\n', { errorMultiplier: 0 })
-        if (container_typing) {
-          const height = container_typing.scrollHeight + 100
-          container_typing.scrollTo({
-            left: 0,
-            top: height,
-            behavior: 'smooth',
-          })
-        }
-
-        typed.wait(1000)
-        if (container_typing) {
-          const height = container_typing.scrollHeight + 100
-          container_typing.scrollTo({
-            left: 0,
-            top: height,
-            behavior: 'smooth',
-          })
-        }
-      }
-    } else {
-      if (line5) {
-        typed.type(line5, {
-          errorMultiplier: 0,
-          noSpecialCharErrors: true,
-          className: 'errorTyped',
-        })
-        typed.wait(3000)
-        if (container_typing) {
-          const height = container_typing.scrollHeight + 100
-          container_typing.scrollTo({
-            left: 0,
-            top: height,
-            behavior: 'smooth',
-          })
-        }
-
-        typed.type('====================\n', { errorMultiplier: 0 })
-        typed.wait(1000)
-        if (container_typing) {
-          const height = container_typing.scrollHeight + 100
-          container_typing.scrollTo({
-            left: 0,
-            top: height,
-            behavior: 'smooth',
-          })
-        }
-
-        typed.type('Oh no, please try again...\n', {
-          errorMultiplier: 0,
-          className: 'fontWeight',
-        })
-        typed.wait(1000)
-        if (container_typing) {
-          const height = container_typing.scrollHeight + 100
-          container_typing.scrollTo({
-            left: 0,
-            top: height,
-            behavior: 'smooth',
-          })
-        }
-
-        typed.type('====================\n', { errorMultiplier: 0 })
-        typed.wait(1000)
-      }
-    }
-
-    await typed.run()
-    startIndex.value += 1
-    const second =
-      new Date().getSeconds() <= 9
-        ? '0' + new Date().getSeconds()
-        : '' + new Date().getSeconds()
-    const minute =
-      new Date().getMinutes() <= 9
-        ? '0' + new Date().getMinutes()
-        : '' + new Date().getMinutes()
-    const hour =
-      new Date().getHours() <= 9
-        ? '0' + new Date().getHours()
-        : '' + new Date().getHours()
-
-    dataTerminal.value.push({
-      html: 'input',
-      created_at: hour + ':' + minute + ':' + second,
-    })
-
-    if (container_typing) {
-      container_typing.scrollTo({
-        left: 0,
-        top: container_typing.scrollHeight,
-        behavior: 'smooth',
-      })
-    }
-  }
-
-  type()
-}
-
-// function handleSubmit(e: KeyboardEvent, props: any) {
-//   let value = null
-
-//   const typing_text = document.getElementById(`typing_text${props.index}`)
-//   const second =
-//     new Date().getSeconds() <= 9
-//       ? '0' + new Date().getSeconds()
-//       : '' + new Date().getSeconds()
-//   const minute =
-//     new Date().getMinutes() <= 9
-//       ? '0' + new Date().getMinutes()
-//       : '' + new Date().getMinutes()
-//   const hour =
-//     new Date().getHours() <= 9
-//       ? '0' + new Date().getHours()
-//       : '' + new Date().getHours()
-
-//   let charCode = e.keyCode || e.which
-//   value = typing_text?.innerText.replace(/\n/gm, '')
-
-//   if (!typing_text) return
-
-//   if (charCode === 13 || e.key == 'Enter' || e.code == 'Enter') {
-//     e.preventDefault()
-//     value = typing_text?.innerText.replace(/\n/gm, '')
-
-//     const input = document.createElement('input')
-//     input.value = typing_text.innerHTML
-
-//     container_typing?.scrollTo({
-//       left: 0,
-//       top: container_typing?.scrollHeight,
-//       behavior: 'smooth',
-//     })
-
-//     typing_text.setAttribute('contentEditable', 'false')
-//     typing_text.blur()
-
-//     if (!value) {
-//       dataTerminal.value.push({
-//         html: 'input',
-//         created_at: hour + ':' + minute + ':' + second,
-//       })
-
-//       typing_text.focus()
-//       return
-//     }
-
-//     if (value.toLocaleLowerCase().includes('npm')) {
-//       if (value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm') {
-//         dataTerminal.value.push({
-//           html: 'text',
-//           created_at: hour + ':' + minute + ':' + second,
-//         })
-//         typeText('npm list', "'npm i msa'")
-//         typing_text.focus()
-//         return
-//       }
-//       if (
-//         value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm i' ||
-//         value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm install' ||
-//         value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm i msa' ||
-//         value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'npm install msa'
-//       ) {
-//         dataTerminal.value.push({
-//           html: 'text',
-//           created_at: hour + ':' + minute + ':' + second,
-//         })
-//         typeText('npm')
-//         typing_text.focus()
-
-//         if (container_typing)
-//           container_typing.scrollTo({
-//             left: 0,
-//             top: container_typing.scrollHeight,
-//             behavior: 'smooth',
-//           })
-//       } else {
-//         const textsplit = value.toLocaleLowerCase().split(' ')
-
-//         dataTerminal.value.push({
-//           html: 'text',
-//           created_at: hour + ':' + minute + ':' + second,
-//         })
-//         typeText('npm not', textsplit[textsplit.length - 1])
-//         typing_text.focus()
-//       }
-//       return
-//     }
-//     if (
-//       value
-//         .toLocaleLowerCase()
-//         .replace(/^\s{1,}/gm, '')
-//         .includes('msa name') ||
-//       value
-//         ?.toLocaleLowerCase()
-//         .replace(/^\s{1,}/gm, '')
-//         .includes('my name')
-//     ) {
-//       dataTerminal.value.push({
-//         html: 'text',
-//         created_at: hour + ':' + minute + ':' + second,
-//       })
-//       typeText('msa name')
-//       return
-//     }
-//     if (
-//       value
-//         .toLocaleLowerCase()
-//         .replace(/^\s{1,}/gm, '')
-//         .includes('msa phone')
-//     ) {
-//       dataTerminal.value.push({
-//         html: 'text',
-//         created_at: hour + ':' + minute + ':' + second,
-//       })
-//       typeText('msa phone')
-//       return
-//     }
-//     if (
-//       value
-//         .toLocaleLowerCase()
-//         .replace(/^\s{1,}/gm, '')
-//         .includes('msa wife')
-//     ) {
-//       dataTerminal.value.push({
-//         html: 'text',
-//         created_at: hour + ':' + minute + ':' + second,
-//       })
-//       typeText('msa wife')
-//       return
-//     }
-//     if (
-//       value
-//         .toLocaleLowerCase()
-//         .replace(/^\s{1,}/gm, '')
-//         .includes('msa cv')
-//     ) {
-//       dataTerminal.value.push({
-//         html: 'text',
-//         created_at: hour + ':' + minute + ':' + second,
-//       })
-//       typeText('msa cv')
-//       return
-//     }
-//     if (
-//       value
-//         .toLocaleLowerCase()
-//         .replace(/^\s{1,}/gm, '')
-//         .includes('umur') ||
-//       value
-//         .toLocaleLowerCase()
-//         .replace(/^\s{1,}/gm, '')
-//         .includes('msa age')
-//     ) {
-//       dataTerminal.value.push({
-//         html: 'text',
-//         created_at: hour + ':' + minute + ':' + second,
-//       })
-//       typeText('msa age')
-//       return
-//     }
-//     if (
-//       value
-//         .toLocaleLowerCase()
-//         .replace(/^\s{1,}/gm, '')
-//         .includes('msa clear')
-//     ) {
-//       dataTerminal.value.push({
-//         html: 'input',
-//         created_at: hour + ':' + minute + ':' + second,
-//       })
-//       return
-//     }
-
-//     if (value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === '') {
-//       dataTerminal.value.push({
-//         html: 'input',
-//         created_at: hour + ':' + minute + ':' + second,
-//       })
-//       return
-//     }
-
-//     if (value.toLocaleLowerCase().replace(/^\s{1,}/gm, '') === 'msa') {
-//       dataTerminal.value.push({
-//         html: 'text',
-//         created_at: hour + ':' + minute + ':' + second,
-//       })
-//       typeText('msa')
-//       return
-//     }
-
-//     dataTerminal.value.push({
-//       html: 'text',
-//       created_at: hour + ':' + minute + ':' + second,
-//     })
-//     typeText('not found')
-//   }
-// }
-
-// function handleMouseEvent(e?: number) {
-//   const typing_text = document.getElementById(
-//     `typing_text${e ? e : dataTerminal.value.length - 1}`
-//   )
-//   const container_typing = document.getElementById('container_typing')
-
-//   if (!typing_text) return
-//   if (container_typing) {
-//     typing_text.focus()
-//   }
-//   if (typing_text) {
-//     typing_text.focus()
-//   }
-//   return
-// }
-// const typeValue = ref('')
-// const displayTextArray = ref([
-//   ' Hello I’m Muh Syahendra A a Software Engineer And UI Designer',
-// ])
-// const displayTextArrayIndex = ref(0)
-// const charIndex = ref(0)
-// const typingSpeed = 100
-
-// function typeTextTitle() {
-//   typeValue.value += displayTextArray.value[displayTextArrayIndex.value].charAt(
-//     charIndex.value
-//   )
-//   charIndex.value += 1
-//   setTimeout(typeTextTitle, typingSpeed)
-// }
-const MONTH_NAME = {
-  januari: '01',
-  februari: '02',
-  maret: '03',
-  april: '04',
-  mei: '05',
-  juni: '06',
-  juli: '07',
-  agustus: '08',
-  september: '09',
-  oktober: '10',
-  november: '11',
-  desember: '12',
-} as const
-
-// function formatDate(e: string) {
-//   const date = new Date(e)
-//   const monthName = Object.keys(MONTH_NAME)[date.getMonth()]
-//   return (
-//     date.getDate() + ' ' + monthName.toUpperCase() + ' ' + date.getFullYear()
-//   )
-// }
-
-// async function getWebsiteDetail() {
-//   const data = await $fetch('/api/getDetailWebsiteGamePs')
-//   const dom = new DOMParser().parseFromString(data, 'text/html')
-//   const listGame = dom?.querySelectorAll('#main')
-
-//   const result = (Array.from(listGame) as any[]).flatMap((item, index) => {
-//     const imgBackground =
-//       item?.querySelector(
-//         '[data-qa="gameBackgroundImage#heroImage"] noscript img'
-//       ) || null
-//     const nameGame =
-//       item?.querySelector('[data-qa="mfe-game-title#name"]') || null
-
-//     const publisher =
-//       item?.querySelector('[data-qa="mfe-game-title#publisher"]') || null
-
-//     const rating =
-//       item?.querySelector(
-//         '[data-track-click="starRating:selectStarRatingLink"]'
-//       ) || null
-//     const averageRating = rating?.querySelector(
-//       '[data-qa="mfe-game-title#average-rating"]'
-//     )
-//     const totalRatingCount = rating?.querySelector(
-//       '[data-qa="mfe-game-title#rating-count"]'
-//     )
-//     const product =
-//       item?.querySelector('[data-qa="mfe-game-title#productTag0"]') || null
-//     const product1 =
-//       item?.querySelector('[data-qa="mfe-game-title#productTag1"]') || null
-
-//     const online =
-//       item?.querySelector([
-//         '[data-qa="mfe-compatibility-notices#notices#notice0#compatText"]',
-//       ]) || null
-//     const player =
-//       item?.querySelector(
-//         '[data-qa="mfe-compatibility-notices#notices#notice1#compatText"]'
-//       ) || null
-//     const ratingContentGame =
-//       item?.querySelector(
-//         '[data-qa="mfe-content-rating#ratingImage"] noscript img'
-//       ) || null
-//     const descriptionContentGame =
-//       item?.querySelector('[data-qa="mfe-content-rating#textDescriptors"]') ||
-//       null
-
-//     const descriptionGame =
-//       item?.querySelector('[data-qa="mfe-game-overview#description"]') || null
-
-//     const releaseGame =
-//       item?.querySelector(
-//         'dl [data-qa="gameInfo#releaseInformation#releaseDate-value"]'
-//       ) || null
-
-//     const genreGame =
-//       item?.querySelector(
-//         '[data-qa="gameInfo#releaseInformation#genre-value"] span'
-//       ) || null
-
-//     const voiceGame =
-//       item?.querySelector(
-//         '[data-qa="gameInfo#releaseInformation#voice-value"]'
-//       ) || null
-//     const screenLanguage =
-//       item?.querySelector(
-//         '[data-qa="gameInfo#releaseInformation#subtitles-value"]'
-//       ) || null
-
-//     const preOrder =
-//       item?.querySelector('[data-qa="mfeCtaMain#cta#action"] span') || null
-
-//     return {
-//       img: imgBackground?.getAttribute('src') || null,
-//       name: nameGame?.innerHTML || null,
-//       publisher: publisher?.innerHTML || null,
-//       rating: rating
-//         ? {
-//           average: averageRating?.innerHTML,
-//           total: totalRatingCount?.innerHTML,
-//         }
-//         : null,
-//       platform:
-//         [product?.innerHTML, product1?.innerHTML].filter(Boolean).length > 0
-//           ? [product?.innerHTML, product1?.innerHTML].filter(Boolean)
-//           : [],
-//       online: online ? true : false,
-//       player: player?.innerHTML || null,
-//       rating_content_game: {
-//         img_rating: ratingContentGame?.getAttribute('src') || null,
-//         description: descriptionContentGame?.innerHTML || null,
-//       },
-//       description_game: descriptionGame?.innerHTML || null,
-//       release_game: releaseGame?.innerHTML || null,
-//       genre: genreGame?.innerHTML || null,
-//       voice: voiceGame?.innerHTML || null,
-//       screen_language: screenLanguage?.innerHTML || null,
-//       pre_order: preOrder ? true : false,
-//     }
-//   })
-// }
-
-// async function getSearchWebsite() {
-//   const data = await $fetch('/api/getSearchGame')
-// }
-
-// async function getWebsite() {
-//   const data = await $fetch('/api/getWebsiteGamePs')
-//   // const dom = new DOMParser().parseFromString(data, 'text/html')
-//   // const listGame = await dom?.querySelectorAll('#main section')
-//   // console.log(dom, 'inigame')
-
-//   // const sectionSDK = listGame[0].querySelectorAll(
-//   //   'section [data-qa="ems-sdk-grid"] div .psw-l-grid'
-//   // )
-//   // const selectUl = sectionSDK[0]?.querySelectorAll('#main section ul')
-//   // const resultGame = Array.from(selectUl[0]?.querySelectorAll('li')) as any[]
-
-//   // if (!resultGame) {
-//   //   throw new Error('Failed to parse DOM')
-//   // }
-//   // const resultItems = (Array.from(resultGame) as any[])
-//   //   .flatMap((item, index) => {
-//   //     const checkEmpty = item.querySelector(`li [data-qa-index="${index}"]`)
-//   //     if (!checkEmpty) {
-//   //       return false
-//   //     }
-//   //     const img = item.querySelector(
-//   //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art#image"] noscript img`
-//   //     )
-//   //     const name = item.querySelector(
-//   //       `li section [data-qa="ems-sdk-grid#productTile${index}#product-name"]`
-//   //     )?.innerHTML
-//   //     const categoryPS5 = item.querySelector(
-//   //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag0"]`
-//   //     )?.innerHTML
-//   //     const categoryPS4 = item.querySelector(
-//   //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"] [data-qa="ems-sdk-grid#productTile${index}"] div [data-qa="ems-sdk-grid#productTile${index}#game-art"] [data-qa="ems-sdk-grid#productTile${index}#game-art#tag1"]`
-//   //     )?.innerHTML
-//   //     const id = item.querySelector(
-//   //       `li [data-qa-index="${index}"] [data-track="web:store:product-tile"]`
-//   //     )
-//   //     return {
-//   //       img: img?.src,
-//   //       name,
-//   //       platforms: [categoryPS5, categoryPS4].filter(Boolean),
-//   //       id: id.href.replace(window.location.origin + '/en-id/product/', ''),
-//   //     }
-//   //   })
-//   //   .filter(Boolean)
-//   // console.log(resultItems, 'iniresultItems')
-// }
-
-async function getDate() {
-  const data = await $fetch<any>('/api/getWebsite')
-
-  const dom = new DOMParser().parseFromString(data, 'text/html')
-  const trs = dom.querySelectorAll('table tbody tr')
-
-  const result: any[] = []
-
-  Array.from(trs).forEach((row) => {
-    const tds = row.querySelectorAll('td')
-    if (tds.length >= 3) {
-      const dateText = tds[0]?.textContent?.trim() || ''
-      const name = tds[2]?.textContent?.trim() || ''
-
-      const parts = dateText.split(' ')
-      if (parts.length >= 2) {
-        const dayStr = parts[0]
-        const monthStr = parts[1]
-        const monthLower = monthStr?.toLowerCase() as keyof typeof MONTH_NAME
-        const monthNumStr = MONTH_NAME[monthLower]
-
-        if (monthNumStr && name.toLowerCase() !== 'sabtu' && name.toLowerCase() !== 'minggu') {
-          const year = new Date().getFullYear()
-          const date = `${year}-${monthNumStr}-${dayStr?.padStart(2, '0')}`
-
-          const isDuplicate = result.some(item => item.date === date && item.name === name)
-          if (!isDuplicate) {
-            result.push({
-              date,
-              name,
-            })
-          }
-        }
-      }
-    }
-  })
-
-  let month = String(new Date().getMonth() + 1)
-  let year = new Date().getFullYear()
-
-  if (Number(month) < 10) {
-    month = String('0' + month)
-  }
-  let resultDateYear = '' + year + '-' + month
-
-  if (result.length < 1) {
-    isModalHolidayResult.value = true
-    return
-  }
-  console.log(result, resultDateYear, 'iniresult')
-  holidayResult.value = result.filter((item: any) =>
-    item.date.includes(resultDateYear)
-  )
-}
-
-// function handleClose() {
-//   isModalHolidayResult.value = true
-// }
-onMounted(() => {
-  getDate()
-  // getWebsiteDetail()
-  // getSearchWebsite()
-  nextTick(() => {
-    // console.log(import.meta.client)
-    // if (import.meta.client) {
-    //   getWebsite()
-    // }
-    typeText('mount')
-  })
-})
-
-// onBeforeMount(() => {
-//   setTimeout(typeTextTitle, 1000)
-//   setTimeout(() => {
+<script setup lang="ts">
+import { useAsyncData, computed, ref } from '#app'; // Import ref
+import AppHeader from '~/components/AppHeader.vue';
+import HeroSection from '~/components/HeroSection.vue';
+// AboutMeSection component is not directly used for rendering contact details anymore, as they are now in the page.
+// If AboutMeSection has other responsibilities, it can remain imported or be refactored.
+// For now, I'll keep it imported as it might be used by HeroSection or other parts.
+import AboutMeSection from '~/components/AboutMeSection.vue'; 
+import SkillsSection from '~/components/SkillsSection.vue';
+import ExperienceSection from '~/components/ExperienceSection.vue';
+import ProjectsSection from '~/components/ProjectsSection.vue';
+import ContactSection from '~/components/ContactSection.vue';
+import AppFooter from '~/components/AppFooter.vue';
+import PdfDownloadButton from '~/components/PdfDownloadButton.vue'; // Import the new component
+import { useI18n } from 'vue-i18n';
+
+const { t: $t, locale } = useI18n();
+
+const { data, pending, error } = await useAsyncData('portfolio-content', async () => {
+  const profile = await queryContent(locale.value, 'profile').findOne();
+  const skills = await queryContent(locale.value, 'skills').findOne();
+  const experience = await queryContent(locale.value, 'experience').find(); // Use find() for multiple entries
+  const projects = await queryContent(locale.value, 'projects').find(); // Use find() for multiple entries
+
+  return { profile, skills, experience, projects };
+});
+
+const profile = computed(() => data.value?.profile);
+const skills = computed(() => data.value?.skills);
+const experience = computed(() => data.value?.experience);
+const projects = computed(() => data.value?.projects);
+
+// Education data structure based on CV page, hardcoded as it wasn't in content/
+// Added keys for i18n lookup for degrees.
+const educationData = ref([
+  { institution: 'Pijar Camp (ex Arkademy)', period: '2020 - 2021', degree: 'education.pijar' },
+  { institution: 'Institut Teknologi Bandung', period: '2019 - 2019', degree: 'education.itb' },
+  { institution: 'Muhammadiyah University of Surakarta', period: '2014 - 2018', degree: 'education.ums' },
+]);
+
+// --- Internationalization (i18n) Keys Reference ---
+// Ensure these keys are defined in your language files (e.g., public/locales/en.json and public/locales/id.json).
 //
-//   }, 1000)
-// })
+// Example: For English (en.json)
+// {
+//   "about_me": "About Me",
+//   "home": "Home",
+//   "home_description": "Welcome to my portfolio",
+//   "educationTitle": "Education",
+//   "education": {
+//     "pijar": "Full-Stack Developer, Information Technology",
+//     "itb": "Digital Talent Scholarship - Internet of Things",
+//     "ums": "Bachelor's degree, Electrical Engineering"
+//   },
+//   // Add translations for other text elements like 'location', 'email', 'phone', 'linkedin', 'github' labels if they are not static.
+//   // For example, if you wanted to translate "LinkedIn":
+//   // "linkedin_label": "LinkedIn",
+//   // and then use $t('linkedin_label') in the template.
+// }
+//
+// Example: For Indonesian (id.json)
+// {
+//   "about_me": "Tentang Saya",
+//   "home": "Beranda",
+//   "home_description": "Selamat datang di portofolio saya",
+//   "educationTitle": "Pendidikan",
+//   "education": {
+//     "pijar": "Full-Stack Developer, Teknologi Informasi",
+//     "itb": "Digital Talent Scholarship - Internet of Things",
+//     "ums": "Gelar Sarjana, Teknik Elektro"
+//   },
+//   // Add translations for other text elements if needed.
+// }
+// --- End of Internationalization (i18n) Keys Reference ---
+
+
+useHead({
+  title: computed(() => ($t('home') + ' - ' + (profile.value?.name || ''))),
+  meta: [
+    { name: 'description', content: computed(() => ($t('home_description') + ' ' + (profile.value?.name || ''))) }
+  ]
+})
 </script>
 
-<style lang="scss" scoped>
-:deep() body {
-  overflow: hidden !important;
+<style scoped>
+/* Scoped styles for the page */
+.about-me-section {
+  /* Specific styles if needed, otherwise rely on global/tailwind */
 }
 
-.fontTerminal {
-  font-family: 'ByteBounce' !important;
-  font-size: 14px;
+.education-section {
+  /* Specific styles if needed */
 }
 
-#me {
-  animation: fadeInAnimation 3s ease-in-out;
-}
-
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-// blinks curso start
-.blinking-cursor {
-  // font-size: 6rem;
-  color: black;
-  -webkit-animation: 1s blink step-end infinite;
-  -moz-animation: 1s blink step-end infinite;
-  -ms-animation: 1s blink step-end infinite;
-  -o-animation: 1s blink step-end infinite;
-  animation: 1s blink step-end infinite;
-}
-
-@keyframes blink {
-
-  from,
-  to {
-    color: transparent;
-  }
-
-  50% {
-    color: #2c3e50;
-  }
-}
-
-@-moz-keyframes blink {
-
-  from,
-  to {
-    color: transparent;
-  }
-
-  50% {
-    color: #2c3e50;
-  }
-}
-
-@-webkit-keyframes blink {
-
-  from,
-  to {
-    color: transparent;
-  }
-
-  50% {
-    color: #2c3e50;
-  }
-}
-
-@-ms-keyframes blink {
-
-  from,
-  to {
-    color: transparent;
-  }
-
-  50% {
-    color: #2c3e50;
-  }
-}
-
-@-o-keyframes blink {
-
-  from,
-  to {
-    color: transparent;
-  }
-
-  50% {
-    color: #2c3e50;
-  }
-}
-
-// blink cursor end
-
-// sleep
-
-#pillow {
-  margin-left: 100px;
-}
-
-// .corner {
-//   height: 50px;
-//   position: absolute;
-//   width: 50px;
-//   z-index: 1;
-// }
-
-.top-left {
-  top: 0;
-  left: 0;
-}
-
-.top-right {
-  top: 0;
-  right: 0;
-}
-
-.bottom-right {
-  background-color: #e1e1e1;
-  bottom: -45px;
-  right: 0;
-}
-
-.bottom-left {
-  background-color: #e1e1e1;
-  bottom: -45px;
-  left: 0;
-}
-
-.zzz {
-  animation-name: zzz;
-  animation-duration: 2s;
-  animation-timing-function: ease-out;
-  animation-iteration-count: infinite;
-  animation-direction: forwards;
-  font-weight: bold;
-  position: absolute;
-  z-index: 100;
-  transform: translateY(100%);
-  font-family: 'Concert One', cursive;
-}
-
-.zzz-z {
-  animation-delay: 0s;
-  right: 10px;
-}
-
-.zzz-zz {
-  animation-delay: 0.5s;
-  right: -20px;
-}
-
-.zzz-zzz {
-  animation-delay: 1s;
-  right: 0;
-}
-
-/* *** All Animations *** */
-/*Darker Sky*/
-@-webkit-keyframes zzz {
-  0% {
-    color: rgba(160, 84, 246, 0);
-    font-size: 30px;
-    -webkit-transform: translateY(100%);
-    transform: translateY(100%);
-  }
-
-  100% {
-    font-size: 72px;
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
-  }
-}
-
-@keyframes zzz {
-  0% {
-    color: rgba(160, 84, 246, 0);
-    font-size: 30px;
-    -webkit-transform: translateY(100%);
-    transform: translateY(100%);
-  }
-
-  100% {
-    font-size: 72px;
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
-  }
-}
-
-::-webkit-scrollbar {
-  display: none;
+/* Add styles for the new contact info links */
+.about-me-section p a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* space between icon and text */
 }
 </style>

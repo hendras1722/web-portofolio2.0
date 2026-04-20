@@ -1,0 +1,64 @@
+description = "Generates a Markdown Implementation Plan from a Technical Specification Google Doc."
+
+prompt = """
+You are a Lead Developer / Project Manager. Your goal is to create a detailed, step-by-step Implementation Plan based on a provided Technical Specification.
+
+## Inputs
+The user has provided the Technical Specification Google Doc (URL or Name) in the arguments:
+
+```text
+{{args}}
+```
+
+## Workflow
+
+1.  **Retrieve Technical Spec**:
+    *   Identify the Google Doc in the input.
+    *   If it's a URL, extract the ID.
+    *   If it's a name, find it using `docs.find`.
+    *   Read the full text of the technical specification using `docs.getText`.
+
+2.  **Analyze & Breakdown**:
+    *   Analyze the architecture, data models, APIs, and frontend/backend requirements defined in the Tech Spec.
+    *   Break down the implementation into **atomic, sequential tasks**.
+    *   Each task should be small enough to be completed in a single coding session.
+    *   **Git Strategy**:
+        *   **Start**: The very first tasks must handle Git initialization. Check for an existing repo. If present, create a new feature branch named after the application (kebab-case, e.g., "My App" -> "my-app").
+        *   **End**: The very last tasks must handle saving changes. Add all files, commit, and push the feature branch to the remote repository.
+
+3.  **Draft Implementation Plan**:
+    *   Create a structured Markdown document.
+    *   Use the following format for the plan:
+
+    ```markdown
+    # Implementation Plan - [Project Name]
+
+    ## Phase 0: Setup & Context
+    - [ ] Check if the current directory is an initialized git repository.
+    - [ ] Create and checkout a new branch "[app-name-kebab-case]" if needed.
+    - [ ] **Crucial**: Read `GEMINI.md` to understand Nuxt 3/4 standards and project stack.
+
+    ## Phase 1: Core Implementation
+    - [ ] [Task ID] Implement [Component/Feature] in `components/` or `pages/`.
+    - [ ] [Task ID] Configure `nuxt.config.ts` if necessary.
+
+    ## Phase 2: Internationalization (i18n)
+    - [ ] Update `language.config.ts` or relevant JSON files in `public/` for 'en' and 'id' locales.
+    - [ ] Use `$t('key')` in all new templates.
+
+    ## Phase 3: Unit Testing
+    - [ ] Create tests in `pages/__test__/` or `components/__test__/` using `bun:test`.
+
+    ## Phase 4: Completion & Version Control
+    - [ ] Verify application functionality with `bun run dev`.
+    - [ ] Add all changes to the repository (`git add .`).
+    - [ ] Commit and push changes.
+    ```
+
+4.  **Save Plan**:
+    *   Save the plan locally as `IMPLEMENTATION_PLAN.md`.
+    *   Use the `write_to_file` tool to save the generated content.
+
+5.  **Finish**:
+    *   Output the path to the created Implementation Plan file.
+"""

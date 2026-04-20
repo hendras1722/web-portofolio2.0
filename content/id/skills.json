@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Vue.js",
+    "icon": "i-simple-icons-vuejs",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "Nuxt.js",
+    "icon": "i-simple-icons-nuxtdotjs",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "Tailwind CSS",
+    "icon": "i-simple-icons-tailwindcss",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "TypeScript",
+    "icon": "i-simple-icons-typescript",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Node.js",
+    "icon": "i-simple-icons-nodedotjs",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Supabase",
+    "icon": "i-simple-icons-supabase",
+    "proficiency": "Menengah"
+  }
+]
