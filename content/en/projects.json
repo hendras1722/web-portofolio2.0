@@ -1,0 +1,27 @@
+[
+  {
+    "title": "E-commerce Platform",
+    "description": "Developed a full-stack e-commerce platform with user authentication, product catalog, and payment gateway integration.",
+    "technologies": [
+      "Nuxt.js",
+      "Vue.js",
+      "Tailwind CSS",
+      "Node.js",
+      "PostgreSQL"
+    ],
+    "link": "https://example.com/ecommerce",
+    "image": "/images/project-ecommerce.png"
+  },
+  {
+    "title": "Portfolio Website 1.0",
+    "description": "Personal portfolio showcasing skills and projects. Implemented with Vue.js and custom CSS.",
+    "technologies": [
+      "Vue.js",
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "link": "https://example.com/old-portfolio",
+    "image": "/images/project-portfolio.png"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "company": "Insira",
+    "title": "Developer",
+    "dates": "2026 - 2026",
+    "description": "Develop apps insira, about the apps is public cemetery and handle 3 apps: Petugas, Insira, Client Insira."
+  },
+  {
+    "company": "Panglima Propertindo",
+    "title": "Developer",
+    "dates": "2025 - 2025",
+    "description": "Develop apps insira, about the apps is public cemetery and handle 3 apps: Petugas, Insira, Client Insira."
+  },
+  {
+    "company": "Geek Garden",
+    "title": "Frontend Developer",
+    "dates": "2025 - 2025",
+    "description": "Project base 5 months maintaining Scyllax TPM (Trade Promotion Management), handling modules Annual Budget and Approval Schema."
+  },
+  {
+    "company": "Privy",
+    "title": "Frontend Engineer",
+    "dates": "2021 - 2025",
+    "description": "Maintained and handled CIMB projects (Credit Card & Personal Loan), contributed to BNI, CIMB Octo Saver, and internal applications using Nuxt (JavaScript)."
+  },
+  {
+    "company": "PT Nastha Global Utama",
+    "title": "Frontend Developer",
+    "dates": "2020 - 2021",
+    "description": "Maintained and handled Ceisa 4.0 project from Tax using React (JavaScript)."
+  },
+  {
+    "company": "BLPT Yogyakarta",
+    "title": "Arduino Trainer",
+    "dates": "2019",
+    "description": "Conducted a 3-day training session teaching teachers Arduino programming."
+  },
+  {
+    "company": "PT Binterjet",
+    "title": "Technical Support Engineer",
+    "dates": "2019",
+    "description": "Handled technical support and sales for customers in a screen printing-focused company."
+  }
+]

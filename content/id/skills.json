@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Vue.js",
+    "icon": "i-simple-icons-vuedotjs",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "Nuxt.js",
+    "icon": "i-simple-icons-nuxtdotjs",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "React",
+    "icon": "i-simple-icons-react",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "Next.js",
+    "icon": "i-simple-icons-nextdotjs",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "Tailwind CSS",
+    "icon": "i-simple-icons-tailwindcss",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "JavaScript",
+    "icon": "i-simple-icons-javascript",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "TypeScript",
+    "icon": "i-simple-icons-typescript",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Node.js",
+    "icon": "i-simple-icons-nodedotjs",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Express.js",
+    "icon": "i-simple-icons-express",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "PostgreSQL",
+    "icon": "i-simple-icons-postgresql",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "MySQL",
+    "icon": "i-simple-icons-mysql",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "MongoDB",
+    "icon": "i-simple-icons-mongodb",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Firebase",
+    "icon": "i-simple-icons-firebase",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Supabase",
+    "icon": "i-simple-icons-supabase",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Redux",
+    "icon": "i-simple-icons-redux",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Vuetify",
+    "icon": "i-simple-icons-vuetify",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Nuxt UI",
+    "icon": "i-heroicons-squares-2x2",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Bootstrap",
+    "icon": "i-simple-icons-bootstrap",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Vite",
+    "icon": "i-simple-icons-vite",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "GitLab",
+    "icon": "i-simple-icons-gitlab",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Postman",
+    "icon": "i-simple-icons-postman",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Figma",
+    "icon": "i-simple-icons-figma",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Jira",
+    "icon": "i-simple-icons-jira",
+    "proficiency": "Menengah"
+  },
+  {
+    "name": "Pinia",
+    "icon": "i-simple-icons-pinia",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "HTML5",
+    "icon": "i-simple-icons-html5",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "CSS3",
+    "icon": "i-simple-icons-css3",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "Git",
+    "icon": "i-simple-icons-git",
+    "proficiency": "Mahir"
+  },
+  {
+    "name": "Go",
+    "icon": "i-simple-icons-go",
+    "proficiency": "Dasar"
+  }
+]

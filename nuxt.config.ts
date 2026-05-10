@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   ],
   i18n: {
     strategy: 'prefix_except_default',
-    vueI18n: './language.config.ts', // if you are using custom path, default
+    vueI18n: './plugins/i18n.ts', // Use the correct path to your i18n plugin
     locales: [
       { code: 'en', iso: 'en-US', name: 'English' },
       { code: 'id', iso: 'id-ID', name: 'Indonesia' },
@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/css/font.css'],
+  css: ['~/assets/css/font.css', '~/assets/css/print.css'],
 
   colorMode: {
     preference: 'light',
@@ -76,6 +76,8 @@ export default defineNuxtConfig({
     },
     pwaAssets: {
       config: true,
+      preset: 'transparent',
+      imagesDir: 'public', // Assuming favicon.ico is in the public directory
     },
     // workbox: {
     //   globPatterns: ['**/*.{js,css,html,png,svg,ico}'],

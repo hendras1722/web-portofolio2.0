@@ -1,0 +1,115 @@
+[
+  {
+    "title": "Insira",
+    "description": "Product untuk jual beli pemakaman",
+    "technologies": [
+      "Next.js 15"
+    ],
+    "link": "https://insira.id/"
+  },
+  {
+    "title": "TPM Scyllax",
+    "description": "Project client untuk management promosi",
+    "technologies": [
+      "Vue.js 3"
+    ],
+    "link": "https://tpm-fe.scylla.id/"
+  },
+  {
+    "title": "Ronda App",
+    "description": "Project ronda app",
+    "technologies": [
+      "Nuxt 3"
+    ],
+    "link": "https://gpa.syahendra.com/"
+  },
+  {
+    "title": "New Cashsir App build with Nuxt 3",
+    "description": "project.cashsir_app2",
+    "technologies": [
+      "Nuxt 3"
+    ],
+    "link": "https://newcashsir.syahendra.com/"
+  },
+  {
+    "title": "Cashsir App build with Next 15",
+    "description": "project.cashsir_app",
+    "technologies": [
+      "Next.js 15"
+    ],
+    "link": "https://cashsir.syahendra.com/"
+  },
+  {
+    "title": "Operator Provider",
+    "description": "project.operator",
+    "technologies": [
+      "Express.js"
+    ],
+    "link": "https://provider.syahendra.com"
+  },
+  {
+    "title": "Auth",
+    "description": "project.auth",
+    "technologies": [
+      "Express.js",
+      "MongoDB"
+    ],
+    "link": "https://auth.syahendra.com/docs"
+  },
+  {
+    "title": "Adonara Dashboard",
+    "description": "project.adonara_dashboard",
+    "technologies": [
+      "Nuxt 3"
+    ]
+  },
+  {
+    "title": "Landing Privy",
+    "description": "project.landing_privy",
+    "technologies": [
+      "Nuxt 3"
+    ]
+  },
+  {
+    "title": "CIMB Octo Saver",
+    "description": "project.octo",
+    "technologies": [
+      "Nuxt 2"
+    ]
+  },
+  {
+    "title": "CIMB Credit Card and Personal Loan",
+    "description": "project.ccpl",
+    "technologies": [
+      "Nuxt 2"
+    ]
+  },
+  {
+    "title": "App Tele Privy",
+    "description": "project.App_tele_privy",
+    "technologies": [
+      "Next.js"
+    ]
+  },
+  {
+    "title": "Ronin Dashboard",
+    "description": "project.ronin",
+    "technologies": [
+      "Nuxt 3"
+    ]
+  },
+  {
+    "title": "BNI Regsand",
+    "description": "project.bni",
+    "technologies": [
+      "Nuxt 2"
+    ]
+  },
+  {
+    "title": "Ceisa 4.0",
+    "description": "project.ceisa",
+    "technologies": [
+      "React.js"
+    ]
+  }
+]

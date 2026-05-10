@@ -1,0 +1,33 @@
+@media print {
+  /* Hide elements not relevant for print */
+  .app-header, .contact-section, .app-footer, .morph-cursor {
+    display: none !important;
+  }
+
+  /* Adjust layout for better printability */
+  body {
+    -webkit-print-color-adjust: exact !important; /* For background colors and images */
+    print-color-adjust: exact !important;
+  }
+
+  /* Ensure text is black for readability on white paper */
+  h1, h2, h3, h4, h5, h6, p, span, div {
+    color: #000 !important;
+    background-color: transparent !important;
+  }
+
+  /* Remove motion/animations during print */
+  [v-motion] {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Add page breaks */
+  .section { /* Assuming sections have a common class */
+    page-break-after: always;
+  }
+  .section:last-child {
+    page-break-after: auto;
+  }
+}
