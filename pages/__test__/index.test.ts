@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi } from 'bun:test';
 import { mountSuspense } from '@nuxt/test-utils/runtime';
 import IndexPage from '~/pages/index.vue';
 
@@ -104,7 +104,7 @@ describe('pages/index.vue', () => {
     // Check for core components
     expect(wrapper.findComponent({ name: 'AppHeader' }).exists()).toBe(true);
     expect(wrapper.findComponent({ name: 'HeroSection' }).exists()).toBe(true);
-    
+
     // Check for the About Me section with contact details
     expect(wrapper.find('.about-me-section').exists()).toBe(true);
     expect(wrapper.find('p a[href^="mailto:"]').exists()).toBe(true); // Email link

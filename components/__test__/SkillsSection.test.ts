@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from 'bun:test';
 import { mount } from '@vue/test-utils';
 import SkillsSection from '~/components/SkillsSection.vue';
 
 // Mocking i18n
 const mockI18n = {
   methods: {
-    t: (key) => key
+    t: (key: string) => key
   }
 };
 
