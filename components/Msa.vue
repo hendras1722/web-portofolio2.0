@@ -12,6 +12,12 @@ useHead({
   ]
 })
 
+const { data: posts } = await useAsyncData('blog', () => queryContent('blog').sort({ date: -1 }).find())
+
+useSeoMeta({
+  title: 'Muh Syahendra Anindyantoro',
+  description: 'Sharing knowledge about web development, React, Nuxt, and more.'
+})
 // Helper function to calculate opacity based on scroll progress
 // fade in from start, fade out at end
 const calculateOpacity = (progress: number, start: number, peak: number, end: number) => {
@@ -75,6 +81,24 @@ const experience = [
     desc: "My career at PT Binterjet for 1 month where I held technicians and sales to customers. This company focuses on screen printing."
   }
 ]
+
+// Pagination Logic
+const currentPage = ref(1)
+const itemsPerPage = 4
+const paginatedPosts = computed(() => {
+  if (!posts.value) return []
+  const start = (currentPage.value - 1) * itemsPerPage
+  const end = start + itemsPerPage
+  return posts.value.slice(start, end)
+})
+const totalPages = computed(() => posts.value ? Math.ceil(posts.value.length / itemsPerPage) : 0)
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) currentPage.value++
+}
+const prevPage = () => {
+  if (currentPage.value > 1) currentPage.value--
+}
 </script>
 
 <template>
@@ -251,6 +275,82 @@ const experience = [
                 {{ item.desc }}
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog / Stories Section -->
+    <div class="py-32 px-8 bg-[#050505] border-t border-white/5">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-24 text-left">
+          <h3 class="text-4xl md:text-6xl font-bold tracking-tighter text-white/90 mb-6">Latest Stories</h3>
+          <p class="text-xl text-white/50 font-light">
+            Insights, tutorials, and thoughts on modern web development.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <NuxtLink v-for="(post, index) in paginatedPosts" :key="post._path" :to="post._path"
+            class="group block p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-500"
+            v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: index * 50 } }">
+
+            <div class="flex flex-col h-full">
+              <div class="mb-6 flex justify-between items-start">
+                <span
+                  class="px-3 py-1 rounded-full bg-white/10 text-[10px] font-mono tracking-widest uppercase text-white/70">
+                  {{ post.description || 'Article' }}
+                </span>
+                <span class="text-xs font-mono text-white/30">{{ post.date }}</span>
+              </div>
+
+              <h4 class="text-2xl font-bold text-white/90 group-hover:text-white mb-4 line-clamp-2 leading-tight">
+                {{ post.title }}
+              </h4>
+
+              <div
+                class="mt-auto pt-6 flex items-center gap-2 text-sm font-medium text-white/40 group-hover:text-white transition-colors">
+                Read Story
+                <UIcon name="i-heroicons-arrow-right-20-solid"
+                  class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+              </div>
+            </div>
+          </NuxtLink>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div v-if="totalPages > 1" class="mt-20 flex flex-col md:flex-row items-center justify-between gap-8 border-t border-white/5 pt-12">
+          <div class="flex items-center gap-4">
+            <button 
+              @click="prevPage" 
+              :disabled="currentPage === 1"
+              class="flex items-center gap-2 text-sm font-medium transition-all"
+              :class="currentPage === 1 ? 'text-white/10 cursor-not-allowed' : 'text-white/50 hover:text-white'"
+            >
+              <UIcon name="i-heroicons-arrow-left-20-solid" class="w-5 h-5" />
+              Previous
+            </button>
+            
+            <div class="h-1 w-12 bg-white/10 rounded-full overflow-hidden">
+              <div 
+                class="h-full bg-white transition-all duration-300" 
+                :style="{ width: `${(currentPage / totalPages) * 100}%` }"
+              ></div>
+            </div>
+
+            <button 
+              @click="nextPage" 
+              :disabled="currentPage === totalPages"
+              class="flex items-center gap-2 text-sm font-medium transition-all"
+              :class="currentPage === totalPages ? 'text-white/10 cursor-not-allowed' : 'text-white/50 hover:text-white'"
+            >
+              Next
+              <UIcon name="i-heroicons-arrow-right-20-solid" class="w-5 h-5" />
+            </button>
+          </div>
+
+          <div class="text-xs font-mono tracking-widest text-white/20 uppercase">
+            Page {{ currentPage }} of {{ totalPages }}
           </div>
         </div>
       </div>
