@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import Msa from './msa.vue';
-
+import Msa from '~/components/Msa.vue';
 </script>
 
 <template>
