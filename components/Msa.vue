@@ -80,7 +80,7 @@ const experience = [
 <template>
   <div class="bg-[#050505] min-h-screen text-white selection:bg-white/30 font-sans">
 
-    <ScrollyTellingCanvas :frame-count="31" frame-prefix="/me/ezgif-frame-" v-slot="{ progress, isLoading }">
+    <ScrollyTellingCanvas :frame-count="183" frame-prefix="/me/ezgif-frame-" v-slot="{ progress, isLoading }">
       <div v-if="!isLoading" class="absolute inset-0 pointer-events-none flex flex-col justify-center">
 
         <!-- 0% Scroll: Hero Headline (Centered) -->
