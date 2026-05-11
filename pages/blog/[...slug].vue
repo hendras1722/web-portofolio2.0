@@ -83,13 +83,26 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const { data: doc } = await useAsyncData('content-' + route.path, () => queryContent(route.path).findOne())
+const { locale, defaultLocale } = useI18n()
 
+// Normalize path by stripping locale prefix if it's not the default
+// This ensures content is found in content/blog/ even when on /en/blog/
+const contentPath = computed(() => {
+  const path = route.path
+  if (locale.value === defaultLocale) return path
+  return path.replace(new RegExp(`^/${locale.value}`), '') || '/'
+})
+
+const { data: doc } = await useAsyncData('content-' + contentPath.value, () => 
+  queryContent(contentPath.value).findOne()
+)
+
+// Use getters to ensure title and metadata are reactive
 useSeoMeta({
-  title: doc.value?.title,
-  ogTitle: doc.value?.title,
-  description: doc.value?.description,
-  ogDescription: doc.value?.description,
+  title: () => doc.value?.title ? `${doc.value.title} | MSA` : 'MSA - Journal',
+  ogTitle: () => doc.value?.title ? `${doc.value.title} | MSA` : 'MSA - Journal',
+  description: () => doc.value?.description || 'Muh Syahendra Anindyantoro - Journal',
+  ogDescription: () => doc.value?.description || 'Muh Syahendra Anindyantoro - Journal',
   ogImage: '/me.png',
   twitterCard: 'summary_large_image',
 })
