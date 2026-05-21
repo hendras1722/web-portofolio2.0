@@ -1,25 +1,28 @@
 <script setup lang="ts">
+import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import ScrollyTellingCanvas from '~/components/ScrollyTellingCanvas.vue'
 
-// MSA Landing Page Configuration
-const PAGE_TITLE = 'MSA'
-const PAGE_DESCRIPTION = 'Experience the deconstruction.'
+// i18n
+const { locale, locales, t } = useI18n()
 
+// SEO Config
 useHead({
-  title: PAGE_TITLE,
+  title: 'Muh Syahendra - Frontend Engineer',
   meta: [
-    { name: 'description', content: PAGE_DESCRIPTION }
+    { name: 'description', content: 'Building robust digital experiences with precision & performance.' }
   ]
 })
-
-const { data: posts } = await useAsyncData('blog', () => queryContent('blog').sort({ date: -1 }).find())
 
 useSeoMeta({
   title: 'Muh Syahendra Anindyantoro',
   description: 'Sharing knowledge about web development, React, Nuxt, and more.'
 })
+
+// Fetch blog posts from @nuxt/content
+const { data: posts } = await useAsyncData('blog', () => queryContent('blog').sort({ date: -1 }).find())
+
 // Helper function to calculate opacity based on scroll progress
-// fade in from start, fade out at end
 const calculateOpacity = (progress: number, start: number, peak: number, end: number) => {
   if (progress <= start || progress >= end) return 0
   if (progress <= peak) {
@@ -37,9 +40,10 @@ const calculateTransform = (progress: number, start: number, end: number, yOffse
   return `translateY(${currentY}px)`
 }
 
+// Scroll to content
 function discoverMSA() {
   window.scrollTo({
-    top: window.innerHeight * 4, // scroll to the end of the canvas container
+    top: window.innerHeight * 4, // scroll past the scrollytelling canvas container
     behavior: 'smooth',
   })
 }
@@ -47,36 +51,43 @@ function discoverMSA() {
 const experience = [
   {
     title: "Insira",
-    date: "2026-2026",
-    desc: "Develop apps insira, about the apps is public cemetery and Handle 3 apps Petugas, Insira, Client Insira"
+    role: "Frontend Developer",
+    date: "2026",
+    desc: "Develop apps insira, about the apps is public cemetery and Handle 3 apps Petugas, Insira, Client Insira."
   },
   {
     title: "Panglima Propertindo",
-    date: "2025-2025",
-    desc: "Develop apps insira, about the apps is public cemetery and Handle 3 apps Petugas, Insira, Client Insira"
+    role: "Frontend Developer",
+    date: "2025",
+    desc: "Develop apps insira, about the apps is public cemetery and Handle 3 apps Petugas, Insira, Client Insira."
   },
   {
     title: "Geek Garden",
-    date: "2025-2025",
-    desc: "Project base 5 month where I maintain apps Scyllax TPM (Trade Promotion Management), handle module Annual budget and Approval Schema"
+    role: "Software Engineer",
+    date: "2025",
+    desc: "Project base 5 month where I maintain apps Scyllax TPM (Trade Promotion Management), handle module Annual budget and Approval Schema."
   },
   {
-    title: "Privy - Frontend Engineer",
-    date: "2021-2025",
-    desc: "My career in privy for 4 years where I maintain and hold CIMB project (Credit Card and Personal Loan). In addition, I helped projects in the BNI section, CIMB Octo Server, Internal Application from Privy. using javascript language (Nuxt)"
+    title: "Privy",
+    role: "Frontend Engineer",
+    date: "2021 - 2025",
+    desc: "Leading frontend architecture and implementation for enterprise-grade digital identity solutions. Maintained and held CIMB project (Credit Card and Personal Loan). In addition, helped projects in the BNI section, CIMB Octo Server, Internal Application from Privy. Using javascript language (Nuxt)."
   },
   {
-    title: "PT Nastha Global Utama - Frontend Developer",
-    date: "2020-2021",
-    desc: "My career at PT Nastha Global Utama for 1 year where I maintain and hold Ceisa 4.0 project from Tax. using javascript language (React)"
+    title: "PT Nastha Global Utama",
+    role: "Frontend Developer",
+    date: "2020 - 2021",
+    desc: "My career at PT Nastha Global Utama for 1 year where I maintain and hold Ceisa 4.0 project from Tax. using javascript language (React)."
   },
   {
-    title: "BLPT Yogyakarta - Trainner Arduino",
+    title: "BLPT Yogyakarta",
+    role: "Trainer Arduino",
     date: "2019",
     desc: "I worked at BLPT Yogyakarta for 3 days. There I taught teachers about Arduino programming."
   },
   {
-    title: "PT Binterjet - Technical Support Engineer",
+    title: "PT Binterjet",
+    role: "Developer",
     date: "2019",
     desc: "My career at PT Binterjet for 1 month where I held technicians and sales to customers. This company focuses on screen printing."
   }
@@ -99,241 +110,443 @@ const nextPage = () => {
 const prevPage = () => {
   if (currentPage.value > 1) currentPage.value--
 }
+
+// Particle Canvas Animation Logic
+const canvasRef = ref<HTMLCanvasElement | null>(null)
+let particles: Array<{
+  x: number
+  y: number
+  size: number
+  speedX: number
+  speedY: number
+  opacity: number
+}> = []
+
+function initParticles() {
+  const canvas = canvasRef.value
+  if (!canvas) return
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
+  particles = []
+  const particleCount = Math.floor((canvas.width * canvas.height) / 15000)
+  
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 2 + 1,
+      speedX: Math.random() * 0.5 - 0.25,
+      speedY: Math.random() * 0.5 - 0.25,
+      opacity: Math.random() * 0.5 + 0.1
+    })
+  }
+}
+
+let animationFrameId: number
+function animateParticles() {
+  const canvas = canvasRef.value
+  if (!canvas) return
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  
+  particles.forEach(p => {
+    p.x += p.speedX
+    p.y += p.speedY
+
+    if (p.x < 0 || p.x > canvas.width) p.speedX *= -1
+    if (p.y < 0 || p.y > canvas.height) p.speedY *= -1
+
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
+    ctx.fillStyle = `rgba(0, 240, 255, ${p.opacity})`
+    ctx.fill()
+
+    particles.forEach(p2 => {
+      const dx = p.x - p2.x
+      const dy = p.y - p2.y
+      const distance = Math.sqrt(dx * dx + dy * dy)
+
+      if (distance < 150) {
+        ctx.beginPath()
+        ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 * (1 - distance / 150)})`
+        ctx.lineWidth = 0.5
+        ctx.moveTo(p.x, p.y)
+        ctx.lineTo(p2.x, p2.y)
+        ctx.stroke()
+      }
+    })
+  })
+  animationFrameId = requestAnimationFrame(animateParticles)
+}
+
+// Parallax target logic
+const mouseX = ref(0)
+const mouseY = ref(0)
+
+const onMouseMove = (e: MouseEvent) => {
+  mouseX.value = e.clientX
+  mouseY.value = e.clientY
+}
+
+const getParallaxStyle = (speed: number) => {
+  if (process.client) {
+    const x = (window.innerWidth / 2 - mouseX.value) * speed
+    const y = (window.innerHeight / 2 - mouseY.value) * speed
+    return {
+      transform: `translateX(${x}px) translateY(${y}px)`
+    }
+  }
+  return {}
+}
+
+const handleResize = () => {
+  initParticles()
+}
+
+onMounted(() => {
+  window.addEventListener('mousemove', onMouseMove)
+  window.addEventListener('resize', handleResize)
+  initParticles()
+  animateParticles()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('mousemove', onMouseMove)
+  window.removeEventListener('resize', handleResize)
+  cancelAnimationFrame(animationFrameId)
+})
+
+// Theme Mode (dark/light)
+const colorMode = useColorMode()
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set() {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
+})
+
+// Filter locales to show only 'en' and 'id'
+const availableLocales = computed(() => {
+  return (locales.value as Array<{ code: string; name: string }>).filter(
+    (i) => i.code === 'en' || i.code === 'id'
+  )
+})
+
+// Update the v-model for locale switcher
+const selectedLocale = computed({
+  get: () => locale.value,
+  set: (value) => {
+    locale.value = value
+  }
+})
+
+// CV download link depending on current locale
+const cvDownloadUrl = computed(() => {
+  return  '/cv_syahendra_id.pdf'
+  // return locale.value === 'id' ? '/cv_syahendra_id.pdf' : '/cv_syahendra_en.pdf'
+})
 </script>
 
 <template>
-  <div class="bg-[#050505] min-h-screen text-white selection:bg-white/30 font-sans">
-
-    <ScrollyTellingCanvas :frame-count="183" frame-prefix="/me/ezgif-frame-" v-slot="{ progress, isLoading }">
-      <div v-if="!isLoading" class="absolute inset-0 pointer-events-none flex flex-col justify-center">
-
-        <!-- 0% Scroll: Hero Headline (Centered) -->
-        <div
-          class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center text-center p-8 transition-opacity duration-100 will-change-transform"
-          :style="{
-            opacity: calculateOpacity(progress, -0.1, 0.05, 0.25),
-            transform: calculateTransform(progress, 0, 0.25, 40)
-          }">
-          <div>
-            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter text-white/90 mb-4">
-              Muh Syahendra Anindyantoro
-            </h1>
-            <p class="text-xl md:text-2xl text-white/60 max-w-2xl mx-auto font-light tracking-wide">
-              Frontend Developer
-            </p>
-          </div>
+  <div class="bg-[#121414] min-h-screen text-[#e3e2e2] selection:bg-[#00f0ff] selection:text-[#002022] font-geist antialiased overflow-x-clip">
+    
+    <!-- TopNavBar -->
+    <header class="fixed top-0 w-full z-50 bg-[#121414]/80 backdrop-blur-xl border-b border-[#3b494b]/20">
+      <div class="flex justify-between items-center h-20 px-6 md:px-16 max-w-[1200px] mx-auto w-full">
+        <!-- Brand -->
+        <a class="font-hanken text-2xl font-bold tracking-tight text-[#e3e2e2]" href="#">
+          Muh Syahendra A
+        </a>
+        
+        <!-- Navigation Links (Desktop) -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a class="text-[#b9cacb] font-semibold hover:text-[#00f0ff] transition-all duration-300 font-geist text-xs tracking-widest uppercase" href="#career">
+            {{ $t('nav_career') }}
+          </a>
+          <a class="text-[#b9cacb] font-semibold hover:text-[#00f0ff] transition-all duration-300 font-geist text-xs tracking-widest uppercase" href="#articles">
+            {{ $t('nav_articles') }}
+          </a>
+          <a class="text-[#b9cacb] font-semibold hover:text-[#00f0ff] transition-all duration-300 font-geist text-xs tracking-widest uppercase" href="#connect">
+            {{ $t('nav_connect') }}
+          </a>
+        </nav>
+        
+        <!-- Trailing Actions (Download) -->
+        <div class="flex items-center gap-4">
+          <!-- CV Download Button -->
+          <a :href="cvDownloadUrl" download class="hidden sm:inline-block bg-[#00f0ff] text-[#002022] hover:bg-[#7df4ff] px-5 py-2.5 rounded-full font-geist text-xs font-bold tracking-wider hover:scale-95 transition-all duration-300 uppercase shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+            {{ $t('download_cv') }}
+          </a>
         </div>
-
-        <!-- 30% Scroll: Feature #1 (Left aligned) -->
-        <div
-          class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-start p-8 md:p-24 transition-opacity duration-100 will-change-transform"
-          :style="{
-            opacity: calculateOpacity(progress, 0.15, 0.3, 0.45),
-            transform: calculateTransform(progress, 0.15, 0.45, 40)
-          }">
-          <div class="max-w-xl text-left">
-            <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-white/90 mb-8">
-              Tech Stack
-            </h2>
-            <div class="flex flex-wrap gap-8 items-center">
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:react" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">React</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                  <UIcon name="logos:nextjs-icon" class="w-8 h-8" />
-                </div>
-                <span class="text-sm font-medium text-white/60 tracking-wider">Next.js</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:vue" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">Vue</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:nuxt-icon" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">Nuxt</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:tailwindcss-icon" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">Tailwind</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="simple-icons:express" class="w-12 h-12 text-white" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">Express</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:bun" class="w-12 h-12 text-white" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">Bun</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <img src="/elysia.svg" alt="Elysia" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">Elysia</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:go" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">Golang</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 60% Scroll: Feature #2 (Right aligned) -->
-        <div
-          class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-end p-8 md:p-24 transition-opacity duration-100 will-change-transform"
-          :style="{
-            opacity: calculateOpacity(progress, 0.45, 0.6, 0.75),
-            transform: calculateTransform(progress, 0.45, 0.75, 40)
-          }">
-          <div class="max-w-xl text-right flex flex-col items-end">
-            <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-white/90 mb-8">
-              Tools & Infrastructure
-            </h2>
-            <div class="flex flex-wrap gap-8 items-center justify-end">
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:postgresql" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">PostgreSQL</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:mysql" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">MySQL</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:redis" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">Redis</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:aws-s3" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">S3</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:postman-icon" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">Postman</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:swagger" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">Swagger</span>
-              </div>
-              <div class="flex flex-col items-center gap-3 hover:scale-110 transition-transform cursor-default">
-                <UIcon name="logos:supabase-icon" class="w-12 h-12" />
-                <span class="text-sm font-medium text-white/60 tracking-wider">Supabase</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 90% Scroll: CTA / Final Message (Centered) -->
-        <div
-          class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center text-center p-8 transition-opacity duration-100 will-change-transform"
-          :style="{
-            opacity: calculateOpacity(progress, 0.8, 0.95, 1.1),
-            transform: calculateTransform(progress, 0.8, 1, 40)
-          }">
-          <div>
-            <h2 class="text-5xl md:text-7xl font-bold tracking-tighter text-white/90 mb-6">
-              Selamat Datang Di Web Portofolio Saya
-            </h2>
-            <p class="text-xl md:text-2xl text-white/60 max-w-2xl mx-auto font-light tracking-wide mb-8">
-              Terima kasih sudah berkunjung
-            </p>
-            <button @click="discoverMSA"
-              class="pointer-events-auto px-8 py-4 bg-white text-black font-semibold tracking-wide rounded-full hover:scale-105 transition-transform duration-300">
-              Discover MSA
-            </button>
-          </div>
-        </div>
-
       </div>
-    </ScrollyTellingCanvas>
+    </header>
 
-    <!-- Career / Experience Section -->
-    <div class="py-32 px-8 bg-[#050505]">
-      <div class="max-w-5xl mx-auto">
-        <div class="mb-24 text-center">
-          <h3 class="text-4xl md:text-6xl font-bold tracking-tighter text-white/90 mb-6">Career Journey</h3>
-          <p class="text-xl text-white/50 font-light max-w-2xl mx-auto">
-            A timeline of my professional growth and the impactful projects I've been part of.
-          </p>
-        </div>
+    <main class="relative">
+      
+      <!-- ScrollyTelling Canvas Section (Hero Sequence Animation) -->
+      <ScrollyTellingCanvas :frame-count="183" frame-prefix="/me/ezgif-frame-" v-slot="{ progress, isLoading }">
+        <!-- Particle Canvas & Color Overlay -->
+        <canvas id="particle-canvas" ref="canvasRef" class="absolute inset-0 pointer-events-none z-0 transition-opacity duration-1000" :class="isLoading ? 'opacity-0' : 'opacity-100'"></canvas>
+        <div class="absolute inset-0 hero-gradient-overlay pointer-events-none z-0 transition-opacity duration-1000" :class="isLoading ? 'opacity-0' : 'opacity-100'"></div>
+        
+        <!-- Glowing Orb behind the text area -->
+        <div class="absolute -left-20 top-1/4 w-[450px] h-[450px] bg-[#00f0ff]/10 blur-[150px] rounded-full pointer-events-none z-0 animate-pulse transition-opacity duration-1000" :class="isLoading ? 'opacity-0' : 'opacity-100'"></div>
 
-        <div class="space-y-20">
-          <div v-for="(item, index) in experience" :key="index"
-            class="group relative flex flex-col md:flex-row gap-8 md:gap-16 items-start" v-motion
-            :initial="{ opacity: 0, y: 50 }" :enter="{ opacity: 1, y: 0, transition: { delay: index * 100 } }">
+        <div v-if="!isLoading" class="absolute inset-0 pointer-events-none flex flex-col justify-center">
 
-            <!-- Date Column -->
-            <div class="md:w-32 flex-shrink-0 pt-2">
-              <span class="text-sm font-mono tracking-widest text-white/40 uppercase">{{ item.date }}</span>
-            </div>
-
-            <!-- Content Column -->
-            <div class="flex-grow pb-12 border-b border-white/5">
-              <h4 class="text-2xl md:text-3xl font-bold text-white/90 mb-4 group-hover:text-white transition-colors">
-                {{ item.title }}
-              </h4>
-              <p class="text-lg text-white/60 font-light leading-relaxed max-w-3xl">
-                {{ item.desc }}
+          <!-- Overlay 1: 0% to 25% progress (Intro Hero text) -->
+          <div
+            class="absolute inset-0 flex items-center justify-center lg:justify-start px-6 md:px-16 max-w-[1200px] mx-auto w-full transition-opacity duration-100 will-change-transform z-10"
+            :style="{
+              opacity: calculateOpacity(progress, -0.1, 0.05, 0.25),
+              transform: calculateTransform(progress, 0, 0.25, 40),
+              ...getParallaxStyle(0.015)
+            }">
+            <div class="flex flex-col gap-6 text-center lg:text-left max-w-[600px] w-full">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#3b494b] bg-[#1f2020] w-fit mx-auto lg:mx-0">
+                <span class="w-2 h-2 rounded-full bg-[#00f0ff] animate-pulse"></span>
+                <span class="font-geist text-[10px] text-[#b9cacb] uppercase tracking-wider font-semibold">{{ $t('badge_frontend_engineer') }}</span>
+              </div>
+              <h1 class="font-hanken text-4xl md:text-5xl lg:text-6xl font-bold text-[#e3e2e2] leading-[1.1] tracking-tight">
+                {{ $t('hero_title') }}
+              </h1>
+              <p class="font-geist text-base md:text-lg text-[#b9cacb] max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                {{ $t('hero_subtitle') }}
               </p>
+              <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-6 pointer-events-auto">
+                <button @click="discoverMSA" class="bg-[#00f0ff] text-[#002022] hover:bg-[#7df4ff] px-8 py-4 rounded-full font-geist text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(0,240,255,0.25)] hover:scale-105">
+                  {{ $t('explore_work') }}
+                </button>
+                <a href="#connect" class="border border-[#3b494b] text-[#e3e2e2] hover:border-[#e3e2e2] hover:bg-[#1f2020] px-8 py-4 rounded-full font-geist text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:scale-105">
+                  {{ $t('get_in_touch') }}
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Blog / Stories Section -->
-    <div class="py-32 px-8 bg-[#050505] border-t border-white/5">
-      <div class="max-w-5xl mx-auto">
-        <div class="mb-24 text-left">
-          <h3 class="text-4xl md:text-6xl font-bold tracking-tighter text-white/90 mb-6">Latest Stories</h3>
-          <p class="text-xl text-white/50 font-light">
-            Insights, tutorials, and thoughts on modern web development.
+          <!-- Overlay 2: 30% progress (Tech Stack Grid) -->
+          <div
+            class="absolute inset-0 flex items-center justify-center lg:justify-start px-6 md:px-16 max-w-[1200px] mx-auto w-full transition-opacity duration-100 will-change-transform z-10"
+            :style="{
+              opacity: calculateOpacity(progress, 0.15, 0.3, 0.45),
+              transform: calculateTransform(progress, 0.15, 0.45, 40),
+              ...getParallaxStyle(0.02)
+            }">
+            <div class="max-w-[600px] text-center lg:text-left w-full">
+              <h2 class="font-hanken text-3xl md:text-5xl font-bold tracking-tight text-[#e3e2e2] mb-8">
+                Tech Stack
+              </h2>
+              <div class="grid grid-cols-3 sm:grid-cols-4 gap-4 pointer-events-auto w-full">
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:react" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">React</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                    <UIcon name="logos:nextjs-icon" class="w-6 h-6" />
+                  </div>
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Next.js</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:vue" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Vue</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:nuxt-icon" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Nuxt</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:tailwindcss-icon" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Tailwind</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="simple-icons:express" class="w-10 h-10 text-[#e3e2e2]" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Express</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:bun" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Bun</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <img src="/elysia.svg" alt="Elysia" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Elysia</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:go" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Golang</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overlay 3: 60% progress (Tools & Infrastructure) -->
+          <div
+            class="absolute inset-0 flex items-center justify-center lg:justify-start px-6 md:px-16 max-w-[1200px] mx-auto w-full transition-opacity duration-100 will-change-transform z-10"
+            :style="{
+              opacity: calculateOpacity(progress, 0.45, 0.6, 0.75),
+              transform: calculateTransform(progress, 0.45, 0.75, 40),
+              ...getParallaxStyle(-0.02)
+            }">
+            <div class="max-w-[600px] text-center lg:text-left w-full flex flex-col items-center lg:items-start">
+              <h2 class="font-hanken text-3xl md:text-5xl font-bold tracking-tight text-[#e3e2e2] mb-8">
+                Tools & Infrastructure
+              </h2>
+              <div class="grid grid-cols-3 sm:grid-cols-4 gap-4 pointer-events-auto w-full">
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:postgresql" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">PostgreSQL</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:mysql" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">MySQL</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:redis" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Redis</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:aws-s3" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">S3</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:postman-icon" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Postman</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:swagger" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Swagger</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-4 rounded-xl border border-[#3b494b]/30 bg-[#1f2020]/40 backdrop-blur-md hover:border-[#00f0ff] hover:scale-105 hover:shadow-[0_0_15px_rgba(0,240,255,0.1)] transition-all duration-300 cursor-default">
+                  <UIcon name="logos:supabase-icon" class="w-10 h-10" />
+                  <span class="text-xs font-geist text-[#b9cacb] tracking-wider font-semibold">Supabase</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overlay 4: 90% progress (Welcome CTA) -->
+          <div
+            class="absolute inset-0 flex items-center justify-center lg:justify-start px-6 md:px-16 max-w-[1200px] mx-auto w-full transition-opacity duration-100 will-change-transform z-10"
+            :style="{
+              opacity: calculateOpacity(progress, 0.8, 0.95, 1.1),
+              transform: calculateTransform(progress, 0.8, 1, 40)
+            }">
+            <div class="max-w-[600px] flex flex-col gap-6 text-center lg:text-left w-full">
+              <h2 class="font-hanken text-4xl md:text-5xl font-bold tracking-tight text-[#e3e2e2] leading-tight">
+                {{ selectedLocale === 'id' ? 'Selamat Datang Di Web Portofolio Saya' : 'Welcome to My Web Portfolio' }}
+              </h2>
+              <p class="font-geist text-base md:text-lg text-[#b9cacb] font-light tracking-wide max-w-xl mx-auto lg:mx-0">
+                {{ selectedLocale === 'id' ? 'Terima kasih sudah berkunjung' : 'Thank you for stopping by' }}
+              </p>
+              <button @click="discoverMSA"
+                class="pointer-events-auto w-fit mx-auto lg:mx-0 px-8 py-4 bg-[#e3e2e2] text-[#121414] hover:bg-white font-geist text-xs font-bold tracking-wider rounded-full hover:scale-105 transition-all duration-300 uppercase shadow-lg">
+                Discover MSA
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </ScrollyTellingCanvas>
+
+      <!-- Career Journey Section -->
+      <section class="max-w-[1200px] mx-auto px-6 md:px-16 py-32 border-t border-[#3b494b]/20" id="career">
+        <div class="mb-20">
+          <h2 class="font-hanken text-3xl md:text-5xl font-bold text-[#e3e2e2] mb-4">
+            {{ $t('career_arc_title') }}
+          </h2>
+          <p class="font-geist text-base md:text-lg text-[#b9cacb] max-w-2xl font-light">
+            {{ $t('career_arc_subtitle') }}
           </p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <NuxtLink v-for="(post, index) in paginatedPosts" :key="post._path" :to="post._path"
-            class="group block p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-500"
-            v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: index * 50 } }">
-
-            <div class="flex flex-col h-full">
-              <div class="mb-6 flex justify-between items-start">
-                <span
-                  class="px-3 py-1 rounded-full bg-white/10 text-[10px] font-mono tracking-widest uppercase text-white/70">
-                  {{ post.description || 'Article' }}
+        
+        <div class="relative ml-4 md:ml-8 border-l border-[#3b494b]/30 pb-8">
+          <!-- Timeline Items -->
+          <div v-for="(item, index) in experience" :key="index" class="relative pl-8 md:pl-12 pb-16 group last:pb-0" v-motion :initial="{ opacity: 0, y: 50 }" :enter="{ opacity: 1, y: 0, transition: { delay: index * 100 } }">
+            <!-- Glow Circle Node -->
+            <div class="absolute -left-[5px] top-2 w-[9px] h-[9px] rounded-full bg-[#121414] border border-[#3b494b] group-hover:bg-[#00f0ff] group-hover:border-[#00f0ff] group-hover:shadow-[0_0_10px_rgba(0,240,255,0.8)] transition-all duration-300"></div>
+            
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-4">
+              <div class="flex flex-col">
+                <h3 class="font-hanken text-xl md:text-2xl font-semibold text-[#e3e2e2] group-hover:text-[#00f0ff] transition-colors duration-300">
+                  {{ item.title }}
+                </h3>
+                <span class="font-geist text-sm text-[#b9cacb] uppercase tracking-wider font-semibold mt-1">
+                  {{ item.role }}
                 </span>
-                <span class="text-xs font-mono text-white/30">{{ post.date }}</span>
               </div>
+              <span class="font-geist text-xs text-[#b9cacb] font-semibold uppercase tracking-widest bg-[#1f2020]/60 px-3 py-1.5 rounded-full border border-[#3b494b]/30">
+                {{ item.date }}
+              </span>
+            </div>
+            <p class="font-geist text-sm md:text-base text-[#b9cacb]/80 leading-relaxed font-light">
+              {{ item.desc }}
+            </p>
+          </div>
+        </div>
+      </section>
 
-              <h4 class="text-2xl font-bold text-white/90 group-hover:text-white mb-4 line-clamp-2 leading-tight">
-                {{ post.title }}
-              </h4>
-
-              <div
-                class="mt-auto pt-6 flex items-center gap-2 text-sm font-medium text-white/40 group-hover:text-white transition-colors">
-                Read Story
-                <UIcon name="i-heroicons-arrow-right-20-solid"
-                  class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+      <!-- Latest Writings (Blog Stories) Section -->
+      <section class="max-w-[1200px] mx-auto px-6 md:px-16 py-32 border-t border-[#3b494b]/20" id="articles">
+        <div class="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <h2 class="font-hanken text-3xl md:text-5xl font-bold text-[#e3e2e2] mb-4">
+              {{ $t('latest_writings_title') }}
+            </h2>
+            <p class="font-geist text-base md:text-lg text-[#b9cacb] max-w-2xl font-light">
+              {{ $t('latest_writings_subtitle') }}
+            </p>
+          </div>
+        </div>
+        
+        <div id="work" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Story Card -->
+          <NuxtLink v-for="(post, index) in paginatedPosts" :key="post._path" :to="post._path"
+            class="group block bg-[#1f2020]/30 border border-[#3b494b]/20 rounded-2xl p-8 hover:border-[#00f0ff] transition-all duration-500 relative overflow-hidden"
+            v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: index * 50 } }">
+            
+            <!-- Glow Background Effect -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#00f0ff]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <div class="relative z-10 flex flex-col h-full justify-between gap-8">
+              <div>
+                <div class="flex items-center justify-between gap-3 mb-6">
+                  <span class="px-2.5 py-1 bg-[#121414] border border-[#3b494b]/30 rounded font-geist text-[10px] text-[#b9cacb] uppercase tracking-wider font-semibold">
+                    {{ post.description || 'Article' }}
+                  </span>
+                  <span class="text-xs font-geist text-[#b9cacb]/40 font-semibold">{{ post.date }}</span>
+                </div>
+                <h4 class="font-hanken text-xl md:text-2xl text-[#e3e2e2] group-hover:text-[#00f0ff] transition-colors duration-300 mb-4 font-bold leading-snug line-clamp-2">
+                  {{ post.title }}
+                </h4>
+              </div>
+              
+              <div class="flex items-center text-[#b9cacb]/60 group-hover:text-[#e3e2e2] font-geist text-xs uppercase tracking-widest font-bold">
+                {{ $t('read_article') }}
+                <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
               </div>
             </div>
           </NuxtLink>
         </div>
-
+        
         <!-- Pagination Controls -->
-        <div v-if="totalPages > 1" class="mt-20 flex flex-col md:flex-row items-center justify-between gap-8 border-t border-white/5 pt-12">
+        <div v-if="totalPages > 1" class="mt-20 flex flex-col sm:flex-row items-center justify-between gap-8 border-t border-[#3b494b]/20 pt-12">
           <div class="flex items-center gap-4">
             <button 
               @click="prevPage" 
               :disabled="currentPage === 1"
-              class="flex items-center gap-2 text-sm font-medium transition-all"
-              :class="currentPage === 1 ? 'text-white/10 cursor-not-allowed' : 'text-white/50 hover:text-white'"
+              class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider font-geist transition-all duration-300 bg-[#1f2020]/40 px-4 py-2 rounded-full border border-[#3b494b]/30"
+              :class="currentPage === 1 ? 'text-[#e3e2e2]/10 cursor-not-allowed border-[#3b494b]/10' : 'text-[#b9cacb] hover:text-[#00f0ff] hover:border-[#00f0ff]'"
             >
-              <UIcon name="i-heroicons-arrow-left-20-solid" class="w-5 h-5" />
+              <UIcon name="i-heroicons-arrow-left-20-solid" class="w-4 h-4" />
               Previous
             </button>
             
-            <div class="h-1 w-12 bg-white/10 rounded-full overflow-hidden">
+            <div class="h-1 w-16 bg-[#1f2020] rounded-full overflow-hidden">
               <div 
-                class="h-full bg-white transition-all duration-300" 
+                class="h-full bg-[#00f0ff] transition-all duration-300" 
                 :style="{ width: `${(currentPage / totalPages) * 100}%` }"
               ></div>
             </div>
@@ -341,61 +554,60 @@ const prevPage = () => {
             <button 
               @click="nextPage" 
               :disabled="currentPage === totalPages"
-              class="flex items-center gap-2 text-sm font-medium transition-all"
-              :class="currentPage === totalPages ? 'text-white/10 cursor-not-allowed' : 'text-white/50 hover:text-white'"
+              class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider font-geist transition-all duration-300 bg-[#1f2020]/40 px-4 py-2 rounded-full border border-[#3b494b]/30"
+              :class="currentPage === totalPages ? 'text-[#e3e2e2]/10 cursor-not-allowed border-[#3b494b]/10' : 'text-[#b9cacb] hover:text-[#00f0ff] hover:border-[#00f0ff]'"
             >
               Next
-              <UIcon name="i-heroicons-arrow-right-20-solid" class="w-5 h-5" />
+              <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4" />
             </button>
           </div>
 
-          <div class="text-xs font-mono tracking-widest text-white/20 uppercase">
+          <div class="text-xs font-geist font-bold tracking-widest text-[#b9cacb]/40 uppercase">
             Page {{ currentPage }} of {{ totalPages }}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- Footer / Contact Section -->
-    <footer class="py-24 px-8 border-t border-white/5 bg-[#050505]">
-      <div class="max-w-5xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
-          <!-- Left: Big Contact Call to Action -->
+    </main>
+
+    <!-- Footer / Contact section -->
+    <footer class="w-full bg-[#121414] border-t border-[#3b494b]/20" id="connect">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-16 py-24">
+        <!-- Top Row -->
+        <div class="mb-16 pb-16 border-b border-[#3b494b]/10 grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
-            <h2 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-12">
-              Let's <br /> <span class="text-white/40">Connect.</span>
-            </h2>
-            <div class="space-y-4">
-              <a href="mailto:muhsyahendraa1722@gmail.com"
-                class="block text-xl text-white/60 hover:text-white transition-colors underline underline-offset-8">
-                muhsyahendraa1722@gmail.com
-              </a>
-              <a href="tel:+6289663604258" class="block text-xl text-white/60 hover:text-white transition-colors">
-                +62 896-6360-4258
-              </a>
-            </div>
+            <h3 class="font-hanken text-4xl md:text-5xl font-bold text-[#e3e2e2] mb-3">
+              {{ $t('lets_build_something') }}
+            </h3>
+            <p class="font-geist text-sm md:text-base text-[#b9cacb] font-light">
+              {{ $t('available_for_opportunities') }}
+            </p>
           </div>
-
-          <!-- Right: Social Links & Small Text -->
-          <div class="flex flex-col items-start md:items-end space-y-12">
-            <div class="flex gap-8">
-              <a href="https://www.linkedin.com/in/muhsyahendraa/" target="_blank"
-                class="text-white/60 hover:text-white transition-colors">
-                <UIcon name="i-ic-baseline-linkedin" class="w-8 h-8" />
-              </a>
-              <a href="https://github.com/hendras1722" target="_blank"
-                class="text-white/60 hover:text-white transition-colors">
-                <UIcon name="i-ic-baseline-github" class="w-8 h-8" />
-              </a>
-            </div>
-
-            <div class="text-right">
-              <p class="text-sm text-white/30 font-mono uppercase tracking-[0.2em]">
-                &copy; 2026 MSA Portfolio. <br />
-                Created by Muh Syahendra Anindyantoro
-              </p>
-            </div>
+          
+          <div class="flex flex-col md:items-end gap-3 font-geist text-sm font-semibold">
+            <a class="text-[#00f0ff] hover:text-[#7df4ff] transition-colors duration-300 inline-flex items-center gap-2" href="mailto:muhsyahendraa1722@gmail.com">
+              <UIcon name="i-heroicons-envelope-20-solid" class="w-5 h-5" />
+              muhsyahendraa1722@gmail.com
+            </a>
+            <a class="text-[#b9cacb] hover:text-[#e3e2e2] transition-colors duration-300 inline-flex items-center gap-2" href="tel:+6289663604258">
+              <UIcon name="i-heroicons-phone-20-solid" class="w-5 h-5" />
+              +62 896-6360-4258
+            </a>
           </div>
+        </div>
+        
+        <!-- Bottom Row -->
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          <span class="font-geist text-xs text-[#b9cacb]/40 font-bold tracking-wider">
+            {{ $t('copyright') }}
+          </span>
+          
+          <nav class="flex items-center gap-6">
+            <a href="https://github.com/hendras1722" target="_blank" class="font-geist text-xs font-bold text-[#b9cacb] hover:text-[#00f0ff] transition-all duration-300 tracking-wider uppercase">GitHub</a>
+            <a href="https://www.linkedin.com/in/muhsyahendraa/" target="_blank" class="font-geist text-xs font-bold text-[#b9cacb] hover:text-[#00f0ff] transition-all duration-300 tracking-wider uppercase">LinkedIn</a>
+            <a href="#" class="font-geist text-xs font-bold text-[#b9cacb] hover:text-[#00f0ff] transition-all duration-300 tracking-wider uppercase">Twitter</a>
+            <a href="mailto:muhsyahendraa1722@gmail.com" class="font-geist text-xs font-bold text-[#b9cacb] hover:text-[#00f0ff] transition-all duration-300 tracking-wider uppercase">Email</a>
+          </nav>
         </div>
       </div>
     </footer>
@@ -404,8 +616,5 @@ const prevPage = () => {
 </template>
 
 <style scoped>
-/* Smooth scrolling for the whole page */
-html {
-  scroll-behavior: smooth;
-}
+/* Scoped overrides if any */
 </style>

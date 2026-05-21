@@ -127,12 +127,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="containerRef" class="relative w-full h-[400vh] bg-[#050505]">
-    <div class="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center">
+  <div ref="containerRef" class="relative w-full h-[400vh] bg-[#121414]">
+    <div class="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center bg-[#121414]">
 
       <!-- Loading State -->
       <div v-if="isLoading"
-        class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] text-white">
+        class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#121414] text-white">
         <svg class="animate-spin h-10 w-10 text-white mb-4" xmlns="http://www.w3.org/2000/svg" fill="none"
           viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -144,12 +144,19 @@ onUnmounted(() => {
           frameCount) * 100) }}%)</p>
       </div>
 
-      <!-- Canvas -->
-      <canvas ref="canvasRef" class="w-full h-full object-contain mix-blend-screen contrast-[1.05] saturate-[1.05]"
-        :class="{ 'opacity-0': isLoading, 'opacity-100 transition-opacity duration-1000': !isLoading }"></canvas>
+      <!-- Canvas Wrapper: Right 45% on desktop, full screen on mobile -->
+      <div class="absolute inset-y-0 right-0 w-full lg:w-[45%] flex items-center justify-center pointer-events-none z-0 lg:z-10">
+        <!-- Glowing pulsing cyan background orb behind the main sequence canvas -->
+        <div class="absolute w-[350px] h-[350px] bg-[#00f0ff]/10 blur-[120px] rounded-full pointer-events-none animate-pulse transition-opacity duration-1000" :class="isLoading ? 'opacity-0' : 'opacity-100'"></div>
+        <canvas ref="canvasRef" class="w-full h-full object-contain mix-blend-screen contrast-[1.05] saturate-[1.05]"
+          :class="{ 'opacity-0': isLoading, 'opacity-100 transition-opacity duration-1000': !isLoading }"></canvas>
+      </div>
 
-      <!-- Text Overlays -->
-      <slot :progress="progress" :is-loading="isLoading" />
+      <!-- Text Overlays Slot Wrapper: Occupies full screen, allowing alignment inside the slot content -->
+      <div class="absolute inset-0 pointer-events-none z-20">
+        <slot :progress="progress" :is-loading="isLoading" />
+      </div>
+
     </div>
   </div>
 </template>
