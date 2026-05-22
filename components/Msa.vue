@@ -414,15 +414,15 @@ const handleResize = () => {
   }
 }
 
-function openNewWindow() {
-  if (process.client) {
-    window.open(
-      window.location.href,
-      '_blank',
-      'width=600,height=600,left=100,top=100'
-    )
-  }
-}
+// function openNewWindow() {
+//   if (process.client) {
+//     window.open(
+//       window.location.href,
+//       '_blank',
+//       'width=600,height=600,left=100,top=100'
+//     )
+//   }
+// }
 
 function handleVisibilityChange() {
   if (!process.client || !channel || isIframe) return
@@ -640,7 +640,7 @@ const cvDownloadUrl = computed(() => {
         <canvas id="particle-canvas" ref="canvasRef" class="absolute inset-0 pointer-events-none z-0 transition-opacity duration-1000" :class="isLoading ? 'opacity-0' : 'opacity-100'"></canvas>
 
         <!-- Floating HUD Cross-Tab Sync Status -->
-        <div v-if="!isLoading" class="absolute bottom-6 right-6 z-30 pointer-events-auto flex flex-col gap-2 bg-[#1f2020]/90 border border-[#3b494b]/40 backdrop-blur-md p-4 rounded-xl max-w-xs transition-all duration-300 hover:border-[#00f0ff]/50 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+        <!-- <div v-if="!isLoading" class="absolute bottom-6 right-6 z-30 pointer-events-auto flex flex-col gap-2 bg-[#1f2020]/90 border border-[#3b494b]/40 backdrop-blur-md p-4 rounded-xl max-w-xs transition-all duration-300 hover:border-[#00f0ff]/50 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 rounded-full" :class="connectedTabsCount > 0 ? 'bg-[#00f0ff] animate-ping' : 'bg-[#10b981]'"></span>
             <span class="font-geist text-xs font-bold uppercase tracking-wider text-[#e3e2e2]">
@@ -653,7 +653,7 @@ const cvDownloadUrl = computed(() => {
           <button @click="openNewWindow" class="mt-2 text-center w-full bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] border border-[#00f0ff]/30 py-1.5 rounded-lg font-geist text-[10px] font-bold uppercase tracking-wider transition-all duration-300">
             {{ $t('crosstab_button') }}
           </button>
-        </div>
+        </div> -->
 
         <div class="absolute inset-0 hero-gradient-overlay pointer-events-none z-0 transition-opacity duration-1000" :class="isLoading ? 'opacity-0' : 'opacity-100'"></div>
         
