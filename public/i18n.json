@@ -35,7 +35,12 @@
     "read_article": "Read Article",
     "lets_build_something": "Let's build something.",
     "available_for_opportunities": "Available for interesting opportunities.",
-    "copyright": "© 2026 Muh Syahendra. Engineered for performance."
+    "copyright": "© 2026 Muh Syahendra. Engineered for performance.",
+    "crosstab_active": "Cross-Tab Link Active",
+    "crosstab_sync": "Sync: {count} Tabs Active",
+    "crosstab_desc_active": "Open this page in a separate window/monitor to experience real-time cross-tab canvas sync.",
+    "crosstab_desc_sync": "Windows are connected! Drag them around your screen to see the lines update.",
+    "crosstab_button": "Open New Tab"
   },
   "id": {
     "home": "Beranda",
@@ -73,6 +78,11 @@
     "read_article": "Baca Artikel",
     "lets_build_something": "Mari bangun sesuatu.",
     "available_for_opportunities": "Tersedia untuk peluang menarik.",
-    "copyright": "© 2026 Muh Syahendra. Didesain untuk performa."
+    "copyright": "© 2026 Muh Syahendra. Didesain untuk performa.",
+    "crosstab_active": "Link Lintas-Tab Aktif",
+    "crosstab_sync": "Sinkronisasi: {count} Tab Aktif",
+    "crosstab_desc_active": "Buka halaman ini di jendela/monitor terpisah untuk merasakan sinkronisasi kanvas lintas-tab secara real-time.",
+    "crosstab_desc_sync": "Jendela terhubung! Seret jendela di layar Anda untuk melihat pembaruan garis.",
+    "crosstab_button": "Buka Tab Baru"
   }
 }
