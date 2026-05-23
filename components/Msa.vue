@@ -593,8 +593,7 @@ const selectedLocale = computed({
 
 // CV download link depending on current locale
 const cvDownloadUrl = computed(() => {
-  return  '/cv_syahendra_id.pdf'
-  // return locale.value === 'id' ? '/cv_syahendra_id.pdf' : '/cv_syahendra_en.pdf'
+  return `/curriculum-vitae`
 })
 </script>
 
@@ -614,6 +613,9 @@ const cvDownloadUrl = computed(() => {
           <a class="text-[#b9cacb] font-semibold hover:text-[#00f0ff] transition-all duration-300 font-geist text-xs tracking-widest uppercase" href="#career">
             {{ $t('nav_career') }}
           </a>
+          <a class="text-[#b9cacb] font-semibold hover:text-[#00f0ff] transition-all duration-300 font-geist text-xs tracking-widest uppercase" href="#api-public">
+            {{ $t('nav_apis') }}
+          </a>
           <a class="text-[#b9cacb] font-semibold hover:text-[#00f0ff] transition-all duration-300 font-geist text-xs tracking-widest uppercase" href="#articles">
             {{ $t('nav_articles') }}
           </a>
@@ -625,7 +627,7 @@ const cvDownloadUrl = computed(() => {
         <!-- Trailing Actions (Download) -->
         <div class="flex items-center gap-4">
           <!-- CV Download Button -->
-          <a :href="cvDownloadUrl" download class="hidden sm:inline-block bg-[#00f0ff] text-[#002022] hover:bg-[#7df4ff] px-5 py-2.5 rounded-full font-geist text-xs font-bold tracking-wider hover:scale-95 transition-all duration-300 uppercase shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+          <a :href="cvDownloadUrl" class="hidden sm:inline-block bg-[#00f0ff] text-[#002022] hover:bg-[#7df4ff] px-5 py-2.5 rounded-full font-geist text-xs font-bold tracking-wider hover:scale-95 transition-all duration-300 uppercase shadow-[0_0_15px_rgba(0,240,255,0.2)]">
             {{ $t('download_cv') }}
           </a>
         </div>
@@ -855,6 +857,90 @@ const cvDownloadUrl = computed(() => {
               {{ item.desc }}
             </p>
           </div>
+        </div>
+      </section>
+
+      <!-- API Public Section -->
+      <section class="max-w-[1200px] mx-auto py-32 border-t border-[#3b494b]/20" :class="connectedTabsCount > 0 ? 'px-16' : 'px-6 md:px-16'" id="api-public">
+        <div class="mb-20">
+          <h2 class="font-hanken font-bold text-[#e3e2e2] mb-4" :class="connectedTabsCount > 0 ? 'text-5xl' : 'text-3xl md:text-5xl'">
+            {{ $t('api_public_title') }}
+          </h2>
+          <p class="font-geist text-[#b9cacb] max-w-2xl font-light" :class="connectedTabsCount > 0 ? 'text-lg' : 'text-base md:text-lg'">
+            {{ $t('api_public_subtitle') }}
+          </p>
+        </div>
+
+        <div class="grid gap-6" :class="connectedTabsCount > 0 ? 'grid-cols-2' : 'grid-cols-1 md:grid-cols-2'">
+          <!-- Card 1: Auth Dummy -->
+          <a href="https://auth.syahendra.com/docs/" target="_blank"
+            class="group block bg-[#1f2020]/30 border border-[#3b494b]/20 rounded-2xl p-8 hover:border-[#00f0ff] transition-all duration-500 relative overflow-hidden">
+            <!-- Glow Background Effect -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#00f0ff]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <div class="relative z-10 flex flex-col h-full justify-between gap-8">
+              <div>
+                <div class="flex items-center justify-between gap-3 mb-6">
+                  <span class="px-2.5 py-1 bg-[#121414] border border-[#3b494b]/30 rounded font-geist text-[10px] text-[#b9cacb] uppercase tracking-wider font-semibold">
+                    Authentication Service
+                  </span>
+                  <span class="text-xs font-geist text-[#00f0ff] font-semibold flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse"></span>
+                    Online
+                  </span>
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                  <UIcon name="i-heroicons-lock-closed" class="w-8 h-8 text-[#00f0ff] group-hover:scale-110 transition-transform duration-300" />
+                  <h4 :class="connectedTabsCount > 0 ? 'text-2xl' : 'text-xl md:text-2xl'" class="font-hanken text-[#e3e2e2] group-hover:text-[#00f0ff] transition-colors duration-300 font-bold leading-snug">
+                    AUTH DUMMY
+                  </h4>
+                </div>
+                <p class="text-sm font-geist text-[#b9cacb]/80 leading-relaxed font-light mb-4">
+                  {{ $t('api_public_auth_desc') }}
+                </p>
+              </div>
+              
+              <div class="flex items-center text-[#b9cacb]/60 group-hover:text-[#e3e2e2] font-geist text-xs uppercase tracking-widest font-bold">
+                {{ $t('api_public_doc') }}
+                <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 2: Operator Provider -->
+          <a href="https://provider.syahendra.com/" target="_blank"
+            class="group block bg-[#1f2020]/30 border border-[#3b494b]/20 rounded-2xl p-8 hover:border-[#00f0ff] transition-all duration-500 relative overflow-hidden">
+            <!-- Glow Background Effect -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#00f0ff]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <div class="relative z-10 flex flex-col h-full justify-between gap-8">
+              <div>
+                <div class="flex items-center justify-between gap-3 mb-6">
+                  <span class="px-2.5 py-1 bg-[#121414] border border-[#3b494b]/30 rounded font-geist text-[10px] text-[#b9cacb] uppercase tracking-wider font-semibold">
+                    Utility API
+                  </span>
+                  <span class="text-xs font-geist text-[#00f0ff] font-semibold flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse"></span>
+                    Online
+                  </span>
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                  <UIcon name="i-heroicons-signal" class="w-8 h-8 text-[#00f0ff] group-hover:scale-110 transition-transform duration-300" />
+                  <h4 :class="connectedTabsCount > 0 ? 'text-2xl' : 'text-xl md:text-2xl'" class="font-hanken text-[#e3e2e2] group-hover:text-[#00f0ff] transition-colors duration-300 font-bold leading-snug">
+                    Operator Provider
+                  </h4>
+                </div>
+                <p class="text-sm font-geist text-[#b9cacb]/80 leading-relaxed font-light mb-4">
+                  {{ $t('api_public_provider_desc') }}
+                </p>
+              </div>
+              
+              <div class="flex items-center text-[#b9cacb]/60 group-hover:text-[#e3e2e2] font-geist text-xs uppercase tracking-widest font-bold">
+                {{ $t('api_public_visit') }}
+                <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+              </div>
+            </div>
+          </a>
         </div>
       </section>
 
