@@ -196,6 +196,7 @@ function initParticles() {
 
 let lastPostedX = -1;
 let lastPostedY = -1;
+let lastPostTime = 0;
 
 function postPosition() {
   if (!process.client || !channel) return
@@ -204,10 +205,12 @@ function postPosition() {
   const x = window.screenX + window.innerWidth / 2
   const y = window.screenY + chromeHeight + window.innerHeight / 2
   
-  if (x !== lastPostedX || y !== lastPostedY) {
+  const now = performance.now()
+  if (x !== lastPostedX || y !== lastPostedY || now - lastPostTime > 1000) {
     channel.postMessage({ tabId: TAB_ID, x, y, visible: isVisible })
     lastPostedX = x;
     lastPostedY = y;
+    lastPostTime = now;
   }
 }
 
