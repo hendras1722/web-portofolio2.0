@@ -17,4 +17,8 @@ import MorphCursor from '~/components/MorphCursor.vue'; // Import the component
 const { width } = useWindowSize();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+html {
+  scroll-behavior: smooth;
+}
+</style>

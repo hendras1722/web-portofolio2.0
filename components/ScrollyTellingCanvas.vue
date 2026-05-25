@@ -13,8 +13,15 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 const context = ref<CanvasRenderingContext2D | null>(null)
 
 const scrollY = ref(0)
+let isTicking = false
 const onScroll = () => {
-  scrollY.value = window.scrollY
+  if (!isTicking) {
+    window.requestAnimationFrame(() => {
+      scrollY.value = window.scrollY
+      isTicking = false
+    })
+    isTicking = true
+  }
 }
 
 const onSyncScroll = (e: Event) => {

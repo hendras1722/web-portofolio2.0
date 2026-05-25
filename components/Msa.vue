@@ -169,7 +169,7 @@ function handleScroll() {
   }
   if (isLocalResizing.value) return
   if (window.scrollY === lastSyncedScrollY) return
-  if (channel) {
+  if (channel && connectedTabsCount.value > 0) {
     channel.postMessage({ type: 'scroll', scrollY: window.scrollY })
   }
 }
@@ -194,13 +194,21 @@ function initParticles() {
   }
 }
 
+let lastPostedX = -1;
+let lastPostedY = -1;
+
 function postPosition() {
   if (!process.client || !channel) return
   const isVisible = document.visibilityState === 'visible'
   const chromeHeight = window.outerHeight - window.innerHeight
   const x = window.screenX + window.innerWidth / 2
   const y = window.screenY + chromeHeight + window.innerHeight / 2
-  channel.postMessage({ tabId: TAB_ID, x, y, visible: isVisible })
+  
+  if (x !== lastPostedX || y !== lastPostedY) {
+    channel.postMessage({ tabId: TAB_ID, x, y, visible: isVisible })
+    lastPostedX = x;
+    lastPostedY = y;
+  }
 }
 
 function cleanupDeadTabs() {
@@ -257,7 +265,8 @@ function animateParticles() {
   }
   
   // 1. Draw ambient particles
-  particles.forEach(p => {
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i]
     p.x += p.speedX
     p.y += p.speedY
 
@@ -269,21 +278,22 @@ function animateParticles() {
     ctx.fillStyle = `rgba(0, 240, 255, ${p.opacity * (connectedTabsCount.value > 0 ? 0.3 : 1)})`
     ctx.fill()
 
-    particles.forEach(p2 => {
+    for (let j = i + 1; j < particles.length; j++) {
+      const p2 = particles[j]
       const dx = p.x - p2.x
       const dy = p.y - p2.y
       const distance = Math.sqrt(dx * dx + dy * dy)
 
-      if (distance < 150) {
+      if (distance < 120) {
         ctx.beginPath()
-        ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 * (1 - distance / 150) * (connectedTabsCount.value > 0 ? 0.3 : 1)})`
+        ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 * (1 - distance / 120) * (connectedTabsCount.value > 0 ? 0.3 : 1)})`
         ctx.lineWidth = 0.5
         ctx.moveTo(p.x, p.y)
         ctx.lineTo(p2.x, p2.y)
         ctx.stroke()
       }
-    })
-  })
+    }
+  }
 
   // 2. Draw cross-tab communication lines and node indicators
   if (process.client && connectedTabsCount.value > 0) {
@@ -665,7 +675,7 @@ const cvDownloadUrl = computed(() => {
         <div v-if="!isLoading" class="absolute inset-0 pointer-events-none flex flex-col justify-center">
 
           <!-- Overlay 1: 0% to 25% progress (Intro Hero text) -->
-          <div
+          <div v-show="progress >= -0.1 && progress <= 0.25"
             class="absolute inset-0 flex items-center max-w-[1200px] mx-auto w-full transition-opacity duration-100 will-change-transform z-10"
             :class="connectedTabsCount > 0 ? 'justify-start px-16' : 'justify-center lg:justify-start px-6 md:px-16'"
             :style="{
@@ -696,7 +706,7 @@ const cvDownloadUrl = computed(() => {
           </div>
 
           <!-- Overlay 2: 30% progress (Tech Stack Grid) -->
-          <div
+          <div v-show="progress >= 0.15 && progress <= 0.45"
             class="absolute inset-0 flex items-center max-w-[1200px] mx-auto w-full transition-opacity duration-100 will-change-transform z-10"
             :class="connectedTabsCount > 0 ? 'justify-start px-16' : 'justify-center lg:justify-start px-6 md:px-16'"
             :style="{
@@ -752,7 +762,7 @@ const cvDownloadUrl = computed(() => {
           </div>
 
           <!-- Overlay 3: 60% progress (Tools & Infrastructure) -->
-          <div
+          <div v-show="progress >= 0.45 && progress <= 0.75"
             class="absolute inset-0 flex items-center max-w-[1200px] mx-auto w-full transition-opacity duration-100 will-change-transform z-10"
             :class="connectedTabsCount > 0 ? 'justify-start px-16' : 'justify-center lg:justify-start px-6 md:px-16'"
             :style="{
@@ -798,7 +808,7 @@ const cvDownloadUrl = computed(() => {
           </div>
 
           <!-- Overlay 4: 90% progress (Welcome CTA) -->
-          <div
+          <div v-show="progress >= 0.8 && progress <= 1.1"
             class="absolute inset-0 flex items-center max-w-[1200px] mx-auto w-full transition-opacity duration-100 will-change-transform z-10"
             :class="connectedTabsCount > 0 ? 'justify-start px-16' : 'justify-center lg:justify-start px-6 md:px-16'"
             :style="{
