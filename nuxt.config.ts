@@ -45,16 +45,18 @@ export default defineNuxtConfig({
     registerType: 'autoUpdate',
 
     manifest: {
-      name: 'MSA me',
-      short_name: 'msame',
-      description: 'OIOIOOi',
-      theme_color: '#ffffff',
+      name: 'Muh Syahendra — Frontend Engineer',
+      short_name: 'MSA',
+      description: 'Portfolio of Muh Syahendra — Frontend Engineer specializing in React, Vue, Nuxt & Next.js.',
+      theme_color: '#0a0b0b',
+      background_color: '#0a0b0b',
       display: 'standalone',
       scope: '/',
       start_url: '/',
       launch_handler: {
         client_mode: ['navigate-existing', 'auto']
       },
+      categories: ['portfolio', 'developer', 'engineering'],
       icons: [
         {
           src: 'icons/icon-192x192.png',
@@ -115,6 +117,16 @@ export default defineNuxtConfig({
       Poppins: [100, 200, 300, 400, 500, 600, 700, 800, 900],
       'Hanken Grotesk': [500, 600, 700],
       'Geist': [400, 500, 600, 700],
+    },
+  },
+
+  app: {
+    head: {
+      htmlAttrs: { lang: 'en' },
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/icons/icon-192x192.png' },
+      ],
     },
   },
 
