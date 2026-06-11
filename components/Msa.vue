@@ -144,43 +144,50 @@ const experience = [
     title: "Insira",
     role: "Frontend Developer",
     date: "2026",
-    desc: "Develop apps insira, about the apps is public cemetery and Handle 3 apps Petugas, Insira, Client Insira."
+    desc: "Develop apps insira, about the apps is public cemetery and Handle 3 apps Petugas, Insira, Client Insira.",
+    tags: ['Next.js', 'Nuxt 4', 'Tailwind CSS', 'TypeScript', 'Map API']
   },
   {
     title: "Panglima Propertindo",
     role: "Frontend Developer",
     date: "2025",
-    desc: "Develop apps insira, about the apps is public cemetery and Handle 3 apps Petugas, Insira, Client Insira."
+    desc: "Develop apps insira, about the apps is public cemetery and Handle 3 apps Petugas, Insira, Client Insira.",
+    tags: ['Next 15 & 16', 'Shadcn UI', 'GitHub', 'Lark']
   },
   {
     title: "Geek Garden",
     role: "Software Engineer",
     date: "2025",
-    desc: "Project base 5 month where I maintain apps Scyllax TPM (Trade Promotion Management), handle module Annual budget and Approval Schema."
+    desc: "Project base 5 month where I maintain apps Scyllax TPM (Trade Promotion Management), handle module Annual budget and Approval Schema.",
+    tags: ['Vue 3', 'Pinia', 'Tailwind CSS', 'GitLab', 'Jira']
   },
   {
-    title: "Privy",
+    title: "Privy ID",
     role: "Frontend Engineer",
     date: "2021 - 2025",
-    desc: "Leading frontend architecture and implementation for enterprise-grade digital identity solutions. Maintained and held CIMB project (Credit Card and Personal Loan). In addition, helped projects in the BNI section, CIMB Octo Server, Internal Application from Privy. Using javascript language (Nuxt)."
+    desc: "Leading frontend architecture and implementation for enterprise-grade digital identity solutions. Maintained CIMB project (Credit Card and Personal Loan), BNI Regsand, CIMB Octo Server, Internal Applications at Privy.",
+    tags: ['Nuxt 2 & 3', 'Next.js', 'Vuetify', 'Pinia', 'Vuex', 'GitLab', 'Jira']
   },
   {
     title: "PT Nastha Global Utama",
     role: "Frontend Developer",
     date: "2020 - 2021",
-    desc: "My career at PT Nastha Global Utama for 1 year where I maintain and hold Ceisa 4.0 project from Tax. using javascript language (React)."
+    desc: "Maintained and developed Ceisa 4.0 project for Indonesian Customs. Built licensing and manifest modules for taxation application.",
+    tags: ['React', 'Redux', 'Ant Design', 'Tailwind CSS', 'GitLab']
   },
   {
     title: "BLPT Yogyakarta",
     role: "Trainer Arduino",
     date: "2019",
-    desc: "I worked at BLPT Yogyakarta for 3 days. There I taught teachers about Arduino programming."
+    desc: "Conducted Arduino programming workshops for teachers, bridging the gap between hardware and software education.",
+    tags: ['Arduino', 'C++', 'IoT']
   },
   {
     title: "PT Binterjet",
     role: "Developer",
     date: "2019",
-    desc: "My career at PT Binterjet for 1 month where I held technicians and sales to customers. This company focuses on screen printing."
+    desc: "Provided technical support and sales solutions for screen printing technology to enterprise customers.",
+    tags: ['Technical Support', 'Sales']
   }
 ]
 
@@ -645,11 +652,17 @@ const isActiveLink = (id: string) => activeSection.value === id
               </p>
               <div class="flex flex-wrap items-center gap-4 mt-4 pointer-events-auto" :class="connectedTabsCount > 0 ? 'justify-start' : 'justify-center lg:justify-start'">
                 <button @click="discoverMSA" class="group relative bg-[#00f0ff] text-[#002022] hover:bg-[#7df4ff] px-8 py-4 rounded-full font-geist text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_25px_rgba(0,240,255,0.2)] hover:shadow-[0_0_40px_rgba(0,240,255,0.35)] hover:scale-105 overflow-hidden">
-                  <span class="relative z-10">{{ $t('explore_work') }}</span>
+                  <span class="relative z-10 flex items-center gap-2">
+                    {{ $t('explore_work') }}
+                    <UIcon name="i-heroicons-arrow-down-20-solid" class="w-4 h-4 animate-bounce" />
+                  </span>
                   <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12"></div>
                 </button>
-                <a href="#connect" class="border border-[#3b494b]/60 text-[#e3e2e2] hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/5 px-8 py-4 rounded-full font-geist text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,240,255,0.1)]">
-                  {{ $t('get_in_touch') }}
+                <a href="#connect" class="group border border-[#3b494b]/60 text-[#e3e2e2] hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/5 px-8 py-4 rounded-full font-geist text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,240,255,0.1)]">
+                  <span class="flex items-center gap-2">
+                    {{ $t('get_in_touch') }}
+                    <UIcon name="i-heroicons-chat-bubble-left-right-20-solid" class="w-4 h-4 group-hover:animate-pulse" />
+                  </span>
                 </a>
               </div>
             </div>
@@ -842,6 +855,15 @@ const isActiveLink = (id: string) => activeSection.value === id
                 <p :class="connectedTabsCount > 0 ? 'text-base' : 'text-sm md:text-base'" class="font-geist text-[#b9cacb]/70 leading-relaxed font-light">
                   {{ item.desc }}
                 </p>
+
+                <!-- Skill Tags -->
+                <div v-if="item.tags && item.tags.length"
+                  class="flex flex-wrap gap-1.5 mt-4">
+                  <span v-for="tag in item.tags" :key="tag"
+                    class="px-2.5 py-1 rounded-md text-[10px] font-geist font-semibold uppercase tracking-wider transition-all duration-300 border border-[#3b494b]/20 bg-[#0a0b0b]/40 text-[#b9cacb]/80 group-hover/card:border-[#00f0ff]/20 group-hover/card:text-[#00f0ff]/90 group-hover/card:bg-[#00f0ff]/5">
+                    {{ tag }}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -867,72 +889,96 @@ const isActiveLink = (id: string) => activeSection.value === id
           <div class="grid gap-6" :class="connectedTabsCount > 0 ? 'grid-cols-2' : 'grid-cols-1 md:grid-cols-2'">
             <!-- Auth Dummy Card -->
             <a href="https://auth.syahendra.com/docs/" target="_blank" rel="noopener noreferrer"
-              class="api-card group block relative overflow-hidden rounded-2xl border border-[#3b494b]/15 bg-[#1a1b1b]/20 p-8 md:p-10 hover:border-[#00f0ff]/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,240,255,0.06)]">
+              class="api-card group block relative overflow-hidden rounded-2xl border border-[#3b494b]/15 bg-gradient-to-br from-[#1a1b1b]/30 to-[#121414]/50 p-8 md:p-10 hover:border-[#00f0ff]/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,240,255,0.06)]">
               <div class="absolute inset-0 bg-gradient-to-br from-[#00f0ff]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="absolute top-0 right-0 w-[200px] h-[200px] bg-[#00f0ff]/3 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div class="absolute -top-20 -right-20 w-[300px] h-[300px] bg-[#00f0ff]/3 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
               <div class="relative z-10 flex flex-col h-full justify-between gap-8">
                 <div>
                   <div class="flex items-center justify-between gap-3 mb-8">
                     <span class="px-3 py-1.5 bg-[#0a0b0b]/80 border border-[#3b494b]/20 rounded-lg font-geist text-[9px] text-[#b9cacb] uppercase tracking-[0.15em] font-semibold">
-                      Authentication Service
+                      <span class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse shadow-[0_0_6px_rgba(0,240,255,0.6)]"></span>
+                        Authentication Service
+                      </span>
                     </span>
-                    <span class="text-[10px] font-geist text-[#00f0ff] font-semibold flex items-center gap-1.5">
+                    <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00f0ff]/5 border border-[#00f0ff]/10 text-[10px] font-geist text-[#00f0ff] font-semibold">
                       <span class="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse shadow-[0_0_6px_rgba(0,240,255,0.6)]"></span>
-                      Online
+                      Live
                     </span>
                   </div>
                   <div class="flex items-center gap-4 mb-5">
-                    <div class="w-12 h-12 rounded-xl bg-[#00f0ff]/10 flex items-center justify-center group-hover:bg-[#00f0ff]/20 transition-colors duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00f0ff]/10 to-[#00f0ff]/5 flex items-center justify-center border border-[#00f0ff]/10 group-hover:border-[#00f0ff]/20 group-hover:bg-[#00f0ff]/15 transition-all duration-300">
                       <UIcon name="i-heroicons-lock-closed" class="w-6 h-6 text-[#00f0ff]" />
                     </div>
-                    <h4 :class="connectedTabsCount > 0 ? 'text-2xl' : 'text-xl md:text-2xl'" class="font-hanken text-[#e3e2e2] group-hover:text-[#00f0ff] transition-colors duration-300 font-bold leading-snug">
-                      AUTH DUMMY
-                    </h4>
+                    <div>
+                      <h4 :class="connectedTabsCount > 0 ? 'text-2xl' : 'text-xl md:text-2xl'" class="font-hanken text-[#e3e2e2] group-hover:text-[#00f0ff] transition-colors duration-300 font-bold leading-snug">
+                        AUTH DUMMY
+                      </h4>
+                      <p class="text-[10px] font-geist text-[#b9cacb]/40 uppercase tracking-wider font-medium mt-0.5">REST API • JWT • OAuth</p>
+                    </div>
                   </div>
                   <p class="text-sm font-geist text-[#b9cacb]/70 leading-relaxed font-light">
                     {{ $t('api_public_auth_desc') }}
                   </p>
                 </div>
-                <div class="flex items-center text-[#b9cacb]/50 group-hover:text-[#e3e2e2] font-geist text-xs uppercase tracking-widest font-bold">
-                  {{ $t('api_public_doc') }}
-                  <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                <div class="flex items-center justify-between pt-2 border-t border-[#3b494b]/10">
+                  <div class="flex items-center gap-2 text-[#b9cacb]/60 text-[10px] font-geist font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500/60"></span>
+                    {{ $t('api_public_doc') }}
+                  </div>
+                  <div class="flex items-center text-[#b9cacb]/50 group-hover:text-[#e3e2e2] font-geist text-xs uppercase tracking-widest font-bold transition-all duration-300">
+                    Explore
+                    <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                  </div>
                 </div>
               </div>
             </a>
 
             <!-- Operator Provider Card -->
             <a href="https://provider.syahendra.com/" target="_blank" rel="noopener noreferrer"
-              class="api-card group block relative overflow-hidden rounded-2xl border border-[#3b494b]/15 bg-[#1a1b1b]/20 p-8 md:p-10 hover:border-[#00f0ff]/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,240,255,0.06)]">
+              class="api-card group block relative overflow-hidden rounded-2xl border border-[#3b494b]/15 bg-gradient-to-br from-[#1a1b1b]/30 to-[#121414]/50 p-8 md:p-10 hover:border-[#00f0ff]/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,240,255,0.06)]">
               <div class="absolute inset-0 bg-gradient-to-br from-[#ff0080]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="absolute bottom-0 left-0 w-[200px] h-[200px] bg-[#ff0080]/3 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div class="absolute -bottom-20 -left-20 w-[300px] h-[300px] bg-[#ff0080]/3 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
               <div class="relative z-10 flex flex-col h-full justify-between gap-8">
                 <div>
                   <div class="flex items-center justify-between gap-3 mb-8">
                     <span class="px-3 py-1.5 bg-[#0a0b0b]/80 border border-[#3b494b]/20 rounded-lg font-geist text-[9px] text-[#b9cacb] uppercase tracking-[0.15em] font-semibold">
-                      Utility API
+                      <span class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#ff0080] animate-pulse shadow-[0_0_6px_rgba(255,0,128,0.4)]"></span>
+                        Utility API
+                      </span>
                     </span>
-                    <span class="text-[10px] font-geist text-[#00f0ff] font-semibold flex items-center gap-1.5">
+                    <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00f0ff]/5 border border-[#00f0ff]/10 text-[10px] font-geist text-[#00f0ff] font-semibold">
                       <span class="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse shadow-[0_0_6px_rgba(0,240,255,0.6)]"></span>
-                      Online
+                      Live
                     </span>
                   </div>
                   <div class="flex items-center gap-4 mb-5">
-                    <div class="w-12 h-12 rounded-xl bg-[#ff0080]/10 flex items-center justify-center group-hover:bg-[#ff0080]/20 transition-colors duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#ff0080]/10 to-[#ff0080]/5 flex items-center justify-center border border-[#ff0080]/10 group-hover:border-[#ff0080]/20 group-hover:bg-[#ff0080]/15 transition-all duration-300">
                       <UIcon name="i-heroicons-signal" class="w-6 h-6 text-[#ff0080]" />
                     </div>
-                    <h4 :class="connectedTabsCount > 0 ? 'text-2xl' : 'text-xl md:text-2xl'" class="font-hanken text-[#e3e2e2] group-hover:text-[#00f0ff] transition-colors duration-300 font-bold leading-snug">
-                      Operator Provider
-                    </h4>
+                    <div>
+                      <h4 :class="connectedTabsCount > 0 ? 'text-2xl' : 'text-xl md:text-2xl'" class="font-hanken text-[#e3e2e2] group-hover:text-[#00f0ff] transition-colors duration-300 font-bold leading-snug">
+                        Operator Provider
+                      </h4>
+                      <p class="text-[10px] font-geist text-[#b9cacb]/40 uppercase tracking-wider font-medium mt-0.5">Utility • Telco • Prefix Check</p>
+                    </div>
                   </div>
                   <p class="text-sm font-geist text-[#b9cacb]/70 leading-relaxed font-light">
                     {{ $t('api_public_provider_desc') }}
                   </p>
                 </div>
-                <div class="flex items-center text-[#b9cacb]/50 group-hover:text-[#e3e2e2] font-geist text-xs uppercase tracking-widest font-bold">
-                  {{ $t('api_public_visit') }}
-                  <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                <div class="flex items-center justify-between pt-2 border-t border-[#3b494b]/10">
+                  <div class="flex items-center gap-2 text-[#b9cacb]/60 text-[10px] font-geist font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500/60"></span>
+                    Available
+                  </div>
+                  <div class="flex items-center text-[#b9cacb]/50 group-hover:text-[#e3e2e2] font-geist text-xs uppercase tracking-widest font-bold transition-all duration-300">
+                    Visit
+                    <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                  </div>
                 </div>
               </div>
             </a>
@@ -964,7 +1010,7 @@ const isActiveLink = (id: string) => activeSection.value === id
 
           <div id="work" :class="connectedTabsCount > 0 ? 'grid-cols-2' : 'grid-cols-1 md:grid-cols-2'" class="grid gap-6">
             <NuxtLink v-for="(post, index) in paginatedPosts" :key="post._path" :to="post._path"
-              class="article-card group block relative overflow-hidden rounded-2xl border border-[#3b494b]/15 bg-[#1a1b1b]/20 p-8 hover:border-[#00f0ff]/40 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,240,255,0.05)]"
+              class="article-card group block relative overflow-hidden rounded-2xl border border-[#3b494b]/15 bg-gradient-to-br from-[#1a1b1b]/30 to-[#121414]/50 p-8 hover:border-[#00f0ff]/40 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,240,255,0.05)]"
               :style="{ '--delay': `${index * 80}ms` }">
 
               <div class="absolute inset-0 bg-gradient-to-br from-[#00f0ff]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -972,18 +1018,23 @@ const isActiveLink = (id: string) => activeSection.value === id
               <div class="relative z-10 flex flex-col h-full justify-between gap-8">
                 <div>
                   <div class="flex items-center justify-between gap-3 mb-6">
-                    <span class="px-3 py-1.5 bg-[#0a0b0b]/80 border border-[#3b494b]/20 rounded-lg font-geist text-[9px] text-[#b9cacb] uppercase tracking-[0.15em] font-semibold line-clamp-1">
-                      {{ post.description || 'Article' }}
-                    </span>
-                    <span class="text-[10px] font-geist text-[#b9cacb]/40 font-semibold shrink-0">{{ post.date }}</span>
+                    <div class="flex items-center gap-2 px-2.5 py-1.5 bg-[#0a0b0b]/80 border border-[#3b494b]/20 rounded-lg font-geist text-[9px] text-[#b9cacb] uppercase tracking-[0.15em] font-semibold">
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#7df4ff]"></span>
+                      <span class="line-clamp-1">Article</span>
+                    </div>
+                    <span class="text-[10px] font-geist text-[#b9cacb]/30 font-semibold shrink-0 font-mono">{{ post.date }}</span>
                   </div>
                   <h4 :class="connectedTabsCount > 0 ? 'text-2xl' : 'text-xl md:text-2xl'" class="font-hanken text-[#e3e2e2] group-hover:text-[#00f0ff] transition-colors duration-300 mb-4 font-bold leading-snug line-clamp-2">
                     {{ post.title }}
                   </h4>
+                  <p class="font-geist text-xs text-[#b9cacb]/50 leading-relaxed font-light line-clamp-2">{{ post.description }}</p>
                 </div>
-                <div class="flex items-center text-[#b9cacb]/50 group-hover:text-[#e3e2e2] font-geist text-xs uppercase tracking-widest font-bold">
-                  {{ $t('read_article') }}
-                  <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                <div class="flex items-center justify-between pt-3 border-t border-[#3b494b]/10">
+                  <span class="text-[10px] font-geist text-[#b9cacb]/40 font-medium">{{ post.readingTime || '3 min read' }}</span>
+                  <div class="flex items-center text-[#b9cacb]/50 group-hover:text-[#e3e2e2] font-geist text-xs uppercase tracking-widest font-bold transition-all duration-300">
+                    {{ $t('read_article') }}
+                    <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                  </div>
                 </div>
               </div>
             </NuxtLink>
@@ -1064,14 +1115,17 @@ const isActiveLink = (id: string) => activeSection.value === id
               </span>
             </div>
             <nav class="flex items-center gap-5">
-              <a href="https://github.com/hendras1722" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg border border-[#3b494b]/20 bg-[#1a1b1b]/20 flex items-center justify-center hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/5 hover:shadow-[0_0_10px_rgba(0,240,255,0.1)] transition-all duration-300 group" aria-label="GitHub">
-                <UIcon name="i-heroicons-code-bracket" class="w-4 h-4 text-[#b9cacb] group-hover:text-[#00f0ff] transition-colors duration-300" />
+              <a href="https://github.com/hendras1722" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl border border-[#3b494b]/20 bg-[#1a1b1b]/20 flex items-center justify-center hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/5 hover:shadow-[0_0_10px_rgba(0,240,255,0.1)] transition-all duration-300 group" aria-label="GitHub">
+                <svg class="w-4 h-4 text-[#b9cacb] group-hover:text-[#00f0ff] transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.31.467-2.381 1.235-3.221-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.873.118 3.176.77.84 1.233 1.911 1.233 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               </a>
-              <a href="https://www.linkedin.com/in/muhsyahendraa/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg border border-[#3b494b]/20 bg-[#1a1b1b]/20 flex items-center justify-center hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/5 hover:shadow-[0_0_10px_rgba(0,240,255,0.1)] transition-all duration-300 group" aria-label="LinkedIn">
-                <UIcon name="i-heroicons-link" class="w-4 h-4 text-[#b9cacb] group-hover:text-[#00f0ff] transition-colors duration-300" />
+              <a href="https://www.linkedin.com/in/muhsyahendraa/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl border border-[#3b494b]/20 bg-[#1a1b1b]/20 flex items-center justify-center hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/5 hover:shadow-[0_0_10px_rgba(0,240,255,0.1)] transition-all duration-300 group" aria-label="LinkedIn">
+                <svg class="w-4 h-4 text-[#b9cacb] group-hover:text-[#00f0ff] transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               </a>
-              <a href="mailto:muhsyahendraa1722@gmail.com" class="w-9 h-9 rounded-lg border border-[#3b494b]/20 bg-[#1a1b1b]/20 flex items-center justify-center hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/5 hover:shadow-[0_0_10px_rgba(0,240,255,0.1)] transition-all duration-300 group" aria-label="Email">
+              <a href="mailto:muhsyahendraa1722@gmail.com" class="w-10 h-10 rounded-xl border border-[#3b494b]/20 bg-[#1a1b1b]/20 flex items-center justify-center hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/5 hover:shadow-[0_0_10px_rgba(0,240,255,0.1)] transition-all duration-300 group" aria-label="Email">
                 <UIcon name="i-heroicons-envelope" class="w-4 h-4 text-[#b9cacb] group-hover:text-[#00f0ff] transition-colors duration-300" />
+              </a>
+              <a href="/curriculum-vitae" class="w-10 h-10 rounded-xl border border-[#3b494b]/20 bg-[#1a1b1b]/20 flex items-center justify-center hover:border-[#00f0ff]/50 hover:bg-[#00f0ff]/5 hover:shadow-[0_0_10px_rgba(0,240,255,0.1)] transition-all duration-300 group" aria-label="CV">
+                <UIcon name="i-heroicons-document-text" class="w-4 h-4 text-[#b9cacb] group-hover:text-[#00f0ff] transition-colors duration-300" />
               </a>
             </nav>
           </div>

@@ -1,5 +1,15 @@
 {
   "project": [
+     {
+    "title": "Cashier Apps",
+    "description": "project.cashsir_app2",
+    "technologies": [
+      "Nuxt 3",
+      "Bun",
+      "Postgreesql"
+    ],
+    "link": "https://newcashsir.syahendra.com/"
+  },
     {
       "title": "Insira",
       "descriptionKey": "Product untuk jual beli pemakaman",
@@ -17,18 +27,6 @@
       "descriptionKey": "Project ronda app",
       "link": "https://gpa.syahendra.com/",
       "technology": "Nuxt 3"
-    },
-    {
-      "title": "New Cashsir App build with Nuxt 3",
-      "descriptionKey": "project.cashsir_app2",
-      "link": "https://newcashsir.syahendra.com/",
-      "technology": "Nuxt 3"
-    },
-    {
-      "title": "Cashsir App build with Next 15",
-      "descriptionKey": "project.cashsir_app",
-      "link": "https://cashsir.syahendra.com/",
-      "technology": "Next 15"
     },
     {
       "title": "Operator Provider",
