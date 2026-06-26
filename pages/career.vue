@@ -110,6 +110,7 @@
 </template>
 
 <script setup lang="ts">
+import careerData from '~/public/career.json'
 export interface Career {
   project: string[];
   project_individu: ProjectIndividu[];
@@ -121,13 +122,9 @@ export interface ProjectIndividu {
   technology: string;
 }
 
-
-
 const isOpen = ref(false)
 const nameCertificate = ref('')
 const loading = ref(false)
-
-const { data, status } = await useFetch<string>('https://raw.githubusercontent.com/hendras1722/web-portofolio2.0/refs/heads/master/public/career.json')
 
 function handleOpenCertificateModal(e: string) {
   isOpen.value = true
@@ -211,7 +208,7 @@ const dataCertificate = ref([
     date: 'Sep 2014 - Mar 2018',
   },
 ])
-const dataExperience = ref<{ title: string, date: string, desc: string }[]>([])
+const dataExperience = ref<{ title: string, date: string, desc: string }[]>(careerData?.experience ?? [])
 
 const dataEducation = [
   {
@@ -230,16 +227,9 @@ const dataEducation = [
     desc: `Activities to major in strong current electrical engineering and graduate in 2018 `,
   },
 ]
-const dataProject = ref<string[]>([])
+const dataProject = ref<string[]>(careerData?.project ?? [])
 
-const projectMe = ref<ProjectIndividu[]>([])
-
-if (status.value === 'success') {
-  const result = JSON.parse(data.value as string)
-  dataProject.value = result?.project ?? []
-  projectMe.value = result?.project_individu ?? []
-  dataExperience.value = result?.experience ?? []
-}
+const projectMe = ref<ProjectIndividu[]>(careerData?.project_individu ?? [])
 
 
 onMounted(() => {

@@ -19,6 +19,7 @@
     "error_message": "Failed to send message. Please try again.",
     "nav_work": "Work",
     "nav_career": "Career",
+    "nav_projects": "Live Projects",
     "nav_articles": "Articles",
     "nav_connect": "Connect",
     "nav_apis": "APIs",
@@ -48,6 +49,15 @@
     "api_public_provider_desc": "A high-performance utility API to check telecommunication provider numbers, prefixes, and cellular routing formats globally.",
     "api_public_doc": "API Documentation",
     "api_public_visit": "Visit Service",
+    "live_projects": {
+      "badge": "Featured Work",
+      "title": "Live Projects",
+      "subtitle": "Explore some of my recently deployed applications in production. Built with modern web technologies focusing on performance and user experience.",
+      "visit_site": "Visit Site",
+      "cashier_desc": "A modern, high-performance Point of Sale (POS) system built for seamless business transactions, real-time analytics, and inventory management.",
+      "insira_desc": "Comprehensive public cemetery management platform. Integrated multi-app system serving administrators, on-field staff, and public clients.",
+      "tpm_desc": "Enterprise Trade Promotion Management. Features complex approval schemas, annual budget tracking, and real-time financial reporting."
+    },
     "cv": {
       "name": "Muhammad Syahendra Anindyantoro",
       "title": "Frontend Developer",
@@ -207,6 +217,7 @@
     "error_message": "Gagal mengirim pesan. Silakan coba lagi.",
     "nav_work": "Karya",
     "nav_career": "Karir",
+    "nav_projects": "Proyek Langsung",
     "nav_articles": "Artikel",
     "nav_connect": "Kontak",
     "nav_apis": "API",
@@ -236,6 +247,15 @@
     "api_public_provider_desc": "API utilitas berkinerja tinggi untuk memeriksa nomor penyedia telekomunikasi, awalan (prefix), dan format perutean seluler secara global.",
     "api_public_doc": "Dokumentasi API",
     "api_public_visit": "Kunjungi Layanan",
+    "live_projects": {
+      "badge": "Karya Pilihan",
+      "title": "Proyek Langsung",
+      "subtitle": "Jelajahi beberapa aplikasi terbaru saya yang sudah diluncurkan. Dibangun dengan teknologi web modern yang fokus pada performa dan pengalaman pengguna.",
+      "visit_site": "Kunjungi Situs",
+      "cashier_desc": "Sistem Point of Sale (POS) modern berkinerja tinggi yang dibangun untuk transaksi bisnis mulus, analitik real-time, dan manajemen inventaris.",
+      "insira_desc": "Platform manajemen pemakaman umum komprehensif. Sistem multi-aplikasi terintegrasi yang melayani administrator, staf lapangan, dan klien publik.",
+      "tpm_desc": "Manajemen Promosi Perdagangan Enterprise (TPM). Memiliki skema persetujuan kompleks, pelacakan anggaran tahunan, dan pelaporan keuangan real-time."
+    },
     "cv": {
       "name": "Muhammad Syahendra Anindyantoro",
       "title": "Frontend Developer",
@@ -358,20 +378,14 @@
       ]
     },
     "project": {
-      "cashsir_app2": "Portofolio ini menggunakan Nuxt 3, simple POSapp dan masih bisa dikembangkan",
-      "cashsir_app": "Portofolio ini menggunakan Next 15 ini simple POSapp dan masih bisa dikembangkan",
+      "cashsir_app2": "Portofolio ini menggunakan Nuxt 3, sudah rilis production di cashier.my.id",
       "operator": "Portofolio ini untuk cek nomer provider dan prefix diberbagai negara didunia",
-      "seller_be": "Portofolio ini menggunakan ExpressJS, prisma, posgresql",
-      "seller_dashboard": "Portofolio ini menggunakan Next 15 dengan fitur auth login, register dan create article dan category",
       "auth": "Portofolio ini dibuat menggunakan ExpressJS, dan hanya fitur auth login, register, dan logout.",
       "octo": "Memperbaiki bug landing octo saver",
-      "landing_privy": "Perbarui kata-kata dan perbarui situs web yang diperlukan",
       "ccpl": "Aplikasi CIMB untuk pengajuan kartu kredit dan pengajuan pinjaman",
       "ronin": "Aplikasi website internal untuk memeriksa log oleh Aplikasi privy atau lainnya",
       "bni": "Dasbor pemeliharaan dan arahan untuk pengajuan kartu kredit bank BNI",
       "ceisa": "Aplikasi untuk permohonan perpajakan dari bea cukai",
-      "gardu": "Alat pemantau suhu untuk panel gardu induk wonogiri.",
-      "App_tele_privy": "Apps untuk memverifikasi document serta validasi data",
       "adonara_dashboard": "Mirip seperti app tele privy ini versi pembaruannya tapi lebih update"
     }
   }

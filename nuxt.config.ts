@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   ],
   i18n: {
     strategy: 'prefix_except_default',
-    vueI18n: './plugins/i18n.ts', // Use the correct path to your i18n plugin
+    vueI18n: '~/language.config.ts',
     locales: [
       { code: 'en', iso: 'en-US', name: 'English' },
       { code: 'id', iso: 'id-ID', name: 'Indonesia' },

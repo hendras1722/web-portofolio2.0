@@ -93,7 +93,7 @@
       </h2>
 
       <div v-for="(job, index) in work" :key="index"
-        class="mb-6 last:mb-0 border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
+        class="job-item mb-6 last:mb-0 border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
         <!-- Company, Role, Location, Date -->
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1">
           <h3 class="text-base font-bold text-gray-900">
@@ -134,12 +134,12 @@
         {{ $t('cv.educationTitle') }}
       </h2>
 
-      <div v-for="(edu, idx) in education" :key="idx" class="mb-4 last:mb-0">
+      <div v-for="(edu, idx) in education" :key="idx" class="edu-item mb-4 last:mb-0">
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1">
           <h3 class="text-base font-bold text-gray-900">{{ edu.institution }}</h3>
           <span class="text-sm font-bold text-gray-800 sm:text-right">{{ edu.period }}</span>
         </div>
-        <p class="text-sm text-gray-700 font-medium">{{ $t(edu.degree) }}</p>
+        <p class="text-sm text-gray-700 font-medium">{{ edu.degree ? $t(edu.degree) : '' }}</p>
       </div>
     </section>
 
@@ -151,7 +151,7 @@
 
       <div class="space-y-3 text-sm text-gray-800">
         <div v-for="(group, s) in categorizedSkills" :key="s"
-          class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+          class="skill-item flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
           <span class="font-bold text-gray-900 sm:w-1/3 min-w-[180px]">{{ group.category }}</span>
           <span class="text-gray-700 sm:w-2/3">{{ group.items.join(', ') }}</span>
         </div>
@@ -166,7 +166,7 @@
 
       <div class="space-y-4">
         <div v-for="(desc, key) in projects" :key="key"
-          class="pb-4 border-b border-gray-100 last:border-0 last:pb-0">
+          class="project-item pb-4 border-b border-gray-100 last:border-0 last:pb-0">
           <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1">
             <h4 class="text-base font-bold text-gray-900 capitalize">{{ desc.title }}</h4>
             <span
@@ -176,7 +176,7 @@
             </span>
           </div>
           <p class="text-sm text-gray-700 leading-relaxed">
-            {{ $t(desc.descriptionKey) }}
+            {{ desc.descriptionKey ? $t(desc.descriptionKey) : (desc.description ? $t(desc.description) : '') }}
           </p>
           <p v-if="desc.link" class="text-xs text-blue-600 break-all mt-1">
             <a :href="desc.link" target="_blank" rel="noopener noreferrer" class="hover:text-blue-800 hover:underline">
@@ -192,6 +192,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
+import cvData from '~/public/cv.json'
 
 const { locale, tm, t } = useI18n()
 function setLanguage(lang) {
@@ -210,6 +211,11 @@ useHead({
 })
 
 const route = useRoute()
+const router = useRouter()
+
+if (route.query.locale) {
+  locale.value = route.query.locale
+}
 
 const work = computed(() => tm('cv.workExperiences', { returnObjects: true }))
 
@@ -250,16 +256,7 @@ const categorizedSkills = computed(() => [
   }
 ])
 
-const { data: getProjects, status } = useFetch('https://raw.githubusercontent.com/hendras1722/web-portofolio2.0/refs/heads/master/public/cv.json')
-
-const projects = ref([])
-
-watch(getProjects, (newVal) => {
-  if (newVal) {
-    const parsed = typeof newVal === 'string' ? JSON.parse(newVal) : newVal
-    projects.value = parsed?.project || []
-  }
-}, { immediate: true })
+const projects = ref(cvData?.project || [])
 
 const cvContainer = ref(null)
 const isGeneratingPDF = ref(false)
@@ -291,13 +288,98 @@ async function generatePDF() {
     element.style.maxWidth = '794px'
     element.style.boxShadow = 'none'
     element.style.margin = '0'
-    element.style.padding = '32px'
+    element.style.padding = '96px 32px'
     element.classList.add('force-desktop-pdf')
+
+    // Await fonts loading to ensure Poppins/Inter dimensions are fully calculated
+    if (typeof document !== 'undefined' && document.fonts) {
+      await document.fonts.ready
+    }
+
+    // Calculate and insert page breaks to prevent text cutting
+    const A4_HEIGHT_PX = 1123
+    const pageHeight = A4_HEIGHT_PX
+    const topMargin = 96
+    const bottomMargin = 96
+    const maxPrintableHeight = pageHeight - topMargin - bottomMargin
+    const insertedSpacers = []
+
+    // Select leaf elements and block elements
+    const blocks = element.querySelectorAll('header, h2, .job-item, .edu-item, .skill-item, .project-item, p, li, h3, h4')
+
+    blocks.forEach((block) => {
+      // Find the logical container we want to keep intact
+      let targetBlock = block
+      const container = block.closest('.job-item, .edu-item, .project-item, .skill-item')
+      if (container) {
+        targetBlock = container
+      }
+
+      // Skip if we already processed and pushed this container
+      if (targetBlock.dataset.pdfPushed === 'true') {
+        return
+      }
+
+      const rect = targetBlock.getBoundingClientRect()
+      const containerRect = element.getBoundingClientRect()
+      
+      const blockTop = rect.top - containerRect.top
+      const blockHeight = rect.height
+      const blockBottom = blockTop + blockHeight
+      
+      // We only push if it fits inside a single page
+      if (blockHeight >= maxPrintableHeight) {
+        return
+      }
+
+      // Find if this block crosses any page boundary
+      let crossPage = 0
+      for (let p = 1; p <= 15; p++) {
+        const pageEnd = p * pageHeight
+        const printableEnd = pageEnd - bottomMargin
+        const nextPrintableStart = pageEnd + topMargin
+        
+        if (blockTop < nextPrintableStart && blockBottom > printableEnd) {
+          crossPage = p
+          break
+        }
+      }
+
+      if (crossPage > 0) {
+        const targetPageEnd = crossPage * pageHeight
+        const spacerHeight = (targetPageEnd + topMargin) - blockTop
+        
+        console.log(`[PDF Sizing] PUSHING element: ${targetBlock.className || targetBlock.tagName} | top: ${Math.round(blockTop)} | height: ${Math.round(blockHeight)} | bottom: ${Math.round(blockBottom)} | page: ${crossPage} | spacer: ${Math.round(spacerHeight)}`)
+
+        const isLi = targetBlock.tagName.toLowerCase() === 'li'
+        const spacer = document.createElement(isLi ? 'li' : 'div')
+        spacer.className = 'pdf-page-spacer'
+        spacer.style.height = `${spacerHeight}px`
+        spacer.style.width = '100%'
+        spacer.style.backgroundColor = '#ffffff'
+        spacer.style.clear = 'both'
+        if (isLi) {
+          spacer.style.listStyleType = 'none'
+        }
+        
+        targetBlock.parentNode.insertBefore(spacer, targetBlock)
+        insertedSpacers.push(spacer)
+        
+        targetBlock.dataset.pdfPushed = 'true'
+        
+        // Log the new top position after reflow
+        const newRect = targetBlock.getBoundingClientRect()
+        const newBlockTop = newRect.top - element.getBoundingClientRect().top
+        console.log(`[PDF Sizing] AFTER PUSH: ${targetBlock.className || targetBlock.tagName} is now at top: ${newBlockTop}. Distance from page top (${targetPageEnd}): ${newBlockTop - targetPageEnd}`)
+      } else {
+        // console.log(`[PDF Sizing] KEEPING element: ${targetBlock.className || targetBlock.tagName} | top: ${Math.round(blockTop)} | height: ${Math.round(blockHeight)} | bottom: ${Math.round(blockBottom)}`)
+      }
+    })
 
     await new Promise((resolve) => setTimeout(resolve, 300))
 
     const canvas = await html2canvas(element, {
-      scale: 2.5,
+      scale: 1.5,
       useCORS: true,
       windowWidth: 1024,
       logging: false,
@@ -312,7 +394,23 @@ async function generatePDF() {
     element.style.padding = originalPadding
     element.classList.remove('force-desktop-pdf')
 
-    const imgData = canvas.toDataURL('image/jpeg', 0.98)
+    // Clean up inserted spacers and dataset properties
+    insertedSpacers.forEach((spacer) => {
+      if (spacer.parentNode) {
+        spacer.parentNode.removeChild(spacer)
+      }
+    })
+
+    blocks.forEach((block) => {
+      let targetBlock = block
+      const container = block.closest('.job-item, .edu-item, .project-item, .skill-item')
+      if (container) {
+        targetBlock = container
+      }
+      delete targetBlock.dataset.pdfPushed
+    })
+
+    const imgData = canvas.toDataURL('image/jpeg', 0.65)
 
     const pdf = new jsPDF('p', 'pt', 'a4')
     const pdfWidth = pdf.internal.pageSize.getWidth()
@@ -341,8 +439,10 @@ async function generatePDF() {
     console.error('Error generating PDF:', error)
   } finally {
     isGeneratingPDF.value = false
-    if (route.query.download === 'true') {
-      const router = useRouter()
+    if (typeof window !== 'undefined' && (window.self !== window.top || route.query.iframe === 'true')) {
+      window.parent.postMessage({ type: 'cv-downloaded' }, '*')
+    }
+    if (route.query.download === 'true' && route.query.iframe !== 'true') {
       router.replace({ query: { ...route.query, download: undefined } })
     }
   }
@@ -383,6 +483,20 @@ onMounted(() => {
 }
 
 /* Force desktop layout styles when exporting PDF */
+.force-desktop-pdf {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.force-desktop-pdf > section {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.force-desktop-pdf .space-y-2,
+.force-desktop-pdf .space-y-3,
+.force-desktop-pdf .space-y-4 {
+  display: flex !important;
+  flex-direction: column !important;
+}
 .force-desktop-pdf [class*="sm:flex-row"] {
   flex-direction: row !important;
 }

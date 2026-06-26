@@ -8,7 +8,7 @@
       "Bun",
       "Postgreesql"
     ],
-    "link": "https://newcashsir.syahendra.com/"
+    "link": "https://cashier.my.id/"
   },
     {
       "title": "Insira",
@@ -35,25 +35,9 @@
       "technology": "ExpressJS"
     },
     {
-      "title": "Auth",
-      "descriptionKey": "project.auth",
-      "link": "https://auth.syahendra.com/docs",
-      "technology": "ExpressJS & mongodb"
-    },
-    {
       "title": "Adonara Dashboard",
       "descriptionKey": "project.adonara_dashboard",
       "technology": "Nuxt 3"
-    },
-    {
-      "title": "Landing Privy",
-      "descriptionKey": "project.landing_privy",
-      "technology": "Nuxt 3"
-    },
-    {
-      "title": "CIMB Octo Saver",
-      "descriptionKey": "project.octo",
-      "technology": "Nuxt 2"
     },
     {
       "title": "CIMB Credit Card and Personal Loan",
@@ -64,11 +48,6 @@
       "title": "App Tele Privy",
       "descriptionKey": "project.App_tele_privy",
       "technology": "Next"
-    },
-    {
-      "title": "Ronin Dashboard",
-      "descriptionKey": "project.ronin",
-      "technology": "Nuxt 3"
     },
     {
       "title": "BNI Regsand",
