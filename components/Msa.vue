@@ -1379,8 +1379,7 @@ const isActiveLink = (id: string) => activeSection.value === id
           {{ locale === 'id' ? 'Membuat PDF...' : 'Generating PDF...' }}
         </p>
         <p class="text-sm text-slate-400 mt-2">
-          {{ locale === 'id' ? 'Mohon tunggu sebentar, dokumen sedang disiapkan.' : 'Please wait while we prepare your
-          document.' }}
+          {{ locale === 'id' ? 'Mohon tunggu sebentar, dokumen sedang disiapkan.' : 'Please wait while we prepare your document.' }}
         </p>
       </div>
     </div>
