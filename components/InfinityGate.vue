@@ -376,7 +376,7 @@ onUnmounted(() => {
     <main class="relative z-10">
 
       <!-- ═══ Hero: The Gate ═══ -->
-      <section class="min-h-screen flex items-center px-6 md:px-16 relative">
+      <section class="min-h-screen flex items-center px-6 md:px-16 pt-28 lg:pt-0 relative">
         <div class="absolute inset-0 bg-gradient-to-b from-[#0d0603]/30 via-transparent to-[#0d0603] pointer-events-none"></div>
         <div class="max-w-[1400px] mx-auto w-full relative z-10">
           <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] items-center gap-14 lg:gap-10">
