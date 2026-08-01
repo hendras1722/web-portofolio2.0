@@ -1,7 +1,7 @@
 <template>
   <div ref="containerRef" class="fixed inset-0 -z-10 pointer-events-none overflow-hidden bg-[#080402]" />
 
-  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 pointer-events-auto">
+  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 pointer-events-auto flex items-center gap-3">
     <UButton
       :icon="cameraIcon"
       color="gray"
@@ -12,6 +12,17 @@
     >
       <span class="text-amber-100 text-sm">{{ cameraLabel }}</span>
     </UButton>
+
+    <UButton
+      icon="i-heroicons-sparkles"
+      color="gray"
+      variant="solid"
+      size="lg"
+      class="!bg-black/60 !backdrop-blur-md !border !border-amber-500/30 !rounded-full !px-5 !py-3 hover:!border-amber-400/70 transition-colors"
+      @click="$emit('replay-intro')"
+    >
+      <span class="text-amber-100 text-sm">Intro</span>
+    </UButton>
   </div>
 </template>
 
@@ -19,6 +30,8 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+
+defineEmits<{ 'replay-intro': [] }>()
 
 type CameraMode = 0 | 1 | 2
 

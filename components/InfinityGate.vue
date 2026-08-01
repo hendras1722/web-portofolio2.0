@@ -6,6 +6,8 @@ import heroPortrait from '~/assets/1783823457317.png'
 
 const { locale, locales, t } = useI18n()
 
+defineEmits<{ 'replay-intro': [] }>()
+
 // ─── SEO ──────────────────────────────────────────────────────────
 useHead({
   title: 'Muh Syahendra — Frontend Engineer | Portfolio',
@@ -296,7 +298,7 @@ onUnmounted(() => {
   <div class="relative min-h-screen text-[#e8dcc8] font-geist antialiased overflow-x-clip selection:bg-[#ff8a2e] selection:text-[#1a0c05]">
 
     <!-- ═══ Infinity Castle background ═══ -->
-    <InfiniteCastle />
+    <InfiniteCastle @replay-intro="$emit('replay-intro')" />
 
     <!-- ═══ Scroll progress ═══ -->
     <div class="fixed top-0 left-0 w-full h-[2px] z-[100]">
