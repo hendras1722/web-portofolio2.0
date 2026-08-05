@@ -1038,7 +1038,7 @@ const isActiveLink = (id: string) => activeSection.value === id
             </p>
           </div>
 
-          <div class="grid gap-6" :class="connectedTabsCount > 0 ? 'grid-cols-2' : 'grid-cols-1 md:grid-cols-2'">
+          <div class="grid gap-6" :class="connectedTabsCount > 0 ? 'grid-cols-3' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'">
             <!-- Auth Dummy Card -->
             <a href="https://auth.syahendra.com/docs/" target="_blank" rel="noopener noreferrer"
               class="api-card group block relative overflow-hidden rounded-2xl border border-[#3b494b]/15 bg-gradient-to-br from-[#1a1b1b]/30 to-[#121414]/50 p-8 md:p-10 hover:border-[#00f0ff]/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,240,255,0.06)]">
@@ -1154,6 +1154,67 @@ const isActiveLink = (id: string) => activeSection.value === id
                   <div
                     class="flex items-center text-[#b9cacb]/50 group-hover:text-[#e3e2e2] font-geist text-xs uppercase tracking-widest font-bold transition-all duration-300">
                     Visit
+                    <UIcon name="i-heroicons-arrow-right-20-solid"
+                      class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <!-- Regions API Card -->
+            <a href="https://github.com/hendras1722/Api-Wilayah-Regional-Indonesia" target="_blank" rel="noopener noreferrer"
+              class="api-card group block relative overflow-hidden rounded-2xl border border-[#3b494b]/15 bg-gradient-to-br from-[#1a1b1b]/30 to-[#121414]/50 p-8 md:p-10 hover:border-[#00f0ff]/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,240,255,0.06)]">
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-[#00f0ff]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              </div>
+              <div
+                class="absolute -top-20 -left-20 w-[300px] h-[300px] bg-[#00f0ff]/3 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              </div>
+
+              <div class="relative z-10 flex flex-col h-full justify-between gap-8">
+                <div>
+                  <div class="flex items-center justify-between gap-3 mb-8">
+                    <span
+                      class="px-3 py-1.5 bg-[#0a0b0b]/80 border border-[#3b494b]/20 rounded-lg font-geist text-[9px] text-[#b9cacb] uppercase tracking-[0.15em] font-semibold">
+                      <span class="flex items-center gap-1.5">
+                        <span
+                          class="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse shadow-[0_0_6px_rgba(0,240,255,0.6)]"></span>
+                        Regional Service
+                      </span>
+                    </span>
+                    <span
+                      class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00f0ff]/5 border border-[#00f0ff]/10 text-[10px] font-geist text-[#00f0ff] font-semibold">
+                      <span
+                        class="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-pulse shadow-[0_0_6px_rgba(0,240,255,0.6)]"></span>
+                      GitHub
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-4 mb-5">
+                    <div
+                      class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00f0ff]/10 to-[#00f0ff]/5 flex items-center justify-center border border-[#00f0ff]/10 group-hover:border-[#00f0ff]/20 group-hover:bg-[#00f0ff]/15 transition-all duration-300">
+                      <UIcon name="i-heroicons-map" class="w-6 h-6 text-[#00f0ff]" />
+                    </div>
+                    <div>
+                      <h4 :class="connectedTabsCount > 0 ? 'text-2xl' : 'text-xl md:text-2xl'"
+                        class="font-hanken text-[#e3e2e2] group-hover:text-[#00f0ff] transition-colors duration-300 font-bold leading-snug">
+                        Regions API
+                      </h4>
+                      <p class="text-[10px] font-geist text-[#b9cacb]/40 uppercase tracking-wider font-medium mt-0.5">
+                        REST API • Indonesia • Regional Data</p>
+                    </div>
+                  </div>
+                  <p class="text-sm font-geist text-[#b9cacb]/70 leading-relaxed font-light">
+                    {{ $t('api_public_regions_desc') }}
+                  </p>
+                </div>
+                <div class="flex items-center justify-between pt-2 border-t border-[#3b494b]/10">
+                  <div class="flex items-center gap-2 text-[#b9cacb]/60 text-[10px] font-geist font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500/60"></span>
+                    {{ $t('api_public_doc') }}
+                  </div>
+                  <div
+                    class="flex items-center text-[#b9cacb]/50 group-hover:text-[#e3e2e2] font-geist text-xs uppercase tracking-widest font-bold transition-all duration-300">
+                    Docs
                     <UIcon name="i-heroicons-arrow-right-20-solid"
                       class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                   </div>

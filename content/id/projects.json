@@ -50,6 +50,15 @@
     "link": "https://provider.syahendra.com"
   },
   {
+    "title": "API Wilayah Indonesia",
+    "description": "project.regions",
+    "technologies": [
+      "Go",
+      "REST API"
+    ],
+    "link": "https://github.com/hendras1722/Api-Wilayah-Regional-Indonesia"
+  },
+  {
     "title": "Auth",
     "description": "project.auth",
     "technologies": [

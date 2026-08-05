@@ -583,7 +583,7 @@ onUnmounted(() => {
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <a href="https://auth.syahendra.com/docs/" target="_blank" rel="noopener noreferrer" class="artifact-card group">
               <div class="relative z-10 flex flex-col h-full justify-between gap-8">
                 <div>
@@ -656,6 +656,45 @@ onUnmounted(() => {
                   </div>
                   <div class="flex items-center text-[#cbb99e]/50 group-hover:text-[#f2e4cf] font-geist text-xs uppercase tracking-widest font-bold transition-all duration-300">
                     Visit
+                    <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="https://github.com/hendras1722/Api-Wilayah-Regional-Indonesia" target="_blank" rel="noopener noreferrer" class="artifact-card group">
+              <div class="relative z-10 flex flex-col h-full justify-between gap-8">
+                <div>
+                  <div class="flex items-center justify-between gap-3 mb-8">
+                    <span class="px-3 py-1.5 bg-[#0d0603]/80 border border-[#3a2412] rounded-lg font-geist text-[9px] text-[#cbb99e] uppercase tracking-[0.15em] font-semibold">
+                      <span class="flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#ffb257] animate-pulse"></span>
+                        Regional Service
+                      </span>
+                    </span>
+                    <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#ff8a2e]/10 border border-[#ff8a2e]/20 text-[10px] font-geist text-[#ffb257] font-semibold">
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#ff8a2e] animate-pulse"></span>
+                      GitHub
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-4 mb-5">
+                    <div class="w-14 h-14 rounded-2xl bg-[#ffb257]/10 flex items-center justify-center border border-[#ffb257]/15 group-hover:bg-[#ffb257]/15 transition-all duration-300">
+                      <UIcon name="i-heroicons-map" class="w-6 h-6 text-[#ffb257]" />
+                    </div>
+                    <div>
+                      <h4 class="font-hanken text-[#f2e4cf] group-hover:text-[#ffb257] transition-colors duration-300 font-bold leading-snug text-xl md:text-2xl">Regions API</h4>
+                      <p class="text-[10px] font-geist text-[#cbb99e]/40 uppercase tracking-wider font-medium mt-0.5">REST API • Indonesia • Regional Data</p>
+                    </div>
+                  </div>
+                  <p class="text-sm font-geist text-[#cbb99e]/70 leading-relaxed font-light">{{ $t('api_public_regions_desc') }}</p>
+                </div>
+                <div class="flex items-center justify-between pt-2 border-t border-[#3a2412]">
+                  <div class="flex items-center gap-2 text-[#cbb99e]/60 text-[10px] font-geist font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500/60"></span>
+                    {{ $t('api_public_doc') }}
+                  </div>
+                  <div class="flex items-center text-[#cbb99e]/50 group-hover:text-[#f2e4cf] font-geist text-xs uppercase tracking-widest font-bold transition-all duration-300">
+                    Docs
                     <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                   </div>
                 </div>

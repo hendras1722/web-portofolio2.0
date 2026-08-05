@@ -48,6 +48,7 @@
     "api_public_subtitle": "Explore my collection of publicly available services and APIs.",
     "api_public_auth_desc": "A dummy authentication service built for developers. Safe testing of OAuth endpoints, JWT token verification, and session management flow simulations.",
     "api_public_provider_desc": "A high-performance utility API to check telecommunication provider numbers, prefixes, and cellular routing formats globally.",
+    "api_public_regions_desc": "A public REST API providing comprehensive administrative division data of Indonesia, including provinces, regencies, districts, and villages.",
     "api_public_doc": "API Documentation",
     "api_public_visit": "Visit Service",
     "live_projects": {
@@ -247,6 +248,7 @@
     "api_public_subtitle": "Jelajahi koleksi layanan dan API yang tersedia secara publik.",
     "api_public_auth_desc": "Layanan autentikasi dummy yang dibuat untuk developer. Uji coba endpoint OAuth, verifikasi token JWT, dan simulasi manajemen sesi secara aman.",
     "api_public_provider_desc": "API utilitas berkinerja tinggi untuk memeriksa nomor penyedia telekomunikasi, awalan (prefix), dan format perutean seluler secara global.",
+    "api_public_regions_desc": "API REST publik yang menyediakan data wilayah administrasi Indonesia secara lengkap, mencakup provinsi, kabupaten/kota, kecamatan, dan desa/kelurahan.",
     "api_public_doc": "Dokumentasi API",
     "api_public_visit": "Kunjungi Layanan",
     "live_projects": {
