@@ -7,7 +7,7 @@
       color="gray"
       variant="solid"
       size="lg"
-      class="!bg-black/60 !backdrop-blur-md !border !border-amber-500/30 !rounded-full !px-5 !py-3 hover:!border-amber-400/70 transition-colors"
+      class="!bg-black/60 text-white !backdrop-blur-md !border !border-amber-500/30 !rounded-full !px-5 !py-3 hover:!border-amber-400/70 transition-colors"
       @click="cycleCamera"
     >
       <span class="text-amber-100 text-sm">{{ cameraLabel }}</span>
@@ -18,7 +18,7 @@
       color="gray"
       variant="solid"
       size="lg"
-      class="!bg-black/60 !backdrop-blur-md !border !border-amber-500/30 !rounded-full !px-5 !py-3 hover:!border-amber-400/70 transition-colors"
+      class="!bg-black/60 text-white !backdrop-blur-md !border !border-amber-500/30 !rounded-full !px-5 !py-3 hover:!border-amber-400/70 transition-colors"
       @click="$emit('replay-intro')"
     >
       <span class="text-amber-100 text-sm">Intro</span>
