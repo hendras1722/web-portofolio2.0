@@ -573,8 +573,8 @@ function flashOverlay(): void {
   )
 }
 
-/* ---------------- real castle (gltf keep) ---------------- */
-const CASTLE_ASSET_URLS = import.meta.glob('../assets/japanese_castle/**/*', {
+/* ---------------- real castle (glb) ---------------- */
+const CASTLE_ASSET_URLS = import.meta.glob('../assets/japanese_castle_glb/**/*', {
   eager: true,
   query: '?url',
   import: 'default',
@@ -600,23 +600,16 @@ function trackMeshForDisposal(mesh: THREE.Mesh): void {
 }
 
 async function loadRealCastle(): Promise<void> {
-  const sceneUrl = resolveCastleAssetUrl('scene.gltf')
-  const binUrl = resolveCastleAssetUrl('scene.bin')
-  if (!sceneUrl || !binUrl) return
+  const sceneUrl = resolveCastleAssetUrl('scene.glb')
+  if (!sceneUrl) return
 
   try {
-    const gltfJson = await (await fetch(sceneUrl)).json()
-    gltfJson.buffers[0].uri = binUrl
-    gltfJson.images?.forEach((img: { uri: string }) => {
-      const filename = img.uri.split('/').pop()
-      if (!filename) return
-      const url = resolveCastleAssetUrl(filename)
-      if (url) img.uri = url
-    })
-
     const loader = new GLTFLoader()
-    loader.parse(JSON.stringify(gltfJson), '', (gltf) => {
+    loader.load(sceneUrl, (gltf) => {
       const model = gltf.scene
+
+      const voidFloor = model.getObjectByName('void_floor')
+      if (voidFloor) voidFloor.removeFromParent()
 
       const box = new THREE.Box3().setFromObject(model)
       const size = new THREE.Vector3()
@@ -635,15 +628,25 @@ async function loadRealCastle(): Promise<void> {
 
       const group = new THREE.Group()
       group.add(model)
-      group.position.set(0, -25, -170)
+      group.position.set(0, -25, -260)
+
+      const REAL_CASTLE_PALETTE = [0x2b1a12, 0x120d0a, 0x6b3a22, 0xffb257, 0x3d2415, 0x1a120a, 0x8a4a20, 0xff6236]
 
       const materials: THREE.Material[] = []
+      let paletteIndex = 0
       group.traverse((child) => {
         if (!(child as THREE.Mesh).isMesh) return
         const mesh = child as THREE.Mesh
         trackMeshForDisposal(mesh)
         const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material]
         mats.forEach((mat) => {
+          const stdMat = mat as THREE.MeshStandardMaterial
+          if (stdMat.color) {
+            stdMat.color.set(REAL_CASTLE_PALETTE[paletteIndex % REAL_CASTLE_PALETTE.length])
+            paletteIndex++
+          }
+          if ('roughness' in stdMat) stdMat.roughness = 0.7
+          if ('metalness' in stdMat) stdMat.metalness = 0.1
           mat.transparent = true
           mat.opacity = 0
           materials.push(mat)
@@ -655,10 +658,10 @@ async function loadRealCastle(): Promise<void> {
       realCastleGroup = group
       scene.add(group)
 
-      const keepLight = new THREE.PointLight(0xffb257, 4, 420, 2)
-      keepLight.position.set(40, 90, -110)
+      const keepLight = new THREE.PointLight(0xffb257, 6, 500, 2)
+      keepLight.position.set(40, 100, -230)
       scene.add(keepLight)
-    }, (err) => {
+    }, undefined, (err) => {
       console.error('[InfiniteCastle] failed to parse real castle model', err)
     })
   } catch (err) {
