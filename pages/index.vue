@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { LazyInfinityGate } from '#components';
 import { ref } from 'vue';
-// import Msa from '~/components/Msa.vue';
 import InfinityGate from '~/components/InfinityGate.vue';
+// import Msa from '~/components/Msa.vue';
 import LoadingSplash from '~/components/LoadingSplash.vue';
 
 const introFinished = ref(false);
