@@ -133,7 +133,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-12-23',
 
   nitro: {
-    preset: "vercel-edge"
+    preset: "vercel"
   },
 
   vite: {
