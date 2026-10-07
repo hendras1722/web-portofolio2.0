@@ -213,8 +213,9 @@ useHead({
 const route = useRoute()
 const router = useRouter()
 
-if (route.query.locale) {
-  locale.value = route.query.locale
+const requestedLocale = route.query.locale
+if (requestedLocale === 'en' || requestedLocale === 'id') {
+  locale.value = requestedLocale
 }
 
 const work = computed(() => tm('cv.workExperiences', { returnObjects: true }))
@@ -322,11 +323,11 @@ async function generatePDF() {
 
       const rect = targetBlock.getBoundingClientRect()
       const containerRect = element.getBoundingClientRect()
-      
+
       const blockTop = rect.top - containerRect.top
       const blockHeight = rect.height
       const blockBottom = blockTop + blockHeight
-      
+
       // We only push if it fits inside a single page
       if (blockHeight >= maxPrintableHeight) {
         return
@@ -338,7 +339,7 @@ async function generatePDF() {
         const pageEnd = p * pageHeight
         const printableEnd = pageEnd - bottomMargin
         const nextPrintableStart = pageEnd + topMargin
-        
+
         if (blockTop < nextPrintableStart && blockBottom > printableEnd) {
           crossPage = p
           break
@@ -348,7 +349,7 @@ async function generatePDF() {
       if (crossPage > 0) {
         const targetPageEnd = crossPage * pageHeight
         const spacerHeight = (targetPageEnd + topMargin) - blockTop
-        
+
         console.log(`[PDF Sizing] PUSHING element: ${targetBlock.className || targetBlock.tagName} | top: ${Math.round(blockTop)} | height: ${Math.round(blockHeight)} | bottom: ${Math.round(blockBottom)} | page: ${crossPage} | spacer: ${Math.round(spacerHeight)}`)
 
         const isLi = targetBlock.tagName.toLowerCase() === 'li'
@@ -361,12 +362,12 @@ async function generatePDF() {
         if (isLi) {
           spacer.style.listStyleType = 'none'
         }
-        
+
         targetBlock.parentNode.insertBefore(spacer, targetBlock)
         insertedSpacers.push(spacer)
-        
+
         targetBlock.dataset.pdfPushed = 'true'
-        
+
         // Log the new top position after reflow
         const newRect = targetBlock.getBoundingClientRect()
         const newBlockTop = newRect.top - element.getBoundingClientRect().top

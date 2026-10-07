@@ -30,7 +30,7 @@
     "@vite-pwa/nuxt": "^0.8.0",
     "@vue/server-renderer": "^3.5.32",
     "@vue/test-utils": "^2.4.6",
-    "nuxt": "^4.5.2",
+    "nuxt": "^4.6.0",
     "playwright": "^1.59.1",
     "sass": "^1.71.1",
     "sharp": "^0.33.4",

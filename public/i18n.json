@@ -39,6 +39,42 @@
     "lets_build_something": "Let's build something.",
     "available_for_opportunities": "Available for interesting opportunities.",
     "copyright": "© 2026 Muh Syahendra. Engineered for performance.",
+    "portfolio": {
+      "seo_title": "Muh Syahendra Anindyantoro — Frontend Engineer",
+      "seo_description": "Muh Syahendra Anindyantoro is a frontend engineer with 6 years of experience building web interfaces with React and Vue.",
+      "language_label": "Choose language",
+      "loading_label": "Loading portfolio",
+      "signature_label": "MSA signature",
+      "home_label": "Muh Syahendra Anindyantoro, home",
+      "role_frontend": "Frontend Developer",
+      "role_software": "Software Engineer",
+      "greeting": "Hello, I’m",
+      "introduction": "Frontend engineer with 6 years of experience building web interfaces with React and Vue. My work spans digital identity, point-of-sale, and business workflow products.",
+      "download_cv": "Download CV",
+      "work_title": "Projects",
+      "cashier_description": "Point-of-sale app for everyday cashier operations, built with Vue 3 and Nuxt.",
+      "insira_description": "Cemetery services platform with separate apps for staff, clients, and administrators.",
+      "tpm_description": "Trade promotion management app covering annual budgets and approval workflows.",
+      "experience_title": "Experience",
+      "insira_period": "2026",
+      "insira_experience": "Building web applications for cemetery operations and customer services.",
+      "panglima_experience": "Developed product interfaces with Next.js, shadcn/ui, and TypeScript.",
+      "geek_garden_experience": "Maintained Scyllax trade promotion management and delivered budgeting and approval modules.",
+      "privy_experience": "Built and maintained enterprise digital identity products and financial services applications.",
+      "nastha_experience": "Developed licensing and manifest modules for Indonesia’s customs platform.",
+      "contact_title": "Send me a note",
+      "contact_copy": "For frontend roles or project enquiries, email me.",
+      "articles_title": "Latest articles",
+      "all_articles": "All articles",
+      "archive_title": "Technical notes",
+      "archive_description": "Notes and tutorials on frontend development, JavaScript, and the tools I use.",
+      "article_count": "{count} articles",
+      "technologies": "Technologies",
+      "back_to_stories": "Back to stories",
+      "journal_label": "Journal",
+      "article_label": "Article",
+      "back_to_articles": "Back to all articles"
+    },
     "crosstab_active": "Cross-Tab Link Active",
     "crosstab_sync": "Sync: {count} Tabs Active",
     "crosstab_desc_active": "Open this page in a separate window/monitor to experience real-time cross-tab canvas sync.",
@@ -91,12 +127,7 @@
           "company": "Insira (Ex Panglima Propertindo)",
           "type": "Contract",
           "desc": "Developed the Insira funeral booking ecosystem, managing and developing three separate applications: Petugas (Staff), Client, and the core Insira platform.",
-          "stackUsed": [
-            "Next.js",
-            "Nuxt 4",
-            "Tailwind CSS",
-            "TypeScript"
-          ],
+          "stackUsed": ["Next.js", "Nuxt 4", "Tailwind CSS", "TypeScript"],
           "project": {
             "title": "",
             "paragraph": "Built and managed Petugas, Insira, and Client Insira applications_Implemented interactive layouts and maps API integration_Optimized state management and query performance across apps."
@@ -109,12 +140,7 @@
           "company": "Panglima Propertindo",
           "type": "Contract",
           "desc": "Developing a funeral booking app called the Insira app. Develop apps.",
-          "stackUsed": [
-            "Next 15 & 16",
-            "Github",
-            "Shadcn UI",
-            "Lark"
-          ],
+          "stackUsed": ["Next 15 & 16", "Github", "Shadcn UI", "Lark"],
           "project": {
             "title": "",
             "paragraph": "Implemented UI/UX designs_built new features_fixed existing bugs."
@@ -127,13 +153,7 @@
           "company": "Geek Garden",
           "type": "Contract",
           "desc": "Developed the Scyllax TPM (Trade Promotion Management) App using Vue 3, worked on the Annual Budget and Approval Schema modules",
-          "stackUsed": [
-            "Vue 3",
-            "Gitlab",
-            "Tailwind CSS",
-            "Pinia",
-            "Jira"
-          ],
+          "stackUsed": ["Vue 3", "Gitlab", "Tailwind CSS", "Pinia", "Jira"],
           "project": {
             "title": "",
             "paragraph": "Implemented UI/UX designs_built new features_fixed existing bugs."
@@ -239,6 +259,42 @@
     "lets_build_something": "Mari bangun sesuatu.",
     "available_for_opportunities": "Tersedia untuk peluang menarik.",
     "copyright": "© 2026 Muh Syahendra. Didesain untuk performa.",
+    "portfolio": {
+      "seo_title": "Muh Syahendra Anindyantoro — Frontend Engineer",
+      "seo_description": "Muh Syahendra Anindyantoro adalah frontend engineer dengan 6 tahun pengalaman membangun antarmuka web menggunakan React dan Vue.",
+      "language_label": "Pilih bahasa",
+      "loading_label": "Memuat portofolio",
+      "signature_label": "Tanda tangan MSA",
+      "home_label": "Muh Syahendra Anindyantoro, beranda",
+      "role_frontend": "Pengembang frontend",
+      "role_software": "Insinyur perangkat lunak",
+      "greeting": "Halo, saya",
+      "introduction": "Frontend engineer dengan 6 tahun pengalaman membangun antarmuka web menggunakan React dan Vue. Pengalaman saya mencakup produk identitas digital, point of sale, dan alur kerja bisnis.",
+      "download_cv": "Unduh CV",
+      "work_title": "Proyek",
+      "cashier_description": "Aplikasi kasir untuk operasional harian, dibangun dengan Vue 3 dan Nuxt.",
+      "insira_description": "Platform layanan pemakaman dengan aplikasi terpisah untuk petugas, klien, dan administrator.",
+      "tpm_description": "Aplikasi manajemen promosi dagang dengan modul anggaran tahunan dan alur persetujuan.",
+      "experience_title": "Pengalaman",
+      "insira_period": "2026",
+      "insira_experience": "Membangun aplikasi web untuk operasional pemakaman dan layanan pelanggan.",
+      "panglima_experience": "Mengembangkan antarmuka produk menggunakan Next.js, shadcn/ui, dan TypeScript.",
+      "geek_garden_experience": "Memelihara sistem manajemen promosi Scyllax serta mengembangkan modul anggaran dan persetujuan.",
+      "privy_experience": "Membangun dan memelihara produk identitas digital perusahaan serta aplikasi layanan finansial.",
+      "nastha_experience": "Mengembangkan modul perizinan dan manifes untuk platform kepabeanan Indonesia.",
+      "contact_title": "Kirim pesan",
+      "contact_copy": "Untuk kesempatan kerja di bidang frontend atau pertanyaan tentang proyek, silakan kirim email.",
+      "articles_title": "Artikel terbaru",
+      "all_articles": "Semua artikel",
+      "archive_title": "Catatan teknis",
+      "archive_description": "Catatan dan tutorial tentang pengembangan frontend, JavaScript, dan alat yang saya gunakan.",
+      "article_count": "{count} artikel",
+      "technologies": "Teknologi",
+      "back_to_stories": "Kembali ke tulisan",
+      "journal_label": "Jurnal",
+      "article_label": "Artikel",
+      "back_to_articles": "Kembali ke semua artikel"
+    },
     "crosstab_active": "Link Lintas-Tab Aktif",
     "crosstab_sync": "Sinkronisasi: {count} Tab Aktif",
     "crosstab_desc_active": "Buka halaman ini di jendela/monitor terpisah untuk merasakan sinkronisasi kanvas lintas-tab secara real-time.",
@@ -291,12 +347,7 @@
           "company": "Insira (Ex Panglima Propertindo)",
           "type": "Contract",
           "desc": "Mengembangkan ekosistem aplikasi pemakaman Insira, mengelola dan mengembangkan tiga aplikasi terpisah: Petugas, Client, dan platform utama Insira.",
-          "stackUsed": [
-            "Next.js",
-            "Nuxt 4",
-            "Tailwind CSS",
-            "TypeScript"
-          ],
+          "stackUsed": ["Next.js", "Nuxt 4", "Tailwind CSS", "TypeScript"],
           "project": {
             "title": "",
             "paragraph": "Membangun dan mengelola aplikasi Petugas, Insira, dan Client Insira_Mengimplementasikan layout interaktif dan integrasi maps API_Mengoptimalkan manajemen state dan performa query di seluruh aplikasi."
@@ -309,12 +360,7 @@
           "company": "Panglima Propertindo",
           "type": "Contract",
           "desc": "Develop apps pemesanan pemakaman bernama apps insira",
-          "stackUsed": [
-            "Next 15 & 16",
-            "Github",
-            "Shadcn UI",
-            "Lark"
-          ],
+          "stackUsed": ["Next 15 & 16", "Github", "Shadcn UI", "Lark"],
           "project": {
             "title": "",
             "paragraph": "Mengimplementasikan desain dari UI/UX_mengembangkan fitur-fitur baru_memperbaiki bug yang ada."
@@ -327,13 +373,7 @@
           "company": "Geek Garden",
           "type": "Kontrak",
           "desc": "Mengembangkan Apps Scyllax TPM (Trade Promotion Management) dengan Vue 3, Mengerjakan module Annual Budget dan Approval Schema",
-          "stackUsed": [
-            "Vue 3",
-            "Gitlab",
-            "Tailwind CSS",
-            "Pinia",
-            "Jira"
-          ],
+          "stackUsed": ["Vue 3", "Gitlab", "Tailwind CSS", "Pinia", "Jira"],
           "project": {
             "title": "",
             "paragraph": "Mengimplementasikan desain dari UI/UX_mengembangkan fitur-fitur baru_memperbaiki bug yang ada."

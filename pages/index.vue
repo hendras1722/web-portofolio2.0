@@ -1,22 +1,7 @@
 <script setup lang="ts">
-import { LazyInfinityGate } from '#components';
-import { ref } from 'vue';
-import InfinityGate from '~/components/InfinityGate.vue';
-// import Msa from '~/components/Msa.vue';
-import LoadingSplash from '~/components/LoadingSplash.vue';
-
-const introFinished = ref(false);
-
-function replayIntro(): void {
-  if (process.client) {
-    try { sessionStorage.removeItem('msa-intro-played') } catch { /* storage unavailable, ignore */ }
-  }
-  introFinished.value = false;
-}
+import PortfolioPage from '~/components/PortfolioPage.vue'
 </script>
 
 <template>
-  <!-- <Msa /> -->
-  <LoadingSplash v-if="!introFinished" @finished="introFinished = true" />
-  <InfinityGate @replay-intro="replayIntro" />
+  <PortfolioPage />
 </template>
