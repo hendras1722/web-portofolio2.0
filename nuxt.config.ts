@@ -124,7 +124,8 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: { lang: 'en' },
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico?v=msa-signature-3' },
+        { rel: 'icon', type: 'image/svg+xml', sizes: 'any', href: '/favicon.svg?v=msa-signature-4' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/icons/icon-192x192.png' },
       ],
     },

@@ -6,17 +6,11 @@ import PortfolioOrganismContact from '~/components/PortfolioOrganismContact.vue'
 import PortfolioOrganismExperience from '~/components/PortfolioOrganismExperience.vue'
 import PortfolioOrganismIntroduction from '~/components/PortfolioOrganismIntroduction.vue'
 import PortfolioOrganismNavigation from '~/components/PortfolioOrganismNavigation.vue'
-import PortfolioOrganismSignatureSplash from '~/components/PortfolioOrganismSignatureSplash.vue'
 import PortfolioOrganismWork from '~/components/PortfolioOrganismWork.vue'
 
 const { t, locale } = useI18n()
 const pageTitle = computed(() => t('portfolio.seo_title'))
 const pageDescription = computed(() => t('portfolio.seo_description'))
-const showSignatureSplash = ref(false)
-
-onMounted(() => {
-  showSignatureSplash.value = true
-})
 
 useHead({
   htmlAttrs: { lang: computed(() => locale.value) },
@@ -29,11 +23,7 @@ useHead({
 </script>
 
 <template>
-  <PortfolioOrganismSignatureSplash
-    v-if="showSignatureSplash"
-    @finished="showSignatureSplash = false"
-  />
-  <main id="portfolio" class="portfolio-shell" :inert="showSignatureSplash">
+  <main id="portfolio" class="portfolio-shell">
     <div class="portfolio">
       <PortfolioOrganismNavigation />
       <PortfolioOrganismIntroduction />
