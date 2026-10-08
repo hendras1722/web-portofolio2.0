@@ -15,8 +15,14 @@ export default defineEventHandler(async (event) => {
   }
 
   function parseJwt(token: string) {
-    var base64Url = token.split('.')[1]
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+    const base64Url = token.split('.')[1]
+    if (!base64Url) {
+      throw createError({
+        statusCode: 403,
+        message: 'Forbidden Access',
+      })
+    }
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
     var jsonPayload = decodeURIComponent(
       atob(base64)
         .split('')

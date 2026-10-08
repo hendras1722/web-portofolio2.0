@@ -43,7 +43,10 @@ export default defineNuxtConfig({
     // mode: 'development',
     strategies: 'generateSW',
     registerType: 'autoUpdate',
-
+    workbox: {
+      skipWaiting: false,
+      clientsClaim: false
+    },
     manifest: {
       name: 'Muh Syahendra — Frontend Engineer',
       short_name: 'MSA',
@@ -77,9 +80,13 @@ export default defineNuxtConfig({
       ],
     },
     pwaAssets: {
-      config: true,
-      preset: 'transparent',
-      imagesDir: 'public', // Assuming favicon.ico is in the public directory
+      config: false,
+      preset: {
+        transparent: { sizes: [64, 192, 512] },
+        maskable: { sizes: [512] },
+        apple: { sizes: [180] },
+      },
+      image: 'public/favicon.svg',
     },
     // workbox: {
     //   globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
@@ -103,9 +110,9 @@ export default defineNuxtConfig({
     },
   },
 
-  ui: {
-    icons: ['ic'],
-  },
+  // ui: {
+  //   icons: ['ic'],
+  // },
 
   supabase: {
     // Options

@@ -1,5 +1,26 @@
 import { Typed } from './typed.ts';
-import { BehaviorSubject } from 'rxjs';
+
+class BehaviorSubject<T> {
+  private readonly observers = new Set<(value: T) => void>();
+  private value: T;
+
+  constructor(value: T) {
+    this.value = value;
+  }
+
+  public next(value: T): void {
+    this.value = value;
+    for (const observer of this.observers) {
+      observer(value);
+    }
+  }
+
+  public subscribe(observer: (value: T) => void): { unsubscribe: () => void } {
+    observer(this.value);
+    this.observers.add(observer);
+    return { unsubscribe: () => this.observers.delete(observer) };
+  }
+}
 
 const typedFac = Typed.factory({
   setUp: () => new BehaviorSubject(''),

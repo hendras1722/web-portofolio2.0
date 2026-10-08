@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'bun:test';
-import { mountSuspense } from '@nuxt/test-utils/runtime';
+import { mount } from '@vue/test-utils';
 import IndexPage from '~/pages/index.vue';
 
 // Mocking necessary modules and components
@@ -55,39 +55,35 @@ vi.mock('~/components/PdfDownloadButton.vue', () => ({
 }));
 
 // Mock useAsyncData to return mock data
-vi.mock('#app', async (importOriginal) => {
-  const original = await importOriginal();
-  return {
-    ...original,
-    useAsyncData: vi.fn().mockImplementation(() => ({
-      data: {
-        value: {
-          profile: {
-            name: 'Mock Name',
-            title: 'Software Engineer',
-            bio: 'Mock bio text.',
-            email: 'mock@example.com',
-            phone: '+1234567890',
-            location: 'Mock Location',
-            linkedin: 'http://mock.linkedin.com',
-            github: 'http://mock.github.com',
-            image: '/mock-avatar.png'
-          },
-          skills: { body: [{ name: 'Vue', proficiency: 'Advanced' }] },
-          experience: [{ company: 'Mock Company', title: 'Developer', dates: '2023-2024', description: 'Mock experience.' }],
-          projects: [{ title: 'Mock Project', description: 'Mock description', technologies: ['Vue'], link: '#' }]
-        }
-      },
-      pending: { value: false },
-      error: { value: null }
-    }))
-  };
-});
+vi.mock('#app', () => ({
+  useAsyncData: vi.fn(() => ({
+    data: {
+      value: {
+        profile: {
+          name: 'Mock Name',
+          title: 'Software Engineer',
+          bio: 'Mock bio text.',
+          email: 'mock@example.com',
+          phone: '+1234567890',
+          location: 'Mock Location',
+          linkedin: 'http://mock.linkedin.com',
+          github: 'http://mock.github.com',
+          image: '/mock-avatar.png'
+        },
+        skills: { body: [{ name: 'Vue', proficiency: 'Advanced' }] },
+        experience: [{ company: 'Mock Company', title: 'Developer', dates: '2023-2024', description: 'Mock experience.' }],
+        projects: [{ title: 'Mock Project', description: 'Mock description', technologies: ['Vue'], link: '#' }]
+      }
+    },
+    pending: { value: false },
+    error: { value: null }
+  }))
+}));
 
 // Mock useI18n for translations
 vi.mock('vue-i18n', () => ({
   useI18n: () => ({
-    t: (key) => key, // Return the key itself as translation
+    t: (key: string) => key, // Return the key itself as translation
     locale: { value: 'en' }
   })
 }));
@@ -99,7 +95,7 @@ vi.mock('#head', () => ({
 
 describe('pages/index.vue', () => {
   it('renders the page with all sections', async () => {
-    const wrapper = await mountSuspense(IndexPage);
+    const wrapper = mount(IndexPage);
 
     // Check for core components
     expect(wrapper.findComponent({ name: 'AppHeader' }).exists()).toBe(true);

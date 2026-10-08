@@ -1,44 +1,33 @@
-import { describe, it, expect, beforeEach, vi } from 'bun:test';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'bun:test';
 import { mount } from '@vue/test-utils';
 import { createI18n } from 'vue-i18n';
+import type { VueWrapper } from '@vue/test-utils';
 
 // Import the page component
-import IndexPage from '../pages/index.vue';
+import IndexPage from '../../pages/index.vue';
 // Import the specific component if needed for more granular control, but page mount is usually enough for integration
-import ContactSection from '../components/ContactSection.vue';
+import ContactSection from '../../components/ContactSection.vue';
 
 // Mock translations
-import en from '../public/i18n.json';
-import id from '../public/i18n.json';
+import en from '../../public/i18n.json';
+import id from '../../public/i18n.json';
 
 // Mock Nuxt's useFetch and queryContent for isolation if necessary,
 // but for integration tests, we often rely on actual interactions.
 // Here, we'll mock the /api/mail endpoint call.
 
 // Mock useFetch globally
-vi.mock('#app', async (importOriginal) => {
-  const original = await importOriginal() as any;
-  return {
-    ...original,
-    useFetch: vi.fn((url, options) => {
-      if (url === '/api/mail') {
-        // Mock response for the mail API
-        return {
-          data: ref({ data: true }), // Simulate successful API response
-          error: ref(null),
-        };
-      }
-      // For other useFetch calls, use default behavior or mock further
-      return original.useFetch(url, options);
-    }),
-    // Mock other Nuxt composables if needed
-    useAsyncData: vi.fn((key, fetcher) => ({
-      data: ref({ profile: {}, skills: { body: [] }, experience: [], projects: [] }), // Mock data structure
-      pending: ref(false),
-      error: ref(null),
-    })),
-  };
-});
+vi.mock('#app', () => ({
+  useFetch: vi.fn((url: string) => ({
+    data: ref(url === '/api/mail' ? { data: true } : null),
+    error: ref(null),
+  })),
+  useAsyncData: vi.fn((_key: string, _fetcher: () => unknown) => ({
+    data: ref({ profile: {}, skills: { body: [] }, experience: [], projects: [] }),
+    pending: ref(false),
+    error: ref(null),
+  })),
+}));
 
 
 const i18n = createI18n({
@@ -50,7 +39,7 @@ const i18n = createI18n({
 });
 
 describe('Integration: Contact Form Submission', () => {
-  let wrapper;
+  let wrapper: VueWrapper;
 
   beforeEach(async () => {
     wrapper = mount(IndexPage, {
@@ -100,11 +89,10 @@ describe('Integration: Contact Form Submission', () => {
     expect(submitButton.props().loading).toBe(true);
 
     // Mock the useFetch to return success immediately for this test scenario
-    vi.spyOn(global, 'fetch').mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ data: true }),
-    });
-    
+    vi.spyOn(global, 'fetch').mockResolvedValueOnce(
+      new Response(JSON.stringify({ data: true }), { status: 200 }),
+    );
+
     // Wait for async operations to complete and notification to potentially appear
     // Need to ensure the mock is active before the API call happens.
     // The current mock structure might be problematic if the API call happens immediately.
@@ -120,10 +108,10 @@ describe('Integration: Contact Form Submission', () => {
     // If UNotification is stubbed, we need a way to check its props or if it was called.
     // For now, let's assert the form is reset and loading is false.
     expect(submitButton.props().loading).toBe(false);
-    expect(contactSection.find('input[placeholder="Name"]').element.value).toBe('');
-    expect(contactSection.find('input[placeholder="Email"]').element.value).toBe('');
-    expect(contactSection.find('input[placeholder="Subject"]').element.value).toBe('');
-    expect(contactSection.find('textarea').element.value).toBe('');
+    expect((contactSection.find('input[placeholder="Name"]').element as HTMLInputElement).value).toBe('');
+    expect((contactSection.find('input[placeholder="Email"]').element as HTMLInputElement).value).toBe('');
+    expect((contactSection.find('input[placeholder="Subject"]').element as HTMLInputElement).value).toBe('');
+    expect((contactSection.find('textarea').element as HTMLTextAreaElement).value).toBe('');
 
     // To properly test notification display, UNotification should not be stubbed,
     // or we'd need to check its props/emitted events.

@@ -1,35 +1,35 @@
 import { keyboards } from '../data/keyboards.ts';
-import { ensureLocale } from './ensure-locale.ts';
 import { isSpecialChar } from './is-special-char.ts';
 import { randomInt } from './random-int.ts';
 
 export class RandomChars {
   public getRandomCharCloseToChar(intendedChar: string, locale: string): string | undefined {
-    ensureLocale(locale);
     const keyboard = keyboards[locale];
+    if (!keyboard) {
+      throw new Error(`Locale ${locale} is not known`);
+    }
     let isLowerKey = true;
-    // Try to find the intended char in the lower case keyboard
     let rowIndex = keyboard.lower.findIndex(row => row.includes(intendedChar));
     if (rowIndex === -1) {
-      // If not found, try to find it in the upper case keyboard
       isLowerKey = false;
       rowIndex = keyboard.upper.findIndex(row => row.includes(intendedChar));
     }
     if (rowIndex === -1) {
-      // If not found, return undefined
       return undefined;
     }
     const usedKeyboard = isLowerKey ? keyboard.lower : keyboard.upper;
-    const columnIndex = usedKeyboard[rowIndex].indexOf(intendedChar);
-
+    const keyboardRow = usedKeyboard[rowIndex];
+    if (!keyboardRow) {
+      return undefined;
+    }
+    const columnIndex = keyboardRow.indexOf(intendedChar);
     const nearbyChars = this.findNearbyChars(intendedChar, rowIndex, columnIndex, usedKeyboard);
 
-    return nearbyChars[randomInt(0, nearbyChars.length - 1)]; // if list is empty, returns undefined
+    return nearbyChars[randomInt(0, nearbyChars.length - 1)];
   }
 
   private findNearbyChars(intendedChar: string, rowIndex: number, columnIndex: number, usedKeyboard: string[]): string[] {
     const threshold = Math.random() < 0.5 ? 2 : 1;
-
     const nearbyChars: string[] = [];
 
     for (let r = -1; r <= 1; r++) {
@@ -38,21 +38,18 @@ export class RandomChars {
         const column = columnIndex + c;
 
         if ((r === 0 && c === 0) || Math.abs(r) + Math.abs(c) > threshold) {
-          // skip same char and too far away
           continue;
         }
         if (row === 0 && rowIndex !== 0) {
-          // We do not want to accidentally switch to the number row, because that is unlikely I think
           continue;
         }
-        if (row < 0 || row >= usedKeyboard.length || column < 0 || column >= usedKeyboard[row].length) {
-          // skip out of bounds
+        const keyboardRow = usedKeyboard[row];
+        if (row < 0 || !keyboardRow || column < 0 || column >= keyboardRow.length) {
           continue;
         }
 
-        const potentialChar = usedKeyboard[row][column];
-        if (isSpecialChar(potentialChar) !== isSpecialChar(intendedChar)) {
-          // skip if the char is a special char and the intended char is not or vice versa
+        const potentialChar = keyboardRow[column];
+        if (potentialChar === undefined || isSpecialChar(potentialChar) !== isSpecialChar(intendedChar)) {
           continue;
         }
         nearbyChars.push(potentialChar);

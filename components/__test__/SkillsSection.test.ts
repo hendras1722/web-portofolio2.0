@@ -2,12 +2,6 @@ import { describe, it, expect } from 'bun:test';
 import { mount } from '@vue/test-utils';
 import SkillsSection from '~/components/SkillsSection.vue';
 
-// Mocking i18n
-const mockI18n = {
-  methods: {
-    t: (key: string) => key
-  }
-};
 
 const mockSkills = [
   { name: 'Vue.js', icon: 'i-simple-icons-vuejs', proficiency: 'Advanced' },
@@ -20,7 +14,7 @@ describe('SkillsSection.vue', () => {
       props: { skills: mockSkills },
       global: {
         mocks: {
-          $t: (key) => key,
+          $t: (key: string) => key,
         },
         stubs: ['i18n-t']
       }
@@ -34,17 +28,17 @@ describe('SkillsSection.vue', () => {
       props: { skills: [mockSkills[0]] },
       global: {
         mocks: {
-          $t: (key) => key,
+          $t: (key: string) => key,
         },
         stubs: ['i18n-t']
       }
     });
 
     const skillItem = wrapper.find('.skill-item');
-    expect(skillItem.find('.skill-name').text()).toBe(mockSkills[0].name);
-    expect(skillItem.find('.skill-proficiency').text()).toContain(mockSkills[0].proficiency);
+    expect(skillItem.find('.skill-name').text()).toBe(mockSkills[0]!.name);
+    expect(skillItem.find('.skill-proficiency').text()).toContain(mockSkills[0]!.proficiency);
     // Icon rendering might depend on how it's implemented (e.g., class-based)
-    // expect(skillItem.find('.skill-icon').classes()).toContain(mockSkills[0].icon); 
+    // expect(skillItem.find('.skill-icon').classes()).toContain(mockSkills[0].icon);
   });
 
   it('handles empty skills array gracefully', () => {
@@ -52,7 +46,7 @@ describe('SkillsSection.vue', () => {
       props: { skills: [] },
       global: {
         mocks: {
-          $t: (key) => key,
+          $t: (key: string) => key,
         },
         stubs: ['i18n-t']
       }

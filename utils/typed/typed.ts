@@ -259,21 +259,25 @@ export class Typed<T = never> {
   private getTextAtIndex(resultItems: ResultItem[], index: number): Letter | undefined {
     let i = 0;
     let skipped = 0;
-    while (resultItems[i]) {
-      if (resultItems[i].text.length > index - skipped) {
-        const letter = resultItems[i].text.substring(index - skipped, index - skipped + 1);
-        const className = resultItems[i].className;
-        return { letter, className };
-      } else {
-        skipped += resultItems[i].text.length;
-        i++;
+    while (true) {
+      const resultItem = resultItems[i];
+      if (!resultItem) {
+        return undefined;
       }
+      if (resultItem.text.length > index - skipped) {
+        const letter = resultItem.text.substring(index - skipped, index - skipped + 1);
+        return { letter, className: resultItem.className };
+      }
+      skipped += resultItem.text.length;
+      i++;
     }
-    return undefined;
   }
 
   private async doQueueAction(): Promise<boolean> {
     const currentQueueItem = this._queue.item;
+    if (!currentQueueItem) {
+      return false;
+    }
     switch (currentQueueItem.type) {
       case 'sentance':
         return this.typeLetter();
@@ -288,8 +292,14 @@ export class Typed<T = never> {
 
   private async typeLetter(): Promise<boolean> {
     const queue = this._queue;
-    const currentSentance = queue.item as Sentance;
+    const currentSentance = queue.item;
+    if (!currentSentance || currentSentance.type !== 'sentance') {
+      return false;
+    }
     const currentLetter = currentSentance.text[queue.detailIndex];
+    if (currentLetter === undefined) {
+      return false;
+    }
     await this.maybeDoError(currentSentance, 0, queue);
     if (queue === this._queue) {
       this.addLetter(currentLetter, currentSentance.className);
@@ -361,6 +371,9 @@ export class Typed<T = never> {
   private async maybeDoError(currentSentance: Sentance, currentWrongLettersCount: number, queue: Queue): Promise<void> {
     const wasFF = this._fastForward;
     const intendedChar = currentSentance.text[queue.detailIndex + currentWrongLettersCount];
+    if (intendedChar === undefined) {
+      return;
+    }
     const nearbyChar = this._randomChars.getRandomCharCloseToChar(intendedChar, this.options.locale);
 
     const shouldError = await this.shouldError(currentWrongLettersCount, intendedChar, wasFF, nearbyChar);
@@ -426,23 +439,22 @@ export class Typed<T = never> {
     do {
       let deleteAmountForThisItem = length;
       const lastResultItem = result[result.length - 1];
+      if (!lastResultItem) {
+        if (this._resetter.isReset) {
+          // might happen due to still running code during reset
+          return;
+        }
+        throw new Error('Cannot delete letter from empty text');
+      }
       const maxDeletableAmount = lastResultItem.text.length;
       if (maxDeletableAmount < length) {
         deleteAmountForThisItem = maxDeletableAmount;
         length -= maxDeletableAmount;
         needsAnotherDelete = true;
       }
-      if (lastResultItem) {
-        lastResultItem.text = lastResultItem.text.slice(0, -deleteAmountForThisItem);
-        if (!lastResultItem.text) {
-          result.pop();
-        }
-      } else {
-        if (this._resetter.isReset) {
-          // might happen due to still running code during reset
-          return;
-        }
-        throw new Error('Cannot delete letter from empty text');
+      lastResultItem.text = lastResultItem.text.slice(0, -deleteAmountForThisItem);
+      if (!lastResultItem.text) {
+        result.pop();
       }
     } while (needsAnotherDelete);
   }

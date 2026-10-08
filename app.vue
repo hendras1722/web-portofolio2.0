@@ -5,10 +5,7 @@ const showSignatureSplash = useLoadingSplashScreen()
 </script>
 
 <template>
-  <PortfolioOrganismSignatureSplash
-    v-if="showSignatureSplash"
-    @finished="showSignatureSplash = false"
-  />
+  <PortfolioOrganismSignatureSplash v-if="showSignatureSplash" @finished="showSignatureSplash = false" />
   <div :inert="showSignatureSplash">
     <NuxtLayout>
       <VitePwaManifest />

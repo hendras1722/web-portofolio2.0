@@ -25,7 +25,7 @@ export class Queue {
     this._queueDetailIndex = 0;
   }
 
-  public get item(): QueueItem {
+  public get item(): QueueItem | undefined {
     return this._items[this._queueIndex];
   }
 

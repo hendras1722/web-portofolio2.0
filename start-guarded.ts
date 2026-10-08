@@ -20,7 +20,6 @@ async function runOnce(): Promise<void> {
     throw new Error(`Entry not found: ${ENTRY} — run "nuxt build" first`);
   }
 
-  // @ts-expect-error cgroup option missing from @types/bun@1.3.14, supported at runtime by bun@1.4.0
   const proc = Bun.spawn({
     cmd: ["node", ENTRY],
     cgroup: CGROUP_DIR,

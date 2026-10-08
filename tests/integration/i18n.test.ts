@@ -1,17 +1,18 @@
-import { describe, it, expect } from 'bun:test';
+import { describe, it, expect, beforeEach, afterEach } from 'bun:test';
 import { mount } from '@vue/test-utils';
-import { setActivePinia, createPinia } from 'pinia'; // Assuming Pinia is used for state management or other global setup
 import { createI18n } from 'vue-i18n'; // To mock vue-i18n
+import type { VueWrapper } from '@vue/test-utils';
 
 // Import the page that includes the header and thus the switcher
-import IndexPage from '../pages/index.vue';
-import AppHeader from '../components/AppHeader.vue'; // Explicitly import AppHeader if needed, or rely on page mounting
-import en from '../public/i18n.json'; // English translations
-import id from '../public/i18n.json'; // Indonesian translations
+import IndexPage from '../../pages/index.vue';
+import AppHeader from '../../components/AppHeader.vue'; // Explicitly import AppHeader if needed, or rely on page mounting
+import en from '../../public/i18n.json'; // English translations
+import id from '../../public/i18n.json'; // Indonesian translations
 
 // Mock necessary Nuxt/Vue features for testing
 const i18n = createI18n({
-  locale: 'en', // Default locale for the test
+  legacy: false,
+  locale: 'en' as 'en' | 'id', // Default locale for the test
   messages: {
     en: en.en,
     id: id.id,
@@ -23,12 +24,8 @@ const i18n = createI18n({
 // A more comprehensive test would involve mocking queryContent as well.
 
 describe('Integration: Language Switcher', () => {
-  let wrapper;
+  let wrapper: VueWrapper;
 
-  beforeAll(() => {
-    // Setup Pinia if needed, though not strictly required for this specific test
-    // setActivePinia(createPinia());
-  });
 
   beforeEach(async () => {
     // Mount the page component which includes the header with the switcher
@@ -81,7 +78,7 @@ describe('Integration: Language Switcher', () => {
     await wrapper.vm.$nextTick();
 
     // Assert that the locale has changed
-    expect(i18n.global.locale.value).toBe('id');
+    expect(String(i18n.global.locale.value)).toBe('id');
 
     // Further assertions could check if translated text is displayed correctly
     // e.g., expect(appHeader.find('a[to="/"]').text()).toContain('Beranda'); // If home link text is internationalized

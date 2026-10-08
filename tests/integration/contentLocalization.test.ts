@@ -1,10 +1,11 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'bun:test';
 import { createI18n } from 'vue-i18n';
-import { ref } from 'vue'; // ref is needed for useAsyncData mock
+import { ref } from 'vue';
+import type { Ref } from 'vue';
 // import IndexPage from '../../pages/index.vue'; // Not mounting the page directly anymore
 
 // Mock localized content data
-const mockContent = {
+const mockContent: Record<'en' | 'id', Record<string, unknown>> = {
   en: {
     profile: {
       name: "Muh Syahendra A",
@@ -28,7 +29,7 @@ const mockContent = {
 };
 
 // Mock queryContent
-const mockQueryContent = vi.fn((locale, path) => {
+const mockQueryContent = vi.fn((locale: 'en' | 'id', path: string) => {
   const contentForLocale = mockContent[locale];
   if (!contentForLocale) {
     return {
@@ -45,36 +46,30 @@ const mockQueryContent = vi.fn((locale, path) => {
 });
 
 // Mock Nuxt's useAsyncData and queryContent
-vi.mock('#app', async (importOriginal) => {
-  const original = await importOriginal();
-  return {
-    ...original,
-    queryContent: mockQueryContent,
-    useAsyncData: vi.fn((key, handler) => {
-      // Simulate the useAsyncData behavior
-      const data = ref(null);
-      const pending = ref(true);
-      const error = ref(null);
+vi.mock('#app', () => ({
+  queryContent: mockQueryContent,
+  useAsyncData: vi.fn((_key: string, handler: () => Promise<unknown>) => {
+    const data = ref<unknown>(null);
+    const pending = ref(true);
+    const error = ref<unknown>(null);
 
-      const execute = async () => {
-        pending.value = true;
-        error.value = null;
-        try {
-          data.value = await handler();
-        } catch (e) {
-          error.value = e;
-        } finally {
-          pending.value = false;
-        }
-      };
+    const execute = async () => {
+      pending.value = true;
+      error.value = null;
+      try {
+        data.value = await handler();
+      } catch (caughtError: unknown) {
+        error.value = caughtError;
+      } finally {
+        pending.value = false;
+      }
+    };
 
-      // Execute immediately as useAsyncData does
-      execute();
+    execute();
 
-      return { data, pending, error, execute };
-    }),
-  };
-});
+    return { data, pending, error, execute };
+  }),
+}));
 
 
 // Mock necessary Nuxt/Vue features for testing
@@ -88,12 +83,12 @@ const i18n = createI18n({
 });
 
 describe('Content Localization with @nuxt/content (Data Fetching Only)', () => {
-  let localeRef; // To hold the locale ref from i18n global
+  let localeRef: Ref<'en' | 'id'>;
 
   beforeEach(() => {
     mockQueryContent.mockClear();
-    i18n.global.locale.value = 'en'; // Reset locale for each test
-    localeRef = ref(i18n.global.locale.value); // Create a reactive ref for locale
+    i18n.global.locale.value = 'en';
+    localeRef = ref<'en' | 'id'>(i18n.global.locale.value);
   });
 
   afterEach(() => {
