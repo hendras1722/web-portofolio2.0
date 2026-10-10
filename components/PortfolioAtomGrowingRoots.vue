@@ -280,17 +280,6 @@ onUnmounted(() => {
     <canvas ref="traceCanvas" class="electric-lines__trace" />
     <canvas v-show="!isReducedMotion" ref="energyCanvas" class="electric-lines__energy" />
   </div>
-  <button v-if="!isReducedMotion" class="electric-lines__toggle" type="button"
-    :aria-label="isPaused ? t('portfolio.resume_background') : t('portfolio.pause_background')" @click="togglePaused">
-    <svg v-if="isPaused" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-      stroke-linecap="round" stroke-linejoin="round">
-      <path d="m8 5 11 7-11 7V5Z" />
-    </svg>
-    <svg v-else aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-      stroke-linecap="round">
-      <path d="M8 5v14M16 5v14" />
-    </svg>
-  </button>
 </template>
 
 <style scoped>

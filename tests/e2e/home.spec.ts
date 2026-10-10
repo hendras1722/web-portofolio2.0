@@ -13,13 +13,15 @@ test('home introduces the developer and links to tools and profiles', async ({ p
   await expect(page.getByRole('main').getByRole('heading', { name: 'Proyek' })).toHaveCount(0)
   await expect(page.getByRole('main').getByRole('heading', { name: 'Pengalaman' })).toHaveCount(0)
 
-  for (const [label, href] of [
+  const profileLinks = [
     ['use-react-utilities', 'https://www.npmjs.com/package/use-react-utilities'],
     ['react-hook-form-easy-access', 'https://www.npmjs.com/package/react-hook-form-easy-access'],
     ['msa-cli', 'https://www.npmjs.com/package/msa-cli'],
     ['GitHub', 'https://github.com/hendras1722'],
     ['LinkedIn', 'https://www.linkedin.com/in/muhsyahendraa/'],
-  ]) {
+  ] as const
+
+  for (const [label, href] of profileLinks) {
     await expect(page.getByRole('main').getByRole('link', { name: label })).toHaveAttribute('href', href)
   }
 })
@@ -88,9 +90,11 @@ test('Antfu-style lightning remains while repeated energy pulses can pause', asy
   const trace = page.locator('.electric-lines__trace')
   const energy = page.locator('.electric-lines__energy')
   const pause = page.getByRole('button', { name: 'Jeda animasi latar' })
-  const paintedPixels = async (): Promise<number> => trace.evaluate((canvas) => {
-    const context = canvas.getContext('2d')
-    const pixels = context?.getImageData(0, 0, canvas.width, canvas.height).data
+  const paintedPixels = async (): Promise<number> => trace.evaluate((element) => {
+    if (!(element instanceof HTMLCanvasElement)) return 0
+
+    const context = element.getContext('2d')
+    const pixels = context?.getImageData(0, 0, element.width, element.height).data
     let count = 0
     for (let index = 3; index < (pixels?.length ?? 0); index += 64) {
       if ((pixels?.[index] ?? 0) > 0) count += 1

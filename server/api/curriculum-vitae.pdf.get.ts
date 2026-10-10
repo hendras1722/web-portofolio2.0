@@ -38,7 +38,7 @@ export default defineEventHandler(async (event) => {
 
     await page.goto(sourceUrl.href, { waitUntil: 'domcontentloaded' })
     await page.waitForSelector('.cv-container')
-    await page.evaluate(() => document.fonts.ready)
+    await page.evaluate('document.fonts.ready')
     await page.emulateMediaType('print')
 
     const pdf = await page.pdf({
