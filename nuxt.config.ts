@@ -141,7 +141,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-12-23',
 
   nitro: {
-    preset: "vercel"
+    preset: 'vercel',
+    externals: {
+      external: ['@sparticuz/chromium', 'puppeteer-core'],
+    },
   },
 
   vite: {

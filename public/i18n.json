@@ -138,6 +138,16 @@
       },
       "workExperiences": [
         {
+          "role": "Software Development – Frontend",
+          "period": "Sep 2026 - Present",
+          "company": "INA Digital Health",
+          "desc": "Develop and maintain the IFP (Instalasi Farmasi Pemerintah) platform, translating Figma UI/UX designs into responsive web interfaces and integrating backend APIs.",
+          "project": {
+            "title": "",
+            "paragraph": "Develop and maintain the IFP (Instalasi Farmasi Pemerintah) platform_Translate Figma UI/UX designs into responsive, production-ready web interfaces_Integrate backend APIs to support application workflows and data presentation."
+          }
+        },
+        {
           "role": "Frontend Developer",
           "location": "Yogyakarta, Indonesia",
           "period": "Jan 2026 - Sep 2026",
@@ -374,6 +384,16 @@
         "ums": "Sarjana Teknik Elektro (Arus Kuat) di Universitas Muhammadiyah Surakarta, IPK: 3.39"
       },
       "workExperiences": [
+        {
+          "role": "Software Development – Frontend",
+          "period": "Sep 2026 - Saat ini",
+          "company": "INA Digital Health",
+          "desc": "Mengembangkan dan memelihara platform IFP (Instalasi Farmasi Pemerintah), menerjemahkan desain UI/UX Figma menjadi antarmuka web responsif, serta mengintegrasikan API backend.",
+          "project": {
+            "title": "",
+            "paragraph": "Mengembangkan dan memelihara platform IFP (Instalasi Farmasi Pemerintah)_Menerjemahkan desain UI/UX Figma menjadi antarmuka web responsif yang siap digunakan_Mengintegrasikan API backend untuk mendukung alur kerja aplikasi dan penyajian data."
+          }
+        },
         {
           "role": "Frontend Developer",
           "location": "Yogyakarta, Indonesia",

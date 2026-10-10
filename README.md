@@ -12,6 +12,12 @@ The experience page centers the role list beneath low-opacity, outline-only year
 
 The header theme button switches between light and dark across the portfolio, projects, experience, and blog pages. The selection persists across navigation and reloads; new visitors start in dark mode with a `#050505` background. Supporting browsers reveal the new theme with a centered, blurred circular view transition; reduced-motion settings and unsupported browsers switch immediately. To run E2E tests against an already-running server on another port, set `E2E_BASE_URL` to its origin.
 
+## CV PDF
+
+`GET /api/curriculum-vitae.pdf?locale=id|en` renders the CV print view on the server and returns an attachment. The CV Download PDF button points directly to this endpoint, so mobile browsers can use their native PDF viewer or download flow. Unknown locales use Indonesian.
+
+Vercel runs Chromium through `@sparticuz/chromium`; local development uses Google Chrome at `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`. Set `PUPPETEER_EXECUTABLE_PATH` to use another local Chromium executable.
+
 ## Setup
 
 Make sure to install the dependencies:
