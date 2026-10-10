@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import PortfolioAtomGrowingRoots from '~/components/PortfolioAtomGrowingRoots.vue'
 import PortfolioOrganismNavigation from '~/components/PortfolioOrganismNavigation.vue'
 import PortfolioMoleculeArticle from '~/components/PortfolioMoleculeArticle.vue'
 
@@ -52,6 +53,7 @@ useHead({
 
       <footer>© {{ new Date().getFullYear() }} Muh Syahendra Anindyantoro</footer>
     </main>
+    <PortfolioAtomGrowingRoots />
   </div>
 </template>
 
@@ -74,6 +76,13 @@ useHead({
   min-height: 100vh;
   background: var(--background);
   color: var(--text);
+  isolation: isolate;
+}
+
+.archive-shell>header,
+.archive-shell>main {
+  position: relative;
+  z-index: 1;
 }
 
 .archive {

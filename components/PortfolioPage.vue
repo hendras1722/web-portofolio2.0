@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import PortfolioAtomGrowingRoots from '~/components/PortfolioAtomGrowingRoots.vue'
 import PortfolioOrganismNavigation from '~/components/PortfolioOrganismNavigation.vue'
 
 interface Props {
@@ -31,6 +32,7 @@ useHead({
       <slot />
     </main>
     <footer class="portfolio-footer">© {{ new Date().getFullYear() }} Muh Syahendra Anindyantoro</footer>
+    <PortfolioAtomGrowingRoots />
   </div>
 </template>
 
@@ -53,6 +55,14 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  isolation: isolate;
+}
+
+.portfolio-shell>header,
+.portfolio-shell>main,
+.portfolio-shell>footer {
+  position: relative;
+  z-index: 1;
 }
 
 .portfolio {

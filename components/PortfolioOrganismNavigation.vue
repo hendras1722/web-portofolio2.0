@@ -17,7 +17,7 @@ const route = useRoute()
       </NuxtLink>
       <nav class="navigation__links" :aria-label="t('portfolio.navigation_label')">
         <NuxtLink :to="localePath('/')" :aria-current="route.path === localePath('/') ? 'page' : undefined">{{ t('home')
-          }}</NuxtLink>
+        }}</NuxtLink>
         <NuxtLink :to="localePath('/projects')"
           :aria-current="route.path === localePath('/projects') ? 'page' : undefined">{{ t('portfolio.work_title') }}
         </NuxtLink>
@@ -39,7 +39,6 @@ const route = useRoute()
 <style scoped>
 .navigation {
   width: 100%;
-  border-bottom: 1px solid var(--line);
 }
 
 .navigation__inner {

@@ -10,6 +10,8 @@
   --on-accent: #050505;
   --code-background: #171b18;
   --inline-code-background: #202622;
+  --electric-glow: #48aaff;
+  --electric-core: #48aaff;
 }
 
 :root.light {
@@ -24,6 +26,8 @@
   --on-accent: #ffffff;
   --code-background: #ecf1ec;
   --inline-code-background: #e7ede7;
+  --electric-glow: #247dc4;
+  --electric-core: #2374b0;
 }
 
 @font-face {

@@ -83,6 +83,46 @@ test('theme switch persists across portfolio and article routes', async ({ page 
   await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(5, 5, 5)')
 })
 
+test('Antfu-style lightning remains while repeated energy pulses can pause', async ({ page }) => {
+  await page.goto('/blog')
+  const trace = page.locator('.electric-lines__trace')
+  const energy = page.locator('.electric-lines__energy')
+  const pause = page.getByRole('button', { name: 'Jeda animasi latar' })
+  const paintedPixels = async (): Promise<number> => trace.evaluate((canvas) => {
+    const context = canvas.getContext('2d')
+    const pixels = context?.getImageData(0, 0, canvas.width, canvas.height).data
+    let count = 0
+    for (let index = 3; index < (pixels?.length ?? 0); index += 64) {
+      if ((pixels?.[index] ?? 0) > 0) count += 1
+    }
+    return count
+  })
+
+  await expect(pause).toBeVisible()
+  await expect.poll(paintedPixels).toBeGreaterThan(0)
+  const firstPulse = await paintedPixels()
+  await expect.poll(paintedPixels, { timeout: 10000 }).toBeGreaterThan(firstPulse)
+
+  await pause.click()
+  await expect(page.getByRole('button', { name: 'Lanjutkan animasi latar' })).toBeVisible()
+  await expect(page.locator('.electric-lines')).toHaveClass(/electric-lines--paused/)
+  const pausedPixels = await paintedPixels()
+  await page.waitForTimeout(5500)
+  expect(await paintedPixels()).toBeGreaterThan(0)
+
+  await page.getByRole('button', { name: 'Lanjutkan animasi latar' }).click()
+  await expect(page.locator('.electric-lines')).not.toHaveClass(/electric-lines--paused/)
+  await expect.poll(paintedPixels).toBeGreaterThan(pausedPixels)
+
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await expect(pause).toBeHidden()
+  await expect(trace).toBeVisible()
+  await expect(energy).toBeHidden()
+
+  await page.setViewportSize({ width: 375, height: 812 })
+  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(375)
+})
+
 test('articles keep the portfolio navigation and English locale across archive and detail', async ({ page }) => {
   await page.goto('/en/blog')
   const navigation = page.getByRole('navigation', { name: 'Main navigation' })
