@@ -11,20 +11,57 @@ defineProps<Props>()
 
 <template>
   <article class="experience">
-    <div class="experience__date">{{ period }}</div>
-    <div>
+    <div class="experience__heading">
       <h3>{{ role }} <span>· {{ company }}</span></h3>
-      <p>{{ detail }}</p>
+      <span class="experience__date">{{ period }}</span>
     </div>
+    <p>{{ detail }}</p>
   </article>
 </template>
 
 <style scoped>
-.experience { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; padding: 1.15rem 0; border-bottom: 1px solid var(--line); }
-.experience:first-child { border-top: 1px solid var(--line); }
-.experience__date { padding-top: 0.12rem; color: var(--muted); font-size: 0.8rem; }
-h3 { margin: 0; color: var(--text); font-size: 0.96rem; font-weight: 550; }
-h3 span { color: var(--muted); font-weight: 400; }
-p { margin: 0.45rem 0 0; color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
-@media (max-width: 540px) { .experience { grid-template-columns: 1fr; gap: 0.4rem; } }
+.experience {
+  padding: 0 0 1.5rem;
+}
+
+.experience__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
+}
+
+.experience__date {
+  color: var(--muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+h3 {
+  min-width: 0;
+  margin: 0;
+  color: var(--text);
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+h3 span {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+p {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 540px) {
+  .experience__heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 </style>

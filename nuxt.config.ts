@@ -36,7 +36,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/font.css', '~/assets/css/print.css'],
 
   colorMode: {
-    preference: 'light',
+    preference: 'dark',
   },
 
   pwa: {

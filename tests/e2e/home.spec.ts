@@ -1,31 +1,116 @@
-import { test, expect } from '@playwright/test';
-import AxeBuilder from '@axe-core/playwright'; // Import AxeBuilder
+import { test, expect } from '@playwright/test'
+import AxeBuilder from '@axe-core/playwright'
+test.beforeEach(async ({ context, baseURL }) => {
+  await context.addCookies([{ name: 'i18n_redirected', value: 'id', url: baseURL ?? 'http://localhost:3000/' }])
+})
 
-test.describe('Home Page', () => {
-  test('should navigate to the home page and display the hero section', async ({ page }) => {
-    await page.goto('/');
+test('home introduces the developer and links to tools and profiles', async ({ page }) => {
+  await page.goto('/')
 
-    // Wait for the hero section content to be visible, ensuring data is loaded
-    await expect(page.getByRole('heading', { name: 'Software Engineer' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Muh Syahendra Anindyantoro')
+  await expect(page.getByText('INA Digital Health')).toBeVisible()
+  await expect(page.getByText('Nuxt · Next.js · React · Vue')).toBeVisible()
+  await expect(page.getByRole('main').getByRole('heading', { name: 'Proyek' })).toHaveCount(0)
+  await expect(page.getByRole('main').getByRole('heading', { name: 'Pengalaman' })).toHaveCount(0)
 
-    // Expect a title "to contain" the full dynamic title.
-    await expect(page).toHaveTitle(/Home - Muh Syahendra A/);
+  for (const [label, href] of [
+    ['use-react-utilities', 'https://www.npmjs.com/package/use-react-utilities'],
+    ['react-hook-form-easy-access', 'https://www.npmjs.com/package/react-hook-form-easy-access'],
+    ['msa-cli', 'https://www.npmjs.com/package/msa-cli'],
+    ['GitHub', 'https://github.com/hendras1722'],
+    ['LinkedIn', 'https://www.linkedin.com/in/muhsyahendraa/'],
+  ]) {
+    await expect(page.getByRole('main').getByRole('link', { name: label })).toHaveAttribute('href', href)
+  }
+})
 
-    // Expect the hero section to be visible (locator for a class)
-    await expect(page.locator('.hero-section')).toBeVisible();
+test('navigation opens dedicated project and experience pages and preserves locale', async ({ page }) => {
+  await page.goto('/')
+  const navigation = page.getByRole('navigation', { name: 'Navigasi utama' })
 
-    // Further check for specific text content
-    await expect(page.getByText('A passionate Software Engineer with expertise in web development.').first()).toBeVisible();
-  });
+  await navigation.getByRole('link', { name: 'Proyek' }).click()
+  await expect(page).toHaveURL(/\/projects$/)
+  await expect(page.getByRole('heading', { level: 1, name: 'Proyek' })).toBeVisible()
+  await expect(page.getByRole('link', { name: /POSAPP Cashier/ })).toBeVisible()
 
-  test('should not have any accessibility violations on the home page', async ({ page }) => {
-    await page.goto('/');
+  await page.getByRole('navigation', { name: 'Pilih bahasa' }).getByRole('link', { name: 'EN' }).click()
+  await expect(page).toHaveURL(/\/en\/projects$/)
+  await expect(page).toHaveTitle(/Projects/)
 
-    // Wait for the content to be loaded to ensure accessibility checks are performed on a stable page
-    await expect(page.getByRole('heading', { name: 'Software Engineer' })).toBeVisible();
+  await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Experience' }).click()
+  await expect(page).toHaveURL(/\/en\/experience$/)
+  await expect(page.getByRole('heading', { level: 1, name: 'Experience' })).toBeVisible()
+  await expect(page.getByText('Privy', { exact: false })).toBeVisible()
+})
 
-    const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+test('navigation spans the viewport without horizontal overflow on mobile', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 })
+  await page.goto('/')
 
-    expect(accessibilityScanResults.violations).toEqual([]);
-  });
-});
+  const header = page.locator('.navigation')
+  await expect(header).toBeVisible()
+  expect(await header.evaluate(element => element.getBoundingClientRect().width)).toBe(375)
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(375)
+  await expect(page.getByRole('navigation', { name: 'Navigasi utama' }).getByRole('link', { name: 'Pengalaman' })).toBeVisible()
+})
+
+test('theme switch persists across portfolio and article routes', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(5, 5, 5)')
+
+  await page.getByRole('button', { name: 'Ganti ke mode terang' }).click()
+  await expect(page.locator('html')).toHaveClass(/light/)
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(248, 250, 248)')
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#f8faf8')
+
+  await page.getByRole('navigation', { name: 'Navigasi utama' }).getByRole('link', { name: 'Proyek' }).click()
+  await expect(page).toHaveURL(/\/projects$/)
+  await page.reload()
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(248, 250, 248)')
+
+  await page.getByRole('navigation', { name: 'Navigasi utama' }).getByRole('link', { name: 'Pengalaman' }).click()
+  await expect(page.getByRole('heading', { level: 1, name: 'Pengalaman' })).toBeVisible()
+  await page.getByRole('navigation', { name: 'Navigasi utama' }).getByRole('link', { name: 'Artikel terbaru' }).click()
+  await expect(page.getByRole('heading', { level: 1, name: 'Catatan teknis' })).toBeVisible()
+  await page.locator('.archive__list a').first().click()
+  await expect(page.locator('.reading-article')).toBeVisible()
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(248, 250, 248)')
+
+  await page.getByRole('button', { name: 'Ganti ke mode gelap' }).click()
+  await expect(page.locator('html')).toHaveClass(/dark/)
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(5, 5, 5)')
+  await page.goto('/')
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(5, 5, 5)')
+})
+
+test('articles keep the portfolio navigation and English locale across archive and detail', async ({ page }) => {
+  await page.goto('/en/blog')
+  const navigation = page.getByRole('navigation', { name: 'Main navigation' })
+  const articles = navigation.getByRole('link', { name: 'Latest articles' })
+
+  await expect(articles).toHaveAttribute('aria-current', 'page')
+  await page.locator('.archive__list a').first().click()
+  await expect(page).toHaveURL(/\/en\/blog\/[^/]+$/)
+  await expect(page.locator('.reading-article')).toBeVisible()
+  await expect(articles).toHaveAttribute('aria-current', 'page')
+  await expect(page.getByRole('main').getByRole('link', { name: /Back to all articles/ }).first()).toHaveAttribute('href', '/en/blog')
+
+  await navigation.getByRole('link', { name: 'Projects' }).click()
+  await expect(page).toHaveURL(/\/en\/projects$/)
+  await articles.click()
+  await expect(page).toHaveURL(/\/en\/blog$/)
+
+  await page.setViewportSize({ width: 375, height: 812 })
+  await expect(navigation.getByRole('link', { name: 'Experience' })).toBeVisible()
+  await page.locator('.archive__list a').first().click()
+  await expect(page).toHaveURL(/\/en\/blog\/[^/]+$/)
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(375)
+})
+
+test('home has no accessibility violations', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+
+  const scan = await new AxeBuilder({ page }).analyze()
+  expect(scan.violations).toEqual([])
+})

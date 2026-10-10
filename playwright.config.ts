@@ -1,5 +1,6 @@
 // playwright.config.ts
 import { defineConfig, devices } from '@playwright/test';
+const e2eBaseURL = process.env.E2E_BASE_URL ?? 'http://localhost:3000'
 
 /**
  * Read environment variables from file.
@@ -25,7 +26,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:3000',
+    baseURL: e2eBaseURL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -69,10 +70,10 @@ export default defineConfig({
     },
   ],
 
-  /* Run your local dev server before starting the tests */
-  webServer: {
+  /* Use an already-running server when E2E_BASE_URL is provided. */
+  webServer: process.env.E2E_BASE_URL ? undefined : {
     command: 'bun run dev',
-    url: 'http://localhost:3000',
+    url: e2eBaseURL,
     reuseExistingServer: !process.env.CI,
   },
 });

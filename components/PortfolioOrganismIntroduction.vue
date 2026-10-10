@@ -1,29 +1,109 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
-const cvDownloadUrl = computed(() => {
-  const downloadLocale = locale.value === 'en' ? 'en' : 'id'
-  return `${localePath('/curriculum-vitae', downloadLocale)}?download=true&locale=${downloadLocale}&iframe=true`
-})
+const { t } = useI18n()
 </script>
 
 <template>
-  <section id="top" class="introduction" aria-labelledby="intro-title">
-    <h1 id="intro-title">{{ t('portfolio.greeting') }} <span>Muh Syahendra Anindyantoro.</span></h1>
-    <p class="introduction__copy">{{ t('portfolio.introduction') }}</p>
-    <a class="cv-link" :href="cvDownloadUrl">{{ t('portfolio.download_cv') }} <span aria-hidden="true">↓</span></a>
+  <section class="introduction" aria-labelledby="intro-title">
+    <h1 id="intro-title">{{ t('portfolio.greeting') }} <span>Muh Syahendra Anindyantoro</span></h1>
+    <p class="introduction__lead">{{ t('portfolio.about_lead') }}</p>
+    <div class="introduction__details">
+      <p>{{ t('portfolio.current_role') }} <strong>INA Digital Health</strong></p>
+      <p>{{ t('portfolio.main_stack') }} <strong>Nuxt · Next.js · React · Vue</strong></p>
+    </div>
+    <div class="introduction__story">
+      <p>{{ t('portfolio.about_ideas') }}</p>
+      <p>
+        {{ t('portfolio.about_tools') }}
+        <a href="https://www.npmjs.com/package/use-react-utilities" target="_blank"
+          rel="noopener noreferrer">use-react-utilities</a>,
+        <a href="https://www.npmjs.com/package/react-hook-form-easy-access" target="_blank"
+          rel="noopener noreferrer">react-hook-form-easy-access</a>,
+        {{ t('portfolio.and') }}
+        <a href="https://www.npmjs.com/package/msa-cli" target="_blank" rel="noopener noreferrer">msa-cli</a>.
+      </p>
+      <p>{{ t('portfolio.about_learning') }}</p>
+      <p>
+        {{ t('portfolio.about_connect_before') }}
+        <a href="https://github.com/hendras1722" target="_blank" rel="noopener noreferrer">GitHub</a>,
+        {{ t('portfolio.about_connect_middle') }}
+        <a href="https://www.linkedin.com/in/muhsyahendraa/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+        {{ t('portfolio.about_connect_after') }}
+      </p>
+    </div>
   </section>
 </template>
 
 <style scoped>
-.introduction { padding: clamp(4.5rem, 12vw, 8rem) 0 clamp(4rem, 9vw, 6.5rem); }
+.introduction {
+  padding: clamp(4.5rem, 12vw, 8rem) 0 clamp(4.5rem, 10vw, 7rem);
+}
 
-h1 { max-width: 45rem; margin: 0; color: var(--text); font-size: clamp(2.7rem, 8vw, 4.8rem); font-weight: 600; letter-spacing: -0.075em; line-height: 1.06; }
-h1 span { color: var(--accent-soft); }
-.introduction__copy { max-width: 37rem; margin: 1.4rem 0 1.6rem; color: var(--muted); font-size: clamp(1rem, 2.5vw, 1.12rem); line-height: 1.85; }
-.cv-link { display: inline-flex; gap: 0.65rem; align-items: center; min-height: 2.8rem; padding: 0 1rem; border: 1px solid var(--accent); border-radius: 0.55rem; background: var(--accent); color: var(--on-accent); font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: background-color 150ms ease, border-color 150ms ease; }
-.cv-link:hover { border-color: var(--accent-hover); background: var(--accent-hover); color: var(--on-accent); }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(2.7rem, 8vw, 4.8rem);
+  font-weight: 600;
+  letter-spacing: -0.075em;
+  line-height: 1.08;
+}
+
+h1 span {
+  color: var(--accent-soft);
+}
+
+.introduction__lead {
+  margin: 1.75rem 0 2rem;
+  color: var(--text);
+  font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+  line-height: 1.7;
+}
+
+.introduction__details {
+  margin: 0 0 3rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.introduction__details p {
+  margin: 0.3rem 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.introduction__story p {
+  margin: 0 0 1.6rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.introduction__story p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-soft);
+  text-underline-offset: 0.2rem;
+  overflow-wrap: anywhere;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
 </style>

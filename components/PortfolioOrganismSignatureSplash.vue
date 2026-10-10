@@ -26,12 +26,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div
-    class="signature-splash"
-    :class="{ 'signature-splash--leaving': isLeaving }"
-    role="status"
-    :aria-label="t('portfolio.loading_label')"
-  >
+  <div class="signature-splash" :class="{ 'signature-splash--leaving': isLeaving }" role="status"
+    :aria-label="t('portfolio.loading_label')">
     <div class="signature-frame">
       <PortfolioAtomAnimatedSignature decorative @finished="finishDrawing" />
     </div>
@@ -39,8 +35,31 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.signature-splash { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; overflow: hidden; background: #000; opacity: 1; transition: opacity 450ms ease-out; }
-.signature-splash--leaving { opacity: 0; pointer-events: none; }
-.signature-frame { width: min(88vw, 840px); }
-@media (prefers-reduced-motion: reduce) { .signature-splash { transition: none; } }
+.signature-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--background);
+  color: var(--text);
+  opacity: 1;
+  transition: opacity 450ms ease-out;
+}
+
+.signature-splash--leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.signature-frame {
+  width: min(88vw, 840px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signature-splash {
+    transition: none;
+  }
+}
 </style>
