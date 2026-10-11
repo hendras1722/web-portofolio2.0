@@ -65,6 +65,20 @@ test('theme switch persists across portfolio and article routes', async ({ page 
   await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(248, 250, 248)')
   await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#f8faf8')
 
+
+  expect(await page.evaluate(() => {
+    const rootStyles = getComputedStyle(document.documentElement)
+    const signature = document.querySelector('.animated-signature')
+    return {
+      core: rootStyles.getPropertyValue('--electric-core').trim(),
+      glow: rootStyles.getPropertyValue('--electric-glow').trim(),
+      signature: signature ? getComputedStyle(signature).color : null,
+    }
+  })).toEqual({
+    core: '#a3a3a3',
+    glow: '#7a7a7a',
+    signature: 'rgb(23, 34, 26)',
+  })
   await page.getByRole('navigation', { name: 'Navigasi utama' }).getByRole('link', { name: 'Proyek' }).click()
   await expect(page).toHaveURL(/\/projects$/)
   await page.reload()

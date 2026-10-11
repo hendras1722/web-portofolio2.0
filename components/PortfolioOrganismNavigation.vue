@@ -54,6 +54,7 @@ const route = useRoute()
   display: block;
   flex: 0 0 auto;
   width: min(30vw, 120px);
+  color: var(--text);
 }
 
 .navigation__links {

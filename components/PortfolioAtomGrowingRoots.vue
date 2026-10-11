@@ -80,6 +80,24 @@ function renderTraces(): void {
   segments.forEach(drawTrace)
 }
 
+function applyEnergyStyle(): void {
+  if (!energyContext) return
+  energyContext.strokeStyle = getColor('--electric-core')
+  energyContext.lineWidth = 0.3
+  energyContext.lineCap = 'round'
+  energyContext.lineJoin = 'round'
+  energyContext.globalAlpha = 0.92
+  energyContext.shadowColor = getColor('--electric-glow')
+  energyContext.shadowBlur = 9
+}
+
+function handleThemeChange(): void {
+  renderTraces()
+  applyEnergyStyle()
+  clearEnergy()
+}
+
+
 function clearEnergy(): void {
   energyContext?.clearRect(0, 0, width, height)
 }
@@ -168,13 +186,7 @@ function startPulse(): void {
   clearEnergy()
   queue = randomEdgeSeed()
   segmentCount = 0
-  energyContext!.strokeStyle = getColor('--electric-core')
-  energyContext!.lineWidth = 0.3
-  energyContext!.lineCap = 'round'
-  energyContext!.lineJoin = 'round'
-  energyContext!.globalAlpha = 0.92
-  energyContext!.shadowColor = getColor('--electric-glow')
-  energyContext!.shadowBlur = 9
+  applyEnergyStyle()
   rafId = requestAnimationFrame(frame)
 }
 
@@ -253,7 +265,7 @@ onMounted(() => {
   isReducedMotion.value = motionQuery.matches
   motionQuery.addEventListener('change', handleMotionChange)
   resize()
-  themeObserver = new MutationObserver(renderTraces)
+  themeObserver = new MutationObserver(handleThemeChange)
   themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
   resizeObserver = new ResizeObserver(resize)
   resizeObserver.observe(document.documentElement)

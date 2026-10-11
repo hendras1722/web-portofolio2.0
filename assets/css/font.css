@@ -26,8 +26,8 @@
   --on-accent: #ffffff;
   --code-background: #ecf1ec;
   --inline-code-background: #e7ede7;
-  --electric-glow: #247dc4;
-  --electric-core: #2374b0;
+  --electric-glow: #7a7a7a;
+  --electric-core: #a3a3a3;
 }
 
 @font-face {
