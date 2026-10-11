@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/css/font.css', '~/assets/css/print.css'],
+  css: ['~/assets/css/main.css', '~/assets/css/font.css', '~/assets/css/print.css'],
 
   colorMode: {
     preference: 'dark',
