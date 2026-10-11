@@ -44,8 +44,9 @@ export default defineNuxtConfig({
     strategies: 'generateSW',
     registerType: 'autoUpdate',
     workbox: {
-      skipWaiting: false,
-      clientsClaim: false
+      navigateFallback: undefined,
+      skipWaiting: true,
+      clientsClaim: true,
     },
     manifest: {
       name: 'Muh Syahendra — Frontend Engineer',
