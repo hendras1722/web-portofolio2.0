@@ -7,7 +7,7 @@ const UrlCV= computed(() => route.pathname === '/curriculum-vitae')
 </script>
 
 <template>
-  <PortfolioOrganismSignatureSplash v-if="showSignatureSplash" @finished="showSignatureSplash = false" />
+  <PortfolioOrganismSignatureSplash v-if="showSignatureSplash && UrlCV" @finished="showSignatureSplash = false" />
   <div :inert="showSignatureSplash">
     <NuxtLayout>
       <VitePwaManifest />
