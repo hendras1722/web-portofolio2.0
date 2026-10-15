@@ -2,6 +2,8 @@
 import { useLoadingSplashScreen } from './composable/use-loading';
 
 const showSignatureSplash = useLoadingSplashScreen()
+const route = useRoute()
+const UrlCV= computed(() => route.pathname === '/curriculum-vitae')
 </script>
 
 <template>

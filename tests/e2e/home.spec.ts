@@ -165,6 +165,13 @@ test('articles keep the portfolio navigation and English locale across archive a
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(375)
 })
 
+test('curriculum vitae renders its Tailwind layout', async ({ page }) => {
+  await page.goto('/curriculum-vitae')
+
+  await expect(page.locator('.cv-page')).toHaveCSS('background-color', 'rgb(255, 255, 255)')
+  await expect(page.locator('.cv-container')).toHaveCSS('max-width', '768px')
+})
+
 test('home has no accessibility violations', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
