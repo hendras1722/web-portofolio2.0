@@ -1,9 +1,19 @@
 import { createClient } from '@supabase/supabase-js'
-const SUPABASE_URL = 'https://omarigmxgnkbnhhnwfne.supabase.co'
+import { createError } from 'h3'
+import type { SupabaseClient } from '@supabase/supabase-js'
+import type { H3Event } from 'h3'
 
-const supabase = createClient(
-  SUPABASE_URL,
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9tYXJpZ214Z25rYm5oaG53Zm5lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTAzOTE4MTAsImV4cCI6MjAyNTk2NzgxMH0.r43IW7P4D3uMIlN68hdMcJXpV1WS_nGthCJdYZUQqkU'
-)
+export function createServerSupabaseClient(event: H3Event): SupabaseClient {
+  const config = useRuntimeConfig(event)
+  const url = config.public.supabaseUrl
+  const key = config.supabaseServiceKey || config.public.supabaseKey
 
-export { supabase }
+  if (!url || !key) {
+    throw createError({
+      statusCode: 500,
+      message: 'Supabase server configuration is missing',
+    })
+  }
+
+  return createClient(url, key)
+}

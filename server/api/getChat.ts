@@ -1,9 +1,9 @@
 import { createError } from 'h3'
-import { serverSupabaseServiceRole } from '#supabase/server'
+import { createServerSupabaseClient } from '@/utils/supabase'
 
 export default defineEventHandler(async (event) => {
   const path = getHeaders(event)
-  const client = await serverSupabaseServiceRole(event)
+  const client = createServerSupabaseClient(event)
 
   if (path['postman-token']) {
     throw createError({

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import PortfolioAtomGrowingRoots from '~/components/PortfolioAtomGrowingRoots.vue'
 import PortfolioOrganismNavigation from '~/components/PortfolioOrganismNavigation.vue'
 
 interface Props {
@@ -32,7 +31,7 @@ useHead({
       <slot />
     </main>
     <footer class="portfolio-footer">© {{ new Date().getFullYear() }} Muh Syahendra Anindyantoro</footer>
-    <PortfolioAtomGrowingRoots />
+    <LazyPortfolioAtomGrowingRoots hydrate-on-idle />
   </div>
 </template>
 
@@ -46,7 +45,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--text);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 

@@ -5,12 +5,19 @@ export default defineNuxtConfig({
   build: {
     transpile: ['@vite-pwa/nuxt'],
   },
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        prefetch: false,
+      },
+    },
+  },
+
 
   modules: [
     '@nuxt/ui',
     '@nuxtjs/google-fonts',
     '@nuxt/content',
-    '@nuxtjs/supabase',
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
     '@vueuse/motion/nuxt',
@@ -24,12 +31,23 @@ export default defineNuxtConfig({
       { code: 'id', iso: 'id-ID', name: 'Indonesia' },
     ],
     defaultLocale: 'id',
+    detectBrowserLanguage: false,
+  },
+
+  ui: {
+    fonts: false,
+    experimental: {
+      componentDetection: true,
+    },
   },
 
   runtimeConfig: {
+    supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY || '',
     public: {
       usermail: '',
       passmail: '',
+      supabaseUrl: process.env.SUPABASE_URL || '',
+      supabaseKey: process.env.SUPABASE_KEY || '',
     },
   },
 
@@ -115,14 +133,9 @@ export default defineNuxtConfig({
   //   icons: ['ic'],
   // },
 
-  supabase: {
-    // Options
-    redirect: false,
-  },
 
   googleFonts: {
     families: {
-      Poppins: [100, 200, 300, 400, 500, 600, 700, 800, 900],
       'Hanken Grotesk': [500, 600, 700],
       'Geist': [400, 500, 600, 700],
     },

@@ -10,7 +10,9 @@ The background uses an Antfu-inspired canvas treatment: short, recursively branc
 
 The experience page centers the role list beneath low-opacity, outline-only year headings inspired by the posts list on antfu.me. Each date range appears just after its role and company; on narrow screens the date range moves below the title.
 
-The header theme button switches between light and dark across the portfolio, projects, experience, and blog pages. The selection persists across navigation and reloads; new visitors start in dark mode with a `#050505` background. Supporting browsers reveal the new theme with a centered, blurred circular view transition; reduced-motion settings and unsupported browsers switch immediately. To run E2E tests against an already-running server on another port, set `E2E_BASE_URL` to its origin.
+The header theme button switches between light and dark across the portfolio, projects, experience, and blog pages. The selection persists across navigation and reloads; new visitors start in dark mode with a `#050505` background. Supporting browsers reveal the new theme with a centered, blurred circular view transition; reduced-motion settings and unsupported browsers switch immediately.
+
+The initial portfolio route avoids a blocking intro, route prefetching, and duplicate web-font downloads. The decorative lightning canvas hydrates when the browser is idle, analytics starts after Nuxt is ready, and the Supabase client is loaded only on `/chat`.
 
 ## CV PDF
 

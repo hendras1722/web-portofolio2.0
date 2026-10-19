@@ -1,5 +1,5 @@
 import { createError } from 'h3'
-import { supabase } from '@/utils/supabase'
+import { createServerSupabaseClient } from '@/utils/supabase'
 
 export default defineEventHandler(async (event) => {
   const path = getHeaders(event)
@@ -14,30 +14,17 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  function parseJwt(token: string) {
-    const base64Url = token.split('.')[1]
-    if (!base64Url) {
-      throw createError({
-        statusCode: 403,
-        message: 'Forbidden Access',
-      })
-    }
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-    var jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split('')
-        .map(function (c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-        })
-        .join('')
-    )
-
-    return JSON.parse(jsonPayload)
-  }
-
-  const parse = parseJwt(cookie)
 
   if (path['postman-token']) {
+    throw createError({
+      statusCode: 403,
+      message: 'Forbidden Access',
+    })
+  }
+
+  const supabase = createServerSupabaseClient(event)
+  const { data: auth, error: authError } = await supabase.auth.getUser(cookie)
+  if (authError || !auth.user) {
     throw createError({
       statusCode: 403,
       message: 'Forbidden Access',
@@ -49,7 +36,7 @@ export default defineEventHandler(async (event) => {
       .from('chat')
       .upsert({
         chat: body.chat,
-        id: parse.sub,
+        id: auth.user.id,
       })
       .select()
 

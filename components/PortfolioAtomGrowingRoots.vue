@@ -21,6 +21,7 @@ const PULSE_INTERVAL_MS = 5000
 const ENERGY_FADE_MS = 260
 const MAX_SEGMENTS_PER_PULSE = 240
 const MAX_BRANCH_DEPTH = 18
+const MAX_RETAINED_SEGMENTS = MAX_SEGMENTS_PER_PULSE * 3
 
 const { t } = useI18n()
 const traceCanvas = ref<HTMLCanvasElement | null>(null)
@@ -47,7 +48,7 @@ function getColor(token: '--electric-glow' | '--electric-core'): string {
 }
 
 function prepareCanvas(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D): void {
-  const dpr = window.devicePixelRatio || 1
+  const dpr = Math.min(window.devicePixelRatio || 1, 2)
   canvas.width = Math.round(width * dpr)
   canvas.height = Math.round(height * dpr)
   context.setTransform(dpr, 0, 0, dpr, 0, 0)
@@ -149,6 +150,9 @@ function drawNextBranch(showEnergy: boolean): boolean {
   if (next.x < -28 || next.x > width + 28 || next.y < -28 || next.y > height + 28) return true
 
   const segment = { from: { x: branch.x, y: branch.y }, to: next }
+  if (segments.length >= MAX_RETAINED_SEGMENTS) {
+    segments.splice(0, MAX_SEGMENTS_PER_PULSE)
+  }
   segments.push(segment)
   segmentCount += 1
   drawTrace(segment)

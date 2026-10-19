@@ -138,100 +138,146 @@
 </template>
 
 <script setup lang="ts">
+import { createClient } from '@supabase/supabase-js'
 import { formatDistanceStrict } from 'date-fns'
-const supabase = useSupabaseClient()
-const user = useSupabaseUser()
-const cookie = useCookie('sb-access-token')
-const modelValue = useState<
-  {
-    id: string
-    chat: string
-    created_at: string
-    info: {
-      email: string
-      full_name: string
-      picture: string
-    }
-  }[]
->('data', () => [])
+import type { Session, User } from '@supabase/supabase-js'
 
-const id = user.value?.id
-async function getChat() {
+interface ChatMessage {
+  id: string
+  chat: string
+  created_at: string
+  info: {
+    email: string
+    full_name: string
+    picture: string
+  }
+}
+
+const config = useRuntimeConfig()
+const supabase = import.meta.client && config.public.supabaseUrl && config.public.supabaseKey
+  ? createClient(config.public.supabaseUrl, config.public.supabaseKey)
+  : null
+const user = ref<User | null>(null)
+const accessToken = ref('')
+const modelValue = useState<ChatMessage[]>('data', () => [])
+const id = computed(() => user.value?.id)
+let stopAuthListener: (() => void) | undefined
+
+function applySession(session: Session | null): void {
+  user.value = session?.user ?? null
+  accessToken.value = session?.access_token ?? ''
+}
+
+onMounted(async () => {
+  if (!supabase) return
+
+  try {
+    const { data, error } = await supabase.auth.getSession()
+    if (error) throw error
+    applySession(data.session)
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      applySession(session)
+    })
+    stopAuthListener = () => listener.subscription.unsubscribe()
+  } catch (error) {
+    console.error('Failed to restore chat session', error)
+  }
+})
+
+onUnmounted(() => stopAuthListener?.())
+
+async function getChat(): Promise<boolean> {
   try {
     const { data } = await useAsyncData('chat', () =>
-      $fetch<{
-        data: any
-      }>('/api/getChat', {
+      $fetch<{ data: ChatMessage[] }>('/api/getChat', {
         method: 'GET',
-      })
+      }),
     )
-    modelValue.value = data.value?.data
-    let objDiv = document.getElementById('container_typing')
-    if (!objDiv) return
-    objDiv.scrollTop = objDiv.scrollHeight
+    modelValue.value = data.value?.data ?? []
+
+    if (import.meta.server) return true
+    const container = document.getElementById('container_typing')
+    if (!container) return false
+    container.scrollTop = container.scrollHeight
     return true
   } catch (error) {
+    console.error('Failed to load chat messages', error)
     return false
   }
 }
-getChat()
 
-async function handleClick() {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-    options: {
-      redirectTo: 'http://localhost:3000/chat',
-    },
-  })
-  if (error) console.log(error)
+void getChat()
+
+async function handleClick(): Promise<void> {
+  if (!supabase) return
+
+  try {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/chat`,
+      },
+    })
+    if (error) throw error
+  } catch (error) {
+    console.error('Failed to sign in', error)
+  }
 }
 
-async function handleSend() {
+async function handleSend(): Promise<void> {
   const body = document.getElementById('typing')
-  if (!body) return
-  const res = await useAsyncData('chat', () =>
-    $fetch('/api/chat', {
+  if (!body || !accessToken.value) return
+
+  try {
+    await $fetch('/api/chat', {
       method: 'POST',
       body: {
         chat: body.innerText.trim(),
       },
       headers: {
-        authorization: 'bearer' + ' ' + cookie.value,
+        authorization: `bearer ${accessToken.value}`,
       },
-      watch: false,
     })
-  )
-  await getChat()
-  let objDiv = document.getElementById('container_typing')
-  let bodyTyping = document.getElementById('typing')
-  if (!objDiv || !bodyTyping) return
-  bodyTyping.innerHTML = ''
-  objDiv.scrollTop = objDiv.scrollHeight
+    await getChat()
+
+    const container = document.getElementById('container_typing')
+    if (!container) return
+    body.innerHTML = ''
+    container.scrollTop = container.scrollHeight
+  } catch (error) {
+    console.error('Failed to send chat message', error)
+  }
 }
 
-async function handleOut() {
-  const { error } = await supabase.auth.signOut()
-  window.location.reload()
-  if (error) return console.error('Error Euy')
+async function handleOut(): Promise<void> {
+  if (!supabase) return
+
+  try {
+    const { error } = await supabase.auth.signOut()
+    if (error) throw error
+    window.location.reload()
+  } catch (error) {
+    console.error('Failed to sign out', error)
+  }
 }
 
-function handleFocus() {
+function handleFocus(): void {
   const navbar = document.getElementById('navbar')
   if (!navbar) return
   navbar.style.transform = 'translateY(-100px)'
 }
 
-function handleBlur() {
+function handleBlur(): void {
   const navbar = document.getElementById('navbar')
   if (!navbar) return
   navbar.style.transform = 'translateY(0px)'
 }
-const handlePaste = (event: ClipboardEvent) => {
-  event.preventDefault() // Stop the default paste behavior
-  const text = (event.clipboardData || (window as any).clipboardData)
-    .getData('text/plain')
-    .trim()
-  document.execCommand('insertText', false, text) // Insert text without formatting
+
+function handlePaste(event: ClipboardEvent): void {
+  event.preventDefault()
+  const text = event.clipboardData?.getData('text/plain').trim() ?? ''
+  document.execCommand('insertText', false, text)
 }
 </script>
 
