@@ -5,12 +5,24 @@ export default defineNuxtConfig({
   build: {
     transpile: ['@vite-pwa/nuxt'],
   },
+  features: {
+    inlineStyles: true,
+  },
   experimental: {
     defaults: {
       nuxtLink: {
         prefetch: false,
       },
     },
+  },
+
+  routeRules: {
+    '/': { prerender: true },
+    '/en': { prerender: true },
+    '/projects': { prerender: true },
+    '/en/projects': { prerender: true },
+    '/experience': { prerender: true },
+    '/en/experience': { prerender: true },
   },
 
 
@@ -51,7 +63,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/css/main.css', '~/assets/css/font.css', '~/assets/css/print.css'],
+  css: ['~/assets/css/font.css', '~/assets/css/print.css'],
 
   colorMode: {
     preference: 'dark',

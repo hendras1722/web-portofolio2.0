@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import '~/assets/css/main.css'
+</script>
+
 <template>
   <div class="flex flex-col min-h-dvh">
     <slot />

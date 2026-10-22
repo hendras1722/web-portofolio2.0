@@ -1,2 +1,5 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+/* Tooling references contain example classes, not application styles. */
+@source not "../../.*/{skills,prompts,steering}/**";

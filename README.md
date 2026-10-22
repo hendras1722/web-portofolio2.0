@@ -12,7 +12,11 @@ The experience page centers the role list beneath low-opacity, outline-only year
 
 The header theme button switches between light and dark across the portfolio, projects, experience, and blog pages. The selection persists across navigation and reloads; new visitors start in dark mode with a `#050505` background. Supporting browsers reveal the new theme with a centered, blurred circular view transition; reduced-motion settings and unsupported browsers switch immediately.
 
-The initial portfolio route avoids a blocking intro, route prefetching, and duplicate web-font downloads. The decorative lightning canvas hydrates when the browser is idle, analytics starts after Nuxt is ready, and the Supabase client is loaded only on `/chat`.
+The opening signature splash is retained, including its drawing/fade sequence, interaction lock, error dismissal, and reduced-motion behavior. The six portfolio routes are prerendered. Their `portfolio` layout loads only the shared reset and component styles; the default and CV layouts retain the full Tailwind/Nuxt UI stylesheet. Tooling references are excluded from Tailwind scanning. Route prefetching remains disabled, the decorative lightning canvas hydrates when idle, analytics starts after Nuxt is ready, and Supabase loads only on `/chat`.
+
+### Mobile performance measurement
+
+On October 22, 2026, the compressed local production preview was audited with Lighthouse 13.5.0's default mobile configuration, with the opening splash enabled before and after optimization. Homepage inline CSS fell from 334,322 to 45,198 bytes (86.5%), and the gzip-compressed HTML document fell from 55,590 to 16,316 bytes (70.6%). The baseline performance score was 90; three final runs scored 91, 90, and 90, with simulated FCP of 2.41–2.46 seconds, LCP of 3.02–3.16 seconds, TBT of 0–6.5 ms, and CLS of 0. These results do not demonstrate a consistent score improvement or a score of 99. Deployed PageSpeed results have not been measured for this build.
 
 ## CV PDF
 
