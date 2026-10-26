@@ -8,6 +8,7 @@ const projects = computed(() => [
   { title: 'POSAPP Cashier', description: t('portfolio.cashier_description'), href: 'https://cashier.my.id/', technologies: ['Vue 3', 'Nuxt', 'Tailwind CSS'] },
   { title: 'Insira', description: t('portfolio.insira_description'), href: 'https://insira.id/', technologies: ['Next.js', 'TypeScript'] },
   { title: 'TPM Scylla', description: t('portfolio.tpm_description'), href: 'https://tpm-fe.scylla.id/', technologies: ['Vue 3', 'Pinia', 'Tailwind CSS'] },
+  { title: 'Virtual Office', description: t('portfolio.virtual_office_description'), href: 'https://github.com/hendras1722/virtual-office', technologies: ['Vue 3', 'TypeScript', 'Three.js', 'Bun'] },
 ])
 </script>
 
