@@ -1,7 +1,6 @@
 {
   "en": {
     "home": "Home",
-    "home_description": "Personal portfolio website of",
     "about_me": "About Me",
     "skills": "Skills",
     "experience": "Experience",
@@ -17,7 +16,6 @@
     "error_message_title": "Error",
     "success_message": "Your message has been sent successfully!",
     "error_message": "Failed to send message. Please try again.",
-    "nav_work": "Work",
     "nav_career": "Career",
     "nav_projects": "Live Projects",
     "nav_articles": "Articles",
@@ -94,18 +92,12 @@
       "article_label": "Article",
       "back_to_articles": "Back to all articles"
     },
-    "crosstab_active": "Cross-Tab Link Active",
-    "crosstab_sync": "Sync: {count} Tabs Active",
-    "crosstab_desc_active": "Open this page in a separate window/monitor to experience real-time cross-tab canvas sync.",
-    "crosstab_desc_sync": "Windows are connected! Drag them around your screen to see the lines update.",
-    "crosstab_button": "Open New Tab",
     "api_public_title": "Public APIs",
     "api_public_subtitle": "Explore my collection of publicly available services and APIs.",
     "api_public_auth_desc": "A dummy authentication service built for developers. Safe testing of OAuth endpoints, JWT token verification, and session management flow simulations.",
     "api_public_provider_desc": "A high-performance utility API to check telecommunication provider numbers, prefixes, and cellular routing formats globally.",
     "api_public_regions_desc": "A public REST API providing comprehensive administrative division data of Indonesia, including provinces, regencies, districts, and villages.",
     "api_public_doc": "API Documentation",
-    "api_public_visit": "Visit Service",
     "live_projects": {
       "badge": "Featured Work",
       "title": "Live Projects",
@@ -126,9 +118,6 @@
       "educationTitle": "Education",
       "skillsTitle": "Skills",
       "location": "Yogyakarta, Indonesia",
-      "phone": "Phone",
-      "email": "Email",
-      "website": "Website",
       "skills": {
         "languages": "Languages & Core",
         "frameworks": "Frameworks & Libraries",
@@ -232,25 +221,16 @@
     },
     "project": {
       "cashsir_app2": "This project uses Nuxt 3, which is a simple POSapp and can still be developed",
-      "cashsir_app": "This project uses Next.js version 15, which is a simple POSapp and can still be developed",
       "operator": "This project is for checking provider number and prefix around the world",
-      "seller_be": "This project was built using ExpressJS, prisma, posgresql",
-      "seller_dashboard": "This project was built using Next.js version 15 and includes authentication features such as login, registration, and the ability to create Menu and Menu management.",
-      "auth": "This project was developed using ExpressJS, featuring a simple authentication system with login, registration, and logout functionality.",
-      "octo": "Maintenance landing octo saver",
-      "landing_privy": "Update wording and update needed website privy",
       "ccpl": "CIMB app for credit card applications and loan applications",
-      "ronin": "Application privy internal for check log by Application privy orther",
       "bni": "Maintenance dashboard and landing for applying credit card bank BNI",
       "ceisa": "Application for taxation from customs",
-      "gardu": "Temperature monitoring device for wonogiri substation panel.",
       "App_tele_privy": "Apps for document verification and data validation",
       "adonara_dashboard": "Similar to the tele privy app this is the updated version but more updated"
     }
   },
   "id": {
     "home": "Beranda",
-    "home_description": "Situs web portofolio pribadi dari",
     "about_me": "Tentang Saya",
     "skills": "Keahlian",
     "experience": "Pengalaman",
@@ -266,7 +246,6 @@
     "error_message_title": "Kesalahan",
     "success_message": "Pesan Anda berhasil dikirim!",
     "error_message": "Gagal mengirim pesan. Silakan coba lagi.",
-    "nav_work": "Karya",
     "nav_career": "Karir",
     "nav_projects": "Proyek Langsung",
     "nav_articles": "Artikel",
@@ -343,18 +322,12 @@
       "article_label": "Artikel",
       "back_to_articles": "Kembali ke semua artikel"
     },
-    "crosstab_active": "Link Lintas-Tab Aktif",
-    "crosstab_sync": "Sinkronisasi: {count} Tab Aktif",
-    "crosstab_desc_active": "Buka halaman ini di jendela/monitor terpisah untuk merasakan sinkronisasi kanvas lintas-tab secara real-time.",
-    "crosstab_desc_sync": "Jendela terhubung! Seret jendela di layar Anda untuk melihat pembaruan garis.",
-    "crosstab_button": "Buka Tab Baru",
     "api_public_title": "API Publik",
     "api_public_subtitle": "Jelajahi koleksi layanan dan API yang tersedia secara publik.",
     "api_public_auth_desc": "Layanan autentikasi dummy yang dibuat untuk developer. Uji coba endpoint OAuth, verifikasi token JWT, dan simulasi manajemen sesi secara aman.",
     "api_public_provider_desc": "API utilitas berkinerja tinggi untuk memeriksa nomor penyedia telekomunikasi, awalan (prefix), dan format perutean seluler secara global.",
     "api_public_regions_desc": "API REST publik yang menyediakan data wilayah administrasi Indonesia secara lengkap, mencakup provinsi, kabupaten/kota, kecamatan, dan desa/kelurahan.",
     "api_public_doc": "Dokumentasi API",
-    "api_public_visit": "Kunjungi Layanan",
     "live_projects": {
       "badge": "Karya Pilihan",
       "title": "Proyek Langsung",
@@ -375,9 +348,6 @@
       "educationTitle": "Pendidikan",
       "skillsTitle": "Keahlian",
       "location": "Yogyakarta, Indonesia",
-      "phone": "Telepon",
-      "email": "Email",
-      "website": "Situs Web",
       "skills": {
         "languages": "Bahasa Pemrograman & Core",
         "frameworks": "Framework & Pustaka",
@@ -482,10 +452,7 @@
     "project": {
       "cashsir_app2": "Portofolio ini menggunakan Nuxt 3, sudah rilis production di cashier.my.id",
       "operator": "Portofolio ini untuk cek nomer provider dan prefix diberbagai negara didunia",
-      "auth": "Portofolio ini dibuat menggunakan ExpressJS, dan hanya fitur auth login, register, dan logout.",
-      "octo": "Memperbaiki bug landing octo saver",
       "ccpl": "Aplikasi CIMB untuk pengajuan kartu kredit dan pengajuan pinjaman",
-      "ronin": "Aplikasi website internal untuk memeriksa log oleh Aplikasi privy atau lainnya",
       "bni": "Dasbor pemeliharaan dan arahan untuk pengajuan kartu kredit bank BNI",
       "ceisa": "Aplikasi untuk permohonan perpajakan dari bea cukai",
       "adonara_dashboard": "Mirip seperti app tele privy ini versi pembaruannya tapi lebih update"
