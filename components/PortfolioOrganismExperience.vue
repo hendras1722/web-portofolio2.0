@@ -5,6 +5,7 @@ import PortfolioMoleculeExperience from '~/components/PortfolioMoleculeExperienc
 
 const { t } = useI18n()
 const roles = computed(() => [
+  { company: 'INA Digital Health', role: t('portfolio.role_frontend'), period: t('portfolio.ina_period'), detail: t('portfolio.ina_experience') },
   { company: 'Insira', role: t('portfolio.role_frontend'), period: t('portfolio.insira_period'), detail: t('portfolio.insira_experience') },
   { company: 'Panglima Propertindo', role: t('portfolio.role_frontend'), period: '2025', detail: t('portfolio.panglima_experience') },
   { company: 'Geek Garden', role: t('portfolio.role_software'), period: '2025', detail: t('portfolio.geek_garden_experience') },
